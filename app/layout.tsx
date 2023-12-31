@@ -1,11 +1,16 @@
+import { Button, ThemeModeScript } from "flowbite-react";
+
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html>
+      <head>
+        <ThemeModeScript />
+      </head>
       <body>{children}</body>
     </html>
-  )
+  );
 }
