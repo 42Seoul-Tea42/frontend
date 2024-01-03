@@ -1,4 +1,5 @@
 import Head from "next/head";
+import "./styles/tailwind.css";
 
 export default function RootLayout({
   children,
