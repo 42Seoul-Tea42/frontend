@@ -1,7 +1,9 @@
-export default function Page() {
+const Home = () => {
   return (
     <>
-      <h1>hihi</h1>
+      <h1>캐러셀</h1>
     </>
   );
-}
+};
+
+export default Home;
