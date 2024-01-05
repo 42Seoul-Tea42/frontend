@@ -6,23 +6,21 @@ function LandingPage() {
   const router = useRouter();
 
   const scrollView = () => {
-    (function smoothScroll() {
-      const targetY = window.innerHeight;
-      const duration = 500;
+    const targetY = window.innerHeight;
+    const duration = 500;
+    const startTime = performance.now();
 
-      const startTime = performance.now();
-      function animateScroll(currentTime: number) {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
+    const animateScroll = (currentTime: number) => {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
 
-        window.scrollTo(0, targetY * progress);
+      window.scrollTo(0, targetY * progress);
 
-        if (elapsedTime < duration) {
-          window.requestAnimationFrame(animateScroll);
-        }
+      if (elapsedTime < duration) {
+        window.requestAnimationFrame(animateScroll);
       }
-      window.requestAnimationFrame(animateScroll);
-    })();
+    };
+    window.requestAnimationFrame(animateScroll);
   };
 
   return (
