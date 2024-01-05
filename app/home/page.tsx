@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <>
-      <h1>캐러셀</h1>
+      <h1 className="w-full bg-green-100 h-screen">캐러셀</h1>
     </>
   );
 };

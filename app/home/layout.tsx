@@ -1,9 +1,15 @@
-// 홈 레이아웃 컴포넌트
+"use client";
 
-const HomeLayout = ({ children }: { children: React.ReactNode }) => (
-  <div>
-    <main>{children}</main>
-  </div>
-);
+import HomeNavBar from "./HomeNavBar";
+
+// 홈 레이아웃 컴포넌트
+const HomeLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div>
+      <HomeNavBar />
+      <main>{children}</main>
+    </div>
+  );
+};
 
 export default HomeLayout;
