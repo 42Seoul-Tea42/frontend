@@ -1,11 +1,7 @@
 import "./styles/tailwind.css";
 import Head from "next/head";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <html>
@@ -18,3 +14,5 @@ export default function RootLayout({
     </>
   );
 }
+
+export default RootLayout;

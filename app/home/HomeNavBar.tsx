@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // 홈 레이아웃 컴포넌트
-const HomeNavBar = () => {
+function HomeNavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -103,6 +103,6 @@ const HomeNavBar = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default HomeNavBar;

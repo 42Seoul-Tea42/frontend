@@ -26,7 +26,7 @@ function LandingPage() {
 
   return (
     <>
-      {/* Tea for Two Main */}
+      {/* Main page - Tea for Two */}
       <div className="w-full mx-auto h-screen bg-blue-100">
         <div className="flex items-center justify-center h-screen">
           <div>
@@ -41,7 +41,7 @@ function LandingPage() {
             <button
               type="button"
               className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-              onClick={() => router.push("/home")}
+              onClick={() => router.push("/auth/login")}
             >
               Get Started
             </button>
@@ -50,7 +50,7 @@ function LandingPage() {
         </div>
       </div>
 
-      {/* Learn more */}
+      {/* Second Page - Learn more */}
       <div className="w-full mx-auto p-4 h-screen bg-red-400"></div>
     </>
   );
