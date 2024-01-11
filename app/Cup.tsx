@@ -25,6 +25,7 @@ const Cup: React.FC = () => {
     scene.background = new THREE.Color("#e1effe");
 
     const light = new THREE.DirectionalLight("#e1effe", 4);
+
     light.position.set(3, 5, 8);
     scene.add(light);
 
@@ -52,8 +53,8 @@ const Cup: React.FC = () => {
         const targetRotationY = mouseX * Math.PI;
 
         // 부드러운 회전을 위해 현재 회전값을 부드럽게 업데이트
-        cup.rotation.x += 0.015 * (targetRotationX - cup.rotation.x);
-        cup.rotation.y += 0.015 * (targetRotationY - cup.rotation.y);
+        cup.rotation.x += 0.05 * (targetRotationX - cup.rotation.x);
+        cup.rotation.y += 0.05 * (targetRotationY - cup.rotation.y);
 
         renderer.render(scene, camera);
       };
