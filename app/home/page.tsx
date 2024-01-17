@@ -16,6 +16,8 @@ function Home() {
 
   return (
     <>
+    <div className="w-full h-screen">
+      <div className="mx-10 my-10">
       <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div
           id="default-carousel"
@@ -26,15 +28,6 @@ function Home() {
             <div className="duration-700 ease-in-out" data-carousel-item>
               <Image
                 src="/조유리.webp"
-                alt="face"
-                width={500}
-                height={700}
-                priority={true}
-              />
-            </div>
-            <div className="duration-700 ease-in-out" data-carousel-item>
-              <Image
-                src="/장원영.jpeg"
                 alt="face"
                 width={500}
                 height={700}
@@ -92,6 +85,8 @@ function Home() {
           </button>
         </div>
       </div>
+      </div>
+    </div>
     </>
   );
 }
