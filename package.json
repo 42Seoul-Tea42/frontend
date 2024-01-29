@@ -5,13 +5,11 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "@opentelemetry/api": "1.4.0",
     "esbuild": "0.18.0",
     "flowbite": "^2.2.1",
-    "gh-pages": "^6.1.1",
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
