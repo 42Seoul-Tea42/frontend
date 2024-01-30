@@ -1,12 +1,14 @@
 // src/store/index.ts
 
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './slice';
+import loginViewSlice from './slices/loginViewSlice';
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
-  },
+    loginViewer: loginViewSlice
+  }
 });
+
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;
