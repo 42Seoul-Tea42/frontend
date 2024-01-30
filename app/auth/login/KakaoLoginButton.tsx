@@ -4,7 +4,7 @@ const KakaoLoginButton: React.FC = () => {
   return (
     <button
       type="button"
-      className="text-[#381F1F] bg-[#FFE812] hover:bg-[#FFE812]/90 focus:ring-4 focus:outline-none focus:ring-[#FFE812]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#FFE812]/55 me-2 mb-2"
+      className="w-full text-[#381F1F] bg-[#FFE812] hover:bg-[#FFE812]/90 focus:ring-4 focus:outline-none focus:ring-[#FFE812]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#FFE812]/55 me-2 mb-2"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 48 48" id="kakaotalk">
         <path fill="#FFE812" d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"></path>

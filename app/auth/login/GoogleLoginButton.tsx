@@ -4,7 +4,7 @@ const GoogleLoginButton: React.FC = () => {
   return (
     <button
       type="button"
-      className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2"
+      className="w-full text-white bg-[#222222] hover:bg-[#222222]/90 focus:ring-4 focus:outline-none focus:ring-[#222222]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#222222]/55 me-2 mb-2"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="13" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" id="google">
         <path
