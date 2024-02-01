@@ -1,8 +1,12 @@
 "use client";
 
-function Signup() {
+const Signup : React.FC = () => {
   return (
-    <form className="max-w-md mx-auto">
+    <div className="items-center justify-center h-screen flex flex-col">
+    <form className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">
+        회원가입을 위해서 필수 정보를 입력해주세요.
+      </h5>
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
@@ -127,6 +131,7 @@ function Signup() {
         Submit
       </button>
     </form>
+    </div>
   );
 }
 

@@ -14,7 +14,7 @@ const loginViewSlice = createSlice({
   name: 'loginView',
   initialState,
   reducers: {
-    toggleEmailView: state => {
+    toggleEmailView: (state: { email: boolean; }) => {
       state.email = !state.email;
     }
   }
