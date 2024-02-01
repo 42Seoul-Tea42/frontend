@@ -13,7 +13,7 @@ const EmailLoginForm: React.FC = () => {
   const clickSubmit = () => router.push('/home');
 
   return (
-    <form className="space-y-6" action="#">
+    <form className="space-y-6 mb-1" action="#">
       <button onClick={useToggleEmailView} className="block">
         <svg className="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
@@ -71,12 +71,6 @@ const EmailLoginForm: React.FC = () => {
       >
         Login to your account
       </button>
-      <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-        Not registered?{' '}
-        <Link href="#" className="text-blue-700 hover:underline dark:text-blue-500">
-          Create account
-        </Link>
-      </div>
     </form>
   );
 };

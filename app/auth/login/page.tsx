@@ -5,6 +5,7 @@ import EmailLoginForm from './EmailLoginForm';
 import GoogleLoginButton from './GoogleLoginButton';
 import KakaoLoginButton from './KakaoLoginButton';
 import EmailLoginButton from './EmailLoginButton';
+import CreateAccountButton from './components/CreateAccountButton';
 
 const LoginPage: React.FC = () => {
   const emailFormView = useSelector((state: RootState) => state.loginViewer.email);
@@ -18,7 +19,7 @@ const LoginPage: React.FC = () => {
             <>
               <GoogleLoginButton />
               <KakaoLoginButton />
-              <h6 className="text-md m-2 text-gray-600"> or </h6>
+              <h6 className="text-md mb-2 text-gray-600"> or </h6>
               <EmailLoginButton />
             </>
           ) : (
@@ -26,6 +27,7 @@ const LoginPage: React.FC = () => {
               <EmailLoginForm />
             </>
           )}
+          <CreateAccountButton/>
         </div>
       </div>
     </div>
