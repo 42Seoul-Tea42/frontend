@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import HomeNavBarButton from "./components/HomeNavBarButton";
 
 // 홈 레이아웃 컴포넌트
 function HomeNavBar() {
@@ -48,56 +49,11 @@ function HomeNavBar() {
           id="navbar-default"
         >
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li className="flex items-center">
-              <button
-                type="button"
-                onClick={() => router.push("/home/chat")}
-                className=""
-              >
-                <h2>Chat</h2>
-                {/* 채팅 아이콘 */}
-              </button>
-            </li>
-            <li className="flex items-center">
-              <button
-                type="button"
-                onClick={() => router.push("/home/fancy")}
-                className=""
-              >
-                <h2>Fancy</h2>
-                {/* 팬시 아이콘 */}
-              </button>
-            </li>
-            <li className="flex items-center">
-              <button
-                type="button"
-                onClick={() => router.push("/home")}
-                className=""
-              >
-                <h2>Home</h2>
-                {/* tea for two 아이콘 */}
-              </button>
-            </li>
-            <li className="flex items-center">
-              <button
-                type="button"
-                onClick={() => router.push("/home/search")}
-                className=""
-              >
-                <h2>Search</h2>
-                {/*  검색 아이콘 */}
-              </button>
-            </li>
-            <li className="flex items-center">
-              <button
-                type="button"
-                onClick={() => router.push("/home/history")}
-                className=""
-              >
-                <h2>History</h2>
-                {/* 기록 아이콘 */}
-              </button>
-            </li>
+            <li><HomeNavBarButton router={router} path={"chat"} buttonName={"Chat"} /></li>
+            <li><HomeNavBarButton router={router} path={"fancy"} buttonName={"Fancy"} /></li>
+            <li><HomeNavBarButton router={router} path={"/"} buttonName={"Home"} /></li>
+            <li><HomeNavBarButton router={router} path={"search"} buttonName={"Search"} /></li>
+            <li><HomeNavBarButton router={router} path={"history"} buttonName={"History"} /></li>
           </ul>
         </div>
       </div>
