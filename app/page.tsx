@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Cup from './Cup';
 
-function LandingPage() {
+function LandingPage() : React.ReactNode {
   const router = useRouter();
 
   const scrollPage = () => {
