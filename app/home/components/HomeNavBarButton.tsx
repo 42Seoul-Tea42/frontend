@@ -3,10 +3,11 @@
 interface HomeNavBarButtonProps {
     router: any,
     path: string,
-    buttonName: string
+    buttonName: string,
+    style?: string
 }
 
-const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ router, path, buttonName }) => {
+const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ router, path, buttonName, style }) => {
 
     const pushPathPage = (path: string) => {router.push(`/home/${path}`)}
 
@@ -14,7 +15,7 @@ const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ router, path, butto
         <button
         type="button"
         onClick={() => pushPathPage(path)}
-        className=""
+        className={style}
         >
         <h2>{buttonName}</h2>
         {/* 아이콘 들어가는 위치 */}
