@@ -8,24 +8,17 @@ import Cup from './Cup';
 function LandingPage() {
   const router = useRouter();
 
-  const scrollView = () => {
-    const targetY = window.innerHeight;
-    const duration = 500;
-    const startTime = performance.now();
+  const scrollPage = () => {
+    window.scrollTo({
+      top: window.scrollY + window.innerHeight,
+      behavior: 'smooth',
+    })
+  }
 
-    const animateScroll = (currentTime: number) => {
-      const elapsedTime = currentTime - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-
-      window.scrollTo(0, targetY * progress);
-
-      if (elapsedTime < duration) {
-        window.requestAnimationFrame(animateScroll);
-      }
-    };
-    window.requestAnimationFrame(animateScroll);
-  };
-
+  const pushLoginPage = () => {
+    router.push('auth/login'); 
+  }
+  
   return (
     <>
       <Provider store={store}>
@@ -37,14 +30,14 @@ function LandingPage() {
               <button
                 type="button"
                 className="text-black bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-                onClick={scrollView}
+                onClick={scrollPage}
               >
                 Learn More
               </button>
               <button
                 type="button"
                 className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-                onClick={() => router.push('/auth/login')}
+                onClick={pushLoginPage}
               >
                 Get Started
               </button>
