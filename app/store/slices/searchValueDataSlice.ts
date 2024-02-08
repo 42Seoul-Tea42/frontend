@@ -8,16 +8,16 @@ interface valueRange {
 
 interface searchValueState {
   age: valueRange;
-  distanceInKilometers: valueRange;
+  distance: number;
   tags: Tag[];
-  starCount: number;
+  fame: number;
 }
 
 const initialState: searchValueState = {
   age: { min: 18, max: 99 },
-  distanceInKilometers: { min: 1, max: 100 },
+  distance: 10,
   tags: [],
-  starCount: 1
+  fame: 1
 };
 
 const searchPageSlice = createSlice({
@@ -28,12 +28,12 @@ const searchPageSlice = createSlice({
       state.age = actions.payload;
     },
 
-    setDistanceInKilometers: (state: { distanceInKilometers: valueRange }, actions: { payload: valueRange }) => {
-      state.distanceInKilometers = actions.payload;
+    setDistance: (state: { distance: number }, actions: { payload: number }) => {
+      state.distance = actions.payload;
     },
 
-    setStarCount: (state: { starCount: number }, actions: { payload: number }) => {
-      state.starCount = actions.payload;
+    setStarCount: (state: { fame: number }, actions: { payload: number }) => {
+      state.fame = actions.payload;
     },
 
     setTags: (state: { tags: Tag[] }, actions: { payload: Tag[] }) => {

@@ -4,7 +4,7 @@ import { RootState } from '../../../store';
 import { useSelector } from 'react-redux';
 
 const StarRatingBar: React.FC = () => {
-  const starValue: number = useSelector((state: RootState) => state.searchValue.starCount);
+  const starValue: number = useSelector((state: RootState) => state.searchValue.fame);
 
   return (
     <div>
