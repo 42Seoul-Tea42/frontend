@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import HomeNavBarButton from "./components/HomeNavBarButton";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import HomeNavBarButton from './HomeNavBarButton';
 
 // 홈 레이아웃 컴포넌트
 function HomeNavBar() {
@@ -25,35 +25,28 @@ function HomeNavBar() {
           aria-expanded={isMenuOpen}
         >
           <span className="sr-only">Open main menu</span>
-          <svg
-            className="w-4 h-4"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 17 14"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 1h15M1 7h15M1 13h15"
-            />
+          <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
           </svg>
         </button>
         {/*  작은 화면에서 보이는 메뉴 안쪽 내용 */}
-        <div
-          className={`w-full md:block md:w-auto ${
-            isMenuOpen ? "block" : "hidden"
-          }`}
-          id="navbar-default"
-        >
+        <div className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`} id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li><HomeNavBarButton router={router} path={"chat"} buttonName={"Chat"} /></li>
-            <li><HomeNavBarButton router={router} path={"fancy"} buttonName={"Fancy"} /></li>
-            <li><HomeNavBarButton router={router} path={"/"} buttonName={"Home"} /></li>
-            <li><HomeNavBarButton router={router} path={"search"} buttonName={"Search"} /></li>
-            <li><HomeNavBarButton router={router} path={"history"} buttonName={"History"} /></li>
+            <li>
+              <HomeNavBarButton router={router} path={'chat'} buttonName={'Chat'} />
+            </li>
+            <li>
+              <HomeNavBarButton router={router} path={'fancy'} buttonName={'Fancy'} />
+            </li>
+            <li>
+              <HomeNavBarButton router={router} path={'/'} buttonName={'Home'} />
+            </li>
+            <li>
+              <HomeNavBarButton router={router} path={'search'} buttonName={'Search'} />
+            </li>
+            <li>
+              <HomeNavBarButton router={router} path={'history'} buttonName={'History'} />
+            </li>
           </ul>
         </div>
       </div>
