@@ -3,6 +3,7 @@
 import InputRangeStarBar from './components/InputRangeStarBar';
 
 const Search = () => {
+  const handleSearchButton = () => {};
   return (
     <>
       <h1 className="w-full bg-red-100 h-screen">
@@ -13,7 +14,8 @@ const Search = () => {
         <InputRangeStarBar />
         <button
           type="button"
-          className="text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          className="text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          onClick={handleSearchButton}
         >
           검색
         </button>
