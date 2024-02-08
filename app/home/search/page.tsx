@@ -1,9 +1,28 @@
 'use client';
 
+import { useSelector } from 'react-redux';
 import InputRangeStarBar from './components/InputRangeStarBar';
+import { RootState } from '../../store';
+import fetchApi from '../../utils/api';
 
 const Search = () => {
-  const handleSearchButton = () => {};
+  const ageRange = useSelector((state: RootState) => state.searchValue.age);
+  const distance = useSelector((state: RootState) => state.searchValue.distance);
+  const fameRate = useSelector((state: RootState) => state.searchValue.fame);
+  const tags = useSelector((state: RootState) => state.searchValue.tags);
+
+  const handleSearchButton = () => {
+    const sendData = {
+      min_age: ageRange.min,
+      max_age: ageRange.max,
+      distance: distance,
+      fame: fameRate,
+      tags: tags
+    };
+
+    fetchApi('/user/search', 'POST', JSON.stringify(sendData));
+  };
+
   return (
     <>
       <h1 className="w-full bg-red-100 h-screen">
