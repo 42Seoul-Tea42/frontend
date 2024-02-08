@@ -1,32 +1,18 @@
 import React, { useState } from 'react';
+import StarButton from './StarButton';
+import { RootState } from '../../../store';
+import { useSelector } from 'react-redux';
 
 const StarRatingBar: React.FC = () => {
-  const [rating, setRating] = useState(0);
-
-  const handleStarClick = (starValue: number) => {
-    setRating(starValue);
-  };
+  const starValue: number = useSelector((state: RootState) => state.searchValue.starCount);
 
   return (
     <div>
-      {[1, 2, 3, 4, 5].map(starValue => (
-        <StarButton key={starValue} starValue={starValue} isFilled={starValue <= rating} onClick={handleStarClick} />
+      {[1, 2, 3, 4, 5].map(el => (
+        <StarButton key={el} star={el} isFilled={el <= starValue} />
       ))}
+      {starValue}점
     </div>
-  );
-};
-
-interface StarButtonProps {
-  starValue: number;
-  isFilled: boolean;
-  onClick: (starValue: number) => void;
-}
-
-const StarButton: React.FC<StarButtonProps> = ({ starValue, isFilled, onClick }) => {
-  return (
-    <button onClick={() => onClick(starValue)} style={{ color: isFilled ? 'yellow' : 'gray', border: 'none', cursor: 'pointer' }}>
-      ★
-    </button>
   );
 };
 
