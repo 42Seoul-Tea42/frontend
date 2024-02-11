@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { setStarCount } from '../../../store/slices/searchValueDataSlice';
+import { setStarCount } from '../../../../store/slices/searchValueDataSlice';
 import IconStar from './IconStar';
 
 interface StarButtonProps {

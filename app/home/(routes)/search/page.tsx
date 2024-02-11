@@ -2,12 +2,14 @@
 
 import { useSelector } from 'react-redux';
 import InputRangeStarBar from './components/InputRangeStarBar';
-import { RootState } from '../../store';
-import fetchApi from '../../utils/api';
+import { RootState } from '../../../store';
+import fetchApi from '../../../utils/api';
 
 const Search = () => {
   const ageRange = useSelector((state: RootState) => state.searchValue.age);
-  const distance = useSelector((state: RootState) => state.searchValue.distance);
+  const distance = useSelector(
+    (state: RootState) => state.searchValue.distance
+  );
   const fameRate = useSelector((state: RootState) => state.searchValue.fame);
   const tags = useSelector((state: RootState) => state.searchValue.tags);
 
