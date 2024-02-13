@@ -1,8 +1,8 @@
 // components/Cup.tsx
 
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 const Cup: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,7 +13,7 @@ const Cup: React.FC = () => {
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas as HTMLCanvasElement,
-      antialias: true,
+      antialias: true
     });
 
     const camera = new THREE.PerspectiveCamera(
@@ -22,15 +22,18 @@ const Cup: React.FC = () => {
     );
     camera.position.set(0, 0, 5);
 
-    scene.background = new THREE.Color("#e1effe");
+    // 배경색을 가져옵니다.
+    const bodyStyle = window.getComputedStyle(document.body);
+    const backgroundColor = bodyStyle?.backgroundColor;
 
-    const light = new THREE.DirectionalLight("#e1effe", 4);
+    scene.background = new THREE.Color('white');
+    const light = new THREE.DirectionalLight('white', 4);
 
     light.position.set(3, 5, 8);
     scene.add(light);
 
     const loader = new GLTFLoader();
-    loader.load("/cup/scene.gltf", (gltf) => {
+    loader.load('/cup/scene.gltf', gltf => {
       const cup = gltf.scene;
 
       // 컵의 초기 회전값 (모델 초기값이 치우쳐져 있음)
@@ -60,11 +63,19 @@ const Cup: React.FC = () => {
       };
 
       // 마우스 이벤트 리스너 등록
-      document.addEventListener("mousemove", animate);
+      document.addEventListener('mousemove', animate);
     });
   }, []);
 
-  return <canvas style={{ height: "150px" }} ref={canvasRef} id="cup" />;
+  return (
+    <div className="flex justify-center">
+      <canvas
+        style={{ width: '300', height: '200px' }}
+        ref={canvasRef}
+        id="cup"
+      />
+    </div>
+  );
 };
 
 export default Cup;
