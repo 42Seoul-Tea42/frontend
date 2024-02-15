@@ -7,16 +7,13 @@ const toggleEmailFormButton: React.FC = () => {
   const dispatch = useDispatch();
   const useToggleEmailView = () => dispatch(toggleEmailView());
   return (
-    <button
-      onClick={useToggleEmailView}
-      className="absolute left-15 top-15 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-    >
+    <button onClick={useToggleEmailView} className="items-center">
       <svg
-        className="w-5 h-5 text-gray-800 dark:text-white"
+        className="w-5 h-5 top-0 left-0 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
-        viewBox="0 0 8 14"
+        viewBox="0 0 10 15"
       >
         <path
           stroke="currentColor"
