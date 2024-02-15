@@ -24,10 +24,10 @@ const LandingPage: React.FC = () => {
       <Provider store={store}>
         {/* Main page - Tea for Two */}
         <div className="col-3 h-screen space-y-10">
-          <div className="flex justify-center items-end py-10 text-6xl font-extrabold bg-red-100 h-96">
+          <div className="flex justify-center items-end py-10 text-6xl font-extrabold bg-red-200 h-1/5">
             Tea for Two
           </div>
-          <div className="flex flex-col px-36 space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+          <div className="flex flex-col px-36 space-y-5 sm:flex-row sm:justify-center sm:space-y-0">
             <button
               type="button"
               className="inline-flex justify-center items-center py-3 px-5 text-base font-bold text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900"
@@ -62,7 +62,7 @@ const LandingPage: React.FC = () => {
         </div>
 
         {/* Second Page - Learn more */}
-        <div className="w-full mx-auto p-4 h-screen bg-red-100"></div>
+        <div className="w-full mx-auto p-4 h-screen bg-red-200"></div>
       </Provider>
     </>
   );

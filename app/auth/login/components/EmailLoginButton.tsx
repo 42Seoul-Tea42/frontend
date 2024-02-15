@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { toggleEmailView } from '../../store/slices/loginViewSlice';
+import { toggleEmailView } from '../../../store/slices/loginViewSlice';
 
 const EmailLoginButton: React.FC = () => {
   const dispatch = useDispatch();

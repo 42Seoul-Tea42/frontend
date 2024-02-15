@@ -45,21 +45,22 @@ const Cup: React.FC = () => {
 
       const animate = (event: MouseEvent) => {
         const update = (time: number) => {
-          requestAnimationFrame(update);
+          // 마우스의 현재 위치를 이용한 카메라의 회전
+          const mouseX = (event?.clientX / window.innerWidth) * 2 - 1 || 0;
+          const mouseY = (event?.clientY / window.innerHeight) * 2 - 1 || 0;
+          const targetRotationX = mouseY * Math.PI;
+          const targetRotationY = mouseX * Math.PI;
+
+          // 부드러운 회전을 위해 현재 회전값을 부드럽게 업데이트
+          cup.rotation.x += 0.05 * (targetRotationX - cup.rotation.x);
+          cup.rotation.y += 0.05 * (targetRotationY - cup.rotation.y);
+
+          renderer.render(scene, camera);
+
+          requestAnimationFrame(update); // 다음 프레임 요청
         };
-        requestAnimationFrame(update);
 
-        // 마우스의 현재 위치를 이용한 카메라의 회전
-        const mouseX = (event?.clientX / window.innerWidth) * 2 - 1 || 0;
-        const mouseY = (event?.clientY / window.innerHeight) * 2 - 1 || 0;
-        const targetRotationX = mouseY * Math.PI;
-        const targetRotationY = mouseX * Math.PI;
-
-        // 부드러운 회전을 위해 현재 회전값을 부드럽게 업데이트
-        cup.rotation.x += 0.05 * (targetRotationX - cup.rotation.x);
-        cup.rotation.y += 0.05 * (targetRotationY - cup.rotation.y);
-
-        renderer.render(scene, camera);
+        requestAnimationFrame(update); // 첫 프레임 요청
       };
 
       // 마우스 이벤트 리스너 등록
