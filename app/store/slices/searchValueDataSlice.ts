@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Tag from '../../interface/TagType';
 
-interface valueRange {
+export interface ageRange {
   min: number;
   max: number;
 }
 
 interface searchValueState {
-  age: valueRange;
+  age: ageRange;
   distance: number;
   tags: Tag[];
   fame: number;
 }
 
 const initialState: searchValueState = {
-  age: { min: 18, max: 99 },
+  age: { min: 0, max: 0 },
   distance: 10,
   tags: [],
   fame: 1
@@ -24,7 +24,7 @@ const searchPageSlice = createSlice({
   name: 'searchPageSlice',
   initialState,
   reducers: {
-    setAgae: (state: { age: valueRange }, actions: { payload: valueRange }) => {
+    setAge: (state: { age: ageRange }, actions: { payload: ageRange }) => {
       state.age = actions.payload;
     },
 
@@ -42,6 +42,6 @@ const searchPageSlice = createSlice({
   }
 });
 
-export const { setStarCount } = searchPageSlice.actions;
+export const { setAge, setDistance, setStarCount, setTags } = searchPageSlice.actions;
 
 export default searchPageSlice.reducer;

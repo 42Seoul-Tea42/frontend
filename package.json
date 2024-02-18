@@ -1,6 +1,9 @@
 {
   "private": true,
-  "style": "app/styles/tailwind.css",
+  "style": [
+    "app/styles/tailwind.css",
+    "app/styles/multiRangeSlider.css"
+  ],
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
@@ -24,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "autoprefixer": "^10.4.16",
+    "classnames": "^2.5.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.33.2",

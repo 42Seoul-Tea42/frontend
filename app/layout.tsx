@@ -1,10 +1,11 @@
-import "./styles/tailwind.css";
-import type { Metadata } from "next";
+import './styles/tailwind.css';
+import './styles/multiRangeSlider.css';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Tea For Two",
-  description: "Tea For Two is a sns matching platform.",
-  applicationName: "teafortwo"
+  title: 'Tea For Two',
+  description: 'Tea For Two is a sns matching platform.',
+  applicationName: 'teafortwo'
 };
 
 function RootLayout({ children }: { children: React.ReactNode }) {
