@@ -10,7 +10,7 @@ const Signup: React.FC = () => {
   return (
     <div className="items-center justify-center h-screen flex flex-col">
       <div className="mb-20">
-        <SignupStepper />
+        <SignupStepper currentStep={currentStep} />
       </div>
       <AccountInfoForm />
     </div>
