@@ -1,33 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export enum signupSteps {
+  AccountInfo,
+  PersonalInfo,
+  EmojiInfo
+}
+
 interface signupState {
-  account: boolean;
-  personal: boolean;
-  emoji: boolean;
+  currentStep: number;
 }
 
 const initialState: signupState = {
-  account: false,
-  personal: false,
-  emoji: false
+  currentStep: signupSteps.AccountInfo
 };
 
 const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
   reducers: {
-    setAccount: (state: { account: boolean }, actions: { payload: boolean }) => {
-      state.account = actions.payload;
-    },
-    setPersonal: (state: { personal: boolean }, actions: { payload: boolean }) => {
-      state.personal = actions.payload;
-    },
-    setEmoji: (state: { emoji: boolean }, actions: { payload: boolean }) => {
-      state.emoji = actions.payload;
+    setCurrentStep: (state: { currentStep: number }, actions: { payload: number }) => {
+      state.currentStep = actions.payload;
     }
   }
 });
 
-export const { setAccount, setPersonal, setEmoji } = signupSlice.actions;
+export const { setCurrentStep } = signupSlice.actions;
 
 export default signupSlice.reducer;
