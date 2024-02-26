@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 export enum signupSteps {
   AccountInfo,
   PersonalInfo,
+  ProfileUpload,
   EmojiInfo
 }
 
@@ -18,8 +19,8 @@ const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
   reducers: {
-    setCurrentStep: (state: { currentStep: number }, actions: { payload: number }) => {
-      state.currentStep = actions.payload;
+    setCurrentStep: (state: { currentStep: number }, action: { payload: number }) => {
+      state.currentStep = action.payload;
     }
   }
 });

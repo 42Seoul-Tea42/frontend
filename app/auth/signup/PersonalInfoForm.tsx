@@ -8,7 +8,7 @@ import { setCurrentStep, signupSteps } from '../../store/slices/signupSlice';
 const PersonalInfoForm: React.FC = () => {
   const dispatch = useDispatch();
   const handleNextStep = () => {
-    dispatch(setCurrentStep(signupSteps.EmojiInfo));
+    dispatch(setCurrentStep(signupSteps.ProfileUpload));
   };
   return (
     <form className="max-w-sm min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -38,7 +38,7 @@ const PersonalInfoForm: React.FC = () => {
           id="message"
           rows={4}
           className="block p-2.5 w-full min-h-36 max-h-96 text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="같이 테니스치러 갈래요?"
+          placeholder="나랑 눈사람 만들래?"
         ></textarea>
       </div>
       <button
