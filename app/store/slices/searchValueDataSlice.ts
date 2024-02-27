@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Tag from '../../dto/TagType';
+import { Tag } from './signupSlice';
 
 export interface ageRange {
   min: number;
