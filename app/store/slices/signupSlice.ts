@@ -25,12 +25,16 @@ export enum signupSteps {
 
 interface signupState {
   currentStep: number;
+  // profileImage: string;
   selectedTags: number;
+  EmojiInfo: number;
 }
 
 const initialState: signupState = {
   currentStep: signupSteps.AccountInfo,
-  selectedTags: 0
+  // profileImage: '',
+  selectedTags: 0,
+  EmojiInfo: 0
 };
 
 const signupSlice = createSlice({
