@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { signupSteps } from '../../store/slices/signupSlice';
-import SignupStepper from './SignupStepper';
-import AccountInfoForm from './AccountInfoForm';
-import PersonalInfoForm from './PersonalInfoForm';
-import ProfileUploadForm from './ProfileUploadForm';
+import SignupStepper from './components/SignupStepper';
+import AccountInfoForm from './components/AccountInfoForm';
+import PersonalInfoForm from './components/PersonalInfoForm';
+import ProfileUploadForm from './components/ProfileUploadForm';
 
 const Signup: React.FC = () => {
   const currentStep = useSelector((state: RootState) => state.signupViewer.currentStep);
@@ -35,11 +35,10 @@ const Signup: React.FC = () => {
 
   return (
     <div className="items-center justify-center h-screen flex flex-col">
-      <div className="mb-20">
+      <div className="h-48">
         <SignupStepper currentStep={currentStep} />
       </div>
-      {/* {currentForm} */}
-      <ProfileUploadForm />
+      {currentForm}
     </div>
   );
 };

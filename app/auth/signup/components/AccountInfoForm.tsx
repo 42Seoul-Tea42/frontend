@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { setCurrentStep, signupSteps } from '../../store/slices/signupSlice';
+import { setCurrentStep, signupSteps } from '../../../store/slices/signupSlice';
 
 const AccountInfoForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -113,7 +113,7 @@ const AccountInfoForm: React.FC = () => {
           </label>
         </div>
       </div>
-      <div className="relative z-0 w-full mb-5 group">
+      <div className="relative z-0 w-full mb-10 group">
         <input
           type="number"
           name="floating_company"
@@ -129,13 +129,15 @@ const AccountInfoForm: React.FC = () => {
           Age
         </label>
       </div>
-      <button
-        type="submit"
-        className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={handleNextStep}
-      >
-        Submit
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={handleNextStep}
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };

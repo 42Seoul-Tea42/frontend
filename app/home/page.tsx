@@ -22,7 +22,7 @@ function Home() {
           <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div id="default-carousel" className="relative w-full" data-carousel="slide">
               <div className="relative h-96 overflow-hidden rounded-lg md:h-96">
-                <Image src="/조유리.webp" alt="face" width={500} height={700} priority={true} />
+                <Image src="/조유리.webp" alt="face" width={500} height={500} priority={true} />
               </div>
               <CarouselButton direction="prev" position="start" />
               <CarouselButton direction="next" position="end" />

@@ -3,8 +3,7 @@
 import { useDispatch } from 'react-redux';
 import GenderRadioList from './GenderRadioList';
 import SexualPreferenceRadioList from './SexualPreferenceRadioList';
-import { setCurrentStep, signupSteps } from '../../store/slices/signupSlice';
-
+import { setCurrentStep, signupSteps } from '../../../store/slices/signupSlice';
 const PersonalInfoForm: React.FC = () => {
   const dispatch = useDispatch();
   const handleNextStep = () => {
@@ -27,7 +26,7 @@ const PersonalInfoForm: React.FC = () => {
         </legend>
         <SexualPreferenceRadioList />
       </fieldset>
-      <div className="mb-5">
+      <div className="mb-10">
         <label
           htmlFor="message"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -41,13 +40,15 @@ const PersonalInfoForm: React.FC = () => {
           placeholder="나랑 눈사람 만들래?"
         ></textarea>
       </div>
-      <button
-        type="submit"
-        className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={handleNextStep}
-      >
-        Submit
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={handleNextStep}
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };

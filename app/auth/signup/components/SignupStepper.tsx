@@ -1,7 +1,7 @@
 'use client';
 
-import { signupSteps } from '../../store/slices/signupSlice';
-import StepperSVG from '../../svg/StepperSVG';
+import { signupSteps } from '../../../store/slices/signupSlice';
+import StepperSVG from '../../../svg/StepperSVG';
 
 interface SignupStepperProps {
   currentStep: number;
