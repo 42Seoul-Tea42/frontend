@@ -1,9 +1,12 @@
 import Image from 'next/image';
-import React, { useState, ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import TagSelector from './TagSelector';
+import { useDispatch } from 'react-redux';
+import { setCurrentStep, signupSteps } from '../../../store/slices/signupSlice';
 
-const ImageUploadForm: React.FC = () => {
+const ProfileUploadForm: React.FC = () => {
   const [previewImage, setPreviewImage] = useState<string>('');
+  const dispatch = useDispatch();
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -17,6 +20,10 @@ const ImageUploadForm: React.FC = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleNextStep = () => {
+    dispatch(setCurrentStep(signupSteps.EmojiInfo));
   };
 
   return (
@@ -75,15 +82,15 @@ const ImageUploadForm: React.FC = () => {
       <TagSelector />
       <div className="flex justify-end">
         <button
-          type="submit"
+          type="button"
           className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          onClick={() => {}}
+          onClick={handleNextStep}
         >
-          Submit
+          Next
         </button>
       </div>
     </form>
   );
 };
 
-export default ImageUploadForm;
+export default ProfileUploadForm;

@@ -8,6 +8,7 @@ import SignupStepper from './components/SignupStepper';
 import AccountInfoForm from './components/AccountInfoForm';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import ProfileUploadForm from './components/ProfileUploadForm';
+import EmojiInfoForm from '../login/components/EmojiInfoForm';
 
 const Signup: React.FC = () => {
   const currentStep = useSelector((state: RootState) => state.signupViewer.currentStep);
@@ -25,7 +26,7 @@ const Signup: React.FC = () => {
         setCurrentForm(<ProfileUploadForm />);
         break;
       case signupSteps.EmojiInfo:
-        setCurrentForm(<div>Emoji Info</div>);
+        setCurrentForm(<EmojiInfoForm />);
         break;
       default:
         setCurrentForm(<AccountInfoForm />);
@@ -38,7 +39,8 @@ const Signup: React.FC = () => {
       <div className="h-48">
         <SignupStepper currentStep={currentStep} />
       </div>
-      {currentForm}
+      {/* {currentForm} */}
+      <EmojiInfoForm />
     </div>
   );
 };
