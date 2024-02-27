@@ -39,8 +39,8 @@ const Signup: React.FC = () => {
       <div className="h-48">
         <SignupStepper currentStep={currentStep} />
       </div>
-      {/* {currentForm} */}
-      <EmojiInfoForm />
+      {currentForm}
+      {/* <EmojiInfoForm /> */}
     </div>
   );
 };
