@@ -1,37 +1,22 @@
+import EmojiGridList from './EmojiGridList';
+
 const EmojiInfoForm: React.FC = () => {
   return (
-    <div>
-      {
-        <form className="max-w-sm min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-blue-500/50">
-            이모티콘 넣을거양?
-          </h5>
-          <div className="mb-10">
-            <label
-              htmlFor="message"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              이모티콘 월드컵..? 그냥 선택? 어케만듬...?
-            </label>
-            <textarea
-              id="message"
-              rows={4}
-              className="block p-2.5 w-full min-h-36 max-h-96 text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="진짜로 어케만들지...?"
-            ></textarea>
-          </div>
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              onClick={() => {}}
-            >
-              Next
-            </button>
-          </div>
-        </form>
-      }
-    </div>
+    <form className="max-w-sm min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-blue-500/50">
+        선호하는 이모티콘을 골라주세요.
+      </h5>
+      <EmojiGridList />
+      <div className="flex justify-end mt-10">
+        <button
+          type="submit"
+          className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={() => {}}
+        >
+          Next
+        </button>
+      </div>
+    </form>
   );
 };
 
