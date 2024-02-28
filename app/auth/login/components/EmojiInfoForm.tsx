@@ -2,7 +2,7 @@ import EmojiGridList from './EmojiGridList';
 
 const EmojiInfoForm: React.FC = () => {
   return (
-    <form className="max-w-sm min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <form className="min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-blue-500/50">
         선호하는 이모티콘을 골라주세요.
       </h5>
