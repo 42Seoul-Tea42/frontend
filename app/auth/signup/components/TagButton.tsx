@@ -14,8 +14,8 @@ const TagButton: React.FC<TagButtonProps> = ({ text, gradientFrom, gradientTo, d
   const dispatch = useDispatch();
 
   const toggleTag = () => {
-    if (isClicked) dispatch(removeSelectedTags(dtoValue));
-    else dispatch(addSelectedTags(dtoValue));
+    if (!isClicked) dispatch(addSelectedTags(dtoValue));
+    else dispatch(removeSelectedTags(dtoValue));
     setIsClicked(!isClicked);
   };
 

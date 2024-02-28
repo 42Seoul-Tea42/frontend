@@ -26,14 +26,14 @@ export enum signupSteps {
 interface signupState {
   currentStep: number;
   // profileImage: string;
-  selectedTags: number;
+  selectedTags: number[];
   EmojiInfo: number;
 }
 
 const initialState: signupState = {
   currentStep: signupSteps.AccountInfo,
   // profileImage: '',
-  selectedTags: 0,
+  selectedTags: [],
   EmojiInfo: 0
 };
 
@@ -44,11 +44,11 @@ const signupSlice = createSlice({
     setCurrentStep: (state: { currentStep: number }, action: { payload: number }) => {
       state.currentStep = action.payload;
     },
-    addSelectedTags: (state: { selectedTags: number }, action: { payload: number }) => {
-      state.selectedTags = state.selectedTags | action.payload;
+    addSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
+      state.selectedTags.push(action.payload);
     },
-    removeSelectedTags: (state: { selectedTags: number }, action: { payload: number }) => {
-      state.selectedTags = state.selectedTags & ~action.payload;
+    removeSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
+      state.selectedTags = state.selectedTags.filter(tag => tag !== action.payload);
     }
   }
 });
