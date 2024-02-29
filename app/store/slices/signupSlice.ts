@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 export const TagType = Object.freeze({
   SPORTS: 1 << 0,
   TRAVEL: 1 << 1,
@@ -45,14 +44,13 @@ const signupSlice = createSlice({
       state.currentStep = action.payload;
     },
     addSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
-      state.selectedTags.push(action.payload);
+      state.selectedTags = [...state.selectedTags, action.payload];
     },
     removeSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
       state.selectedTags = state.selectedTags.filter(tag => tag !== action.payload);
     }
   }
 });
-
 export const { setCurrentStep, addSelectedTags, removeSelectedTags } = signupSlice.actions;
 
 export default signupSlice.reducer;
