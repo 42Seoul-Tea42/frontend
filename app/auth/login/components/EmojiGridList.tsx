@@ -9,12 +9,52 @@ const EmojiGridList: React.FC = () => {
     alt: 'emoji'
   }));
 
-  // 현재 선택된 이미지의 ID를 추적하는 state
-  const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
+  enum Reaction {
+    Like = 'like',
+    Dislike = 'dislike',
+    None = 'none'
+  }
 
-  // 이미지를 클릭할 때 호출되는 함수
+  const [selectedReaction, setSelectedReaction] = useState<Reaction[]>(
+    Array.from({ length: 16 }, () => Reaction.None)
+  );
+
   const handleClick = (id: number) => {
-    setSelectedImageId(id === selectedImageId ? null : id); // 이미지를 다시 클릭하면 선택 해제
+    const currentReaction = selectedReaction[id];
+    switch (currentReaction) {
+      case Reaction.Like:
+        setSelectedReaction(prevState => {
+          const newState = [...prevState];
+          newState[id] = Reaction.Dislike;
+          return newState;
+        });
+        break;
+      case Reaction.Dislike:
+        setSelectedReaction(prevState => {
+          const newState = [...prevState];
+          newState[id] = Reaction.None;
+          return newState;
+        });
+        break;
+      case Reaction.None:
+        setSelectedReaction(prevState => {
+          const newState = [...prevState];
+          newState[id] = Reaction.Like;
+          return newState;
+        });
+        break;
+    }
+  };
+
+  const selectedStyle = (reaction: Reaction): string => {
+    switch (reaction) {
+      case Reaction.Like:
+        return 'border-8 border-solid border-red-400 rounded-lg';
+      case Reaction.Dislike:
+        return 'border-8 border-solid border-blue-400 rounded-lg';
+      case Reaction.None:
+        return '';
+    }
   };
 
   return (
@@ -22,9 +62,7 @@ const EmojiGridList: React.FC = () => {
       {images.map(image => (
         <div className="shadow" key={image.id}>
           <div
-            className={`cursor-pointer relative ${
-              selectedImageId === image.id ? 'border-8 border-solid border-red-600 rounded-lg' : ''
-            }`}
+            className={`cursor-pointer relative ${selectedStyle(selectedReaction[image.id])}`}
             onClick={() => handleClick(image.id)}
           >
             <Image
