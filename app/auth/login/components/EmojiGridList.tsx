@@ -2,8 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const EmojiGridList: React.FC = () => {
-  // 이미지 정보를 담은 배열
-  const images = Array.from({ length: 16 }, (_, index) => ({
+  const Emojis = Array.from({ length: 16 }, (_, index) => ({
     id: index,
     src: `/emoji/${index + 1}.jpg`, // 이미지 경로
     alt: 'emoji'
@@ -59,20 +58,21 @@ const EmojiGridList: React.FC = () => {
 
   return (
     <div className="max-w-96 grid grid-cols-4 gap-4">
-      {images.map(image => (
-        <div className="shadow" key={image.id}>
-          <div
-            className={`cursor-pointer relative ${selectedStyle(selectedReaction[image.id])}`}
-            onClick={() => handleClick(image.id)}
+      {Emojis.map(Emoji => (
+        <div className="shadow" key={Emoji.id}>
+          <button
+            type="button"
+            className={`cursor-pointer relative ${selectedStyle(selectedReaction[Emoji.id])}`}
+            onClick={() => handleClick(Emoji.id)}
           >
             <Image
               width={500}
               height={500}
-              className="h-auto max-w-full rounded-lg"
-              src={image.src}
-              alt={image.alt}
+              className="h-auto max-w-full rounded-lg hover:opacity-60 transition-opacity duration-300"
+              src={Emoji.src}
+              alt={Emoji.alt}
             />
-          </div>
+          </button>
         </div>
       ))}
     </div>
