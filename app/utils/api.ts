@@ -14,7 +14,7 @@ function fetchApi(endpoint: string, method: string, body?: string) {
     body: body
   })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => console.table(data))
     .catch(error => handleError(error));
 }
 

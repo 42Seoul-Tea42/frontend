@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import CarouselButton from './components/CarouselButton';
 
-function Home() {
+const Home: React.FC = () => {
   // const clickImage = () => {
   // 상세데이터 가져오기
   // };
@@ -24,14 +24,14 @@ function Home() {
               <div className="relative h-96 overflow-hidden rounded-lg md:h-96">
                 <Image src="/조유리.webp" alt="face" width={500} height={500} priority={true} />
               </div>
-              <CarouselButton direction="prev" position="start" />
-              <CarouselButton direction="next" position="end" />
+              {/* <CarouselButton direction="left" position="start-0" />
+              <CarouselButton direction="right" position="end-0" /> */}
             </div>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default Home;

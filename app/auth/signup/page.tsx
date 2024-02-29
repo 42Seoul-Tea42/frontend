@@ -40,7 +40,10 @@ const Signup: React.FC = () => {
         <SignupStepper currentStep={currentStep} />
       </div>
       {currentForm}
-      {/* <EmojiInfoForm /> */}
+      {/* <AccountInfoForm />
+      <PersonalInfoForm />
+      <ProfileUploadForm />
+      <EmojiInfoForm /> */}
     </div>
   );
 };

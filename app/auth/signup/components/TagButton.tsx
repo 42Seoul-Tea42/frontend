@@ -22,7 +22,8 @@ const TagButton: React.FC<TagButtonProps> = ({ text, gradientFrom, gradientTo, d
   const tagStyle = {
     backgroundImage: isClicked
       ? `linear-gradient(to bottom right, ${gradientFrom}, ${gradientTo})`
-      : 'none'
+      : 'none',
+    fontWeight: isClicked ? 'bold' : 'normal'
   };
 
   return (

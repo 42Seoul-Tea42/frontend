@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import StarButton from './StarButton';
 import { RootState } from '../../../../store';
 import { useSelector } from 'react-redux';
 
 const StarRatingBar: React.FC = () => {
-  const starValue: number = useSelector(
-    (state: RootState) => state.searchValue.fame
-  );
+  const starValue: number = useSelector((state: RootState) => state.searchValue.fame);
 
   return (
-    <div>
+    <div className="flex justify-center min-w-72">
       {[1, 2, 3, 4, 5].map(el => (
         <StarButton key={el} star={el} isFilled={el <= starValue} />
       ))}
-      {starValue}점
     </div>
   );
 };
