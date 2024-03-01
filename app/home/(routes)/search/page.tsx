@@ -7,10 +7,11 @@ import fetchApi from '../../../utils/api';
 import TagSelector from '../../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
 import DirectionSVG from '../../../components/DirectionSVG';
-import { InputMinMaxAge } from './components/InputMinMaxAge';
+import InputMinMaxAge from './components/InputMinMaxAge';
 
 const Search: React.FC = () => {
-  const ageRange = useSelector((state: RootState) => state.searchValue.age);
+  const minAge = useSelector((state: RootState) => state.searchValue.minAge);
+  const maxAge = useSelector((state: RootState) => state.searchValue.maxAge);
   const distance = useSelector((state: RootState) => state.searchValue.distance);
   const fameRate = useSelector((state: RootState) => state.searchValue.fame);
   const tags = useSelector((state: RootState) => state.searchValue.tags);
@@ -25,8 +26,8 @@ const Search: React.FC = () => {
 
   const handleSearchButton = () => {
     const sendData = {
-      min_age: ageRange.min,
-      max_age: ageRange.max,
+      min_age: minAge,
+      max_age: maxAge,
       distance: distance,
       fame: fameRate,
       tags: tags
