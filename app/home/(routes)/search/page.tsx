@@ -8,6 +8,7 @@ import TagSelector from '../../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
 import DirectionSVG from '../../../components/DirectionSVG';
 import InputMinMaxAge from './components/InputMinMaxAge';
+import InputRangeDistance from './components/InputRangeDistance';
 
 const Search: React.FC = () => {
   const minAge = useSelector((state: RootState) => state.searchValue.minAge);
@@ -38,10 +39,7 @@ const Search: React.FC = () => {
 
   const accordionItems = [
     { title: '검색할 나이를 선택해주세요.', content: <InputMinMaxAge /> },
-    {
-      title: '검색할 최대 거리를 선택해주세요.',
-      content: <input type="range" min="20" max="100" step={1} />
-    },
+    { title: '검색할 최대 거리를 선택해주세요.', content: <InputRangeDistance /> },
     { title: '검색할 태그를 선택해주세요.', content: <TagSelector /> },
     { title: '검색할 등급을 선택해주세요.', content: <InputRangeStarBar /> }
   ];
