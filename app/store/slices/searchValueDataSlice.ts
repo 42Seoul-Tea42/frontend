@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Tag } from './signupSlice';
 
 export interface ageRange {
   min: number;
@@ -9,7 +8,7 @@ export interface ageRange {
 interface searchValueState {
   age: ageRange;
   distance: number;
-  tags: Tag[];
+  tags: number[];
   fame: number;
 }
 
@@ -36,7 +35,7 @@ const searchPageSlice = createSlice({
       state.fame = actions.payload;
     },
 
-    setTags: (state: { tags: Tag[] }, actions: { payload: Tag[] }) => {
+    setTags: (state: { tags: number[] }, actions: { payload: number[] }) => {
       state.tags = actions.payload;
     }
   }
