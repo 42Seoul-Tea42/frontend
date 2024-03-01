@@ -6,8 +6,8 @@ import { RootState } from '../../../store';
 import fetchApi from '../../../utils/api';
 import TagSelector from '../../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
-import DirectionSVG from '../../../svg/DirectionSVG';
-import InputMinMaxAge from './components/InputMinMaxAge';
+import DirectionSVG from '../../../components/DirectionSVG';
+import { InputMinMaxAge } from './components/InputMinMaxAge';
 
 const Search: React.FC = () => {
   const ageRange = useSelector((state: RootState) => state.searchValue.age);
@@ -46,14 +46,14 @@ const Search: React.FC = () => {
   ];
 
   return (
-    <div className="flex justify-center h-screen">
-      <div className="w-1/3 min-w-96">
+    <div className="flex h-screen">
+      <div className="mx-auto w-1/3 min-w-96">
         {accordionItems.map((item, index) => (
           <div key={index} id={`accordion-collapse-${index}`} data-accordion="collapse">
             <h2 id={`accordion-collapse-heading-${index}`} className="max-h-12">
               <button
                 type="button"
-                className="flex max-h-12 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                className="flex max-h-12 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                 data-accordion-target={`#accordion-collapse-body-${index}`}
                 aria-expanded={isOpen[index] ? 'true' : 'false'}
                 aria-controls={`accordion-collapse-body-${index}`}

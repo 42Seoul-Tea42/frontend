@@ -2,7 +2,7 @@
 
 import { Fragment } from 'react';
 import { signupSteps } from '../../../store/slices/signupSlice';
-import StepperSVG from '../../../svg/StepperSVG';
+import StepperSVG from '../../../components/StepperSVG';
 
 interface StepperItem {
   step: number;
