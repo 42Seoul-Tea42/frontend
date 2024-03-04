@@ -1,56 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-export const TagType = Object.freeze({
-  SPORTS: 1 << 0,
-  TRAVEL: 1 << 1,
-  FOOD: 1 << 2,
-  GAME: 1 << 3,
-  BOOK: 1 << 4,
-  'IT / SCIENCE': 1 << 5,
-  VIDEO: 1 << 6,
-  LANGUE: 1 << 7,
-  FASHION: 1 << 8,
-  PETS: 1 << 9,
-  ART: 1 << 10,
-  SMOKE: 1 << 11,
-  DRINK: 1 << 12
-} as const);
 
-export enum SignupSteps {
-  ACCOUNT_INFO,
-  PERSONAL_INFO,
-  PROFILE_UPLOAD,
-  EMOJI_INFO
-}
-
-interface signupState {
-  currentStep: number;
-  // profileImage: string;
+interface UserState {
   selectedTags: number[];
-  EMOJI_INFO: number;
 }
 
-const initialState: signupState = {
-  currentStep: SignupSteps.ACCOUNT_INFO,
-  // profileImage: '',
-  selectedTags: [],
-  EMOJI_INFO: 0
+const initialState: UserState = {
+  selectedTags: []
 };
 
-const signupSlice = createSlice({
-  name: 'signupSlice',
+const UserSlice = createSlice({
+  name: 'UserSlice',
   initialState,
   reducers: {
-    setCurrentStep: (state: { currentStep: number }, action: { payload: number }) => {
-      state.currentStep = action.payload;
-    },
     addSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
       state.selectedTags = [...state.selectedTags, action.payload];
+      console.table(state.selectedTags);
     },
     removeSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
       state.selectedTags = state.selectedTags.filter(tag => tag !== action.payload);
     }
   }
 });
-export const { setCurrentStep, addSelectedTags, removeSelectedTags } = signupSlice.actions;
+export const { addSelectedTags, removeSelectedTags } = UserSlice.actions;
 
-export default signupSlice.reducer;
+export default UserSlice.reducer;
