@@ -1,7 +1,7 @@
 'use client';
 
 import { Fragment } from 'react';
-import { signupSteps } from '../../../store/slices/signupSlice';
+import { SignupSteps } from '../../../store/slices/signupSlice';
 import StepperSVG from '../../../components/StepperSVG';
 
 interface StepperItem {
@@ -10,10 +10,10 @@ interface StepperItem {
 }
 
 const steps: StepperItem[] = [
-  { step: signupSteps.AccountInfo, label: 'Account Info' },
-  { step: signupSteps.PersonalInfo, label: 'Personal Info' },
-  { step: signupSteps.ProfileUpload, label: 'Profile Upload' },
-  { step: signupSteps.EmojiInfo, label: 'Emoji Info' }
+  { step: SignupSteps.ACCOUNT_INFO, label: 'Account Info' },
+  { step: SignupSteps.PERSONAL_INFO, label: 'Personal Info' },
+  { step: SignupSteps.PROFILE_UPLOAD, label: 'Profile Upload' },
+  { step: SignupSteps.EMOJI_INFO, label: 'Emoji Info' }
 ];
 
 interface SignupStepperProps {

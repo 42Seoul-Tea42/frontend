@@ -15,25 +15,25 @@ export const TagType = Object.freeze({
   DRINK: 1 << 12
 } as const);
 
-export enum signupSteps {
-  AccountInfo,
-  PersonalInfo,
-  ProfileUpload,
-  EmojiInfo
+export enum SignupSteps {
+  ACCOUNT_INFO,
+  PERSONAL_INFO,
+  PROFILE_UPLOAD,
+  EMOJI_INFO
 }
 
 interface signupState {
   currentStep: number;
   // profileImage: string;
   selectedTags: number[];
-  EmojiInfo: number;
+  EMOJI_INFO: number;
 }
 
 const initialState: signupState = {
-  currentStep: signupSteps.AccountInfo,
+  currentStep: SignupSteps.ACCOUNT_INFO,
   // profileImage: '',
   selectedTags: [],
-  EmojiInfo: 0
+  EMOJI_INFO: 0
 };
 
 const signupSlice = createSlice({

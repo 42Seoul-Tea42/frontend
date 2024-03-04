@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { signupSteps } from '../../store/slices/signupSlice';
+import { SignupSteps } from '../../store/slices/signupSlice';
 import SignupStepper from './components/SignupStepper';
 import AccountInfoForm from './components/AccountInfoForm';
 import PersonalInfoForm from './components/PersonalInfoForm';
@@ -16,16 +16,16 @@ const Signup: React.FC = () => {
 
   useEffect(() => {
     switch (currentStep) {
-      case signupSteps.AccountInfo:
+      case SignupSteps.ACCOUNT_INFO:
         setCurrentForm(<AccountInfoForm />);
         break;
-      case signupSteps.PersonalInfo:
+      case SignupSteps.PERSONAL_INFO:
         setCurrentForm(<PersonalInfoForm />);
         break;
-      case signupSteps.ProfileUpload:
+      case SignupSteps.PROFILE_UPLOAD:
         setCurrentForm(<ProfileUploadForm />);
         break;
-      case signupSteps.EmojiInfo:
+      case SignupSteps.EMOJI_INFO:
         setCurrentForm(<EmojiInfoForm />);
         break;
       default:
@@ -40,10 +40,6 @@ const Signup: React.FC = () => {
         <SignupStepper currentStep={currentStep} />
       </div>
       {currentForm}
-      {/* <AccountInfoForm />
-      <PersonalInfoForm />
-      <ProfileUploadForm />
-      <EmojiInfoForm /> */}
     </div>
   );
 };

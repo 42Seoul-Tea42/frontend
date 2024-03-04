@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { ChangeEvent, useState } from 'react';
 import TagSelector from './TagSelector';
 import { useDispatch } from 'react-redux';
-import { setCurrentStep, signupSteps } from '../../../store/slices/signupSlice';
+import { setCurrentStep, SignupSteps } from '../../../store/slices/signupSlice';
 
 const ProfileUploadForm: React.FC = () => {
   const [previewImage, setPreviewImage] = useState<string>('');
@@ -23,7 +23,7 @@ const ProfileUploadForm: React.FC = () => {
   };
 
   const handleNextStep = () => {
-    dispatch(setCurrentStep(signupSteps.EmojiInfo));
+    dispatch(setCurrentStep(SignupSteps.EMOJI_INFO));
   };
 
   return (

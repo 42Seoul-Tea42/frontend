@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { setCurrentStep, signupSteps } from '../../../store/slices/signupSlice';
+import { setCurrentStep, SignupSteps } from '../../../store/slices/signupSlice';
 import NameInputForm from './NameInputForm';
 import UsernamePasswordForm from './UsernamePasswordForm';
 import DateOfBirthForm from './DateOfBirthForm';
@@ -10,7 +10,7 @@ const AccountInfoForm: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleNextStep = () => {
-    dispatch(setCurrentStep(signupSteps.PersonalInfo));
+    dispatch(setCurrentStep(SignupSteps.PERSONAL_INFO));
   };
 
   return (

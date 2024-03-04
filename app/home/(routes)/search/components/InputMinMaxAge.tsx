@@ -21,7 +21,7 @@ const InputMinMaxAge: React.FC = () => {
   return (
     <div className="flex grid grid-rows-2 gap-y-5">
       <div className="flex flex-col items-center">
-        <label htmlFor="input-min">Minimum: {minAgeState | 0}</label>
+        <label htmlFor="input-min">최소: {minAgeState || 0}</label>
         <input
           id="input-min"
           type="number"
@@ -33,7 +33,7 @@ const InputMinMaxAge: React.FC = () => {
         />
       </div>
       <div className="flex flex-col items-center">
-        <label htmlFor="input-max">Maximum: {maxAgeState | 0}</label>
+        <label htmlFor="input-max">최대: {maxAgeState || 0}</label>
         <input
           id="input-max"
           type="number"
