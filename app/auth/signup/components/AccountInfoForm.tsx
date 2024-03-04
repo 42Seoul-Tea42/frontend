@@ -1,6 +1,5 @@
 'use client';
 
-import NameInputForm from './NameInputForm';
 import UsernamePasswordForm from './UsernamePasswordForm';
 import DateOfBirthForm from './DateOfBirthForm';
 
@@ -14,7 +13,6 @@ const AccountInfoForm: React.FC<AccountInfoFormProps> = ({ onNextStep }) => {
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">
         회원가입을 위한 계정정보를 입력해주세요.
       </h5>
-      <NameInputForm />
       <UsernamePasswordForm />
       <DateOfBirthForm />
       <div className="flex justify-end">

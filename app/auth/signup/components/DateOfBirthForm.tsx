@@ -2,7 +2,7 @@ import { AgeLimit } from '../../../store/slices/searchValueDataSlice';
 
 const DateOfBirthForm: React.FC = () => {
   return (
-    <div className="relative z-0 w-full mb-10 group mt-10">
+    <div className="relative z-0 w-full group mb-5 mt-5">
       <input
         type="date"
         name="floating_company"

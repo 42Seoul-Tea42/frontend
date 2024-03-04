@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addSelectedTags, removeSelectedTags } from '../../../store/slices/signupSlice';
+import { addSelectedTags, removeSelectedTags } from '../../../store/slices/userSlice';
 
 interface TagButtonProps {
   text: string;

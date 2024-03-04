@@ -3,7 +3,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import loginViewSlice from './slices/loginViewSlice';
 import searchPageSlice from './slices/searchValueDataSlice';
-import signupSlice from './slices/signupSlice';
+import signupSlice from './slices/userSlice';
 
 const store = configureStore({
   reducer: {
