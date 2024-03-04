@@ -32,8 +32,8 @@ const Setting: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      <div className="mx-auto md:grid md:grid-cols-2 md:gap-4">
+    <div className="flex min-h-screen">
+      <div className="mx-auto md:mt-20 md:grid md:grid-cols-2 md:gap-8">
         <div className="gird grid-cols-subgrid">
           <div className="flex justify-center">
             <ImageUploadForm width={96} height={96} id="main_profile" />

@@ -6,7 +6,7 @@ import HomeNavBarButton from './HomeNavBarButton';
 import {
   HamburgerSVG,
   HistorySVG,
-  HomeSVG,
+  HomeFillSVG,
   MessageSVG,
   SearchSVG,
   StarFullSVG
@@ -23,7 +23,7 @@ function HomeNavBar() {
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-start md:justify-center mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-start md:justify-center mx-auto p-4 shadow-sm">
         <button
           type="button"
           onClick={toggleMenu}
@@ -57,7 +57,12 @@ function HomeNavBar() {
               />
             </li>
             <li>
-              <HomeNavBarButton router={router} path={'/'} buttonName={'Home'} icon={<HomeSVG />} />
+              <HomeNavBarButton
+                router={router}
+                path={'/'}
+                buttonName={'Home'}
+                icon={<HomeFillSVG />}
+              />
             </li>
             <li>
               <HomeNavBarButton

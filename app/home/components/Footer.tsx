@@ -31,7 +31,7 @@ const Footer = () => {
           </Link>
         </li>
         <li className="mx-5 mb-5 sm:mb-0">
-          <HomeNavBarButton router={router} path={'setting'} buttonName={'설정'} style={'hover:underline'} />
+          <HomeNavBarButton router={router} path={'setting'} buttonName={'설정'} icon={undefined} />
         </li>
         <li className="mx-5 sm:mb-0">
           <Link href="#" className="hover:underline">

@@ -4,7 +4,7 @@ interface HomeNavBarButtonProps {
   router: any;
   path: string;
   buttonName: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }
 
 const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ router, path, buttonName, icon }) => {
@@ -13,11 +13,12 @@ const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ router, path, butto
   };
 
   return (
-    <button type="button" onClick={() => pushPathPage(path)} className="flex gap-2">
-      {/* 아이콘 들어가는 위치 */}
-      {icon}
-      <h2>{buttonName}</h2>
-    </button>
+    <div className="text-gray-500 hover:text-red-400">
+      <button type="button" onClick={() => pushPathPage(path)} className="flex gap-2">
+        {icon}
+        <h2>{buttonName}</h2>
+      </button>
+    </div>
   );
 };
 
