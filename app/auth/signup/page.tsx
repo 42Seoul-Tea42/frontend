@@ -1,38 +1,46 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { SignupSteps } from '../../store/slices/signupSlice';
 import SignupStepper from './components/SignupStepper';
 import AccountInfoForm from './components/AccountInfoForm';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import ProfileUploadForm from './components/ProfileUploadForm';
 import EmojiInfoForm from '../login/components/EmojiInfoForm';
 
+export enum Steps {
+  ACCOUNT_INFO,
+  PERSONAL_INFO,
+  PROFILE_UPLOAD,
+  EMOJI_INFO
+}
+
 const Signup: React.FC = () => {
-  const currentStep = useSelector((state: RootState) => state.signupViewer.currentStep);
+  const [currentStep, setCurrentStep] = useState<Steps>(Steps.ACCOUNT_INFO);
   const [currentForm, setCurrentForm] = useState<JSX.Element | null>(null);
 
   useEffect(() => {
     switch (currentStep) {
-      case SignupSteps.ACCOUNT_INFO:
-        setCurrentForm(<AccountInfoForm />);
+      case Steps.ACCOUNT_INFO:
+        setCurrentForm(<AccountInfoForm onNextStep={nextStep} />);
         break;
-      case SignupSteps.PERSONAL_INFO:
-        setCurrentForm(<PersonalInfoForm />);
+      case Steps.PERSONAL_INFO:
+        setCurrentForm(<PersonalInfoForm onNextStep={nextStep} />);
         break;
-      case SignupSteps.PROFILE_UPLOAD:
-        setCurrentForm(<ProfileUploadForm />);
+      case Steps.PROFILE_UPLOAD:
+        setCurrentForm(<ProfileUploadForm onNextStep={nextStep} />);
         break;
-      case SignupSteps.EMOJI_INFO:
-        setCurrentForm(<EmojiInfoForm />);
+      case Steps.EMOJI_INFO:
+        setCurrentForm(<EmojiInfoForm onNextStep={nextStep} />);
         break;
       default:
-        setCurrentForm(<AccountInfoForm />);
+        setCurrentForm(<AccountInfoForm onNextStep={nextStep} />);
         break;
     }
   }, [currentStep]);
+
+  const nextStep = () => {
+    setCurrentStep(prevStep => prevStep + 1);
+  };
 
   return (
     <div className="items-center justify-center h-screen flex flex-col">

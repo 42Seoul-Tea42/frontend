@@ -2,11 +2,13 @@ import Image from 'next/image';
 import React, { ChangeEvent, useState } from 'react';
 import TagSelector from './TagSelector';
 import { useDispatch } from 'react-redux';
-import { setCurrentStep, SignupSteps } from '../../../store/slices/signupSlice';
 
-const ProfileUploadForm: React.FC = () => {
+interface ProfileUploadFormProps {
+  onNextStep: () => void;
+}
+
+const ProfileUploadForm: React.FC<ProfileUploadFormProps> = ({ onNextStep }) => {
   const [previewImage, setPreviewImage] = useState<string>('');
-  const dispatch = useDispatch();
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -20,10 +22,6 @@ const ProfileUploadForm: React.FC = () => {
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  const handleNextStep = () => {
-    dispatch(setCurrentStep(SignupSteps.EMOJI_INFO));
   };
 
   return (
@@ -84,7 +82,7 @@ const ProfileUploadForm: React.FC = () => {
         <button
           type="button"
           className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          onClick={handleNextStep}
+          onClick={onNextStep}
         >
           Next
         </button>
