@@ -6,7 +6,7 @@ import { RootState } from '../../../store';
 import fetchApi from '../../../utils/api';
 import TagSelector from '../../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
-import DirectionSVG from '../../../components/DirectionSVG';
+import DirectionSVG from '../../../svg/DirectionSVG';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
 
@@ -48,7 +48,12 @@ const Search: React.FC = () => {
     <div className="flex h-screen">
       <div className="mx-auto w-1/3 min-w-96">
         {accordionItems.map((item, index) => (
-          <div key={index} id={`accordion-collapse-${index}`} data-accordion="collapse">
+          <div
+            key={index}
+            id={`accordion-collapse-${index}`}
+            data-accordion="collapse"
+            className="border-b border-gray-200 dark:border-gray-700"
+          >
             <h2 id={`accordion-collapse-heading-${index}`} className="max-h-12">
               <button
                 type="button"

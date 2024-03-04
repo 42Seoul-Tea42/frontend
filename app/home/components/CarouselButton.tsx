@@ -1,6 +1,6 @@
 'use client';
 
-import DirectionSVG from '../../components/DirectionSVG';
+import DirectionSVG from '../../svg/DirectionSVG';
 
 interface CarouselButtonProps {
   direction: 'left' | 'right';

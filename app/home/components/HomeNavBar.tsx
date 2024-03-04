@@ -3,6 +3,14 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import HomeNavBarButton from './HomeNavBarButton';
+import {
+  HamburgerSVG,
+  HistorySVG,
+  HomeSVG,
+  MessageSVG,
+  SearchSVG,
+  StarFullSVG
+} from '../../svg/HomeNavBarSVG';
 
 // 홈 레이아웃 컴포넌트
 function HomeNavBar() {
@@ -19,33 +27,53 @@ function HomeNavBar() {
         <button
           type="button"
           onClick={toggleMenu}
-          className="inline-flex items-center  w-8 h-8 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="inline-flex items-center w-8 h-8 justify-center border text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           data-collapse-toggle="navbar-default"
           aria-controls="navbar-default"
           aria-expanded={isMenuOpen}
         >
           <span className="sr-only">Open main menu</span>
-          <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-          </svg>
+          <HamburgerSVG />
         </button>
-        {/*  작은 화면에서 보이는 메뉴 안쪽 내용 */}
-        <div className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`} id="navbar-default">
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <div
+          className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`}
+          id="navbar-default"
+        >
+          <ul className="font-midium text-xl flex flex-col p-4 gap-5 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <HomeNavBarButton router={router} path={'chat'} buttonName={'Chat'} />
+              <HomeNavBarButton
+                router={router}
+                path={'chat'}
+                buttonName={'Chat'}
+                icon={<MessageSVG />}
+              />
             </li>
             <li>
-              <HomeNavBarButton router={router} path={'fancy'} buttonName={'Fancy'} />
+              <HomeNavBarButton
+                router={router}
+                path={'fancy'}
+                buttonName={'Fancy'}
+                icon={<StarFullSVG />}
+              />
             </li>
             <li>
-              <HomeNavBarButton router={router} path={'/'} buttonName={'Home'} />
+              <HomeNavBarButton router={router} path={'/'} buttonName={'Home'} icon={<HomeSVG />} />
             </li>
             <li>
-              <HomeNavBarButton router={router} path={'search'} buttonName={'Search'} />
+              <HomeNavBarButton
+                router={router}
+                path={'search'}
+                buttonName={'Search'}
+                icon={<SearchSVG />}
+              />
             </li>
             <li>
-              <HomeNavBarButton router={router} path={'history'} buttonName={'History'} />
+              <HomeNavBarButton
+                router={router}
+                path={'history'}
+                buttonName={'History'}
+                icon={<HistorySVG />}
+              />
             </li>
           </ul>
         </div>

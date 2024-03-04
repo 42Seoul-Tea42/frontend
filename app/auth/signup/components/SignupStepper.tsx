@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react';
-import StepperSVG from '../../../components/StepperSVG';
+import StepperSVG from '../../../svg/StepperSVG';
 import { Steps } from '../page';
 
 interface StepperItem {

@@ -12,7 +12,9 @@ const ProfileUploadForm: React.FC<ProfileUploadFormProps> = ({ onNextStep }) => 
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-purple-500/50">
         다른 사람에게 보이는 프로필 정보입니다.
       </h5>
-      <ImageUploadForm />
+      <div className="flex justify-center mb-5">
+        <ImageUploadForm width={96} height={80} id="signup_Profile" />
+      </div>
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-yellow-500/50">
         관심있는 분야를 선택해주세요.
       </h5>

@@ -1,15 +1,13 @@
 'use client';
-
 import { useState } from 'react';
 import TagSelector from '../../../auth/signup/components/TagSelector';
-import DirectionSVG from '../../../components/DirectionSVG';
+import DirectionSVG from '../../../svg/DirectionSVG';
 import GenderRadioList from '../../../auth/signup/components/GenderRadioList';
 import EmojiGridList from '../../../auth/login/components/EmojiGridList';
 import SexualPreferenceRadioList from '../../../auth/signup/components/SexualPreferenceRadioList';
 import EmailVerificationForm from '../../../auth/signup/components/EmailVerificationForm';
 import UsernamePasswordForm from '../../../auth/signup/components/UsernamePasswordForm';
 import DateOfBirthForm from '../../../auth/signup/components/DateOfBirthForm';
-import ProfileUploadForm from '../../../auth/signup/components/ProfileUploadForm';
 import ImageUploadForm from '../../../auth/signup/components/ImageUploadForm';
 
 const Setting: React.FC = () => {
@@ -35,14 +33,30 @@ const Setting: React.FC = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="grid grid-cols-2">
-        <div className="w-1/5 min-w-96">
+      <div className="mx-auto md:grid md:grid-cols-2 md:gap-4">
+        <div className="gird grid-cols-subgrid">
+          <div className="flex justify-center">
+            <ImageUploadForm width={96} height={96} id="main_profile" />
+          </div>
+          <div className="grid grid-cols-2 gap-x-4">
+            <ImageUploadForm width={48} height={48} id="small_profile_1" />
+            <ImageUploadForm width={48} height={48} id="small_profile_2" />
+            <ImageUploadForm width={48} height={48} id="small_profile_3" />
+            <ImageUploadForm width={48} height={48} id="small_profile_4" />
+          </div>
+        </div>
+        <div className="mx-auto w-96">
           {accordionItems.map((item, index) => (
-            <div key={index} id={`accordion-collapse-${index}`} data-accordion="collapse">
+            <div
+              key={index}
+              id={`accordion-collapse-${index}`}
+              data-accordion="collapse"
+              className="border-b border-gray-200 dark:border-gray-700"
+            >
               <h2 id={`accordion-collapse-heading-${index}`} className="max-h-12">
                 <button
                   type="button"
-                  className="flex max-h-12 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                  className="flex max-h-12 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                   data-accordion-target={`#accordion-collapse-body-${index}`}
                   aria-expanded={isOpen[index] ? 'true' : 'false'}
                   aria-controls={`accordion-collapse-body-${index}`}
@@ -63,19 +77,16 @@ const Setting: React.FC = () => {
               </div>
             </div>
           ))}
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="mt-10 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={() => {}}
+            >
+              Save
+            </button>
+          </div>
         </div>
-        <div className="gird grid-subgrid">
-          <ImageUploadForm />
-        </div>
-        {/* <div className="flex justify-end mt-10">
-          <button
-            type="button"
-            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={() => {}}
-          >
-            Submit
-          </button>
-        </div> */}
       </div>
     </div>
   );
