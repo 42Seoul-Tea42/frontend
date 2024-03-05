@@ -18,15 +18,13 @@ const Home: React.FC = () => {
   return (
     <>
       <div className="w-full h-screen">
-        <div className="mx-10 my-10">
-          <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div id="default-carousel" className="relative w-full" data-carousel="slide">
-              <div className="relative h-96 overflow-hidden rounded-lg md:h-96">
-                <Image src="/조유리.webp" alt="face" width={500} height={500} priority={true} />
-              </div>
-              {/* <CarouselButton direction="left" position="start-0" />
-              <CarouselButton direction="right" position="end-0" /> */}
+        <div className="mx-auto mt-20 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div id="default-carousel" className="relative w-full" data-carousel="slide">
+            <div className="relative h-96 overflow-hidden rounded-lg md:h-96">
+              <Image src="/조유리.webp" alt="face" width={500} height={500} priority={true} />
             </div>
+            {/* <CarouselButton direction="left" position="start-0" />
+              <CarouselButton direction="right" position="end-0" /> */}
           </div>
         </div>
       </div>
