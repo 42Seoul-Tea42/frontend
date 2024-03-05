@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import Cup from './Cup';
+import LearnMorePage from './LearnMorePage';
 
 const LandingPage: React.FC = () => {
   const router = useRouter();
@@ -24,13 +25,13 @@ const LandingPage: React.FC = () => {
       <Provider store={store}>
         {/* Main page - Tea for Two */}
         <div className="col-3 h-screen space-y-10">
-          <div className="flex justify-center items-end py-10 text-6xl font-extrabold bg-red-200 h-1/5">
+          <h1 className="tracking-wider flex justify-center items-end py-10 text-6xl font-extrabold bg-red-200 h-1/5">
             Tea for Two
-          </div>
-          <div className="flex flex-col px-36 space-y-5 sm:flex-row sm:justify-center sm:space-y-0">
+          </h1>
+          <div className="flex flex-col min-w-24 px-36 space-y-5 sm:flex-row sm:justify-center sm:space-y-0">
             <button
               type="button"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-bold text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900"
+              className="inline-flex justify-center items-center py-3 px-5 tracking-wide text-base font-bold text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900"
               onClick={pushLoginPage}
             >
               Get started
@@ -52,7 +53,7 @@ const LandingPage: React.FC = () => {
             </button>
             <button
               type="button"
-              className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-bold text-center text-black rounded-lg border border-black hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
+              className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 tracking-wide sm:ms-4 text-base font-bold text-center text-black rounded-lg border border-black hover:bg-gray-100"
               onClick={scrollPage}
             >
               Learn more
@@ -60,9 +61,8 @@ const LandingPage: React.FC = () => {
           </div>
           <Cup />
         </div>
-
         {/* Second Page - Learn more */}
-        <div className="w-full mx-auto p-4 h-screen bg-red-200"></div>
+        <LearnMorePage />
       </Provider>
     </>
   );
