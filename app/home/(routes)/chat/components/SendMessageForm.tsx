@@ -1,4 +1,8 @@
 const SendMessageForm = () => {
+  enum ChatType {
+    MAX_LENGTH = 500
+  }
+
   return (
     <form>
       <label htmlFor="chat" className="sr-only">
@@ -7,9 +11,10 @@ const SendMessageForm = () => {
       <div className="flex items-center px-3 py-3 rounded-b-xl border bg-gray-50 dark:bg-gray-700">
         <textarea
           id="chat"
-          rows={1}
+          rows={2}
+          maxLength={ChatType.MAX_LENGTH}
           className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-400 focus:border-blue-400 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400"
-          placeholder="Your message... (.../500)"
+          placeholder={`Your message... (.../${ChatType.MAX_LENGTH})`}
         ></textarea>
         <button
           type="submit"
