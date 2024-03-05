@@ -1,22 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import SignupStepper from './components/SignupStepper';
+import SignupStepper, { Steps } from './components/SignupStepper';
 import AccountInfoForm from './components/AccountInfoForm';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import ProfileUploadForm from './components/ProfileUploadForm';
 import EmojiInfoForm from '../login/components/EmojiInfoForm';
 
-export enum Steps {
-  ACCOUNT_INFO,
-  PERSONAL_INFO,
-  PROFILE_UPLOAD,
-  EMOJI_INFO
-}
-
 const Signup: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<Steps>(Steps.ACCOUNT_INFO);
   const [currentForm, setCurrentForm] = useState<JSX.Element | null>(null);
+
+  const nextStep = () => {
+    setCurrentStep(prevStep => prevStep + 1);
+  };
 
   useEffect(() => {
     switch (currentStep) {
@@ -37,10 +34,6 @@ const Signup: React.FC = () => {
         break;
     }
   }, [currentStep]);
-
-  const nextStep = () => {
-    setCurrentStep(prevStep => prevStep + 1);
-  };
 
   return (
     <div className="items-center justify-center h-screen flex flex-col">

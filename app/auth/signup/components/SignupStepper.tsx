@@ -1,6 +1,5 @@
 import { Fragment, useEffect } from 'react';
 import StepperSVG from '../../../svg/StepperSVG';
-import { Steps } from '../page';
 
 interface StepperItem {
   step: Steps;
@@ -14,6 +13,13 @@ interface SignupStepperProps {
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0) + str.slice(1).toLowerCase();
 };
+
+export enum Steps {
+  ACCOUNT_INFO,
+  PERSONAL_INFO,
+  PROFILE_UPLOAD,
+  EMOJI_INFO
+}
 
 const SignupStepper: React.FC<SignupStepperProps> = ({ currentStep }) => {
   const steps = Object.entries(Steps)
