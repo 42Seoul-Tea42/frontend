@@ -8,7 +8,7 @@ export interface ChattingListItemProps {
 
 const ChattingListItem: React.FC<ChattingListItemProps> = ({ name, distance, imageSrc }) => {
   return (
-    <li className="py-3 sm:py-4">
+    <li className="p-3 sm:py-4 border hover:bg-red-100">
       <div className="flex items-center space-x-4 rtl:space-x-reverse">
         <div className="flex-shrink-0">
           <Image

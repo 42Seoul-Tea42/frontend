@@ -1,27 +1,21 @@
 'use client';
 
+import DirectionSVG from '../../../svg/DirectionSVG';
+
 interface toggleEmailFormButtonProps {
   handle: () => void;
+  state: boolean;
 }
 
-const ToggleEmailFormButton: React.FC<toggleEmailFormButtonProps> = ({ handle }) => {
+const ToggleEmailFormButton: React.FC<toggleEmailFormButtonProps> = ({ handle, state }) => {
+  const handleDirection = () => {
+    if (state) return 'left';
+    else return 'down';
+  };
+
   return (
-    <button onClick={handle} className="items-center">
-      <svg
-        className="w-5 h-5 top-0 left-0 text-gray-800 dark:text-white"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 10 15"
-      >
-        <path
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"
-        />
-      </svg>
+    <button onClick={handle} className="items-center hover:text-gray-400">
+      <DirectionSVG direction={handleDirection()} />
     </button>
   );
 };

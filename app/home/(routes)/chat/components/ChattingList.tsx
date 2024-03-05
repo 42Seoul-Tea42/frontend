@@ -26,13 +26,11 @@ const ChattingList = () => {
   }, []);
 
   return (
-    <div className="h-screen">
-      <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-        {users.map((user, index) => (
-          <ChattingListItem key={index} {...user} />
-        ))}
-      </ul>
-    </div>
+    <ul className="divide-gray-200 dark:divide-gray-700">
+      {users.map((user, index) => (
+        <ChattingListItem key={index} {...user} />
+      ))}
+    </ul>
   );
 };
 
