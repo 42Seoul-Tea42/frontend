@@ -9,7 +9,7 @@ import EmailVerificationForm from '../../../auth/signup/components/EmailVerifica
 import DateOfBirthForm from '../../../auth/signup/components/DateOfBirthForm';
 import ImageUploadForm from '../../../auth/signup/components/ImageUploadForm';
 import UserNameForm from '../../../auth/signup/components/UserNameForm';
-import PasswordForm from '../../../auth/signup/components/Passwordform';
+import PasswordForm from '../../../auth/signup/components/PasswordForm';
 
 const Setting: React.FC = () => {
   const accordionItems = [

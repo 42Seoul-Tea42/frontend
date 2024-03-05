@@ -9,10 +9,6 @@ interface EmojiInfoFormProps {
 const EmojiInfoForm: React.FC<EmojiInfoFormProps> = ({ onNextStep }) => {
   const router = useRouter();
 
-  const handleSubmit = () => {
-    router.push('/home');
-  };
-
   return (
     <form className="min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h5 className="text-lg font-semibold mb-10">

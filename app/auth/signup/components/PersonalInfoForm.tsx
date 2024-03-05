@@ -1,6 +1,5 @@
 'use client';
 
-import { useDispatch } from 'react-redux';
 import GenderRadioList from './GenderRadioList';
 import SexualPreferenceRadioList from './SexualPreferenceRadioList';
 import IntroductionForm from './IntroductionForm';
@@ -17,7 +16,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onNextStep }) => {
       </h5>
       <label className="block text-sm font-medium text-gray-900 dark:text-white">성별 정보</label>
       <GenderRadioList />
-      <label className="block text-sm font-medium text-gray-900 dark:text-white">성적 취향</label>
+      <label className="block text-sm font-medium text-gray-900 dark:text-white">성적 선호</label>
       <SexualPreferenceRadioList />
       <IntroductionForm />
       <div className="flex justify-end">

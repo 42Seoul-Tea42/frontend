@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export enum Reaction {
+  Like = 'like',
+  Dislike = 'dislike',
+  None = 'none'
+}
+
 interface UserState {
   dateOfBirth: any;
   firstname: string;
@@ -10,8 +16,9 @@ interface UserState {
   birthDate: string;
   gender: string;
   sexualPreference: string;
-  introduce: string;
+  introduction: string;
   selectedTags: number[];
+  selectedReactions: Reaction[];
 }
 
 const initialState: UserState = {
@@ -23,9 +30,10 @@ const initialState: UserState = {
   birthDate: '',
   gender: '',
   sexualPreference: '',
-  introduce: '',
+  introduction: '',
   selectedTags: [],
-  dateOfBirth: undefined
+  dateOfBirth: undefined,
+  selectedReactions: Array.from({ length: 16 }, () => Reaction.None)
 };
 
 const UserSlice = createSlice({
@@ -64,9 +72,9 @@ const UserSlice = createSlice({
       state.sexualPreference = action.payload;
       console.table(state.sexualPreference);
     },
-    setIntroduce: (state: UserState, action: { payload: string }) => {
-      state.introduce = action.payload;
-      console.table(state.introduce);
+    setIntrodution: (state: UserState, action: { payload: string }) => {
+      state.introduction = action.payload;
+      console.table(state.introduction);
     },
     addSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
       state.selectedTags = [...state.selectedTags, action.payload];
@@ -75,6 +83,22 @@ const UserSlice = createSlice({
     removeSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
       state.selectedTags = state.selectedTags.filter(tag => tag !== action.payload);
       console.table(state.selectedTags);
+    },
+    setReaction: (
+      state: { selectedReactions: Reaction[] },
+      action: { payload: { id: number } }
+    ) => {
+      switch (state.selectedReactions[action.payload.id]) {
+        case Reaction.Like:
+          state.selectedReactions[action.payload.id] = Reaction.Dislike;
+          break;
+        case Reaction.Dislike:
+          state.selectedReactions[action.payload.id] = Reaction.None;
+          break;
+        case Reaction.None:
+          state.selectedReactions[action.payload.id] = Reaction.Like;
+          break;
+      }
     }
   }
 });
@@ -88,9 +112,10 @@ export const {
   setBirthDate,
   setGender,
   setSexualPreference,
-  setIntroduce,
+  setIntrodution,
   addSelectedTags,
-  removeSelectedTags
+  removeSelectedTags,
+  setReaction
 } = UserSlice.actions;
 
 export default UserSlice.reducer;

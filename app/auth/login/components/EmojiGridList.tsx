@@ -1,49 +1,21 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { Reaction, setReaction } from '../../../store/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const EmojiGridList: React.FC = () => {
+  const selectedReaction = useSelector((state: RootState) => state.user.selectedReactions);
+  const dispatch = useDispatch();
+
+  const handleReaction = (id: number) => {
+    dispatch(setReaction({ id }));
+  };
+
   const Emojis = Array.from({ length: 16 }, (_, index) => ({
     id: index,
     src: `/emoji/${index + 1}.jpg`, // 이미지 경로
     alt: 'emoji'
   }));
-
-  enum Reaction {
-    Like = 'like',
-    Dislike = 'dislike',
-    None = 'none'
-  }
-
-  const [selectedReaction, setSelectedReaction] = useState<Reaction[]>(
-    Array.from({ length: 16 }, () => Reaction.None)
-  );
-
-  const handleClick = (id: number) => {
-    const currentReaction = selectedReaction[id];
-    switch (currentReaction) {
-      case Reaction.Like:
-        setSelectedReaction(prevState => {
-          const newState = [...prevState];
-          newState[id] = Reaction.Dislike;
-          return newState;
-        });
-        break;
-      case Reaction.Dislike:
-        setSelectedReaction(prevState => {
-          const newState = [...prevState];
-          newState[id] = Reaction.None;
-          return newState;
-        });
-        break;
-      case Reaction.None:
-        setSelectedReaction(prevState => {
-          const newState = [...prevState];
-          newState[id] = Reaction.Like;
-          return newState;
-        });
-        break;
-    }
-  };
 
   const selectedStyle = (reaction: Reaction): string => {
     switch (reaction) {
@@ -63,7 +35,7 @@ const EmojiGridList: React.FC = () => {
           <button
             type="button"
             className={`cursor-pointer relative ${selectedStyle(selectedReaction[Emoji.id])}`}
-            onClick={() => handleClick(Emoji.id)}
+            onClick={() => handleReaction(Emoji.id)}
           >
             <Image
               width={500}
