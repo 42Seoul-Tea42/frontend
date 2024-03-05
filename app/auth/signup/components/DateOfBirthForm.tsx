@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { RootState } from '../../../store/store';
 import { setBirthDate } from '../../../store/slices/userSlice';
 
 const DateOfBirthForm: React.FC = () => {

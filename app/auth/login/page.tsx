@@ -1,6 +1,5 @@
 'use client';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useState } from 'react';
 import EmailLoginForm from './components/EmailLoginForm';
 import GoogleLoginButton from './components/GoogleLoginButton';
 import KakaoLoginButton from './components/KakaoLoginButton';
@@ -9,9 +8,11 @@ import CreateAccountButton from './components/CreateAccountButton';
 import ToggleEmailFormButton from './components/ToggleEmailFormButton';
 
 const LoginPage: React.FC = () => {
-  const emailFormView = useSelector(
-    (state: RootState) => state.loginViewer.email
-  );
+  const [emailFormView, setEmailFormView] = useState(false);
+
+  const toggle = () => {
+    setEmailFormView(!emailFormView);
+  };
 
   return (
     <div className="flex items-center justify-center w-full h-screen">
@@ -19,10 +20,10 @@ const LoginPage: React.FC = () => {
         <div className="flex items-end gap-3">
           {emailFormView && (
             <div className="left-0">
-              <ToggleEmailFormButton />
+              <ToggleEmailFormButton handle={toggle} />
             </div>
           )}
-          <h5 className="text-3xl font-semibold text-gray-900 dark:text-white flex-grow">
+          <h5 className="text-3xl min-w-96 font-semibold text-gray-900 dark:text-white flex-grow">
             Welcome to tea for two!
           </h5>
         </div>
@@ -32,7 +33,7 @@ const LoginPage: React.FC = () => {
               <GoogleLoginButton />
               <KakaoLoginButton />
               <h6 className="text-md mb-2 text-gray-600"> or </h6>
-              <EmailLoginButton />
+              <EmailLoginButton handle={toggle} />
             </>
           ) : (
             <>

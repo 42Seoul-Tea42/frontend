@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './store/store';
 import Cup from './Cup';
 
 const LandingPage: React.FC = () => {

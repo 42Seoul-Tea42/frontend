@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../store';
-import { setDistance } from '../../../../store/slices/searchValueDataSlice';
+import { RootState } from '../../../../store/store';
+import { setDistance } from '../../../../store/slices/searchParamSlice';
 
 const InputRangeDistance: React.FC = () => {
-  const distance = useSelector((state: RootState) => state.searchValue.distance);
+  const distance = useSelector((state: RootState) => state.searchParam.distance);
   const dispatch = useDispatch();
 
   const handleDistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { RootState } from '../../../store/store';
 import fetchApi from '../../../utils/api';
 import TagSelector from '../../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
@@ -11,11 +11,11 @@ import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
 
 const Search: React.FC = () => {
-  const minAge = useSelector((state: RootState) => state.searchValue.minAge);
-  const maxAge = useSelector((state: RootState) => state.searchValue.maxAge);
-  const distance = useSelector((state: RootState) => state.searchValue.distance);
-  const fameRate = useSelector((state: RootState) => state.searchValue.fame);
-  const tags = useSelector((state: RootState) => state.searchValue.tags);
+  const minAge = useSelector((state: RootState) => state.searchParam.minAge);
+  const maxAge = useSelector((state: RootState) => state.searchParam.maxAge);
+  const distance = useSelector((state: RootState) => state.searchParam.distance);
+  const fameRate = useSelector((state: RootState) => state.searchParam.fame);
+  const tags = useSelector((state: RootState) => state.searchParam.tags);
 
   const [isOpen, setIsOpen] = useState<boolean[]>([false, false, false, false]);
 

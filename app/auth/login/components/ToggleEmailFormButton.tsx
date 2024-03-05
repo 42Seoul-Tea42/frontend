@@ -1,13 +1,12 @@
 'use client';
 
-import { useDispatch } from 'react-redux';
-import { toggleEmailView } from '../../../store/slices/loginViewSlice';
+interface toggleEmailFormButtonProps {
+  handle: () => void;
+}
 
-const toggleEmailFormButton: React.FC = () => {
-  const dispatch = useDispatch();
-  const useToggleEmailView = () => dispatch(toggleEmailView());
+const ToggleEmailFormButton: React.FC<toggleEmailFormButtonProps> = ({ handle }) => {
   return (
-    <button onClick={useToggleEmailView} className="items-center">
+    <button onClick={handle} className="items-center">
       <svg
         className="w-5 h-5 top-0 left-0 text-gray-800 dark:text-white"
         aria-hidden="true"
@@ -27,4 +26,4 @@ const toggleEmailFormButton: React.FC = () => {
   );
 };
 
-export default toggleEmailFormButton;
+export default ToggleEmailFormButton;
