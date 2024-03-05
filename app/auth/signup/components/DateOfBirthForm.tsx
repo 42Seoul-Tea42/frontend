@@ -1,16 +1,25 @@
-import { AgeLimit } from '../../../store/slices/searchValueDataSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import { setBirthDate } from '../../../store/slices/userSlice';
 
 const DateOfBirthForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const dateOfBirth = useSelector((state: RootState) => state.user.dateOfBirth);
+
+  const handleDateOfBirth = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setBirthDate(e.target.value));
+  };
+
   return (
     <div className="relative z-0 w-full group mb-5 mt-5">
       <input
         type="date"
+        value={dateOfBirth}
+        onChange={handleDateOfBirth}
         name="floating_company"
         id="floating_company"
         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         placeholder=""
-        min={AgeLimit.MIN}
-        max={AgeLimit.MAX}
         required
       />
       <label
