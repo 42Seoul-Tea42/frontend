@@ -19,7 +19,7 @@ const InputMinMaxAge: React.FC = () => {
   };
 
   return (
-    <div className="flex grid grid-rows-2 gap-y-5">
+    <>
       <div className="flex flex-col items-center">
         <label htmlFor="input-min">최소: {minAgeState || 0}</label>
         <input
@@ -44,7 +44,7 @@ const InputMinMaxAge: React.FC = () => {
           max={100}
         />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,15 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import fetchApi from '../../../utils/api';
 import TagSelector from '../../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
-import DirectionSVG from '../../../svg/DirectionSVG';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
 import { SearchSVG } from '../../../svg/HomeNavBarSVG';
+import DirectionSVG from '../../../svg/DirectionSVG';
 
 const Search: React.FC = () => {
   const minAge = useSelector((state: RootState) => state.searchParam.minAge);
@@ -18,13 +18,35 @@ const Search: React.FC = () => {
   const fameRate = useSelector((state: RootState) => state.searchParam.fame);
   const tags = useSelector((state: RootState) => state.searchParam.tags);
 
-  const [isOpen, setIsOpen] = useState<boolean[]>([false, false, false, false]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
 
-  const toggleAccordion = (index: number) => {
-    setIsOpen((prevState: boolean[]) =>
-      prevState.map((state, idx) => (idx === index ? !state : false))
-    );
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+        setIsDrawerOpen(false);
+      }
+    };
+
+    const handleScroll = () => {
+      document.body.style.overflow = isDrawerOpen ? 'hidden' : 'auto';
+    };
+
+    if (isDrawerOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('scroll', handleScroll);
+      document.body.style.overflow = 'auto';
+    };
+  }, [isDrawerOpen]);
 
   const handleSearchButton = () => {
     const sendData = {
@@ -36,56 +58,60 @@ const Search: React.FC = () => {
     };
 
     fetchApi('/user/search', 'POST', JSON.stringify(sendData));
+    toggleDrawer();
   };
 
-  const accordionItems = [
-    { title: '검색할 나이 범위를 선택해주세요.', content: <InputMinMaxAge /> },
+  const drawerItems = [
+    { title: '검색할 나이를 선택해주세요.', content: <InputMinMaxAge /> },
     { title: '검색할 태그를 선택해주세요.', content: <TagSelector /> },
-    { title: '검색할 최대 거리를 선택해주세요.', content: <InputRangeDistance /> },
+    { title: '검색할 거리를 선택해주세요.', content: <InputRangeDistance /> },
     { title: '검색할 등급을 선택해주세요.', content: <InputRangeStarBar /> }
   ];
 
   return (
     <div className="flex h-screen">
-      <div className="mx-auto mt-20 w-1/3 md:w-1/2 min-w-96">
-        <div className="md:min-w-72 md:grid md:grid-cols-2">
-          {accordionItems.map((item, index) => (
-            <div key={index} id={`accordion-collapse-${index}`} data-accordion="collapse">
-              <h2 id={`accordion-collapse-heading-${index}`} className="max-h-12">
+      <div className="w-full">
+        {isDrawerOpen && (
+          <>
+            <div className="fixed z-50 top-0 left-0 w-full h-full bg-black opacity-50" />
+            <div
+              ref={drawerRef}
+              className="fixed z-50 bg-gray-100 mt-14 border-t border-gray-200 dark:border-gray-700 dark:bg-gray-800 transition-transform top-0 left-0 right-0 transform translate-y-0"
+            >
+              <div className="mx-auto p-4 border-b border-gray-200 dark:border-gray-700">
+                <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200">검색 옵션</h2>
+              </div>
+              <div className="md:min-w-72 md:grid md:grid-cols-2">
+                {/* Add other drawer content here */}
+                {drawerItems.map((item, index) => (
+                  <div key={index} className="p-4 border border-gray-200 dark:border-gray-700">
+                    <h3 className="text-lg mb-5 font-medium text-gray-800 dark:text-gray-200">
+                      {item.title}
+                    </h3>
+                    {item.content}
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-end m-5">
                 <button
                   type="button"
-                  className="flex w-full max-h-12 items-center justify-between p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                  data-accordion-target={`#accordion-collapse-body-${index}`}
-                  aria-expanded={isOpen[index] ? 'true' : 'false'}
-                  aria-controls={`accordion-collapse-body-${index}`}
-                  onClick={() => toggleAccordion(index)}
+                  className="flex items-center text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-2"
+                  onClick={handleSearchButton}
                 >
-                  {item.title}
-                  <DirectionSVG direction={isOpen[index] ? 'top' : 'down'} />
+                  <SearchSVG />
+                  검색하기
                 </button>
-              </h2>
-              <div
-                id={`accordion-collapse-body-${index}`}
-                className={`${isOpen[index] ? '' : 'hidden'}`}
-                aria-labelledby={`accordion-collapse-heading-${index}`}
-              >
-                <div className="p-5 border rounded-b-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                  {item.content}
-                </div>
               </div>
             </div>
-          ))}
-        </div>
-        <div className="flex justify-end mt-10">
-          <button
-            type="button"
-            className="flex items-center text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-2"
-            onClick={() => {}}
-          >
-            <SearchSVG />
-            검색하기
-          </button>
-        </div>
+          </>
+        )}
+        <button
+          className="w-full h-12 flex justify-center items-center text-gray-400 hover:bg-gray-100 font-medium px-5 py-2.5 mb-2"
+          type="button"
+          onClick={toggleDrawer}
+        >
+          <DirectionSVG direction="down" />
+        </button>
       </div>
     </div>
   );
