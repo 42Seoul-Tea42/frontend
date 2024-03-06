@@ -36,11 +36,13 @@ const Signup: React.FC = () => {
   }, [currentStep]);
 
   return (
-    <div className="items-center justify-center h-screen flex flex-col">
-      <div className="h-48">
-        <SignupStepper currentStep={currentStep} />
+    <div className="w-full h-screen flex justify-center">
+      <div className="flex flex-col items-center justify-center">
+        <div className="mb-20">
+          <SignupStepper currentStep={currentStep} />
+        </div>
+        {currentForm}
       </div>
-      {currentForm}
     </div>
   );
 };

@@ -5,7 +5,6 @@ import DirectionSVG from '../../../svg/DirectionSVG';
 import GenderRadioList from '../../../auth/signup/components/GenderRadioList';
 import EmojiGridList from '../../../auth/login/components/EmojiGridList';
 import SexualPreferenceRadioList from '../../../auth/signup/components/SexualPreferenceRadioList';
-import EmailVerificationForm from '../../../auth/signup/components/EmailVerificationForm';
 import DateOfBirthForm from '../../../auth/signup/components/DateOfBirthForm';
 import ImageUploadForm from '../../../auth/signup/components/ImageUploadForm';
 import UserNameForm from '../../../auth/signup/components/UserNameForm';
@@ -15,7 +14,6 @@ const Setting: React.FC = () => {
   const accordionItems = [
     { title: '이름변경', content: <UserNameForm /> },
     { title: '생년월일 재설정', content: <DateOfBirthForm /> },
-    { title: '이메일 재설정', content: <EmailVerificationForm /> },
     { title: '비밀번호 재설정', content: <PasswordForm /> },
     { title: '나의 성별 선택', content: <GenderRadioList /> },
     { title: '성적 취향 선택', content: <SexualPreferenceRadioList /> },
@@ -35,16 +33,14 @@ const Setting: React.FC = () => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="mx-auto md:mt-20 md:grid md:grid-cols-2 md:gap-8">
+      <div className="mx-auto mt-20 md:grid md:grid-cols-2 md:gap-8">
         <div className="gird grid-cols-subgrid">
-          <div className="flex justify-center">
-            <ImageUploadForm width={96} height={96} id="main_profile" />
-          </div>
-          <div className="grid grid-cols-2 gap-x-4">
-            <ImageUploadForm width={48} height={48} id="small_profile_1" />
-            <ImageUploadForm width={48} height={48} id="small_profile_2" />
-            <ImageUploadForm width={48} height={48} id="small_profile_3" />
-            <ImageUploadForm width={48} height={48} id="small_profile_4" />
+          <ImageUploadForm width={400} height={400} />
+          <div className="grid grid-cols-2 mt-4 gap-4">
+            <ImageUploadForm width={200} height={200} />
+            <ImageUploadForm width={200} height={200} />
+            <ImageUploadForm width={200} height={200} />
+            <ImageUploadForm width={200} height={200} />
           </div>
         </div>
         <div className="mx-auto w-96">

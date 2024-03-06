@@ -10,7 +10,7 @@ interface PersonalInfoFormProps {
 
 const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onNextStep }) => {
   return (
-    <form className="max-w-sm min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <form className="max-w-md min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-blue-500/50">
         원활한 매칭을 위한 정보입니다.
       </h5>

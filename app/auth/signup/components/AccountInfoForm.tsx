@@ -10,7 +10,7 @@ interface AccountInfoFormProps {
 
 const AccountInfoForm: React.FC<AccountInfoFormProps> = ({ onNextStep }) => {
   return (
-    <form className="max-w-sm min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <form className="max-w-md min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">
         회원가입을 위한 계정정보를 입력해주세요.
       </h5>

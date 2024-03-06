@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   applicationName: 'teafortwo'
 };
 
-function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <html lang="en">
@@ -15,6 +15,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       </html>
     </>
   );
-}
+};
 
 export default RootLayout;

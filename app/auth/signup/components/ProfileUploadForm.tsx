@@ -8,12 +8,12 @@ interface ProfileUploadFormProps {
 
 const ProfileUploadForm: React.FC<ProfileUploadFormProps> = ({ onNextStep }) => {
   return (
-    <form className="max-w-sm min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <form className="max-w-md min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-purple-500/50">
-        다른 사람에게 보이는 프로필 정보입니다.
+        프로필 정보입니다.
       </h5>
       <div className="flex justify-center mb-5">
-        <ImageUploadForm width={96} height={80} id="signup_Profile" />
+        <ImageUploadForm width={400} height={400} />
       </div>
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-yellow-500/50">
         관심있는 분야를 선택해주세요.
