@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
 import ImageConverter from './components/ImageConverter';
 
