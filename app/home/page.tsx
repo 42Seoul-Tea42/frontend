@@ -31,7 +31,7 @@ const Home: React.FC = () => {
           isDragging ? '' : 'hidden'
         }`}
       >
-        {direction === 'left' ? 'dislike' : 'like'}
+        {direction === 'left' ? 'dislike 👎' : '👍 like'}
       </p>
       <Draggable
         axis="x"
@@ -39,8 +39,8 @@ const Home: React.FC = () => {
         onStop={handleDragStop}
         position={{ x: originalPosition.x, y: originalPosition.y }}
       >
-        <div>
-          <ImageConverter isAction={isAction} setIsAction={setIsAction} />
+        <div className={isAction ? 'brightness-50' : ''}>
+          <ImageConverter isAction={isAction} setIsAction={setIsAction} isDragging={isDragging} />
         </div>
       </Draggable>
     </div>
