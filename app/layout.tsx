@@ -1,5 +1,9 @@
+'use client';
+
 import './styles/tailwind.css';
+import store from './store/store';
 import type { Metadata } from 'next';
+import { Provider as ReduxProvider } from 'react-redux';
 
 export const metadata: Metadata = {
   title: 'Tea For Two',
@@ -9,11 +13,11 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <>
-      <html lang="en">
+    <html lang="en">
+      <ReduxProvider store={store}>
         <body>{children}</body>
-      </html>
-    </>
+      </ReduxProvider>
+    </html>
   );
 };
 
