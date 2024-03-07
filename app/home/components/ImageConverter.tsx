@@ -1,19 +1,38 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 interface ImageConverterProps {
   isAction: boolean;
+  setIsAction: (isAction: boolean) => void;
 }
 
-const ImageConverter: React.FC<ImageConverterProps> = ({ isAction }) => {
+const ImageConverter: React.FC<ImageConverterProps> = ({ isAction, setIsAction }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = ['/emoji/3.jpg', '/emoji/2.jpg', '/emoji/1.jpg']; // 하드코딩된 이미지 URL 배열
+
+  const handleNextIamge = () => {
+    if (isAction) {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length);
+    }
+    setIsAction(false);
+  };
+
+  useEffect(() => {
+    if (isAction) {
+      // 이미지 프리렌더링
+    }
+  }, [isAction]);
+
   return (
-    <div className="mx-auto mt-20 max-w-sm bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+    <div className="mx-auto mt-20 max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
       <div
-        className={`relative overflow-hidden rounded-lg h-96 ${
+        className={`relative overflow-hidden rounded-xl h-96 ${
           isAction ? 'brightness-50 shadow-2xl' : ''
         }`}
+        onClick={handleNextIamge}
       >
         <Image
-          src="/조유리.webp"
+          src={images[currentImageIndex]}
           alt="face"
           width={500}
           height={500}
