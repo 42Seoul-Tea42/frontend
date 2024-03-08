@@ -1,8 +1,8 @@
 'use client';
 
 import { Provider } from 'react-redux';
-import Footer from './Footer';
-import HomeNavBar from './HomeNavBar';
+import Footer from './components/Footer';
+import HomeNavBar from './components/HomeNavBar';
 import store from '../store/store';
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {

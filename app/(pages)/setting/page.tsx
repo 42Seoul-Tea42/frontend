@@ -33,7 +33,7 @@ const Setting: React.FC = () => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="mx-auto mt-20 md:grid md:grid-cols-2 md:gap-8">
+      <div className="mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
         <div className="gird grid-cols-subgrid">
           <ImageUploadForm width={400} height={400} />
           <div className="grid grid-cols-2 mt-4 gap-4">

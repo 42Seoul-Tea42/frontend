@@ -10,10 +10,17 @@ import {
   MessageSVG,
   SearchSVG,
   StarFullSVG
-} from '../svg/HomeNavBarSVG';
+} from '../../svg/HomeNavBarSVG';
 
-// 홈 레이아웃 컴포넌트
-function HomeNavBar() {
+export const NavigationItems = [
+  { name: 'Chat', icon: <MessageSVG /> },
+  { name: 'Fancy', icon: <StarFullSVG /> },
+  { name: 'Home', icon: <HomeFillSVG /> },
+  { name: 'Search', icon: <SearchSVG /> },
+  { name: 'History', icon: <HistorySVG /> }
+];
+
+const HomeNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -23,19 +30,12 @@ function HomeNavBar() {
 
   const pushPathPage = (path: string) => {
     router.push(path);
+    toggleMenu();
   };
-
-  const NavigationItems = [
-    { name: 'Chat', icon: <MessageSVG /> },
-    { name: 'Fancy', icon: <StarFullSVG /> },
-    { name: 'Home', icon: <HomeFillSVG /> },
-    { name: 'Search', icon: <SearchSVG /> },
-    { name: 'History', icon: <HistorySVG /> }
-  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-start md:justify-center mx-auto p-4 shadow-sm">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-start md:justify-center mx-auto p-4 shadow">
         <button
           type="button"
           onClick={toggleMenu}
@@ -66,6 +66,6 @@ function HomeNavBar() {
       </div>
     </nav>
   );
-}
+};
 
 export default HomeNavBar;

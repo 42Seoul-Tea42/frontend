@@ -26,9 +26,9 @@ const Home: React.FC = () => {
 
   return (
     <div className="w-full h-screen">
-      <div className="m-40">
+      <div className="mt-40 md:m-40">
         <p
-          className={`text-6xl text-gray-700 font-extrabold text-center fixed top-60 left-0 right-0 ${
+          className={`text-6xl text-gray-700 font-extrabold text-center absolute top-60 left-0 right-0 ${
             isDragging ? '' : 'hidden'
           }`}
         >
