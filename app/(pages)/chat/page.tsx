@@ -5,6 +5,7 @@ import ChattingList from './components/ChattingList';
 import SendMessageForm from './components/SendMessageForm';
 import ViewMessageForm from './components/ViewMessageForm';
 import DirectionSVG from '../../svg/DirectionSVG';
+import { SERVER_URL } from '../../../global';
 
 const Chat = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -13,9 +14,17 @@ const Chat = () => {
     setIsOpen((prevState: boolean) => !prevState);
   };
 
-  // useEffect(() => {
-  //   const ws = new WebSocket('');
-  // }, []);
+  useEffect(() => {
+    const ws = new WebSocket(SERVER_URL || '');
+
+    ws.onopen = () => {};
+
+    ws.onclose = () => {};
+
+    return () => {
+      ws.close();
+    };
+  }, []);
 
   return (
     <div className="flex min-h-screen">
