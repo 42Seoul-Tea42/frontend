@@ -26,23 +26,25 @@ const Home: React.FC = () => {
 
   return (
     <div className="w-full h-screen">
-      <p
-        className={`text-6xl font-extrabold text-center absolute top-1/4  left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
-          isDragging ? '' : 'hidden'
-        }`}
-      >
-        {direction === 'left' ? 'dislike 👎' : '👍 like'}
-      </p>
-      <Draggable
-        axis="x"
-        onDrag={handleDrag}
-        onStop={handleDragStop}
-        position={{ x: originalPosition.x, y: originalPosition.y }}
-      >
-        <div className={isAction ? 'brightness-50' : ''}>
-          <ImageConverter isAction={isAction} setIsAction={setIsAction} isDragging={isDragging} />
-        </div>
-      </Draggable>
+      <div className="m-40">
+        <p
+          className={`text-6xl text-gray-700 font-extrabold text-center fixed top-60 left-0 right-0 ${
+            isDragging ? '' : 'hidden'
+          }`}
+        >
+          {direction === 'left' ? 'next →' : '★ fancy'}
+        </p>
+        <Draggable
+          axis="x"
+          onDrag={handleDrag}
+          onStop={handleDragStop}
+          position={{ x: originalPosition.x, y: originalPosition.y }}
+        >
+          <div className={isAction ? 'brightness-50' : ''}>
+            <ImageConverter isAction={isAction} setIsAction={setIsAction} isDragging={isDragging} />
+          </div>
+        </Draggable>
+      </div>
     </div>
   );
 };

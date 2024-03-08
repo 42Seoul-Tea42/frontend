@@ -10,7 +10,7 @@ import {
   MessageSVG,
   SearchSVG,
   StarFullSVG
-} from '../../svg/HomeNavBarSVG';
+} from '../svg/HomeNavBarSVG';
 
 // 홈 레이아웃 컴포넌트
 function HomeNavBar() {
@@ -21,8 +21,20 @@ function HomeNavBar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const pushPathPage = (path: string) => {
+    router.push(path);
+  };
+
+  const NavigationItems = [
+    { name: 'Chat', icon: <MessageSVG /> },
+    { name: 'Fancy', icon: <StarFullSVG /> },
+    { name: 'Home', icon: <HomeFillSVG /> },
+    { name: 'Search', icon: <SearchSVG /> },
+    { name: 'History', icon: <HistorySVG /> }
+  ];
+
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-start md:justify-center mx-auto p-4 shadow-sm">
         <button
           type="button"
@@ -40,46 +52,15 @@ function HomeNavBar() {
           id="navbar-default"
         >
           <ul className="font-midium text-xl flex flex-col p-4 gap-5 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <HomeNavBarButton
-                router={router}
-                path={'chat'}
-                buttonName={'Chat'}
-                icon={<MessageSVG />}
-              />
-            </li>
-            <li>
-              <HomeNavBarButton
-                router={router}
-                path={'fancy'}
-                buttonName={'Fancy'}
-                icon={<StarFullSVG />}
-              />
-            </li>
-            <li>
-              <HomeNavBarButton
-                router={router}
-                path={'/'}
-                buttonName={'Home'}
-                icon={<HomeFillSVG />}
-              />
-            </li>
-            <li>
-              <HomeNavBarButton
-                router={router}
-                path={'search'}
-                buttonName={'Search'}
-                icon={<SearchSVG />}
-              />
-            </li>
-            <li>
-              <HomeNavBarButton
-                router={router}
-                path={'history'}
-                buttonName={'History'}
-                icon={<HistorySVG />}
-              />
-            </li>
+            {NavigationItems.map((item, idx) => (
+              <li key={idx}>
+                <HomeNavBarButton
+                  buttonName={item.name}
+                  icon={item.icon}
+                  handleClick={() => pushPathPage(item.name.toLowerCase())}
+                />
+              </li>
+            ))}
           </ul>
         </div>
       </div>

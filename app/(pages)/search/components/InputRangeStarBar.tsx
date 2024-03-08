@@ -1,6 +1,6 @@
 import React from 'react';
 import StarButton from './StarButton';
-import { RootState } from '../../../../store/store';
+import { RootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
 
 const StarRatingBar: React.FC = () => {

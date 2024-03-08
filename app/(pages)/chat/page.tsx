@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChattingList from './components/ChattingList';
 import SendMessageForm from './components/SendMessageForm';
 import ViewMessageForm from './components/ViewMessageForm';
-import DirectionSVG from '../../../svg/DirectionSVG';
+import DirectionSVG from '../../svg/DirectionSVG';
 
 const Chat = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -13,9 +13,13 @@ const Chat = () => {
     setIsOpen((prevState: boolean) => !prevState);
   };
 
+  // useEffect(() => {
+  //   const ws = new WebSocket('');
+  // }, []);
+
   return (
     <div className="flex min-h-screen">
-      <div className="mx-auto md:grid md:grid-cols-2 mt-20 gap-20">
+      <div className="mx-auto md:grid md:grid-cols-2 m-40 gap-20">
         <div className="mb-10">
           <div id="accordion-collapse" data-accordion="collapse">
             <h2 id="accordion-collapse-heading-1">

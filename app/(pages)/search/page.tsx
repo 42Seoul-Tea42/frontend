@@ -2,14 +2,14 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import fetchApi from '../../../utils/api';
-import TagSelector from '../../../auth/signup/components/TagSelector';
+import { RootState } from '../../store/store';
+import fetchApi from '../../utils/api';
+import TagSelector from '../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
-import { SearchSVG } from '../../../svg/HomeNavBarSVG';
-import DirectionSVG from '../../../svg/DirectionSVG';
+import { SearchSVG } from '../../svg/HomeNavBarSVG';
+import DirectionSVG from '../../svg/DirectionSVG';
 
 const Search: React.FC = () => {
   const minAge = useSelector((state: RootState) => state.searchParam.minAge);
@@ -71,12 +71,19 @@ const Search: React.FC = () => {
   return (
     <div className="flex h-screen">
       <div className="w-full">
+        <button
+          className="fixed top-14 w-full h-12 flex justify-center items-center text-gray-400 hover:bg-gray-100 font-medium px-5 py-2.5 mb-2"
+          type="button"
+          onClick={toggleDrawer}
+        >
+          <DirectionSVG direction="down" />
+        </button>
         {isDrawerOpen && (
           <>
             <div className="fixed z-50 top-0 left-0 w-full h-full bg-black opacity-50" />
             <div
               ref={drawerRef}
-              className="fixed z-50 bg-gray-100 mt-14 border-t border-gray-200 dark:border-gray-700 dark:bg-gray-800 transition-transform top-0 left-0 right-0 transform translate-y-0"
+              className="fixed z-50 top-0 bg-gray-100 border-t border-gray-200 dark:border-gray-700 dark:bg-gray-800 transition-transform top-0 left-0 right-0 transform translate-y-0"
             >
               <div className="mx-auto p-4 border-b border-gray-200 dark:border-gray-700">
                 <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200">검색 옵션</h2>
@@ -105,13 +112,6 @@ const Search: React.FC = () => {
             </div>
           </>
         )}
-        <button
-          className="w-full h-12 flex justify-center items-center text-gray-400 hover:bg-gray-100 font-medium px-5 py-2.5 mb-2"
-          type="button"
-          onClick={toggleDrawer}
-        >
-          <DirectionSVG direction="down" />
-        </button>
       </div>
     </div>
   );

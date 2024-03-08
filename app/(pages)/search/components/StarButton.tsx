@@ -2,7 +2,7 @@
 
 import { useDispatch } from 'react-redux';
 import IconStar from './IconStar';
-import { setStarCount } from '../../../../store/slices/searchParamSlice';
+import { setStarCount } from '../../../store/slices/searchParamSlice';
 
 interface StarButtonProps {
   star: number;

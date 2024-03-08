@@ -1,11 +1,11 @@
 'use client';
 
 import { Provider } from 'react-redux';
-import Footer from './components/Footer';
-import HomeNavBar from './components/HomeNavBar';
+import Footer from './Footer';
+import HomeNavBar from './HomeNavBar';
 import store from '../store/store';
 
-function HomeLayout({ children }: { children: React.ReactNode }) {
+const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Provider store={store}>
       <HomeNavBar />
@@ -13,6 +13,6 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
       <Footer />
     </Provider>
   );
-}
+};
 
 export default HomeLayout;

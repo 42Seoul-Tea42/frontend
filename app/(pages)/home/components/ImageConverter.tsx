@@ -42,7 +42,7 @@ const ImageConverter: React.FC<ImageConverterProps> = ({ isAction, setIsAction, 
   }, []);
 
   return (
-    <div className="mx-auto mt-20 max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
+    <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
       <div>
         <Image
           src={images[currentImageIndex]}
