@@ -38,12 +38,12 @@ const Cup: React.FC = () => {
         const update = () => {
           const mouseX = (event?.clientX / window.innerWidth) * 2 - 1 || 0;
           const mouseY = (event?.clientY / window.innerHeight) * 2 - 1 || 0;
-          const targetRotationX = mouseY * Math.PI;
-          const targetRotationY = mouseX * Math.PI;
+          const targetRotationX = (mouseY / 3) * Math.PI;
+          const targetRotationY = (mouseX / 3) * Math.PI;
 
           // 부드러운 회전을 위해 현재 회전값을 부드럽게 업데이트
-          cup.rotation.x += 0.04 * (targetRotationX - cup.rotation.x);
-          cup.rotation.y += 0.04 * (targetRotationY - cup.rotation.y);
+          cup.rotation.x += 0.2 * (targetRotationX - cup.rotation.x);
+          cup.rotation.y += 0.2 * (targetRotationY - cup.rotation.y);
 
           renderer.render(scene, camera);
         };
@@ -60,7 +60,7 @@ const Cup: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex justify-center">
+    <div className="h-full w-full flex justify-center items-start">
       <canvas className="w-[400px] h-[200px]" ref={canvasRef} id="cup" />
     </div>
   );
