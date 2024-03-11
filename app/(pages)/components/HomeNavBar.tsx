@@ -35,7 +35,7 @@ const HomeNavBar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-start md:justify-center mx-auto p-4 shadow">
+      <div className="max-w-screen flex flex-wrap items-center justify-start md:justify-center mx-auto p-4 shadow">
         <button
           type="button"
           onClick={toggleMenu}

@@ -18,24 +18,24 @@ const Search: React.FC = () => {
   const fameRate = useSelector((state: RootState) => state.searchParam.fame);
   const tags = useSelector((state: RootState) => state.searchParam.tags);
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+      setIsDrawerOpen(false);
+    }
+  };
+
+  const handleScroll = () => {
+    document.body.style.overflow = isDrawerOpen ? 'hidden' : 'auto';
+  };
+
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
-        setIsDrawerOpen(false);
-      }
-    };
-
-    const handleScroll = () => {
-      document.body.style.overflow = isDrawerOpen ? 'hidden' : 'auto';
-    };
-
     if (isDrawerOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('scroll', handleScroll);
@@ -89,7 +89,6 @@ const Search: React.FC = () => {
                 <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200">검색 옵션</h2>
               </div>
               <div className="md:min-w-72 md:grid md:grid-cols-2">
-                {/* Add other drawer content here */}
                 {drawerItems.map((item, index) => (
                   <div key={index} className="p-4 border border-gray-200 dark:border-gray-700">
                     <h3 className="text-lg mb-5 font-medium text-gray-800 dark:text-gray-200">

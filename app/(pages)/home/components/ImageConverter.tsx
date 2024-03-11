@@ -49,8 +49,10 @@ const ImageConverter: React.FC = () => {
         console.log('rendering');
         renderImages();
       }
-      if (direction === 'right') handleFancy();
-      else handleNextImage;
+      if (direction === 'left') {
+        handleFancy();
+        setIsAction(false);
+      }
     }
   }, [isAction]);
 
@@ -68,10 +70,10 @@ const ImageConverter: React.FC = () => {
     <>
       <p
         className={`text-6xl text-gray-700 font-extrabold text-center absolute top-60 left-0 right-0 ${
-          isDragging ? '' : 'hidden'
+          isDragging ? 'animate-pulse' : 'hidden'
         }`}
       >
-        {direction === 'left' ? 'next →' : '★ fancy'}
+        {direction === 'right' ? 'next →' : '★ fancy'}
       </p>
       <Draggable
         axis="x"
@@ -80,7 +82,7 @@ const ImageConverter: React.FC = () => {
         position={{ x: originalPosition.x, y: originalPosition.y }}
       >
         <div className={isAction ? 'brightness-50' : ''}>
-          <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
+          <div className="mx-auto max-w-sm bg-white shadow-lg border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
             <Image
               src={images[currentImageIndex]}
               alt="face"
