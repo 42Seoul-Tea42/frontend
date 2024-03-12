@@ -30,7 +30,7 @@ const HomeNavBar = () => {
 
   const pushPathPage = (path: string) => {
     router.push(path);
-    toggleMenu();
+    setIsMenuOpen(false);
   };
 
   return (
