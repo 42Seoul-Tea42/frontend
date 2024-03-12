@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 
 const ImageConverter: React.FC = () => {
   const dispatch = useDispatch();
-  const [isAction, setIsAction] = useState<boolean>(false);
-  const [direction, setDirection] = useState<'left' | 'right' | 'none'>('none');
+  const [isNext, setIsNext] = useState<boolean>(false);
+  const [isFancy, setIsFancy] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [originalPosition, setOriginalPosition] = useState<{ x: number; y: number }>({
     x: 0,
@@ -17,8 +17,8 @@ const ImageConverter: React.FC = () => {
 
   const handleDrag: DraggableEventHandler = (_e, data) => {
     setIsDragging(true);
-    setIsAction(Math.abs(data.x) > 250);
-    setDirection(data.x > 0 ? 'right' : 'left');
+    setIsNext(data.x > 250);
+    setIsFancy(data.x < -250);
   };
 
   const handleDragStop: DraggableEventHandler = () => {
@@ -27,14 +27,13 @@ const ImageConverter: React.FC = () => {
   };
 
   const handleNextImage = () => {
-    if (isAction && !isDragging) {
-      setCurrentImageIndex(prevIndex => prevIndex + 1);
-      setIsAction(false);
-    }
+    setCurrentImageIndex(prevIndex => prevIndex + 1);
+    setIsNext(false);
   };
 
   const handleFancy = () => {
     //
+    setIsFancy(false);
   };
 
   const renderImages = () => {
@@ -43,22 +42,19 @@ const ImageConverter: React.FC = () => {
 
   // 이미지 데이터 컨트롤
   useEffect(() => {
-    if (isAction) {
+    if (isNext) {
       // 이미지 프리렌더링
       if (currentImageIndex === images.length - 1) {
         console.log('rendering');
         renderImages();
       }
-      if (direction === 'left') {
-        handleFancy();
-        setIsAction(false);
-      }
     }
-  }, [isAction]);
+  }, [isNext]);
 
   // 드래그 트리거
   useEffect(() => {
-    handleNextImage();
+    if (isNext && !isDragging) handleNextImage();
+    if (isFancy && !isDragging) handleFancy();
     console.log(images.length);
   }, [isDragging]);
 
@@ -73,7 +69,8 @@ const ImageConverter: React.FC = () => {
           isDragging ? 'animate-pulse' : 'hidden'
         }`}
       >
-        {direction === 'right' ? 'next →' : '★ fancy'}
+        {isNext ? 'next →' : ''}
+        {isFancy ? '★ fancy' : ''}
       </p>
       <Draggable
         axis="x"
@@ -81,7 +78,7 @@ const ImageConverter: React.FC = () => {
         onStop={handleDragStop}
         position={{ x: originalPosition.x, y: originalPosition.y }}
       >
-        <div className={isAction ? 'brightness-50' : ''}>
+        <div className={isNext ? 'brightness-50' : ''}>
           <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
             <Image
               src={images[currentImageIndex]}

@@ -63,22 +63,16 @@ const UserDetailsBar: React.FC<UserDetailsBarProps> = ({ targetId, name, distanc
             className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50"
           >
             <div ref={modalRef} className="bg-white w-full max-w-3xl p-5 rounded-lg shadow-lg">
-              <div className="md:grid md:grid-cols-2 gap-4">
+              <div className="md:grid md:grid-cols-2 items-center gap-4">
                 <UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />
                 <div>
                   <UserDetailsList userDetails={UserDetails} />
-                  <div className="flex justify-center mt-4">
-                    <p
-                      onClick={toggleModal}
-                      className="mr-2 text-gray-800 hover:text-blue-600 hover:underline"
-                    >
+                  <div className="flex justify-center text-gray-400 mt-10">
+                    <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
                       차단
                     </p>
-                    <p className="text-gray-600"> / </p>
-                    <p
-                      onClick={toggleModal}
-                      className="ml-2 text-gray-800 hover:text-blue-600 hover:underline"
-                    >
+                    <p className="ml-2 mr-2"> / </p>
+                    <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
                       신고
                     </p>
                   </div>
