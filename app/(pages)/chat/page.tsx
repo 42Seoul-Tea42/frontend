@@ -15,15 +15,12 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    const ws = new WebSocket(SERVER_URL || '');
-
-    ws.onopen = () => {};
-
-    ws.onclose = () => {};
-
-    return () => {
-      ws.close();
-    };
+    // const ws = new WebSocket(SERVER_URL || '');
+    // ws.onopen = () => {};
+    // ws.onclose = () => {};
+    // return () => {
+    //   ws.close();
+    // };
   }, []);
 
   return (

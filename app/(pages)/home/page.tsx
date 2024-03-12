@@ -1,6 +1,6 @@
 'use client';
 
-import UserDetailsButton from '../components/UserDetailsButton';
+import UserDetailsBar from '../components/UserDetailsBar';
 import ImageConverter from './components/ImageConverter';
 
 const Home: React.FC = () => {
@@ -8,7 +8,7 @@ const Home: React.FC = () => {
     <div className="w-full h-screen">
       <div className="mt-40 md:m-40">
         <ImageConverter />
-        <UserDetailsButton targetId={1} />
+        <UserDetailsBar targetId={1} name="이름" distance={5} />
       </div>
     </div>
   );

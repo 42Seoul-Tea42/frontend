@@ -82,7 +82,7 @@ const ImageConverter: React.FC = () => {
         position={{ x: originalPosition.x, y: originalPosition.y }}
       >
         <div className={isAction ? 'brightness-50' : ''}>
-          <div className="mx-auto max-w-sm bg-white shadow-lg border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
+          <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
             <Image
               src={images[currentImageIndex]}
               alt="face"
