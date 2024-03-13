@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import UserProfileCarousel from './UserProfileCarousel';
 import UserDetailsList from './UserDetailList';
 import DirectionSVG from '../../svg/DirectionSVG';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
-interface UserDetailsBarProps {
-  name: string;
-  distance: number;
-  targetId: number;
-}
-
-const UserDetailsBar: React.FC<UserDetailsBarProps> = ({ targetId, name, distance }) => {
+const UserDetailsBar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const modalRef = React.createRef<HTMLDivElement>();
+  const currentUserIndex = useSelector((state: RootState) => state.userProfile.currentUserIndex);
+  const user = useSelector((state: RootState) => state.userProfile.profiles[currentUserIndex]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -47,8 +45,8 @@ const UserDetailsBar: React.FC<UserDetailsBarProps> = ({ targetId, name, distanc
   return (
     <div className="flex p-3 w-full mx-auto max-w-sm justify-between items-center border-t rounded-b-xl bg-white dark:bg-gray-800 dark:border-gray-700">
       <div className="flex items-end">
-        <p className="font-semibold text-3xl text-gray-700">{name}</p>
-        <p className="font-normal text-gray-700 ml-2">{distance}km</p>
+        <p className="font-semibold text-3xl text-gray-700">{user?.name}</p>
+        <p className="font-normal text-gray-700 ml-2">{user?.distance}km</p>
       </div>
       <button
         onClick={toggleModal}

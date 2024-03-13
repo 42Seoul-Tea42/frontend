@@ -28,7 +28,7 @@ const Home: React.FC = () => {
         )}
         <div className="border rounded-xl border-gray-200">
           <ImageConverter />
-          <UserDetailsBar targetId={1} name="이름" distance={5} />
+          <UserDetailsBar />
         </div>
       </div>
     </div>

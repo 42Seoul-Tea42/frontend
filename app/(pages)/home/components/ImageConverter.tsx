@@ -7,7 +7,7 @@ import {
   ProfileDto,
   addUserProfile,
   removeUserProfile,
-  setCurrentImageIndex
+  setCurrentUserIndex
 } from '../../../store/slices/userProfileSlice';
 
 const ImageConverter: React.FC = () => {
@@ -19,7 +19,7 @@ const ImageConverter: React.FC = () => {
     x: 0,
     y: 0
   });
-  const currentImageIndex = useSelector((state: RootState) => state.userProfile.currentImageIndex);
+  const currentUserIndex = useSelector((state: RootState) => state.userProfile.currentUserIndex);
   const users = useSelector((state: RootState) => state.userProfile.profiles);
 
   const handleDrag: DraggableEventHandler = (_e, data) => {
@@ -34,7 +34,7 @@ const ImageConverter: React.FC = () => {
   };
 
   const handleNextImage = () => {
-    dispatch(setCurrentImageIndex(currentImageIndex + 1));
+    dispatch(setCurrentUserIndex(currentUserIndex + 1));
     setIsNext(false);
   };
 
@@ -49,7 +49,7 @@ const ImageConverter: React.FC = () => {
         picture: ['/emoji/4.jpg'],
         id: 1,
         login_id: '1',
-        name: '1',
+        name: '귀요미',
         birthday: new Date().toString(),
         distance: 1,
         fame: 1,
@@ -62,7 +62,7 @@ const ImageConverter: React.FC = () => {
 
   //유저 데이터 컨트롤
   useEffect(() => {
-    if (currentImageIndex === users.length - 1) {
+    if (currentUserIndex === users.length - 1) {
       prerenderUsers();
       dispatch(removeUserProfile(0));
     }
@@ -95,7 +95,7 @@ const ImageConverter: React.FC = () => {
         <div className={isNext || isFancy ? 'brightness-50' : ''}>
           <div className="hover:shadow-2xl hover:rounded-xl">
             <Image
-              src={users[currentImageIndex]?.picture[0]}
+              src={users[currentUserIndex]?.picture[0]}
               alt="face"
               width={500}
               height={500}
@@ -104,7 +104,6 @@ const ImageConverter: React.FC = () => {
               className="rounded-xl"
             />
           </div>
-          {currentImageIndex}
         </div>
       </Draggable>
     </div>

@@ -21,20 +21,20 @@ export interface ProfileDto {
 
 interface UserProfileState {
   profiles: ProfileDto[];
-  currentImageIndex: number;
+  currentUserIndex: number;
 }
 
 const initialState: UserProfileState = {
   profiles: [],
-  currentImageIndex: 0
+  currentUserIndex: 0
 };
 
 const userProfileSlice = createSlice({
   name: 'userProfileSlice',
   initialState,
   reducers: {
-    setCurrentImageIndex: (state: UserProfileState, action: PayloadAction<number>) => {
-      state.currentImageIndex = action.payload;
+    setCurrentUserIndex: (state: UserProfileState, action: PayloadAction<number>) => {
+      state.currentUserIndex = action.payload;
     },
     addUserProfile: (state: UserProfileState, action: PayloadAction<ProfileDto[]>) => {
       state.profiles = state.profiles.concat(action.payload);
@@ -42,12 +42,12 @@ const userProfileSlice = createSlice({
     },
     removeUserProfile: (state: UserProfileState, action: PayloadAction<number>) => {
       state.profiles = state.profiles.filter((_, index) => index !== action.payload);
-      state.currentImageIndex -= 1;
+      state.currentUserIndex -= 1;
     }
   }
 });
 
-export const { addUserProfile, removeUserProfile, setCurrentImageIndex } = userProfileSlice.actions;
+export const { addUserProfile, removeUserProfile, setCurrentUserIndex } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;
 
