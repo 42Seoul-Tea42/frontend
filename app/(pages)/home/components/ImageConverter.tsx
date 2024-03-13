@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import {
   ProfileDto,
-  addUserProfile,
-  removeUserProfile,
-  setCurrentUserIndex
+  setCurrentUserIndex,
+  updateProfileDto
 } from '../../../store/slices/userProfileSlice';
 
 const ImageConverter: React.FC = () => {
@@ -44,27 +43,25 @@ const ImageConverter: React.FC = () => {
   };
 
   const prerenderUsers = () => {
-    const Users: ProfileDto[] = [
-      {
-        picture: ['/emoji/4.jpg'],
-        id: 1,
-        login_id: '1',
-        name: '귀요미',
-        birthday: new Date().toString(),
-        distance: 1,
-        fame: 1,
-        tags: [1],
-        fancy: 1
-      }
-    ];
-    dispatch(addUserProfile(Users));
+    const User: ProfileDto = {
+      picture: ['/emoji/4.jpg'],
+      id: 1,
+      firstname: '귀요미',
+      lastname: '귀요미',
+      distance: 1
+    };
+    dispatch(
+      updateProfileDto({
+        index: currentUserIndex,
+        profileDto: User
+      })
+    );
   };
 
   //유저 데이터 컨트롤
   useEffect(() => {
     if (currentUserIndex === users.length - 1) {
       prerenderUsers();
-      dispatch(removeUserProfile(0));
     }
   }, [isNext]);
 
@@ -95,7 +92,7 @@ const ImageConverter: React.FC = () => {
         <div className={isNext || isFancy ? 'brightness-50' : ''}>
           <div className="hover:shadow-2xl hover:rounded-xl">
             <Image
-              src={users[currentUserIndex]?.picture[0]}
+              src={users[currentUserIndex]?.profileDto.picture[0]}
               alt="face"
               width={500}
               height={500}

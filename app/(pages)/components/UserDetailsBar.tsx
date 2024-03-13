@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import UserProfileCarousel from './UserProfileCarousel';
 import UserDetailsList from './UserDetailList';
 import DirectionSVG from '../../svg/DirectionSVG';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
 
 const UserDetailsBar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -31,17 +31,6 @@ const UserDetailsBar: React.FC = () => {
     };
   }, [isModalOpen]);
 
-  const UserDetails = [
-    { label: '이름', value: '이름' },
-    { label: '성별', value: '성별' },
-    { label: '명성', value: '명성' },
-    { label: '거리', value: '거리' },
-    { label: '접속', value: '접속' },
-    { label: '취향', value: '취향' },
-    { label: '태그', value: '태그' },
-    { label: '자기소개', value: '자기소개' }
-  ];
-
   return (
     <div className="flex p-3 w-full mx-auto max-w-sm justify-between items-center border-t rounded-b-xl bg-white dark:bg-gray-800 dark:border-gray-700">
       <div className="flex items-end">
@@ -66,7 +55,7 @@ const UserDetailsBar: React.FC = () => {
             <div className="md:grid md:grid-cols-2 items-center gap-4">
               <UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />
               <div>
-                <UserDetailsList userDetails={UserDetails} />
+                <UserDetailsList />
                 <div className="flex justify-center text-gray-400 mt-10">
                   <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
                     차단

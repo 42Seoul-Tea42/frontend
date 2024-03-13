@@ -9,6 +9,7 @@ import InputRangeStarBar from './components/InputRangeStarBar';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
 import { SearchSVG } from '../../svg/HomeNavBarSVG';
+import SearchResultTable from './components/SearchResultTable';
 import DirectionSVG from '../../svg/DirectionSVG';
 
 const Search: React.FC = () => {
@@ -19,6 +20,7 @@ const Search: React.FC = () => {
   const tags = useSelector((state: RootState) => state.searchParam.tags);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [isBounce, setIsBounce] = useState<boolean>(false);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   const toggleDrawer = () => {
@@ -68,6 +70,13 @@ const Search: React.FC = () => {
     { title: '검색할 등급을 선택해주세요.', content: <InputRangeStarBar /> }
   ];
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsBounce(true);
+    }, 3000);
+    setIsBounce(false);
+  }, []);
+
   return (
     <div className="flex h-screen">
       <div className="w-full">
@@ -76,6 +85,7 @@ const Search: React.FC = () => {
           type="button"
           onClick={toggleDrawer}
         >
+          <div className={`${isBounce} && animate-bounce`}></div>
           <DirectionSVG direction="down" />
         </button>
         {isDrawerOpen && (
@@ -111,6 +121,7 @@ const Search: React.FC = () => {
             </div>
           </>
         )}
+        <SearchResultTable />
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ const UserProfileCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => 
 
   return (
     <div className="relative w-full">
-      <div className="relative mx-auto w-96 h-96 overflow-hidden rounded-lg">
+      <div className="relative mx-auto w-96 h-96 border shadow-sm overflow-hidden rounded-lg">
         {images.map((image, index) => (
           <div
             key={index}

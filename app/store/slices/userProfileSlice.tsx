@@ -1,4 +1,4 @@
-import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum Fancy {
   NONE = 0,
@@ -8,19 +8,30 @@ export enum Fancy {
 }
 
 export interface ProfileDto {
+  // 이미지는 추후에 따로 처리
   picture: string[];
   id: number;
+  firstname: string;
+  lastname: string;
+  distance: number;
+}
+
+export interface ProfileDetailDto {
   login_id: string;
-  name: string;
   birthday: string;
   distance: number;
   fame: number;
-  tags: [number];
+  tags: number[];
   fancy: number;
 }
 
+export interface Profiles {
+  profileDto: ProfileDto;
+  profileDetailDto: ProfileDetailDto;
+}
+
 interface UserProfileState {
-  profiles: ProfileDto[];
+  profiles: Profiles[];
   currentUserIndex: number;
 }
 
@@ -33,35 +44,29 @@ const userProfileSlice = createSlice({
   name: 'userProfileSlice',
   initialState,
   reducers: {
-    setCurrentUserIndex: (state: UserProfileState, action: PayloadAction<number>) => {
-      state.currentUserIndex = action.payload;
+    updateProfileDto: (
+      state: UserProfileState,
+      action: PayloadAction<{
+        index: number;
+        profileDto: ProfileDto;
+      }>
+    ) => {
+      console.table(action.payload);
+      const { index, profileDto } = action.payload;
     },
-    addUserProfile: (state: UserProfileState, action: PayloadAction<ProfileDto[]>) => {
-      state.profiles = state.profiles.concat(action.payload);
-      console.table(state.profiles);
+    removeProfileFirst: (state: UserProfileState) => {
+      state.profiles = state.profiles.slice(1);
     },
-    removeUserProfile: (state: UserProfileState, action: PayloadAction<number>) => {
-      state.profiles = state.profiles.filter((_, index) => index !== action.payload);
-      state.currentUserIndex -= 1;
+    updateProfileDetailDto: (
+      state: UserProfileState,
+      action: PayloadAction<{ index: number; profileDetailDto: ProfileDetailDto }>
+    ) => {
+      const { profileDetailDto } = action.payload;
+      state.profiles[0].profileDetailDto = profileDetailDto;
     }
   }
 });
 
-export const { addUserProfile, removeUserProfile, setCurrentUserIndex } = userProfileSlice.actions;
+export const { updateProfileDto, updateProfileDetailDto } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;
-
-// profile: json
-// {
-// picture: [str]
-
-// id: int
-// login_id: str
-// name: stDate
-// birthday: date
-// * longitude: nmbaer
-// * latitude: float
-// fame: float
-// tags: [int]
-// fancy: int (Enum)
-// }
