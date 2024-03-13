@@ -45,44 +45,45 @@ const UserDetailsBar: React.FC<UserDetailsBarProps> = ({ targetId, name, distanc
   ];
 
   return (
-    <>
-      <div className="flex p-3 w-full mx-auto max-w-sm justify-between items-center bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex items-end">
-          <p className="font-semibold text-2xl text-gray-700">{name}</p>
-          <p className="font-normal text-gray-700 ml-2">{distance}km</p>
-        </div>
-        <button onClick={toggleModal} className="flex border">
-          <p>자세히 보기</p>
-          <DirectionSVG direction="down" />
-        </button>
-        {isModalOpen && (
-          <div
-            id="default-modal"
-            tabIndex={-1}
-            aria-hidden={false}
-            className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50"
-          >
-            <div ref={modalRef} className="bg-white w-full max-w-3xl p-5 rounded-lg shadow-lg">
-              <div className="md:grid md:grid-cols-2 items-center gap-4">
-                <UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />
-                <div>
-                  <UserDetailsList userDetails={UserDetails} />
-                  <div className="flex justify-center text-gray-400 mt-10">
-                    <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
-                      차단
-                    </p>
-                    <p className="ml-2 mr-2"> / </p>
-                    <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
-                      신고
-                    </p>
-                  </div>
+    <div className="flex p-3 w-full mx-auto max-w-sm justify-between items-center border-t rounded-b-xl bg-white dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex items-end">
+        <p className="font-semibold text-3xl text-gray-700">{name}</p>
+        <p className="font-normal text-gray-700 ml-2">{distance}km</p>
+      </div>
+      <button
+        onClick={toggleModal}
+        className="flex border transition duration-150 ease-out hover:ease-in"
+      >
+        <p>자세히 보기</p>
+        <DirectionSVG direction="down" />
+      </button>
+      {isModalOpen && (
+        <div
+          id="default-modal"
+          tabIndex={-1}
+          aria-hidden={false}
+          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50"
+        >
+          <div ref={modalRef} className="bg-white w-full max-w-3xl p-5 rounded-lg shadow-lg">
+            <div className="md:grid md:grid-cols-2 items-center gap-4">
+              <UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />
+              <div>
+                <UserDetailsList userDetails={UserDetails} />
+                <div className="flex justify-center text-gray-400 mt-10">
+                  <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
+                    차단
+                  </p>
+                  <p className="ml-2 mr-2"> / </p>
+                  <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
+                    신고
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 };
 

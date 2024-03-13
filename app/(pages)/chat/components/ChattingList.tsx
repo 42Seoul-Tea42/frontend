@@ -15,6 +15,41 @@ const ChattingList = () => {
         name: 'Jane Cooper',
         distance: '2.7 km',
         imageSrc: '/emoji/1.jpg'
+      },
+      {
+        name: 'Jane Cooper',
+        distance: '2.7 km',
+        imageSrc: '/emoji/1.jpg'
+      },
+      {
+        name: 'Jane Cooper',
+        distance: '2.7 km',
+        imageSrc: '/emoji/1.jpg'
+      },
+      {
+        name: 'Jane Cooper',
+        distance: '2.7 km',
+        imageSrc: '/emoji/1.jpg'
+      },
+      {
+        name: 'Jane Cooper',
+        distance: '2.7 km',
+        imageSrc: '/emoji/1.jpg'
+      },
+      {
+        name: 'Jane Cooper',
+        distance: '2.7 km',
+        imageSrc: '/emoji/1.jpg'
+      },
+      {
+        name: 'Jane Cooper',
+        distance: '2.7 km',
+        imageSrc: '/emoji/1.jpg'
+      },
+      {
+        name: 'Jane Cooper',
+        distance: '2.7 km',
+        imageSrc: '/emoji/1.jpg'
       }
     ]);
 
@@ -26,11 +61,13 @@ const ChattingList = () => {
   }, []);
 
   return (
-    <ul className="divide-gray-200 dark:divide-gray-700">
-      {users.map((user, index) => (
-        <ChattingListItem key={index} {...user} />
-      ))}
-    </ul>
+    <div className="rounded-b-xl">
+      <ul className="max-h-[480px] overflow-hidden hover:overflow-y-scroll rounded-b-xl border-b divide-gray-200 dark:divide-gray-700">
+        {users.map((user, index) => (
+          <ChattingListItem key={index} {...user} />
+        ))}
+      </ul>
+    </div>
   );
 };
 

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import searchPageSlice from './slices/searchParamSlice';
-import userSlice from './slices/userSlice';
+import signupSlice from './slices/signupSlice';
+import userProfileSlice from './slices/userProfileSlice';
 
 const store = configureStore({
   reducer: {
     searchParam: searchPageSlice,
-    user: userSlice
+    signup: signupSlice,
+    userProfile: userProfileSlice
   }
 });
 

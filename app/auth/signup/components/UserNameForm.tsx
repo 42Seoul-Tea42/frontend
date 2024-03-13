@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { setFirstname, setLastname } from '../../../store/slices/userSlice';
+import { setFirstname, setLastname } from '../../../store/slices/signupSlice';
 
 const UserNameForm: React.FC = () => {
   const dispatch = useDispatch();
-  const firstname = useSelector((state: RootState) => state.user.firstname);
-  const lastname = useSelector((state: RootState) => state.user.lastname);
+  const firstname = useSelector((state: RootState) => state.signup.firstname);
+  const lastname = useSelector((state: RootState) => state.signup.lastname);
 
   const handleFirstname = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setFirstname(e.target.value));
@@ -57,4 +57,4 @@ const UserNameForm: React.FC = () => {
   );
 };
 
-export default UserNameForm;
+export default signupNameForm;

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { setBirthDate } from '../../../store/slices/userSlice';
+import { setBirthDate } from '../../../store/slices/signupSlice';
 
 const DateOfBirthForm: React.FC = () => {
   const dispatch = useDispatch();
-  const dateOfBirth = useSelector((state: RootState) => state.user.dateOfBirth);
+  const dateOfBirth = useSelector((state: RootState) => state.signup.dateOfBirth);
 
   const handleDateOfBirth = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setBirthDate(e.target.value));

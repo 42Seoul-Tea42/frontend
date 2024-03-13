@@ -27,6 +27,8 @@ const ViewMessageForm = () => {
 
   // 이전 메시지를 불러오는 함수
   const loadPreviousMessages = () => {
+    if (containerRef.current?.scrollTop === 0 && hasMoreMessages) {
+    }
     // 여기서 이전 메시지를 불러올 수 있는 함수를 호출하여 messages 상태를 업데이트합니다.
     // 예시: fetchPreviousMessages();
     // 이전 메시지를 불러오는 API 요청이 성공하면 새로운 메시지를 기존 메시지 앞에 추가합니다.
@@ -47,14 +49,9 @@ const ViewMessageForm = () => {
         <span className="text-lg ml-5 font-semibold text-gray-800 dark:text-white">{'name'}</span>
       </div>
       <div
-        className="overflow-y-auto max-h-[400px] min-w-96"
+        className="max-h-[400px] min-w-96 overflow-hidden hover:overflow-y-scroll"
         ref={containerRef}
-        onScroll={() => {
-          // 스크롤이 맨 위에 도달했을 때 이전 메시지를 불러옵니다.
-          if (containerRef.current?.scrollTop === 0 && hasMoreMessages) {
-            loadPreviousMessages();
-          }
-        }}
+        onScroll={loadPreviousMessages}
       >
         {messages.map((message, index) => (
           <div key={index}>

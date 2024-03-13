@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setConfirmPassword, setPassword } from '../../../store/slices/userSlice';
+import { setConfirmPassword, setPassword } from '../../../store/slices/signupSlice';
 
 const PasswordForm: React.FC = () => {
   const dispatch = useDispatch();

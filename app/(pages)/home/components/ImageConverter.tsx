@@ -1,7 +1,14 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import {
+  ProfileDto,
+  addUserProfile,
+  removeUserProfile,
+  setCurrentImageIndex
+} from '../../../store/slices/userProfileSlice';
 
 const ImageConverter: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,8 +19,8 @@ const ImageConverter: React.FC = () => {
     x: 0,
     y: 0
   });
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [images, setImages] = useState<string[]>([]);
+  const currentImageIndex = useSelector((state: RootState) => state.userProfile.currentImageIndex);
+  const users = useSelector((state: RootState) => state.userProfile.profiles);
 
   const handleDrag: DraggableEventHandler = (_e, data) => {
     setIsDragging(true);
@@ -27,7 +34,7 @@ const ImageConverter: React.FC = () => {
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex(prevIndex => prevIndex + 1);
+    dispatch(setCurrentImageIndex(currentImageIndex + 1));
     setIsNext(false);
   };
 
@@ -36,18 +43,28 @@ const ImageConverter: React.FC = () => {
     setIsFancy(false);
   };
 
-  const renderImages = () => {
-    setImages([...images, '/emoji/1.jpg', '/emoji/2.jpg', '/emoji/3.jpg']);
+  const prerenderUsers = () => {
+    const Users: ProfileDto[] = [
+      {
+        picture: ['/emoji/4.jpg'],
+        id: 1,
+        login_id: '1',
+        name: '1',
+        birthday: new Date().toString(),
+        distance: 1,
+        fame: 1,
+        tags: [1],
+        fancy: 1
+      }
+    ];
+    dispatch(addUserProfile(Users));
   };
 
-  // 이미지 데이터 컨트롤
+  //유저 데이터 컨트롤
   useEffect(() => {
-    if (isNext) {
-      // 이미지 프리렌더링
-      if (currentImageIndex === images.length - 1) {
-        console.log('rendering');
-        renderImages();
-      }
+    if (currentImageIndex === users.length - 1) {
+      prerenderUsers();
+      dispatch(removeUserProfile(0));
     }
   }, [isNext]);
 
@@ -55,33 +72,30 @@ const ImageConverter: React.FC = () => {
   useEffect(() => {
     if (isNext && !isDragging) handleNextImage();
     if (isFancy && !isDragging) handleFancy();
-    console.log(images.length);
   }, [isDragging]);
 
   useEffect(() => {
-    renderImages();
+    console.table(users);
+    prerenderUsers();
   }, []);
 
   return (
-    <>
-      <p
-        className={`text-6xl text-gray-700 font-extrabold text-center absolute top-60 left-0 right-0 ${
-          isDragging ? 'animate-pulse' : 'hidden'
-        }`}
-      >
+    <div className="w-96 h-96 bg-white border rounded-t-xl">
+      <p className="absolute animate-pulse m-16 text-6xl text-gray-700 font-extrabold">
         {isNext ? 'next →' : ''}
         {isFancy ? '★ fancy' : ''}
       </p>
       <Draggable
         axis="x"
+        bounds={{ left: -400, right: 400 }}
         onDrag={handleDrag}
         onStop={handleDragStop}
         position={{ x: originalPosition.x, y: originalPosition.y }}
       >
-        <div className={isNext ? 'brightness-50' : ''}>
-          <div className="mx-auto max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
+        <div className={isNext || isFancy ? 'brightness-50' : ''}>
+          <div className="hover:shadow-2xl hover:rounded-xl">
             <Image
-              src={images[currentImageIndex]}
+              src={users[currentImageIndex]?.picture[0]}
               alt="face"
               width={500}
               height={500}
@@ -90,9 +104,10 @@ const ImageConverter: React.FC = () => {
               className="rounded-xl"
             />
           </div>
+          {currentImageIndex}
         </div>
       </Draggable>
-    </>
+    </div>
   );
 };
 

@@ -9,6 +9,7 @@ import DateOfBirthForm from '../../auth/signup/components/DateOfBirthForm';
 import ImageUploadForm from '../../auth/signup/components/ImageUploadForm';
 import UserNameForm from '../../auth/signup/components/UserNameForm';
 import PasswordForm from '../../auth/signup/components/PasswordForm';
+import GeoLocationButton from '../home/components/GeolocationButton';
 
 const Setting: React.FC = () => {
   const accordionItems = [
@@ -18,7 +19,8 @@ const Setting: React.FC = () => {
     { title: '나의 성별 선택', content: <GenderRadioList /> },
     { title: '성적 취향 선택', content: <SexualPreferenceRadioList /> },
     { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> },
-    { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
+    { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> },
+    { title: '위치 설정', content: <GeoLocationButton /> }
   ];
 
   const initialState = Array.from({ length: accordionItems.length }, () => false);

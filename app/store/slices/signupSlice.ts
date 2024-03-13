@@ -6,7 +6,7 @@ export enum Reaction {
   None = 'none'
 }
 
-interface UserState {
+interface SignupState {
   dateOfBirth: any;
   firstname: string;
   lastname: string;
@@ -21,7 +21,7 @@ interface UserState {
   selectedReactions: Reaction[];
 }
 
-const initialState: UserState = {
+const initialState: SignupState = {
   firstname: '',
   lastname: '',
   email: '',
@@ -36,43 +36,43 @@ const initialState: UserState = {
   selectedReactions: Array.from({ length: 16 }, () => Reaction.None)
 };
 
-const UserSlice = createSlice({
-  name: 'UserSlice',
+const signupSlice = createSlice({
+  name: 'signupSlice',
   initialState,
   reducers: {
-    setFirstname: (state: UserState, action: { payload: string }) => {
+    setFirstname: (state: SignupState, action: { payload: string }) => {
       state.firstname = action.payload;
       console.table(state.firstname);
     },
-    setLastname: (state: UserState, action: { payload: string }) => {
+    setLastname: (state: SignupState, action: { payload: string }) => {
       state.lastname = action.payload;
       console.table(state.lastname);
     },
-    setEmail: (state: UserState, action: { payload: string }) => {
+    setEmail: (state: SignupState, action: { payload: string }) => {
       state.email = action.payload;
       console.table(state.email);
     },
-    setPassword: (state: UserState, action: { payload: string }) => {
+    setPassword: (state: SignupState, action: { payload: string }) => {
       state.password = action.payload;
       console.table(state.password);
     },
-    setConfirmPassword: (state: UserState, action: { payload: string }) => {
+    setConfirmPassword: (state: SignupState, action: { payload: string }) => {
       state.confirmPassword = action.payload;
       console.table(state.confirmPassword);
     },
-    setBirthDate: (state: UserState, action: { payload: string }) => {
+    setBirthDate: (state: SignupState, action: { payload: string }) => {
       state.birthDate = action.payload;
       console.table(state.birthDate);
     },
-    setGender: (state: UserState, action: { payload: string }) => {
+    setGender: (state: SignupState, action: { payload: string }) => {
       state.gender = action.payload;
       console.table(state.gender);
     },
-    setSexualPreference: (state: UserState, action: { payload: string }) => {
+    setSexualPreference: (state: SignupState, action: { payload: string }) => {
       state.sexualPreference = action.payload;
       console.table(state.sexualPreference);
     },
-    setIntrodution: (state: UserState, action: { payload: string }) => {
+    setIntrodution: (state: SignupState, action: { payload: string }) => {
       state.introduction = action.payload;
       console.table(state.introduction);
     },
@@ -116,6 +116,6 @@ export const {
   addSelectedTags,
   removeSelectedTags,
   setReaction
-} = UserSlice.actions;
+} = signupSlice.actions;
 
-export default UserSlice.reducer;
+export default signupSlice.reducer;

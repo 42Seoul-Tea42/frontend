@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { Reaction, setReaction } from '../../../store/slices/userSlice';
+import { Reaction, setReaction } from '../../../store/slices/signupSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 
 const EmojiGridList: React.FC = () => {
-  const selectedReaction = useSelector((state: RootState) => state.user.selectedReactions);
+  const selectedReaction = useSelector((state: RootState) => state.signup.selectedReactions);
   const dispatch = useDispatch();
 
   const handleReaction = (id: number) => {

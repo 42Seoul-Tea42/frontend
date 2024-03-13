@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setGender } from '../../../store/slices/userSlice';
+import { setGender } from '../../../store/slices/signupSlice';
 
 const GenderRadioList = () => {
   const dispatch = useDispatch();
