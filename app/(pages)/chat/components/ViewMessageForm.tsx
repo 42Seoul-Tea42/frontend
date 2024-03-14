@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import MessageItem from './MessageItem';
 import Image from 'next/image';
+import ChattingRoomList from './ChattingRoomList';
 
 const ViewMessageForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,8 +38,8 @@ const ViewMessageForm = () => {
   };
 
   return (
-    <div className="border border-b-0 rounded-t-xl">
-      <div className="flex border-b p-4 ">
+    <div className="relative flex-col border border-b-0 rounded-t-xl">
+      <div className="flex items-end border-b p-4 ">
         <Image
           className="w-8 h-8 rounded-full"
           src={'/장원영.jpeg'}
@@ -46,8 +47,9 @@ const ViewMessageForm = () => {
           height={700}
           alt="User image"
         />
-        <span className="text-lg ml-5 font-semibold text-gray-800 dark:text-white">{'name'}</span>
+        <p className="text-xl ml-5 font-semibold text-gray-800 dark:text-white">{'name'}</p>
       </div>
+      <ChattingRoomList />
       <div
         className="max-h-[400px] min-w-96 overflow-hidden hover:overflow-y-scroll"
         ref={containerRef}
