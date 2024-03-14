@@ -9,7 +9,6 @@ export enum Fancy {
 
 export interface ProfileDto {
   // 이미지는 추후에 따로 처리
-  picture: string[];
   id: number;
   firstname: string;
   lastname: string;
@@ -25,18 +24,19 @@ export interface ProfileDetailDto {
   fancy: number;
 }
 
-export interface Profiles {
-  profileDto: ProfileDto;
-  profileDetailDto: ProfileDetailDto;
-}
-
 interface UserProfileState {
-  profiles: Profiles[];
+  picture: string;
+  pictureDetail: string[];
+  profiles: ProfileDto[];
+  profileDetail: ProfileDetailDto;
   currentUserIndex: number;
 }
 
 const initialState: UserProfileState = {
+  picture: '',
+  pictureDetail: [],
   profiles: [],
+  profileDetail: {} as ProfileDetailDto,
   currentUserIndex: 0
 };
 
@@ -44,29 +44,22 @@ const userProfileSlice = createSlice({
   name: 'userProfileSlice',
   initialState,
   reducers: {
-    updateProfileDto: (
-      state: UserProfileState,
-      action: PayloadAction<{
-        index: number;
-        profileDto: ProfileDto;
-      }>
-    ) => {
-      console.table(action.payload);
-      const { index, profileDto } = action.payload;
+    setCurrentUserIndex: (state: UserProfileState, action: PayloadAction<number>) => {
+      if (action.payload < 0) return;
+      state.currentUserIndex = action.payload;
     },
-    removeProfileFirst: (state: UserProfileState) => {
-      state.profiles = state.profiles.slice(1);
+    setProfiles: (state: UserProfileState, action: PayloadAction<ProfileDto[]>) => {
+      state.profiles = [...state.profiles, ...action.payload];
     },
-    updateProfileDetailDto: (
-      state: UserProfileState,
-      action: PayloadAction<{ index: number; profileDetailDto: ProfileDetailDto }>
-    ) => {
-      const { profileDetailDto } = action.payload;
-      state.profiles[0].profileDetailDto = profileDetailDto;
+    setPicture: (state: UserProfileState, action: PayloadAction<string>) => {
+      state.picture = action.payload;
+    },
+    setPictureDetail: (state: UserProfileState, action: PayloadAction<string[]>) => {
+      state.pictureDetail = action.payload;
     }
   }
 });
 
-export const { updateProfileDto, updateProfileDetailDto } = userProfileSlice.actions;
+export const { setPicture, setCurrentUserIndex, setProfiles } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;

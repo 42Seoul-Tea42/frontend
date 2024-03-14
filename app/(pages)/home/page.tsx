@@ -6,7 +6,6 @@ import ImageConverter from './components/ImageConverter';
 
 const Home: React.FC = () => {
   const [isTimePulse, setIsTimePulse] = useState<boolean>(false);
-
   useEffect(() => {
     setIsTimePulse(true);
     setTimeout(() => {

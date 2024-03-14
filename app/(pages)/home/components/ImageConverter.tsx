@@ -6,13 +6,14 @@ import { RootState } from '../../../store/store';
 import {
   ProfileDto,
   setCurrentUserIndex,
-  updateProfileDto
+  setPicture,
+  setProfiles
 } from '../../../store/slices/userProfileSlice';
 
 const ImageConverter: React.FC = () => {
   const dispatch = useDispatch();
   const [isNext, setIsNext] = useState<boolean>(false);
-  const [isFancy, setIsFancy] = useState<boolean>(false);
+  const [isPrev, setIsPrev] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [originalPosition, setOriginalPosition] = useState<{ x: number; y: number }>({
     x: 0,
@@ -20,11 +21,12 @@ const ImageConverter: React.FC = () => {
   });
   const currentUserIndex = useSelector((state: RootState) => state.userProfile.currentUserIndex);
   const users = useSelector((state: RootState) => state.userProfile.profiles);
+  const picture = useSelector((state: RootState) => state.userProfile.picture);
 
   const handleDrag: DraggableEventHandler = (_e, data) => {
     setIsDragging(true);
     setIsNext(data.x > 250);
-    setIsFancy(data.x < -250);
+    setIsPrev(data.x < -250);
   };
 
   const handleDragStop: DraggableEventHandler = () => {
@@ -37,25 +39,30 @@ const ImageConverter: React.FC = () => {
     setIsNext(false);
   };
 
+  const handlePrevImage = () => {
+    dispatch(setCurrentUserIndex(currentUserIndex - 1));
+    setIsPrev(false);
+  };
+
   const handleFancy = () => {
     //
-    setIsFancy(false);
+    setIsPrev(false);
   };
 
   const prerenderUsers = () => {
-    const User: ProfileDto = {
-      picture: ['/emoji/4.jpg'],
-      id: 1,
-      firstname: '귀요미',
-      lastname: '귀요미',
-      distance: 1
-    };
-    dispatch(
-      updateProfileDto({
-        index: currentUserIndex,
-        profileDto: User
-      })
-    );
+    console.log('prerenderUsers');
+    const src = '/emoji/3.jpg';
+    dispatch(setPicture(src));
+
+    const profile: ProfileDto[] = [
+      {
+        id: 1,
+        firstname: '옴팡이',
+        lastname: '옴팡이',
+        distance: 1
+      }
+    ];
+    dispatch(setProfiles(profile));
   };
 
   //유저 데이터 컨트롤
@@ -68,19 +75,18 @@ const ImageConverter: React.FC = () => {
   // 드래그 트리거
   useEffect(() => {
     if (isNext && !isDragging) handleNextImage();
-    if (isFancy && !isDragging) handleFancy();
+    if (isPrev && !isDragging) handlePrevImage();
   }, [isDragging]);
 
   useEffect(() => {
-    console.table(users);
     prerenderUsers();
   }, []);
 
   return (
     <div className="w-96 h-96 bg-white border rounded-t-xl">
       <p className="absolute animate-pulse m-16 text-6xl text-gray-700 font-extrabold">
-        {isNext ? 'next →' : ''}
-        {isFancy ? '★ fancy' : ''}
+        {isNext && 'next →'}
+        {isPrev && '← prev'}
       </p>
       <Draggable
         axis="x"
@@ -89,10 +95,10 @@ const ImageConverter: React.FC = () => {
         onStop={handleDragStop}
         position={{ x: originalPosition.x, y: originalPosition.y }}
       >
-        <div className={isNext || isFancy ? 'brightness-50' : ''}>
+        <div className={isNext || isPrev ? 'brightness-50' : ''}>
           <div className="hover:shadow-2xl hover:rounded-xl">
             <Image
-              src={users[currentUserIndex]?.profileDto.picture[0]}
+              src={picture}
               alt="face"
               width={500}
               height={500}

@@ -23,10 +23,10 @@ const SearchResultTable = () => {
                 Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Position
+                Distance
               </th>
               <th scope="col" className="px-6 py-3">
-                Status
+                Gender
               </th>
               <th scope="col" className="px-6 py-3">
                 Action

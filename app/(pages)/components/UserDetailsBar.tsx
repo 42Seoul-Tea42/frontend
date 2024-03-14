@@ -34,8 +34,8 @@ const UserDetailsBar: React.FC = () => {
   return (
     <div className="flex p-3 w-full mx-auto max-w-sm justify-between items-center border-t rounded-b-xl bg-white dark:bg-gray-800 dark:border-gray-700">
       <div className="flex items-end">
-        <p className="font-semibold text-3xl text-gray-700">{user?.profileDto?.firstname}</p>
-        <p className="font-normal text-gray-700 ml-2">{user?.profileDto?.distance}km</p>
+        <p className="font-semibold text-3xl text-gray-700">{user?.firstname}</p>
+        <p className="font-normal text-gray-700 ml-2">{user?.distance}km</p>
       </div>
       <button onClick={toggleModal} className="flex border">
         <p>자세히 보기</p>

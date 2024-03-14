@@ -1,21 +1,32 @@
-const SERVER_URL = process.env.NEXT_PUBLIC_API_URL;
+import axios from 'axios';
 
-function fetchApi(endpoint: string, method: string, body?: string) {
-  const handleError = (error: any) => {
-    console.error('Error:', error);
-  };
+const DEFAULT_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  fetch(`${SERVER_URL}${endpoint}`, {
-    method: method,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    },
-    body: body
-  })
-    .then(response => response.json())
-    .then(data => console.table(data))
-    .catch(error => handleError(error));
-}
+// Axios 인스턴스 생성
+const axiosInstance = axios.create({
+  baseURL: DEFAULT_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
 
-export default fetchApi;
+// Axios 요청 전에 실행되는 인터셉터 추가
+axiosInstance.interceptors.request.use(
+  config => {
+    // 쿠키에서 토큰 가져오기
+    const token = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('token='))
+      ?.split('=')[1];
+
+    // 토큰이 존재하는 경우 헤더에 추가
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);

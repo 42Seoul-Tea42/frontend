@@ -12,7 +12,7 @@ const ViewMessageForm = () => {
 
   useEffect(() => {
     // 더미 데이터 생성
-    const dummyMessages = Array.from({ length: 10 }, (_, index) => `Message ${index + 1}`);
+    const dummyMessages = Array.from({ length: 20 }, (_, index) => `Message ${index + 1}`);
     setMessages(dummyMessages);
   }, []);
 
@@ -39,7 +39,8 @@ const ViewMessageForm = () => {
 
   return (
     <div className="relative flex-col border border-b-0 rounded-t-xl">
-      <div className="flex items-end border-b p-4 ">
+      <ChattingRoomList />
+      <div className="relative flex items-end border-b p-4 ">
         <Image
           className="w-8 h-8 rounded-full"
           src={'/장원영.jpeg'}
@@ -47,9 +48,9 @@ const ViewMessageForm = () => {
           height={700}
           alt="User image"
         />
+        <span className="absolute left-3 bottom-3 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
         <p className="text-xl ml-5 font-semibold text-gray-800 dark:text-white">{'name'}</p>
       </div>
-      <ChattingRoomList />
       <div
         className="max-h-[400px] min-w-96 overflow-hidden hover:overflow-y-scroll"
         ref={containerRef}

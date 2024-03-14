@@ -17,7 +17,7 @@ const Chat = () => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="mx-auto m-40 gap-20">
+      <div className="mx-auto m-60 gap-20">
         <div className="items-center">
           <ViewMessageForm />
           <SendMessageForm />
