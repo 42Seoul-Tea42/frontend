@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import SendMessageForm from './components/SendMessageForm';
 import ViewMessageForm from './components/ViewMessageForm';
-import { SERVER_URL } from '../../../global';
 
 const Chat = () => {
   useEffect(() => {

@@ -3,9 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Cup from './Cup';
 import LearnMorePage from './LearnMorePage';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { SERVER_URL } from '../global';
+
 const LandingPage: React.FC = () => {
   const router = useRouter();
 
@@ -19,14 +17,6 @@ const LandingPage: React.FC = () => {
   const pushLoginPage = () => {
     router.push('auth/login');
   };
-
-  useEffect(() => {
-    // axios.get('https://localhost/api/tea').then((res) => {
-    //   console.log(res.data);
-    // });
-    console.log(SERVER_URL)
-  }, []);
-  
 
   return (
     <>

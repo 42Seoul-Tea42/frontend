@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import DirectionSVG from '../../../svg/DirectionSVG';
+import axiosInstance from '../../../utils/api';
 
 const SendMessageForm = () => {
   enum ChatType {
     MAX_LENGTH = 500
   }
+
+  useEffect(() => {
+    const response = axiosInstance.get('/').then((response) => console.log(response.data)); 
+  }, []);
 
   return (
     <form>
