@@ -58,7 +58,7 @@ const Search: React.FC = () => {
       tags: tags
     };
 
-    fetchApi('/user/search', 'POST', JSON.stringify(sendData));
+    // fetchApi('/user/search', 'POST', JSON.stringify(sendData));
     toggleDrawer();
   };
 

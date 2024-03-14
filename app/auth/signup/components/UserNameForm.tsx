@@ -57,4 +57,4 @@ const UserNameForm: React.FC = () => {
   );
 };
 
-export default signupNameForm;
+export default UserNameForm;

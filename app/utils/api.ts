@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const DEFAULT_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+// const DEFAULT_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: DEFAULT_BASE_URL,
+  // baseURL: 'http://localhost:80',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -30,3 +30,6 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+
+export default axiosInstance;
