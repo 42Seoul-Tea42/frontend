@@ -2,9 +2,10 @@ import React from 'react';
 
 interface DirectionSVGProps {
   direction: 'top' | 'down' | 'left' | 'right';
+  size: string;
 }
 
-const DirectionSVG: React.FC<DirectionSVGProps> = ({ direction }) => {
+const DirectionSVG: React.FC<DirectionSVGProps> = ({ direction, size }) => {
   let rotate = '';
   let viewBox = '';
 
@@ -31,7 +32,7 @@ const DirectionSVG: React.FC<DirectionSVGProps> = ({ direction }) => {
 
   return (
     <svg
-      className="w-5 h-5 text-gray dark:text-gray-800 rtl:rotate-180"
+      className={`w-${size} h-${size} text-gray dark:text-gray-800 rtl:rotate-180`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

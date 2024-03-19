@@ -63,7 +63,7 @@ const Setting: React.FC = () => {
                   onClick={() => toggleAccordion(index)}
                 >
                   {item.title}
-                  <DirectionSVG direction={isOpen[index] ? 'top' : 'down'} />
+                  <DirectionSVG direction={isOpen[index] ? 'top' : 'down'} size="4" />
                 </button>
               </h2>
               <div

@@ -12,7 +12,7 @@ const ViewMessageForm = () => {
 
   useEffect(() => {
     // 더미 데이터 생성
-    const dummyMessages = Array.from({ length: 20 }, (_, index) => `Message ${index + 1}`);
+    const dummyMessages = Array.from({ length: 10 }, (_, index) => `Message ${index + 1}`);
     setMessages(dummyMessages);
   }, []);
 
@@ -48,7 +48,8 @@ const ViewMessageForm = () => {
           height={700}
           alt="User image"
         />
-        <span className="absolute left-3 bottom-3 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+        {/* status */}
+        <span className="bg-green-500 absolute left-3 bottom-3 w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full"></span>
         <p className="text-xl ml-5 font-semibold text-gray-800 dark:text-white">{'name'}</p>
       </div>
       <div
@@ -58,7 +59,7 @@ const ViewMessageForm = () => {
       >
         {messages.map((message, index) => (
           <div key={index}>
-            <MessageItem message={message} time="1010" />
+            <MessageItem message={message} time="1010" me={false} />
           </div>
         ))}
         {!hasMoreMessages && (

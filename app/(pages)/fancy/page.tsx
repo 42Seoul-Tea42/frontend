@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import HeartSVG from '../../svg/HeartSVG';
 
 const Fancy = () => {
   // 여기에 이미지 데이터를 정의합니다.
@@ -14,16 +15,25 @@ const Fancy = () => {
 
   return (
     <div className="flex flex-wrap justify-center h-screen">
-      <div className="mx-auto m-40">
+      <div className="mx-auto m-60">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
           {images.map((image, index) => (
-            <div key={index} className="relative w-48 h-48 rounded-lg">
-              <Image
-                src={`/emoji/${image.src}`}
-                alt={`Preview ${image.alt}`}
-                layout="fill"
-                className="rounded-lg object-cover"
-              />
+            <div>
+              <div key={index} className="relative w-48 h-48 rounded-t-lg border border-b-0">
+                <Image
+                  src={`/emoji/${image.src}`}
+                  alt={`Preview ${image.alt}`}
+                  layout="fill"
+                  className="rounded-lg object-cover"
+                />
+              </div>
+              <div className="w-48 h-12 rounded-b-lg border p-1 pl-2">
+                <div className="flex items-end gap-4">
+                  <p className="font-semibold text-2xl text-gray-700">name</p>
+                  <p className="font-normal text-gray-700">3km</p>
+                  <HeartSVG color="pink" />
+                </div>
+              </div>
             </div>
           ))}
         </div>

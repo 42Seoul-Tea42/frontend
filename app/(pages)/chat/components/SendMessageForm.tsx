@@ -1,15 +1,12 @@
 import { useEffect } from 'react';
 import DirectionSVG from '../../../svg/DirectionSVG';
-import axiosInstance from '../../../utils/api';
 
 const SendMessageForm = () => {
   enum ChatType {
     MAX_LENGTH = 500
   }
 
-  useEffect(() => {
-    const response = axiosInstance.get('/').then((response) => console.log(response.data)); 
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <form>
@@ -28,7 +25,7 @@ const SendMessageForm = () => {
           type="button"
           className="flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-gray-600"
         >
-          <DirectionSVG direction="right" />
+          <DirectionSVG direction="right" size="4" />
           <span className="sr-only">Send message</span>
         </button>
       </div>

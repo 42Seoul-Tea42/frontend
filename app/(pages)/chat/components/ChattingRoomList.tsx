@@ -96,7 +96,7 @@ const ChattingRoomList = () => {
           type="button"
           onClick={openModal}
         >
-          <DirectionSVG direction="down" />
+          <DirectionSVG direction="down" size="6" />
         </button>
       </div>
       {isModalOpen && (

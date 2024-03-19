@@ -2,7 +2,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import fetchApi from '../../utils/api';
 import TagSelector from '../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
 import InputMinMaxAge from './components/InputMinMaxAge';
@@ -85,7 +84,7 @@ const Search: React.FC = () => {
           onClick={toggleDrawer}
         >
           <div className={`${isBounce} && animate-bounce`}></div>
-          <DirectionSVG direction="down" />
+          <DirectionSVG direction="down" size="6" />
         </button>
         {isDrawerOpen && (
           <>

@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
         <div className="flex flex-row items-end ml-5 mr-5 mt-5">
           <div className={`${emailFormView ? '' : 'hidden'}`}>
             <button onClick={toggle} className="items-center hover:text-gray-400">
-              <DirectionSVG direction="left" />
+              <DirectionSVG direction="left" size="5" />
             </button>
           </div>
           <h5 className="tracking-wide text-3xl ml-5 min-w-80 font-semibold text-gray-900 dark:text-white flex-grow">

@@ -1,8 +1,8 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import IconStar from './IconStar';
 import { setStarCount } from '../../../store/slices/searchParamSlice';
+import StarSVG from '../../../svg/StarSVG';
 
 interface StarButtonProps {
   star: number;
@@ -18,7 +18,7 @@ const StarButton: React.FC<StarButtonProps> = ({ star, isFilled }) => {
 
   return (
     <button onClick={handleStarClick}>
-      <IconStar color={isFilled ? 'yellow' : 'gray'} />
+      <StarSVG color={isFilled ? 'yellow' : 'gray'} />
     </button>
   );
 };
