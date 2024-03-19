@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Cup from './Cup';
 import LearnMorePage from './LearnMorePage';
+import Draggable from 'react-draggable';
 
 const LandingPage: React.FC = () => {
   const router = useRouter();
