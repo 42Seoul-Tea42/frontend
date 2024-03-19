@@ -39,7 +39,6 @@ const ViewMessageForm = () => {
 
   return (
     <div className="relative flex-col border border-b-0 rounded-t-xl">
-      <ChattingRoomList />
       <div className="relative flex items-end border-b p-4 ">
         <Image
           className="w-8 h-8 rounded-full"

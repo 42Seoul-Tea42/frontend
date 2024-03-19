@@ -3,8 +3,9 @@
 import { useEffect } from 'react';
 import SendMessageForm from './components/SendMessageForm';
 import ViewMessageForm from './components/ViewMessageForm';
+import ChattingRoomList from './components/ChattingRoomList';
 
-const Chat = () => {
+const Chat: React.FC = () => {
   useEffect(() => {
     // const ws = new WebSocket(SERVER_URL || '');
     // ws.onopen = () => {};
@@ -21,6 +22,7 @@ const Chat = () => {
           <ViewMessageForm />
           <SendMessageForm />
         </div>
+        <ChattingRoomList />
       </div>
     </div>
   );
