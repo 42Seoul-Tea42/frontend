@@ -1,6 +1,5 @@
 import React from 'react';
 import TagButton from './TagButton';
-import { capitalizeFirstLetter } from './SignupStepper';
 
 enum TagType {
   SPORTS = 1 << 0,
@@ -17,6 +16,10 @@ enum TagType {
   SMOKE = 1 << 11,
   DRINK = 1 << 12
 }
+
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0) + str.slice(1).toLowerCase();
+};
 
 const TagSelector: React.FC = () => {
   return (

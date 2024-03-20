@@ -2,7 +2,6 @@
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import axiosInstance from '../../../utils/axios';
 import EmojiGridList from './EmojiGridList';
 import { useRouter } from 'next/navigation';
 
@@ -17,14 +16,14 @@ const EmojiInfoForm: React.FC<EmojiInfoFormProps> = ({ onNextStep }) => {
   const router = useRouter();
 
   const handleSubmitEmojiPreference = async () => {
-    const result = await axiosInstance.post('/user/emoji', {
-      // emoji: [int]
-      // hate_emoji: [int]
-      // similar: bool
-    });
-    if (result && result.status === 200) {
-      // router.push('/home');
-    }
+    // const result = await axiosInstance.post('/user/emoji', {
+    // emoji: [int]
+    // hate_emoji: [int]
+    // similar: bool
+    // });
+    // if (result && result.status === 200) {
+    //   // router.push('/home');
+    // }
     router.push('/home');
   };
 
@@ -38,7 +37,7 @@ const EmojiInfoForm: React.FC<EmojiInfoFormProps> = ({ onNextStep }) => {
         <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-500">
           싫어요
         </span>
-      </h5>{' '}
+      </h5>
       <EmojiGridList />
       <div className="flex justify-end mt-10">
         <button

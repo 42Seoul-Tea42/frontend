@@ -20,8 +20,6 @@ const AccountInfoForm: React.FC<AccountInfoFormProps> = ({ onNextStep }) => {
   const dateOfBirth = useSelector((state: RootState) => state.signup.dateOfBirth);
   const firstname = useSelector((state: RootState) => state.signup.firstname);
   const lastname = useSelector((state: RootState) => state.signup.lastname);
-  const longitude = useSelector((state: RootState) => state.signup.longitude);
-  const latitude = useSelector((state: RootState) => state.signup.latitude);
 
   const handleSubmit = async () => {
     // const result = await axiosInstance.post('/user/register', {
@@ -31,8 +29,6 @@ const AccountInfoForm: React.FC<AccountInfoFormProps> = ({ onNextStep }) => {
     //   last_name: lastname,
     //   name: firstname,
     //   birthday: dateOfBirth,
-    //   longitude: longitude,
-    //   latitude: latitude
     // });
 
     // if (result && result.status === 200)
@@ -48,11 +44,10 @@ const AccountInfoForm: React.FC<AccountInfoFormProps> = ({ onNextStep }) => {
         회원가입을 위한 계정정보를 입력해주세요.
       </h5>
 
-      <EmailInputForm />
       <UserNameForm />
+      <EmailInputForm />
       <PasswordForm />
       <DateOfBirthForm />
-      <GeoLocationButton />
 
       <div className="flex justify-end mt-10">
         <button

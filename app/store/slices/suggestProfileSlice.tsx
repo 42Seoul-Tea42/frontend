@@ -39,8 +39,8 @@ const initialState: UserProfileState = {
   currentUserIndex: 0
 };
 
-const userProfileSlice = createSlice({
-  name: 'userProfileSlice',
+const suggestProfile = createSlice({
+  name: 'suggestProfile',
   initialState,
   reducers: {
     setCurrentUserIndex: (state: UserProfileState, action: PayloadAction<number>) => {
@@ -59,6 +59,6 @@ const userProfileSlice = createSlice({
   }
 });
 
-export const { setPicture, setCurrentUserIndex, setProfiles } = userProfileSlice.actions;
+export const { setPicture, setCurrentUserIndex, setProfiles } = suggestProfile.actions;
 
-export default userProfileSlice.reducer;
+export default suggestProfile.reducer;

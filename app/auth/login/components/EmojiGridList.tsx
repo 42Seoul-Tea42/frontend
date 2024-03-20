@@ -40,7 +40,7 @@ const EmojiGridList: React.FC = () => {
             <Image
               width={500}
               height={500}
-              className="h-auto max-w-full rounded-lg hover:opacity-60 transition-opacity duration-300"
+              className="h-auto max-w-full rounded-lg hover:brightness-50 transition-opacity duration-300"
               src={Emoji.src}
               alt={Emoji.alt}
             />

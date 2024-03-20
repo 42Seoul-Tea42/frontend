@@ -77,13 +77,6 @@ const SearchResultTable = () => {
       email: 'thomes@flowbite.com',
       role: 'UI/UX Engineer',
       status: 'Online'
-    },
-    {
-      id: 5,
-      name: 'Leslie Livingston',
-      email: 'leslie@flowbite.com',
-      role: 'SEO Specialist',
-      status: 'Offline'
     }
   ];
 
@@ -93,39 +86,37 @@ const SearchResultTable = () => {
   };
 
   return (
-    <div className="relative mt-40 shadow-md overflow-x-scroll sm:rounded-lg">
-      <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Distance
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Gender
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map(user => (
-              <UserRow
-                key={user.id}
-                name={user.name}
-                email={user.email}
-                role={user.role}
-                status={user.status}
-                onClickEdit={() => handleEditUser(user.id)}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="relative mt-40 shadow overflow-x-scroll sm:rounded-lg">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Distance
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Gender
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <UserRow
+              key={user.id}
+              name={user.name}
+              email={user.email}
+              role={user.role}
+              status={user.status}
+              onClickEdit={() => handleEditUser(user.id)}
+            />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
