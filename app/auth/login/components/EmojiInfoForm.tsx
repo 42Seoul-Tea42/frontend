@@ -1,13 +1,32 @@
 'use client';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import axiosInstance from '../../../utils/axios';
 import EmojiGridList from './EmojiGridList';
 import { useRouter } from 'next/navigation';
+
 interface EmojiInfoFormProps {
   onNextStep: () => void;
 }
 
 const EmojiInfoForm: React.FC<EmojiInfoFormProps> = ({ onNextStep }) => {
+  const emojis = useSelector((state: RootState) => state.signup.selectedReactions);
+  // const hate_tags = useSelector((state: RootState) => state.signup.hate_tags);
+
   const router = useRouter();
+
+  const handleSubmitEmojiPreference = async () => {
+    const result = await axiosInstance.post('/user/emoji', {
+      // emoji: [int]
+      // hate_emoji: [int]
+      // similar: bool
+    });
+    if (result && result.status === 200) {
+      // router.push('/home');
+    }
+    router.push('/home');
+  };
 
   return (
     <form className="min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -25,7 +44,7 @@ const EmojiInfoForm: React.FC<EmojiInfoFormProps> = ({ onNextStep }) => {
         <button
           type="button"
           className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          onClick={onNextStep}
+          onClick={handleSubmitEmojiPreference}
         >
           Submit
         </button>
