@@ -11,23 +11,27 @@ interface SignupState {
   firstname: string;
   lastname: string;
   email: string;
+  id: string;
   password: string;
-  confirmPassword: string;
   birthDate: string;
   gender: string;
   sexualPreference: string;
   introduction: string;
   selectedTags: number[];
   selectedReactions: Reaction[];
+  latitude: number | null;
+  longitude: number | null;
 }
 
 const initialState: SignupState = {
   firstname: '',
   lastname: '',
   email: '',
+  id: '',
   password: '',
-  confirmPassword: '',
   birthDate: '',
+  latitude: null,
+  longitude: null,
   gender: '',
   sexualPreference: '',
   introduction: '',
@@ -52,13 +56,21 @@ const signupSlice = createSlice({
       state.email = action.payload;
       console.table(state.email);
     },
+    setId: (state: SignupState, action: { payload: string }) => {
+      state.id = action.payload;
+      console.table(state.id);
+    },
     setPassword: (state: SignupState, action: { payload: string }) => {
       state.password = action.payload;
       console.table(state.password);
     },
-    setConfirmPassword: (state: SignupState, action: { payload: string }) => {
-      state.confirmPassword = action.payload;
-      console.table(state.confirmPassword);
+    setLatitude: (state: SignupState, action: { payload: number }) => {
+      state.latitude = action.payload;
+      console.table(state.latitude);
+    },
+    setLongitude: (state: SignupState, action: { payload: number }) => {
+      state.longitude = action.payload;
+      console.table(state.longitude);
     },
     setBirthDate: (state: SignupState, action: { payload: string }) => {
       state.birthDate = action.payload;
@@ -107,9 +119,11 @@ export const {
   setFirstname,
   setLastname,
   setEmail,
+  setId,
   setPassword,
-  setConfirmPassword,
   setBirthDate,
+  setLatitude,
+  setLongitude,
   setGender,
   setSexualPreference,
   setIntrodution,

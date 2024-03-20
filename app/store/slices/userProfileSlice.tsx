@@ -8,7 +8,6 @@ export enum Fancy {
 }
 
 export interface ProfileDto {
-  // 이미지는 추후에 따로 처리
   id: number;
   firstname: string;
   lastname: string;
