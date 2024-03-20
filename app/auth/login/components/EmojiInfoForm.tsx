@@ -24,7 +24,8 @@ const EmojiInfoForm: React.FC<EmojiInfoFormProps> = ({ onNextStep }) => {
     // if (result && result.status === 200) {
     //   // router.push('/home');
     // }
-    router.push('/home');
+    router.push('/auth/login');
+    alert('회원가입이 완료되었습니다. 로그인 해주세요.');
   };
 
   return (

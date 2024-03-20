@@ -12,18 +12,30 @@ import PasswordForm from '../../auth/signup/components/PasswordForm';
 import GeoLocationButton from '../home/components/GeolocationButton';
 
 const Setting: React.FC = () => {
-  const accordionItems = [
-    { title: '이름변경', content: <UserNameForm /> },
-    { title: '생년월일 재설정', content: <DateOfBirthForm /> },
-    { title: '비밀번호 재설정', content: <PasswordForm /> },
-    { title: '나의 성별 선택', content: <GenderRadioList /> },
-    { title: '성적 취향 선택', content: <SexualPreferenceRadioList /> },
-    { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> },
-    { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> },
-    { title: '위치 설정', content: <GeoLocationButton /> }
-  ];
+  const accordionItems = {
+    oauth: [
+      { title: '이름변경', content: <UserNameForm /> },
+      { title: '생년월일 재설정', content: <DateOfBirthForm /> },
+      { title: '비밀번호 재설정', content: <PasswordForm /> },
+      { title: '나의 성별 선택', content: <GenderRadioList /> },
+      { title: '성적 취향 선택', content: <SexualPreferenceRadioList /> },
+      { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> },
+      { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> },
+      { title: '위치 설정', content: <GeoLocationButton /> }
+    ],
+    normal: [
+      { title: '이름변경', content: <UserNameForm /> },
+      { title: '생년월일 재설정', content: <DateOfBirthForm /> },
+      { title: '비밀번호 재설정', content: <PasswordForm /> },
+      { title: '나의 성별 선택', content: <GenderRadioList /> },
+      { title: '성적 취향 선택', content: <SexualPreferenceRadioList /> },
+      { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> },
+      { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> },
+      { title: '위치 설정', content: <GeoLocationButton /> }
+    ]
+  };
 
-  const initialState = Array.from({ length: accordionItems.length }, () => false);
+  const initialState = Array.from({ length: accordionItems.normal.length }, () => false);
 
   const [isOpen, setIsOpen] = useState<boolean[]>(initialState);
 
@@ -46,7 +58,7 @@ const Setting: React.FC = () => {
           </div>
         </div>
         <div className="mx-auto w-96">
-          {accordionItems.map((item, index) => (
+          {accordionItems.normal.map((item, index) => (
             <div
               key={index}
               id={`accordion-collapse-${index}`}

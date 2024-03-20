@@ -8,7 +8,7 @@ import {
   setCurrentUserIndex,
   setPicture,
   setProfiles
-} from '../../../store/slices/userProfileSlice';
+} from '../../../store/slices/suggestProfileSlice';
 
 const ImageConverter: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,9 @@ const ImageConverter: React.FC = () => {
     x: 0,
     y: 0
   });
-  const currentUserIndex = useSelector((state: RootState) => state.userProfile.currentUserIndex);
-  const users = useSelector((state: RootState) => state.userProfile.profiles);
-  const picture = useSelector((state: RootState) => state.userProfile.picture);
+  const currentUserIndex = useSelector((state: RootState) => state.suggestProfile.currentUserIndex);
+  const users = useSelector((state: RootState) => state.suggestProfile.profiles);
+  const picture = useSelector((state: RootState) => state.suggestProfile.picture);
 
   const handleDrag: DraggableEventHandler = (_e, data) => {
     setIsDragging(true);
