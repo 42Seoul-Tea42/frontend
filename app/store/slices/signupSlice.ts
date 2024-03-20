@@ -7,6 +7,7 @@ export enum Reaction {
 }
 
 interface SignupState {
+  profileImage: string;
   dateOfBirth: any;
   firstname: string;
   lastname: string;
@@ -24,6 +25,7 @@ interface SignupState {
 }
 
 const initialState: SignupState = {
+  profileImage: '',
   firstname: '',
   lastname: '',
   email: '',
@@ -44,6 +46,10 @@ const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
   reducers: {
+    setProfileImage: (state: SignupState, action: { payload: string }) => {
+      state.profileImage = action.payload;
+      console.table(state.profileImage);
+    },
     setFirstname: (state: SignupState, action: { payload: string }) => {
       state.firstname = action.payload;
       console.table(state.firstname);
@@ -116,6 +122,7 @@ const signupSlice = createSlice({
 });
 
 export const {
+  setProfileImage,
   setFirstname,
   setLastname,
   setEmail,

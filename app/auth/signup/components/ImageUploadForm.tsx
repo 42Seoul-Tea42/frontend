@@ -1,8 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import CloudUploadSVG from '../../../svg/CloudUploadSVG';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { setProfileImage } from '../../../store/slices/signupSlice';
 
 interface ImageUploadFormProps {
   width: number;
@@ -10,7 +13,9 @@ interface ImageUploadFormProps {
 }
 
 const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
-  const [previewImage, setPreviewImage] = useState<string>('');
+  const previewImage = useSelector((state: RootState) => state.signup.profileImage);
+
+  const dispatch = useDispatch();
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -19,7 +24,7 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
       reader.onloadend = () => {
         const result = reader.result;
         if (result && typeof result === 'string') {
-          setPreviewImage(result);
+          dispatch(setProfileImage(result));
         }
       };
       reader.readAsDataURL(file);

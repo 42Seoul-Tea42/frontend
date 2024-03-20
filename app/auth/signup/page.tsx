@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import SignupStepper, { Steps } from './components/SignupStepper';
 import AccountInfoForm from './components/AccountInfoForm';
-import PersonalInfoForm from './components/PersonalInfoForm';
-import ProfileUploadForm from './components/ProfileUploadForm';
+import ProfileUploadForm from './components/PictureUploadForm';
 import EmojiInfoForm from '../login/components/EmojiInfoForm';
+import ProfileInfoForm from './components/ProfileInfoForm';
 
 const Signup: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<Steps>(Steps.ACCOUNT_INFO);
@@ -20,10 +20,10 @@ const Signup: React.FC = () => {
       case Steps.ACCOUNT_INFO:
         setCurrentForm(<AccountInfoForm onNextStep={nextStep} />);
         break;
-      case Steps.PERSONAL_INFO:
-        setCurrentForm(<PersonalInfoForm onNextStep={nextStep} />);
+      case Steps.PROFILE_INFO:
+        setCurrentForm(<ProfileInfoForm onNextStep={nextStep} />);
         break;
-      case Steps.PROFILE_UPLOAD:
+      case Steps.PICTURE_UPLOAD:
         setCurrentForm(<ProfileUploadForm onNextStep={nextStep} />);
         break;
       case Steps.EMOJI_INFO:

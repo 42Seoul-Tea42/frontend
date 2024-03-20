@@ -11,8 +11,8 @@ export const capitalizeFirstLetter = (str: string) => {
 
 export enum Steps {
   ACCOUNT_INFO,
-  PERSONAL_INFO,
-  PROFILE_UPLOAD,
+  PROFILE_INFO,
+  PICTURE_UPLOAD,
   EMOJI_INFO
 }
 
