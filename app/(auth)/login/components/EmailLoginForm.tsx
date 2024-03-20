@@ -20,14 +20,6 @@ const EmailLoginForm: React.FC = () => {
     }
   };
 
-  const handleId = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setId(e.target.value);
-  };
-
-  const handlepassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
   const findPassword = () => {
     router.push('/auth/user/reset-password');
   };
@@ -41,7 +33,7 @@ const EmailLoginForm: React.FC = () => {
         <input
           type="id"
           name="id"
-          onChange={handleId}
+          onChange={e => setId(e.target.value)}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           placeholder=""
           required
@@ -58,7 +50,7 @@ const EmailLoginForm: React.FC = () => {
           type="password"
           name="password"
           id="password"
-          onChange={handlepassword}
+          onChange={e => setPassword(e.target.value)}
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required

@@ -17,7 +17,7 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
 
   const dispatch = useDispatch();
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const dispatchSignupImage = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -63,7 +63,7 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
           type="file"
           className="hidden"
           accept=".jpg, .jpeg, .png"
-          onChange={handleImageChange}
+          onChange={dispatchSignupImage}
         />
       </label>
     </>

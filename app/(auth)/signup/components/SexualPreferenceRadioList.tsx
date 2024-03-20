@@ -4,7 +4,7 @@ import { setSexualPreference } from '../../../store/slices/signupSlice';
 const SexualPreferenceRadioList = () => {
   const dispatch = useDispatch();
 
-  const handleSexualPreference = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const dispatchSignupSexualPreference = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSexualPreference(e.target.value));
   };
 
@@ -18,7 +18,7 @@ const SexualPreferenceRadioList = () => {
               type="radio"
               value="hetero"
               name="sexual-preference"
-              onChange={handleSexualPreference}
+              onChange={dispatchSignupSexualPreference}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
@@ -37,7 +37,7 @@ const SexualPreferenceRadioList = () => {
               type="radio"
               value="homo"
               name="sexual-preference"
-              onChange={handleSexualPreference}
+              onChange={dispatchSignupSexualPreference}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
@@ -56,7 +56,7 @@ const SexualPreferenceRadioList = () => {
               type="radio"
               value="bisexual"
               name="sexual-preference"
-              onChange={handleSexualPreference}
+              onChange={dispatchSignupSexualPreference}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />

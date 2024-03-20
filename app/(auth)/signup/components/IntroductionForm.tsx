@@ -4,7 +4,7 @@ import { setIntrodution } from '../../../store/slices/signupSlice';
 const IntroductionForm: React.FC = () => {
   const dispatch = useDispatch();
 
-  const handleIntroduction = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const dispatchSignupIntroduction = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setIntrodution(e.target.value));
   };
 
@@ -20,7 +20,7 @@ const IntroductionForm: React.FC = () => {
         <textarea
           id="message"
           rows={4}
-          onChange={handleIntroduction}
+          onChange={dispatchSignupIntroduction}
           className="block p-2.5 w-full min-h-36 max-h-96 text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="나랑 눈사람 만들래?"
         ></textarea>

@@ -6,13 +6,6 @@ import axiosInstance from '../../../utils/axios';
 const ResetPassword: React.FC = () => {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
-  const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setId(e.target.value);
-  };
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
 
   const findId = async () => {
     alert('가입하신 아이디는 땡땡땡 입니다.');
@@ -36,7 +29,7 @@ const ResetPassword: React.FC = () => {
             <input
               type="email"
               name="email"
-              onChange={handleEmailChange}
+              onChange={e => setEmail(e.target.value)}
               id="email"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder="Email을 입력해주세요."
@@ -59,7 +52,7 @@ const ResetPassword: React.FC = () => {
             <input
               type="id"
               name="floating_id"
-              onChange={handleIdChange}
+              onChange={e => setId(e.target.value)}
               id="floating_id"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder="ID를 입력해주세요."

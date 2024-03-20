@@ -4,7 +4,7 @@ import { setGender } from '../../../store/slices/signupSlice';
 const GenderRadioList = () => {
   const dispatch = useDispatch();
 
-  const handleGender = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const dispatchSignupGender = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setGender(e.target.value));
   };
 
@@ -18,7 +18,7 @@ const GenderRadioList = () => {
               type="radio"
               value="male"
               name="gender"
-              onChange={handleGender}
+              onChange={dispatchSignupGender}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
@@ -37,7 +37,7 @@ const GenderRadioList = () => {
               type="radio"
               value="female"
               name="gender"
-              onChange={handleGender}
+              onChange={dispatchSignupGender}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />

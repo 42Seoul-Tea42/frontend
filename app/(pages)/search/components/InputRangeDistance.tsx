@@ -6,7 +6,7 @@ const InputRangeDistance: React.FC = () => {
   const distance = useSelector((state: RootState) => state.searchParam.distance);
   const dispatch = useDispatch();
 
-  const handleDistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const dispatchSearchParamDistance = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value);
     dispatch(setDistance(newValue));
   };
@@ -18,7 +18,7 @@ const InputRangeDistance: React.FC = () => {
         type="range"
         value={distance}
         className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-        onChange={handleDistanceChange}
+        onChange={dispatchSearchParamDistance}
         min="1"
         max="100"
         step={1}

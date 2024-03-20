@@ -6,11 +6,15 @@ import axiosInstance from '../../../../utils/axios';
 
 const page: React.FC = () => {
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const param = useParams<{ key: string }>();
 
   const handleSettingPassword = async () => {
-    const address = `/user/resetPw/${param.key}`;
-    const response = await axiosInstance.post(address, {
+    if (password !== confirmPassword) {
+      return;
+    }
+
+    const response = await axiosInstance.post(`/user/resetPw/${param.key}`, {
       password: password
     });
     if (response && response.status === 200) {
@@ -18,10 +22,6 @@ const page: React.FC = () => {
     } else {
       alert('비밀번호 변경에 실패했습니다.');
     }
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
   };
 
   return (
@@ -42,7 +42,7 @@ const page: React.FC = () => {
                   id="password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@flowbite.com"
-                  onChange={handlePasswordChange}
+                  onChange={e => setPassword(e.target.value)}
                   required
                 />
               </div>
@@ -58,6 +58,7 @@ const page: React.FC = () => {
                   id="confirm password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
+                  onChange={e => setConfirmPassword(e.target.value)}
                 />
               </div>
               <button
