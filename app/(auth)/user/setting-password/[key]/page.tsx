@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import axiosInstance from '../../../utils/axios';
+import { useParams } from 'next/navigation';
+import axiosInstance from '../../../../utils/axios';
 
 const page: React.FC = () => {
   const [password, setPassword] = useState('');
+  const param = useParams<{ key: string }>();
+
   const handleSettingPassword = async () => {
-    const address = `/user/resetPw/${key}`;
+    const address = `/user/resetPw/${param.key}`;
     const response = await axiosInstance.post(address, {
       password: password
     });
