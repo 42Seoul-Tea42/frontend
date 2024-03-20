@@ -1,48 +1,40 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import SignupStepper, { Steps } from './components/SignupStepper';
 import AccountInfoForm from './components/AccountInfoForm';
-import ProfileUploadForm from './components/PictureUploadForm';
+import PictureUploadForm from './components/PictureUploadForm';
 import EmojiInfoForm from '../login/components/EmojiInfoForm';
 import ProfileInfoForm from './components/ProfileInfoForm';
 
 const Signup: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<Steps>(Steps.ACCOUNT_INFO);
+  const [currentStep, setCurrentStep] = useState<number>(0);
   const [currentForm, setCurrentForm] = useState<JSX.Element | null>(null);
 
-  const nextStep = () => {
-    setCurrentStep(prevStep => prevStep + 1);
+  const onNextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const forms = {
+    oauth: [
+      <ProfileInfoForm onNextStep={onNextStep} />,
+      <PictureUploadForm onNextStep={onNextStep} />,
+      <EmojiInfoForm onNextStep={onNextStep} />
+    ],
+    normal: [
+      <AccountInfoForm onNextStep={onNextStep} />,
+      <ProfileInfoForm onNextStep={onNextStep} />,
+      <PictureUploadForm onNextStep={onNextStep} />,
+      <EmojiInfoForm onNextStep={onNextStep} />
+    ]
   };
 
   useEffect(() => {
-    switch (currentStep) {
-      case Steps.ACCOUNT_INFO:
-        setCurrentForm(<AccountInfoForm onNextStep={nextStep} />);
-        break;
-      case Steps.PROFILE_INFO:
-        setCurrentForm(<ProfileInfoForm onNextStep={nextStep} />);
-        break;
-      case Steps.PICTURE_UPLOAD:
-        setCurrentForm(<ProfileUploadForm onNextStep={nextStep} />);
-        break;
-      case Steps.EMOJI_INFO:
-        setCurrentForm(<EmojiInfoForm onNextStep={nextStep} />);
-        break;
-      default:
-        setCurrentForm(<AccountInfoForm onNextStep={nextStep} />);
-        break;
-    }
+    setCurrentForm(forms.normal[currentStep]);
   }, [currentStep]);
 
   return (
     <div className="w-full h-screen flex justify-center">
-      <div className="flex flex-col items-center justify-center">
-        <div className="mb-20">
-          <SignupStepper currentStep={currentStep} />
-        </div>
-        {currentForm}
-      </div>
+      <div className="flex flex-col items-center justify-center">{currentForm}</div>
     </div>
   );
 };
