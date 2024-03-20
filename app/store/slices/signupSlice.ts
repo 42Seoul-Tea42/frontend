@@ -19,8 +19,8 @@ interface SignupState {
   introduction: string;
   selectedTags: number[];
   selectedReactions: Reaction[];
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 const initialState: SignupState = {
@@ -30,8 +30,8 @@ const initialState: SignupState = {
   id: '',
   password: '',
   birthDate: '',
-  latitude: null,
-  longitude: null,
+  latitude: 0,
+  longitude: 0,
   gender: '',
   sexualPreference: '',
   introduction: '',
