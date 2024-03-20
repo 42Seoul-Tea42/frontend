@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Draggable from 'react-draggable';
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
@@ -33,8 +34,8 @@ const Cup: React.FC = () => {
       return model;
     };
 
-    const animateModel = (model: THREE.Object3D) => {
-      const animate = (event: MouseEvent) => {
+    const animateFollowMouse = (model: THREE.Object3D) => {
+      const followMouse = (event: MouseEvent) => {
         const mouseX = (event.clientX / window.innerWidth) * 2 - 1 || 0;
         const mouseY = (event.clientY / window.innerHeight) * 2 - 1 || 0;
         const targetRotationX = (mouseY / 3) * Math.PI;
@@ -46,49 +47,53 @@ const Cup: React.FC = () => {
         renderer.render(scene, camera);
       };
 
-      document.addEventListener('mousemove', animate);
+      document.addEventListener('mousemove', followMouse);
 
       return () => {
-        document.removeEventListener('mousemove', animate);
+        document.removeEventListener('mousemove', followMouse);
       };
     };
 
-    const animateUpDown = (model: THREE.Object3D) => {
+    const animateFollowScroll = (model: THREE.Object3D) => {
       let clickedCount = 0;
 
-      const animate = () => {
-        if (clickedCount % 24 < 12) model.position.y -= 0.06;
-        else model.position.y += 0.06;
+      const upDown = () => {
+        if (clickedCount % 40 < 20) model.position.y -= 0.04;
+        else model.position.y += 0.04;
         renderer.render(scene, camera);
         clickedCount++;
       };
 
-      document.addEventListener('scroll', animate);
+      document.addEventListener('mousemove', upDown);
       return () => {
-        document.removeEventListener('scroll', animate);
+        document.removeEventListener('mousemove', upDown);
       };
     };
 
     loader.load('/cup/scene.gltf', gltf => {
       const cup = addModelToScene(gltf, 0);
-      cup.rotation.z = -0.3;
-      animateModel(cup);
+      cup.rotation.z -= 0.3;
+      animateFollowMouse(cup);
+      renderer.render(scene, camera);
     });
 
     loader.load('/bunny/scene.gltf', gltf => {
       const bunny = addModelToScene(gltf, 0);
       bunny.position.set(0, 0.3, 0);
-      animateUpDown(bunny);
-      animateModel(bunny);
+      animateFollowScroll(bunny);
+      animateFollowMouse(bunny);
+      renderer.render(scene, camera);
     });
 
     return () => {};
   }, []);
 
   return (
-    <div className="h-full w-full flex justify-center items-start">
-      <canvas className="w-[400px] h-[200px]" ref={canvasRef} id="cup" />
-    </div>
+    <Draggable bounds={{ top: 0, bottom: 200 }}>
+      <div className="h-full w-full flex justify-center items-start">
+        <canvas className="w-[400px] h-[200px]" ref={canvasRef} id="cup" />
+      </div>
+    </Draggable>
   );
 };
 
