@@ -8,14 +8,16 @@ import {
   HistorySVG,
   HomeFillSVG,
   SearchSVG,
-  StarFullSVG
+  StarFullSVG,
+  UserSVG
 } from '../../svg/HomeNavBarSVG';
 
 export const NavigationItems = [
   { name: 'Fancy', icon: <StarFullSVG /> },
-  { name: 'Home', icon: <HomeFillSVG /> },
   { name: 'Search', icon: <SearchSVG /> },
-  { name: 'History', icon: <HistorySVG /> }
+  { name: 'Home', icon: <HomeFillSVG /> },
+  { name: 'History', icon: <HistorySVG /> },
+  { name: 'Setting', icon: <UserSVG /> }
 ];
 
 const HomeNavBar = () => {

@@ -26,11 +26,6 @@ const Footer = () => {
             고객센터
           </Link>
         </li>
-        <li className="mx-5 mb-5 sm:mb-0">
-          <Link href={'setting'} className="hover:underline">
-            설정
-          </Link>
-        </li>
         <li className="mx-5 sm:mb-0">
           <Link href="#" className="hover:underline">
             로그아웃
