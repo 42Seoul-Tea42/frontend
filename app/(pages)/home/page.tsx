@@ -5,9 +5,11 @@ import HeartSVG from '../../svg/HeartSVG';
 import UserDetailsModal from '../components/UserDetailsModal';
 import axiosInstance from '../../utils/axios';
 import FancyButton from '../fancy/components/FancyButton';
+import DirectionSVG from '../../svg/DirectionSVG';
 
 const Home: React.FC = () => {
   const [isTimePulse, setIsTimePulse] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const homeMessageAnimation = () => {
     setIsTimePulse(true);
@@ -43,7 +45,18 @@ const Home: React.FC = () => {
               <p className="font-normal text-gray-700 ml-2 mr-2">3km</p>
               <FancyButton targetId={1} />
             </div>
-            <UserDetailsModal />
+            <button
+              onClick={() => setIsModalOpen(!isModalOpen)}
+              className="flex border items-center gap-2"
+            >
+              <p>자세히 보기</p>
+              <DirectionSVG direction="down" size="4" />
+            </button>
+            <UserDetailsModal
+              targetId={1}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            />
           </div>
         </div>
       </div>

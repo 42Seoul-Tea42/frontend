@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import UserProfileCarousel from './UserProfileCarousel';
 import UserDetailsList from './UserDetailList';
-import DirectionSVG from '../../svg/DirectionSVG';
 import axiosInstance from '../../utils/axios';
 
-const UserDetailsModal: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+interface UserDetailsModalProps {
+  targetId: number;
+  isModalOpen: boolean;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
+
+const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
+  targetId,
+  isModalOpen,
+  setIsModalOpen
+}) => {
   const modalRef = React.createRef<HTMLDivElement>();
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -30,6 +38,13 @@ const UserDetailsModal: React.FC = () => {
     alert('신고되었습니다.');
   };
 
+  const getUserProfileDetails = async () => {
+    // const response = await axiosInstance.get('/user/profileDetail', {
+    // target_id: int
+    // });
+    // console.log(response.data);
+  };
+
   useEffect(() => {
     if (isModalOpen) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -39,15 +54,12 @@ const UserDetailsModal: React.FC = () => {
     };
   }, [isModalOpen]);
 
+  useEffect(() => {
+    getUserProfileDetails();
+  }, []);
+
   return (
     <>
-      <button
-        onClick={() => setIsModalOpen(!isModalOpen)}
-        className="flex border items-center gap-2"
-      >
-        <p>자세히 보기</p>
-        <DirectionSVG direction="down" size="4" />
-      </button>
       {isModalOpen && (
         <div
           id="default-modal"

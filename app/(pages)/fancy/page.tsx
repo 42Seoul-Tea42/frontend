@@ -3,9 +3,13 @@ import Image from 'next/image';
 import HeartSVG from '../../svg/HeartSVG';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
 import FancyButton from './components/FancyButton';
+import UserDetailsModal from '../components/UserDetailsModal';
+import { useState } from 'react';
 
 const Fancy = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // 여기에 이미지 데이터를 정의합니다.
+
   const images = [
     { src: '1.jpg', alt: '1' },
     { src: '2.jpg', alt: '2' },
@@ -24,7 +28,7 @@ const Fancy = () => {
               <div>
                 <button
                   type="button"
-                  // onClick={}
+                  onClick={() => setIsModalOpen(!isModalOpen)}
                   key={index}
                   className="relative w-48 h-48 rounded-t-lg border border-b-0 hover:brightness-50 hover:shadow"
                 >
@@ -47,6 +51,7 @@ const Fancy = () => {
             </Draggable>
           ))}
         </div>
+        <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
     </div>
   );
