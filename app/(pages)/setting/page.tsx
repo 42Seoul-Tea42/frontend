@@ -1,15 +1,16 @@
 'use client';
 import { useState } from 'react';
-import TagSelector from '../../auth/signup/components/TagSelector';
-import DirectionSVG from '../../svg/DirectionSVG';
-import GenderRadioList from '../../auth/signup/components/GenderRadioList';
-import EmojiGridList from '../../auth/login/components/EmojiGridList';
-import SexualPreferenceRadioList from '../../auth/signup/components/SexualPreferenceRadioList';
-import DateOfBirthForm from '../../auth/signup/components/DateOfBirthForm';
-import ImageUploadForm from '../../auth/signup/components/ImageUploadForm';
-import UserNameForm from '../../auth/signup/components/UserNameForm';
-import PasswordForm from '../../auth/signup/components/PasswordForm';
+
 import GeoLocationButton from '../home/components/GeolocationButton';
+import UserNameForm from '../../(auth)/signup/components/UserNameForm';
+import DateOfBirthForm from '../../(auth)/signup/components/DateOfBirthForm';
+import PasswordForm from '../../(auth)/signup/components/PasswordForm';
+import GenderRadioList from '../../(auth)/signup/components/GenderRadioList';
+import SexualPreferenceRadioList from '../../(auth)/signup/components/SexualPreferenceRadioList';
+import TagSelector from '../../(auth)/signup/components/TagSelector';
+import EmojiGridList from '../../(auth)/login/components/EmojiGridList';
+import ImageUploadForm from '../../(auth)/signup/components/ImageUploadForm';
+import DirectionSVG from '../../svg/DirectionSVG';
 
 const Setting: React.FC = () => {
   const accordionItems = {

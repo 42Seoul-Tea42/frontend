@@ -20,6 +20,7 @@ const SendMessageForm = () => {
           maxLength={ChatType.MAX_LENGTH}
           className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-400 focus:border-blue-400 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400"
           placeholder={`Your message... (.../${ChatType.MAX_LENGTH})`}
+          style={{ resize: 'none' }}
         ></textarea>
         <button
           type="button"

@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 const LearnMorePage: React.FC = () => {
   const router = useRouter();
   const handleStart = () => {
-    router.push('/auth/login');
+    router.push('/login');
   };
 
   return (

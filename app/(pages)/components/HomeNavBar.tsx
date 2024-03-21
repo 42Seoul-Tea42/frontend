@@ -7,13 +7,11 @@ import {
   HamburgerSVG,
   HistorySVG,
   HomeFillSVG,
-  MessageSVG,
   SearchSVG,
   StarFullSVG
 } from '../../svg/HomeNavBarSVG';
 
 export const NavigationItems = [
-  { name: 'Chat', icon: <MessageSVG /> },
   { name: 'Fancy', icon: <StarFullSVG /> },
   { name: 'Home', icon: <HomeFillSVG /> },
   { name: 'Search', icon: <SearchSVG /> },

@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import MessageItem from './MessageItem';
-import Image from 'next/image';
-import ChattingRoomList from './ChattingRoomList';
 
 const ViewMessageForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,33 +36,19 @@ const ViewMessageForm = () => {
   };
 
   return (
-    <div className="relative flex-col border border-b-0 rounded-t-xl">
-      <div className="relative flex items-end border-b p-4 ">
-        <Image
-          className="w-8 h-8 rounded-full"
-          src={'/장원영.jpeg'}
-          width={500}
-          height={700}
-          alt="User image"
-        />
-        {/* status */}
-        <span className="bg-green-500 absolute left-3 bottom-3 w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full"></span>
-        <p className="text-xl ml-5 font-semibold text-gray-800 dark:text-white">{'name'}</p>
-      </div>
-      <div
-        className="max-h-[400px] min-w-96 overflow-hidden hover:overflow-y-scroll"
-        ref={containerRef}
-        onScroll={loadPreviousMessages}
-      >
-        {messages.map((message, index) => (
-          <div key={index}>
-            <MessageItem message={message} time="1010" me={false} />
-          </div>
-        ))}
-        {!hasMoreMessages && (
-          <div className="text-center text-gray-500 mt-2">더 이상 메시지가 없습니다.</div>
-        )}
-      </div>
+    <div
+      className="max-h-[400px] min-w-96 overflow-hidden hover:overflow-y-scroll"
+      ref={containerRef}
+      onScroll={loadPreviousMessages}
+    >
+      {messages.map((message, index) => (
+        <div key={index}>
+          <MessageItem message={message} time="1010" me={false} />
+        </div>
+      ))}
+      {!hasMoreMessages && (
+        <div className="text-center text-gray-500 mt-2">더 이상 메시지가 없습니다.</div>
+      )}
     </div>
   );
 };
