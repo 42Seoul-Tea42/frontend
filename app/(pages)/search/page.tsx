@@ -2,13 +2,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import TagSelector from '../../auth/signup/components/TagSelector';
 import InputRangeStarBar from './components/InputRangeStarBar';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
 import { SearchSVG } from '../../svg/HomeNavBarSVG';
 import SearchResultTable from './components/SearchResultTable';
 import DirectionSVG from '../../svg/DirectionSVG';
+import TagSelector from '../../(auth)/signup/components/TagSelector';
 
 const Search: React.FC = () => {
   const minAge = useSelector((state: RootState) => state.searchParam.minAge);

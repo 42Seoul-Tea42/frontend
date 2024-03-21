@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import HeartSVG from '../../svg/HeartSVG';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
+import FancyButton from './components/FancyButton';
 
 const Fancy = () => {
   // 여기에 이미지 데이터를 정의합니다.
@@ -39,7 +40,7 @@ const Fancy = () => {
                   <div className="flex items-end gap-4">
                     <p className="font-semibold text-2xl text-gray-700">name</p>
                     <p className="font-normal text-gray-700">3km</p>
-                    <HeartSVG color="pink" />
+                    <FancyButton targetId={1} />
                   </div>
                 </div>
               </div>

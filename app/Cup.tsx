@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import Draggable from 'react-draggable';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
@@ -89,11 +88,9 @@ const Cup: React.FC = () => {
   }, []);
 
   return (
-    <Draggable bounds={{ top: 0, bottom: 200 }}>
-      <div className="h-full w-full flex justify-center items-start">
-        <canvas className="w-[400px] h-[200px]" ref={canvasRef} id="cup" />
-      </div>
-    </Draggable>
+    <div className="h-full w-full flex justify-center items-start">
+      <canvas className="w-[400px] h-[200px]" ref={canvasRef} id="cup" />
+    </div>
   );
 };
 

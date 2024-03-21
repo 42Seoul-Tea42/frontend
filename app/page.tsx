@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Cup from './Cup';
 import LearnMorePage from './LearnMorePage';
+import DirectionSVG from './svg/DirectionSVG';
 
 const LandingPage: React.FC = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const LandingPage: React.FC = () => {
   };
 
   const pushLoginPage = () => {
-    router.push('auth/login');
+    router.push('/login');
   };
 
   return (
@@ -34,22 +35,8 @@ const LandingPage: React.FC = () => {
                   className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900"
                   onClick={pushLoginPage}
                 >
-                  Get started
-                  <svg
-                    className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M1 5h12m0 0L9 1m4 4L9 9"
-                    />
-                  </svg>
+                  <p className="mr-2">Get Started</p>
+                  <DirectionSVG direction="right" size="4" />
                 </button>
                 <button
                   type="button"

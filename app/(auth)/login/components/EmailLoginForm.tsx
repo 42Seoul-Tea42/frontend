@@ -11,17 +11,18 @@ const EmailLoginForm: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const clickSubmit = async () => {
-    const result = await axiosInstance.post('/user/login', {
-      login_id: id,
-      pw: password
-    });
-    if (result && result.status === 200) {
-      router.push('/home');
-    }
+    // const result = await axiosInstance.post('/user/login', {
+    //   login_id: id,
+    //   pw: password
+    // });
+    // if (result && result.status === 200) {
+    //   router.push('/home');
+    // }
+    router.push('/home');
   };
 
   const findPassword = () => {
-    router.push('/auth/user/reset-password');
+    router.push('/user/reset-password');
   };
 
   return (

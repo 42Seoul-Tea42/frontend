@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 import UserProfileCarousel from './UserProfileCarousel';
 import UserDetailsList from './UserDetailList';
 import DirectionSVG from '../../svg/DirectionSVG';
+import axiosInstance from '../../utils/axios';
 
 const UserDetailsModal: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const modalRef = React.createRef<HTMLDivElement>();
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -17,11 +14,26 @@ const UserDetailsModal: React.FC = () => {
     }
   };
 
+  const blockUser = async () => {
+    //  const response = await axiosInstance.post('/user/block', {
+    // target_id: int
+    //  })
+    alert('차단되었습니다.');
+  };
+
+  const reportUser = async () => {
+    // const response = await axiosInstance.post('/user/report', {
+    // target_id: int
+    // reason: int (Enum)
+    // reason_opt: str
+    // });
+    alert('신고되었습니다.');
+  };
+
   useEffect(() => {
     if (isModalOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -29,7 +41,10 @@ const UserDetailsModal: React.FC = () => {
 
   return (
     <>
-      <button onClick={toggleModal} className="flex border items-center gap-2">
+      <button
+        onClick={() => setIsModalOpen(!isModalOpen)}
+        className="flex border items-center gap-2"
+      >
         <p>자세히 보기</p>
         <DirectionSVG direction="down" size="4" />
       </button>
@@ -46,11 +61,11 @@ const UserDetailsModal: React.FC = () => {
               <div>
                 <UserDetailsList />
                 <div className="flex justify-center text-gray-400 mt-10">
-                  <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
+                  <p onClick={blockUser} className="hover:text-blue-600 hover:underline">
                     차단
                   </p>
                   <p className="ml-2 mr-2"> / </p>
-                  <p onClick={toggleModal} className="hover:text-blue-600 hover:underline">
+                  <p onClick={reportUser} className="hover:text-blue-600 hover:underline">
                     신고
                   </p>
                 </div>

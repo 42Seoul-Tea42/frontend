@@ -34,18 +34,13 @@ const ImageConverter: React.FC = () => {
     setOriginalPosition({ x: 0, y: 0 });
   };
 
-  const handleNextImage = () => {
+  const dispatchNextImage = () => {
     dispatch(setCurrentUserIndex(currentUserIndex + 1));
     setIsNext(false);
   };
 
-  const handlePrevImage = () => {
+  const dispatchPrevImage = () => {
     dispatch(setCurrentUserIndex(currentUserIndex - 1));
-    setIsPrev(false);
-  };
-
-  const handleFancy = () => {
-    //
     setIsPrev(false);
   };
 
@@ -74,8 +69,8 @@ const ImageConverter: React.FC = () => {
 
   // 드래그 트리거
   useEffect(() => {
-    if (isNext && !isDragging) handleNextImage();
-    if (isPrev && !isDragging) handlePrevImage();
+    if (isNext && !isDragging) dispatchNextImage();
+    if (isPrev && !isDragging) dispatchPrevImage();
   }, [isDragging]);
 
   useEffect(() => {

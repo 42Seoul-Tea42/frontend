@@ -3,14 +3,21 @@ import { useEffect, useState } from 'react';
 import ImageConverter from './components/ImageConverter';
 import HeartSVG from '../../svg/HeartSVG';
 import UserDetailsModal from '../components/UserDetailsModal';
+import axiosInstance from '../../utils/axios';
+import FancyButton from '../fancy/components/FancyButton';
 
 const Home: React.FC = () => {
   const [isTimePulse, setIsTimePulse] = useState<boolean>(false);
-  useEffect(() => {
+
+  const homeMessageAnimation = () => {
     setIsTimePulse(true);
     setTimeout(() => {
       setIsTimePulse(false);
     }, 4000);
+  };
+
+  useEffect(() => {
+    homeMessageAnimation();
   }, []);
 
   return (
@@ -33,10 +40,8 @@ const Home: React.FC = () => {
           >
             <div className="flex items-end">
               <p className="font-semibold text-3xl text-gray-700">옴팡이</p>
-              <p className="font-normal text-gray-700 ml-2">3km</p>
-              <button onClick={() => {}} className="ml-2">
-                <HeartSVG color="pink" />
-              </button>
+              <p className="font-normal text-gray-700 ml-2 mr-2">3km</p>
+              <FancyButton targetId={1} />
             </div>
             <UserDetailsModal />
           </div>
