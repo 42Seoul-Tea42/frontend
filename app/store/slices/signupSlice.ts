@@ -8,7 +8,7 @@ export enum Reaction {
 
 interface SignupState {
   profileImage: string;
-  dateOfBirth: any;
+  dateOfBirth: string;
   firstname: string;
   lastname: string;
   email: string;
@@ -38,7 +38,7 @@ const initialState: SignupState = {
   sexualPreference: '',
   introduction: '',
   selectedTags: [],
-  dateOfBirth: undefined,
+  dateOfBirth: new Date().toISOString(),
   selectedReactions: Array.from({ length: 16 }, () => Reaction.None)
 };
 

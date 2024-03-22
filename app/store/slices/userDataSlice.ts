@@ -7,7 +7,7 @@ interface UserData {
   // user
   id: number;
   name: string;
-  birthday: Date;
+  birthday: string;
   //signup step
   emailCheck: boolean;
   profileCheck: boolean;
@@ -21,7 +21,7 @@ const initialState: UserData = {
 
   id: 0,
   name: '',
-  birthday: new Date(),
+  birthday: new Date().toISOString(),
 
   emailCheck: false,
   profileCheck: false,

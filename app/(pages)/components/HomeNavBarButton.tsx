@@ -10,7 +10,7 @@ const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ buttonName, icon, h
   return (
     <div className="text-gray-500 hover:text-red-400">
       <button type="button" onClick={handleClick} className="flex gap-2">
-        {icon}
+        <div className="">{icon}</div>
         <h2>{buttonName}</h2>
       </button>
     </div>
