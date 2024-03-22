@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export enum AgeLimit {
   MIN = 18,
@@ -25,19 +25,19 @@ const searchPageSlice = createSlice({
   name: 'searchPageSlice',
   initialState,
   reducers: {
-    setMinAge: (state: { minAge: number; maxAge: number }, actions: { payload: number }) => {
+    setMinAge: (state: { minAge: number }, actions: PayloadAction<number>) => {
       state.minAge = actions.payload;
     },
 
-    setMaxAge: (state: { minAge: number; maxAge: number }, actions: { payload: number }) => {
+    setMaxAge: (state: { maxAge: number }, actions: PayloadAction<number>) => {
       state.maxAge = actions.payload;
     },
 
-    setDistance: (state: { distance: number }, actions: { payload: number }) => {
+    setDistance: (state: { distance: number }, actions: PayloadAction<number>) => {
       state.distance = actions.payload;
     },
 
-    setStarCount: (state: { fame: number }, actions: { payload: number }) => {
+    setStarCount: (state: { fame: number }, actions: PayloadAction<number>) => {
       state.fame = actions.payload;
     }
   }

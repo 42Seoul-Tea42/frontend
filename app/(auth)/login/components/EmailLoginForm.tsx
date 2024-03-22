@@ -1,23 +1,28 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import axiosInstance from '../../../utils/axios';
+import { setUserData } from '../../../store/slices/userDataSlice';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { setCookie } from '../../../utils/cookie';
 
 const EmailLoginForm: React.FC = () => {
-  const router = useRouter();
-
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const clickSubmit = async () => {
-    // const result = await axiosInstance.post('/user/login', {
+    // const response = await axiosInstance.post('/user/login', {
     //   login_id: id,
     //   pw: password
     // });
-    // if (result && result.status === 200) {
-    //   router.push('/home');
+    // if (response && response.status === 200) {
+    //   dispatch(setUserData(response.data));
+    //   setCookie('token', response.data.token);
     // }
+    setCookie('token', 'test');
     router.push('/home');
   };
 
