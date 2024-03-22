@@ -1,7 +1,7 @@
 'use client';
 
 import { useSelector } from 'react-redux';
-import GeoLocationButton from '../../../(pages)/home/components/GeolocationButton';
+import GeoLocationButton from '../../../utils/location';
 import DateOfBirthForm from './DateOfBirthForm';
 import EmailInputForm from './EmailInputForm';
 import PasswordForm from './PasswordForm';

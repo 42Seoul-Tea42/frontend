@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import GeoLocationButton from '../home/components/GeolocationButton';
+import GeoLocationButton from '../../utils/location';
 import UserNameForm from '../../(auth)/signup/components/UserNameForm';
 import DateOfBirthForm from '../../(auth)/signup/components/DateOfBirthForm';
 import PasswordForm from '../../(auth)/signup/components/PasswordForm';

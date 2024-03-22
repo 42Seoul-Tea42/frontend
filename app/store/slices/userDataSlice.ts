@@ -15,9 +15,9 @@ interface UserData {
   oauth: boolean;
 }
 
-const initialState: UserData = {
-  token: '',
-  refresh: '',
+const initialState = {
+  token: 'asdfasdf',
+  refresh: 'asdfasdf',
 
   id: 0,
   name: '',

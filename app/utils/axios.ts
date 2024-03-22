@@ -14,8 +14,18 @@ const axiosInstance = axios.create({
 // Axios 요청 전에 실행되는 인터셉터 추가
 axiosInstance.interceptors.request.use(
   config => {
+    //jwt 토큰추가
     const token = getCookie('token');
-    if (token) config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    // 유저 위치정보 추가
+    const userLocation = localStorage.getItem('userLocation');
+    if (userLocation) {
+      const { latitude, longitude } = JSON.parse(userLocation);
+      config.headers['x-user-location'] = `${latitude},${longitude}`;
+    }
 
     return config;
   },

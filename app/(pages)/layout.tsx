@@ -1,15 +1,18 @@
 'use client';
 
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import Footer from './components/Footer';
-import HomeNavBar from './components/HomeNavBar';
 import store from '../store/store';
 import Chat from './(chat)/Chat';
 import { MessageSVG } from '../svg/HomeNavBarSVG';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import HomeNavBar from './components/HomeNavBar'; // Import the HomeNavBar component
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   const [viewChat, setViewChat] = useState<boolean>(false);
+
+  useEffect(() => {}, []);
+
   return (
     <Provider store={store}>
       <HomeNavBar />

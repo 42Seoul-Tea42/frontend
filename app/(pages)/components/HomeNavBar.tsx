@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import HomeNavBarButton from './HomeNavBarButton';
 import {
   HamburgerSVG,
@@ -11,18 +11,20 @@ import {
   StarFullSVG,
   UserSVG
 } from '../../svg/HomeNavBarSVG';
+import getGeoLocation from '../../utils/location';
 
-export const NavigationItems = [
-  { name: 'Fancy', icon: <StarFullSVG /> },
-  { name: 'Search', icon: <SearchSVG /> },
-  { name: 'Home', icon: <HomeFillSVG /> },
-  { name: 'History', icon: <HistorySVG /> },
-  { name: 'Setting', icon: <UserSVG /> }
-];
-
-const HomeNavBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const HomeNavBar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isPageMoved, setIsPageMoved] = useState<boolean>(false);
   const router = useRouter();
+
+  const NavigationItems = [
+    { name: 'Fancy', icon: <StarFullSVG /> },
+    { name: 'Search', icon: <SearchSVG /> },
+    { name: 'Home', icon: <HomeFillSVG /> },
+    { name: 'History', icon: <HistorySVG /> },
+    { name: 'Setting', icon: <UserSVG /> }
+  ];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -31,7 +33,21 @@ const HomeNavBar = () => {
   const pushPathPage = (path: string) => {
     router.push(path);
     setIsMenuOpen(false);
+    setIsPageMoved(!isPageMoved);
   };
+
+  const getUserLocation = async () => {
+    try {
+      const { latitude, longitude } = await getGeoLocation();
+      localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+    } catch (error) {
+      console.table(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserLocation();
+  }, [isPageMoved]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-gray-200 dark:bg-gray-900">

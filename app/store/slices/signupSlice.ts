@@ -20,8 +20,6 @@ interface SignupState {
   introduction: string;
   selectedTags: number[];
   selectedReactions: Reaction[];
-  latitude: number;
-  longitude: number;
 }
 
 const initialState: SignupState = {
@@ -32,8 +30,6 @@ const initialState: SignupState = {
   id: '',
   password: '',
   birthDate: '',
-  latitude: 0,
-  longitude: 0,
   gender: '',
   sexualPreference: '',
   introduction: '',
@@ -69,14 +65,6 @@ const signupSlice = createSlice({
     setPassword: (state: SignupState, action: { payload: string }) => {
       state.password = action.payload;
       console.table(state.password);
-    },
-    setLatitude: (state: SignupState, action: { payload: number }) => {
-      state.latitude = action.payload;
-      console.table(state.latitude);
-    },
-    setLongitude: (state: SignupState, action: { payload: number }) => {
-      state.longitude = action.payload;
-      console.table(state.longitude);
     },
     setBirthDate: (state: SignupState, action: { payload: string }) => {
       state.birthDate = action.payload;
@@ -129,8 +117,6 @@ export const {
   setId,
   setPassword,
   setBirthDate,
-  setLatitude,
-  setLongitude,
   setGender,
   setSexualPreference,
   setIntrodution,
