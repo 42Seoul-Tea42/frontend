@@ -7,6 +7,7 @@ import Chat from './(chat)/Chat';
 import { MessageSVG } from '../svg/HomeNavBarSVG';
 import { useEffect, useState } from 'react';
 import HomeNavBar from './components/HomeNavBar'; // Import the HomeNavBar component
+import { SocketProvider } from '../utils/socketContext';
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   const [viewChat, setViewChat] = useState<boolean>(false);
@@ -15,6 +16,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Provider store={store}>
+      <SocketProvider>
       <HomeNavBar />
       <main>
         <div className={viewChat ? '' : 'hidden'}>
@@ -30,6 +32,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       <Footer />
+      </SocketProvider>
     </Provider>
   );
 };
