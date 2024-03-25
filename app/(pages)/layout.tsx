@@ -2,7 +2,7 @@
 
 import { Provider, useDispatch } from 'react-redux';
 import Footer from './components/Footer';
-import store from '../store/store';
+import store from '../redux/store';
 import Chat from './(chat)/Chat';
 import { MessageSVG } from '../svg/HomeNavBarSVG';
 import { useEffect, useState } from 'react';

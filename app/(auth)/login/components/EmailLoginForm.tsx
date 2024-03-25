@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import axiosInstance from '../../../utils/axios';
-import { setUserData } from '../../../store/slices/userDataSlice';
+import { setUserData } from '../../../redux/slices/userDataSlice';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { setCookie } from '../../../utils/cookie';
@@ -22,7 +22,7 @@ const EmailLoginForm: React.FC = () => {
     //   dispatch(setUserData(response.data));
     //   setCookie('token', response.data.token);
     // }
-    setCookie('token', 'test');
+    setCookie('access_token', 'testvalue');
     router.push('/home');
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { setMaxAge, setMinAge } from '../../../store/slices/searchParamSlice';
+import { RootState } from '../../../redux/store';
+import { setMaxAge, setMinAge } from '../../../redux/slices/searchParamSlice';
 
 const InputMinMaxAge: React.FC = () => {
   const dispatch = useDispatch();

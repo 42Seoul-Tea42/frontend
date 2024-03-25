@@ -6,7 +6,7 @@ import DateOfBirthForm from './DateOfBirthForm';
 import EmailInputForm from './EmailInputForm';
 import PasswordForm from './PasswordForm';
 import UserNameForm from './UserNameForm';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../redux/store';
 import axiosInstance from '../../../utils/axios';
 
 interface AccountInfoFormProps {

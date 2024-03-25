@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageUploadForm from './ImageUploadForm';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../redux/store';
 
 interface ProfileUploadFormProps {
   onNextStep: () => void;

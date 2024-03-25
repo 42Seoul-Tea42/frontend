@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setId, setPassword } from '../../../store/slices/signupSlice';
+import { setId, setPassword } from '../../../redux/slices/signupSlice';
 import axiosInstance from '../../../utils/axios';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../redux/store';
 
 const PasswordForm: React.FC = () => {
   const dispatch = useDispatch();

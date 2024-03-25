@@ -2,13 +2,13 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../redux/store';
 import {
   ProfileDto,
   setCurrentUserIndex,
   setPicture,
   setProfiles
-} from '../../../store/slices/suggestProfileSlice';
+} from '../../../redux/slices/suggestProfileSlice';
 
 const ImageConverter: React.FC = () => {
   const dispatch = useDispatch();

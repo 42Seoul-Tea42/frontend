@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setIntrodution } from '../../../store/slices/signupSlice';
+import { setIntrodution } from '../../../redux/slices/signupSlice';
 
 const IntroductionForm: React.FC = () => {
   const dispatch = useDispatch();

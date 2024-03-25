@@ -2,8 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface UserData {
   // jwt
-  token: string;
-  refresh: string;
+  accessToken: string;
+  refreshToken: string;
   // user
   id: number;
   name: string;
@@ -16,8 +16,8 @@ interface UserData {
 }
 
 const initialState = {
-  token: 'asdfasdf',
-  refresh: 'asdfasdf',
+  accessToken: 'asdfasdf',
+  refreshToken: 'asdfasdf',
 
   id: 0,
   name: '',
@@ -34,8 +34,8 @@ const userDataSlice = createSlice({
   initialState,
   reducers: {
     setUserData: (state: UserData, action: PayloadAction<UserData>) => {
-      state.token = action.payload.token;
-      state.refresh = action.payload.refresh;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
       state.id = action.payload.id;
       state.name = action.payload.name;
       state.birthday = action.payload.birthday;

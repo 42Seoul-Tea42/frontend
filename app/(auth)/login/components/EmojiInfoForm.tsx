@@ -1,7 +1,7 @@
 'use client';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../redux/store';
 import EmojiGridList from './EmojiGridList';
 import { useRouter } from 'next/navigation';
 

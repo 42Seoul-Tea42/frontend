@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { setFirstname, setLastname } from '../../../store/slices/signupSlice';
+import { RootState } from '../../../redux/store';
+import { setFirstname, setLastname } from '../../../redux/slices/signupSlice';
 
 const UserNameForm: React.FC = () => {
   const dispatch = useDispatch();

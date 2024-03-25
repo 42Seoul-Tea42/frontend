@@ -5,7 +5,7 @@ import SexualPreferenceRadioList from './SexualPreferenceRadioList';
 import IntroductionForm from './IntroductionForm';
 import TagSelector from './TagSelector';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../redux/store';
 
 interface ProfileInfoFormProps {
   onNextStep: () => void;

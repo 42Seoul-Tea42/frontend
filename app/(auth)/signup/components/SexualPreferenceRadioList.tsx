@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setSexualPreference } from '../../../store/slices/signupSlice';
+import { setSexualPreference } from '../../../redux/slices/signupSlice';
 
 const SexualPreferenceRadioList = () => {
   const dispatch = useDispatch();

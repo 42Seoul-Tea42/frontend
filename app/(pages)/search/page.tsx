@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { RootState } from '../../redux/store';
 import InputRangeStarBar from './components/InputRangeStarBar';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';

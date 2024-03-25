@@ -1,7 +1,7 @@
 'use client';
 
 import { Provider } from 'react-redux';
-import store from '../store/store';
+import store from '../redux/store';
 import { CookiesProvider } from 'react-cookie';
 
 const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

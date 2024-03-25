@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { setEmail } from '../../../store/slices/signupSlice';
+import { RootState } from '../../../redux/store';
+import { setEmail } from '../../../redux/slices/signupSlice';
 import axiosInstance from '../../../utils/axios';
 
 const EmailInputForm: React.FC = () => {
