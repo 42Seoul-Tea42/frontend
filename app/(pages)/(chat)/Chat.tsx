@@ -10,11 +10,13 @@ import Image from 'next/image';
 const Chat: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   useEffect(() => {
-    // const ws = new WebSocket(SERVER_URL || '');
-    // ws.onopen = () => {};
-    // ws.onclose = () => {};
+    // const webSocket = new WebSocket(SERVER_URL || '');
+    // webSocket.onopen = () => {};
+    // webSocket.onmessage = (event) => {};
+    // webSocket.onerror = (error) => {};
+    // webSocket.onclose = () => {};
     // return () => {
-    //   ws.close();
+    //   webSocket.close();
     // };
   }, []);
 
