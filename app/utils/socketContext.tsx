@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { Events, createSocketOption, registerSocketEvent, unRegisterSocketEvent } from './socket';
 import { SERVER_URL } from '../../global';
-import { getCookie } from './cookie';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 // SocketContext 생성
 const SocketContext = createContext<Socket | undefined>(undefined);
@@ -13,49 +14,47 @@ export const useSocket = () => {
   return socket;
 };
 
-export const SocketProvider = ({ children }: { children: React.ReactNode}) => {
+export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const [socket, setSocket] = useState<Socket>();
-  
-  useEffect(() => {
-    const accessToken = getCookie('access_token')
-    if (!accessToken) return;
-    const serverUrl = SERVER_URL;
-    if (!serverUrl) return ;
+  const accessToken = useSelector((state: RootState) => state.userData.accessToken);
+  const serverUrl = SERVER_URL || '';
 
+  useEffect(() => {
     const socketInstance = createSocketOption(serverUrl, accessToken);
 
     socketInstance.on('connect', () => {
-      if (socketInstance.connected)
-        setSocket(socketInstance); 
-    })
+      if (socketInstance.connected) setSocket(socketInstance);
+    });
 
     socketInstance.connect();
 
     return () => {
-      socketInstance.disconnect
-    }
+      socketInstance.disconnect;
+    };
   }, []);
 
+  // 소켓 이벤트 등록
   useEffect(() => {
     if (!socket) return;
 
-   const events: Events[] = [
-    {
-      event: 'test',
-      handler: () => {}
-    }, 
-   ]  
+    const events: Events[] = [
+      // { event: 'new_match', handler: '' },
+      // { event: 'new_fancy', handler: '' },
+      // { event: 'new_history', handler: '' },
+      // { event: 'send_message', handler: '' },
+      // { event: 'read_message', handler: '' },
+      // { event: 'update_distance', handler: '' },
+      // { event: 'update_status', handler: '' },
+      // { event: 'unmatch', handler: '' },
+      // { event: 'unregister', handler: '' }
+    ];
 
     registerSocketEvent(socket, events);
 
-   return () => {
+    return () => {
       unRegisterSocketEvent(socket, events);
-   }
+    };
   }, [socket]);
 
-  return (
-    <SocketContext.Provider value={socket}>
-      {children}
-    </SocketContext.Provider>
-  );
+  return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 };
