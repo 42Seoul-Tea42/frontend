@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { SERVER_URL } from '../../global';
-import { getCookie } from './cookie';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
@@ -15,10 +14,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   config => {
     //jwt 토큰추가
-    const token = getCookie('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    // const token = getCookie('token');
+    // if (token) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
 
     // 유저 위치정보 추가
     const userLocation = localStorage.getItem('userLocation');
