@@ -1,37 +1,30 @@
 'use client';
 
-import { Provider, useDispatch } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer';
-import store from '../redux/store';
+import store, { RootState } from '../redux/store';
 import Chat from './(chat)/Chat';
 import { MessageSVG } from '../svg/HomeNavBarSVG';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import HomeNavBar from './components/HomeNavBar'; // Import the HomeNavBar component
 import { SocketProvider } from '../utils/socketContext';
+import ChatButton from './(chat)/ChatButton';
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   const [viewChat, setViewChat] = useState<boolean>(false);
 
-  useEffect(() => {}, []);
-
   return (
     <Provider store={store}>
       <SocketProvider>
-      <HomeNavBar />
-      <main>
-        <div className={viewChat ? '' : 'hidden'}>
-          <Chat />
-        </div>
-        <button
-          onClick={() => setViewChat(!viewChat)}
-          className="flex flex-col bg-gray-200 hover:bg-gray-400 text-red-400 items-center justify-center rounded-full w-20 h-20 fixed bottom-10 right-10 shadow-md"
-        >
-          <MessageSVG />
-          <p className="font-bold">Chat</p>
-        </button>
-        {children}
-      </main>
-      <Footer />
+        <HomeNavBar />
+        <main>
+          <div className={viewChat ? '' : 'hidden'}>
+            <Chat />
+          </div>
+          <ChatButton viewChat={viewChat} setViewChat={setViewChat} />
+          {children}
+        </main>
+        <Footer />
       </SocketProvider>
     </Provider>
   );
