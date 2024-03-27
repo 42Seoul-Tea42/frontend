@@ -1,20 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
-import axiosInstance from '../../../../utils/axios';
+import axiosInstance from '../../utils/axios';
 
-const page: React.FC = () => {
+interface SettingPasswordProps {
+  token: string;
+}
+
+const SettingPassword: React.FC<SettingPasswordProps> = ({ token }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const param = useParams<{ key: string }>();
 
   const handleSettingPassword = async () => {
     if (password !== confirmPassword) {
       return;
     }
 
-    const response = await axiosInstance.post(`/user/resetPw/${param.key}`, {
+    const response = await axiosInstance.post(`/user/resetPw/${token}`, {
       password: password
     });
     if (response && response.status === 200) {
@@ -76,4 +78,4 @@ const page: React.FC = () => {
   );
 };
 
-export default page;
+export default SettingPassword;

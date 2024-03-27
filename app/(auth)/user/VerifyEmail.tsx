@@ -1,15 +1,17 @@
 'use client';
 
-import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import axiosInstance from '../../../../utils/axios';
+import axiosInstance from '../../utils/axios';
 
-const VerifyEmail: React.FC = () => {
+interface VerifyEmailProps {
+  token: string;
+}
+
+const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
   const [id, setId] = useState<string>('');
-  const param = useParams<{ key: string }>();
 
   const sendVerifyEmail = async () => {
-    const result = await axiosInstance.get(`/user/registerEmail/${param.key}`);
+    const result = await axiosInstance.get(`/user/registerEmail/${token}`);
     if (result && result.status === 200) {
       alert('이메일이 성공적으로 전송되었습니다.');
     } else {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import axiosInstance from '../../../utils/axios';
+import axiosInstance from '../../utils/axios';
 
 const ResetPassword: React.FC = () => {
   const [id, setId] = useState('');
