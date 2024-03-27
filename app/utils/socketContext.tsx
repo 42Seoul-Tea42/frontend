@@ -2,18 +2,9 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { Events, createSocketOption, registerSocketEvent, unRegisterSocketEvent } from './socket';
 import { SERVER_URL } from '../../global';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import {
-  newFancy,
-  newHistory,
-  newMatch,
-  readMessage,
-  sendMessage,
-  unMatch,
-  updateDistance,
-  updateStatus
-} from './socketEventHandler';
+import { setChatNoti, setFancyNoti, setHistoryNoti } from '../redux/slices/socketEventSlice';
 
 // SocketContext 생성
 const SocketContext = createContext<Socket | undefined>(undefined);
@@ -25,6 +16,7 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
+  const dispatch = useDispatch();
   const [socket, setSocket] = useState<Socket>();
   const accessToken = useSelector((state: RootState) => state.userData.accessToken);
   const serverUrl = SERVER_URL || '';
@@ -48,15 +40,30 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     if (!socket) return;
 
     const events: Events[] = [
-      { event: 'new_match', handler: newMatch },
-      { event: 'new_fancy', handler: newFancy },
-      { event: 'new_history', handler: newHistory },
-      { event: 'send_message', handler: sendMessage },
-      { event: 'read_message', handler: readMessage },
-      { event: 'update_distance', handler: updateDistance },
-      { event: 'update_status', handler: updateStatus },
-      { event: 'unmatch', handler: unMatch },
-      { event: 'unregister', handler: unRegister }
+      {
+        event: 'new_match',
+        handler: () => {
+          dispatch(setChatNoti(true));
+        }
+      },
+      {
+        event: 'new_fancy',
+        handler: () => {
+          dispatch(setFancyNoti(true));
+        }
+      },
+      {
+        event: 'new_history',
+        handler: () => {
+          dispatch(setHistoryNoti(true));
+        }
+      },
+      { event: 'send_message', handler: () => {} },
+      { event: 'read_message', handler: () => {} },
+      { event: 'update_distance', handler: () => {} },
+      { event: 'update_status', handler: () => {} },
+      { event: 'unmatch', handler: () => {} },
+      { event: 'unregister', handler: () => {} }
     ];
 
     registerSocketEvent(socket, events);
@@ -68,6 +75,3 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 };
-function unRegister(data: any): void {
-  throw new Error('Function not implemented.');
-}
