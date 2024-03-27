@@ -18,12 +18,15 @@ const socketEventSlice = createSlice({
   reducers: {
     setChatNoti: (state: SocketEvent, action: PayloadAction<boolean>) => {
       state.chatNoti = action.payload;
+      console.log(state.chatNoti);
     },
     setFancyNoti: (state: SocketEvent, action: PayloadAction<boolean>) => {
-      state.chatNoti = action.payload;
+      state.fancyNoti = action.payload;
+      console.log(state.fancyNoti);
     },
     setHistoryNoti: (state: SocketEvent, action: PayloadAction<boolean>) => {
-      state.chatNoti = action.payload;
+      state.historyNoti = action.payload;
+      console.log(state.historyNoti);
     }
   }
 });
