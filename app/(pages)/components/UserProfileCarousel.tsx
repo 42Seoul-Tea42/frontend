@@ -32,10 +32,11 @@ const UserProfileCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => 
             } absolute w-full h-full`}
           >
             <Image
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               src={image}
               className="object-cover w-full h-full"
               alt={`Slide ${index}`}
-              layout="fill"
             />
           </div>
         ))}
