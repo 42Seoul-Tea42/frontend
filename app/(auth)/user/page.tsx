@@ -19,7 +19,6 @@ const UserPage = () => {
 
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
-  const key = searchParams.get('key');
 
   const selectPage = (value: number) => {
     switch (value) {

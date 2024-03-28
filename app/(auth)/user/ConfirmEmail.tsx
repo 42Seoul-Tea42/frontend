@@ -13,8 +13,6 @@ const ConfirmEmail: React.FC = () => {
       const response = await axiosInstance.get(`/user/registerEmail/${token}`);
       if (response && response.status === 200) {
         alert('이메일이 성공적으로 인증되었습니다.');
-      } else {
-        alert('유효하지 않습니다. 다시 시도해주세요.');
       }
     } catch (e) {
       alert('유효하지 않습니다. 다시 시도해주세요.');
