@@ -2,14 +2,9 @@
 
 import { Provider } from 'react-redux';
 import store from '../redux/store';
-import { CookiesProvider } from 'react-cookie';
 
 const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <CookiesProvider>
-      <Provider store={store}>{children}</Provider>
-    </CookiesProvider>
-  );
+  return <Provider store={store}>{children}</Provider>;
 };
 
 export default AuthLayout;

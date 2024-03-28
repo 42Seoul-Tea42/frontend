@@ -3,6 +3,8 @@ import { RootState } from '../../../redux/store';
 import { setEmail } from '../../../redux/slices/signupSlice';
 import axiosInstance from '../../../utils/axios';
 
+// 이메일 존재여부 중복체크
+// 이메일 신규/재등록 메일 요청
 const EmailInputForm: React.FC = () => {
   const dispatch = useDispatch();
   const email = useSelector((state: RootState) => state.signup.email);
@@ -12,7 +14,31 @@ const EmailInputForm: React.FC = () => {
   };
 
   const checkDuplicateEmail = async () => {
-    await axiosInstance.post('/user/checkEmail', { email: email });
+    try {
+      await axiosInstance.get('/user/checkEmail');
+    } catch (error) {
+      throw new Error('중복된 이메일입니다.');
+    }
+  };
+
+  const registerVeirfyEmail = async () => {
+    try {
+      const response = await axiosInstance.post('/user/changeEmail', { email: email });
+      if (response && response.status === 200) {
+        alert('이메일을 확인해주세요.');
+      }
+    } catch (error) {
+      throw new Error('이메일 전송 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  const verify = async () => {
+    try {
+      await checkDuplicateEmail();
+      await registerVeirfyEmail();
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
@@ -35,10 +61,10 @@ const EmailInputForm: React.FC = () => {
       </label>
       <button
         type="button"
-        className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={checkDuplicateEmail}
+        className="text-white max-w-24 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        onClick={verify}
       >
-        check
+        인증하기
       </button>
     </div>
   );

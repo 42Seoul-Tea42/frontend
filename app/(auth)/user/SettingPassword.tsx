@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import axiosInstance from '../../utils/axios';
+import { useSearchParams } from 'next/navigation';
 
-interface SettingPasswordProps {
-  token: string;
-}
-
-const SettingPassword: React.FC<SettingPasswordProps> = ({ token }) => {
+const SettingPassword: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const searchParams = useSearchParams();
+  const token = searchParams.get('key');
 
   const handleSettingPassword = async () => {
     if (password !== confirmPassword) {
