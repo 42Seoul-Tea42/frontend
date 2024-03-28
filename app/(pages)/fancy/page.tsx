@@ -33,9 +33,10 @@ const Fancy = () => {
                   className="relative w-48 h-48 rounded-t-lg border border-b-0 hover:brightness-50 hover:shadow"
                 >
                   <Image
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     src={`/emoji/${image.src}`}
                     alt={`Preview ${image.alt}`}
-                    layout="fill"
                     className="rounded-lg object-cover"
                     draggable="false"
                   />
