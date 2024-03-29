@@ -22,26 +22,26 @@ const Fancy = () => {
   return (
     <div className="flex flex-wrap justify-center h-screen">
       <div className="mx-auto m-60">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-          {images.map((image, index) => (
-            <Draggable>
-              <div>
+        <div className="border bg-gray-500 p-10 rounded-lg overflow-hidden hover:overflow-y-scroll">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            {images.map((image, index) => (
+              <div className="shadow-xl rounded-b-lg">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(!isModalOpen)}
                   key={index}
-                  className="relative w-48 h-48 rounded-t-lg border border-b-0 hover:brightness-50 hover:shadow"
+                  className="relative w-48 h-48 rounded-t-lg border-2 border-b-0"
                 >
                   <Image
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     src={`/emoji/${image.src}`}
                     alt={`Preview ${image.alt}`}
-                    className="rounded-lg object-cover"
+                    className="rounded-t-lg object-cover hover:brightness-75"
                     draggable="false"
                   />
                 </button>
-                <div className="w-48 h-12 rounded-b-lg border p-1 pl-2">
+                <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
                   <div className="flex items-end gap-4">
                     <p className="font-semibold text-2xl text-gray-700">name</p>
                     <p className="font-normal text-gray-700">3km</p>
@@ -49,8 +49,8 @@ const Fancy = () => {
                   </div>
                 </div>
               </div>
-            </Draggable>
-          ))}
+            ))}
+          </div>
         </div>
         <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
