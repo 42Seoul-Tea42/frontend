@@ -16,7 +16,6 @@ interface FancyHistoryProps {
 const FancyHistory: React.FC<FancyHistoryProps> = Data => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const profiles = useSelector((state: RootState) => state.profileService.profiles);
-  // 여기에 이미지 데이터를 정의합니다.
 
   const images = [
     { src: '1.jpg', alt: '1' },

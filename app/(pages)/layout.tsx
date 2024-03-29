@@ -15,9 +15,9 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
           <HomeNavBar />
           <Chat />
           <main>{children}</main>
+          <Footer />
         </SocketProvider>
       </Provider>
-      <Footer />
     </div>
   );
 };

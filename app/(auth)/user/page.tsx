@@ -7,7 +7,7 @@ import SettingPassword from './SettingPassword';
 import ConfirmEmail from './ConfirmEmail';
 import VerifyEmail from './VerifyEmail';
 
-export enum PageType {
+enum UserFormType {
   VERIFY_EMAIL = 0,
   RESET_PASSWORD = 1,
   SETTING_PASSWORD = 2,
@@ -22,16 +22,16 @@ const UserPage = () => {
 
   const selectPage = (value: number) => {
     switch (value) {
-      case PageType.VERIFY_EMAIL:
+      case UserFormType.VERIFY_EMAIL:
         setViewPage(<VerifyEmail />);
         break;
-      case PageType.RESET_PASSWORD:
+      case UserFormType.RESET_PASSWORD:
         setViewPage(<ResetPassword />);
         break;
-      case PageType.SETTING_PASSWORD:
+      case UserFormType.SETTING_PASSWORD:
         setViewPage(<SettingPassword />);
         break;
-      case PageType.CONFIRM_EMAIL:
+      case UserFormType.CONFIRM_EMAIL:
         setViewPage(<ConfirmEmail />);
         break;
     }

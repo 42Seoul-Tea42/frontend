@@ -47,7 +47,7 @@ const Chat: React.FC = () => {
                   height={700}
                   alt="User image"
                 />
-                <span className="bg-green-500 absolute bottom-0 w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                <span className="animate bg-green-500 absolute bottom-0 w-4 h-4 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </div>
               <p className="grow text-xl ml-5 font-semibold text-gray-800 dark:text-white">
                 {'name'}
