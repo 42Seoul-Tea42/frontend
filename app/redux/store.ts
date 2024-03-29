@@ -4,6 +4,7 @@ import signupSlice from './slices/signupSlice';
 import suggestProfileSlice from './slices/suggestProfileSlice';
 import userDataSlice from './slices/userDataSlice';
 import socketEventSlice from './slices/socketEventSlice';
+import profileServiceSlice from './slices/profileServiceSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     signup: signupSlice,
     suggestProfile: suggestProfileSlice,
     userData: userDataSlice,
-    socketEvent: socketEventSlice
+    socketEvent: socketEventSlice,
+    profileService: profileServiceSlice
   }
 });
 
