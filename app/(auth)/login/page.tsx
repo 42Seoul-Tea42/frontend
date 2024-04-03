@@ -33,13 +33,18 @@ const LoginPage: React.FC = () => {
           </>
         ) : (
           <>
-            <button
-              onClick={toggleLoginView}
-              className="absolute top-1/2 left-5 w-4 h-4 hover:text-gray-400"
-            >
-              <DirectionSVG direction="left" size="5" />
-            </button>
             <div className="mt-10 mb-10">
+              <button
+                onClick={toggleLoginView}
+                className="absolute flex top-1 left-1 w-4 h-4 text-blue-700 hover:underline"
+              >
+                <div className="flex items-start">
+                  <div className="mt-1 mr-1">
+                    <DirectionSVG direction="left" size="3" />
+                  </div>
+                  <p className="text-light text-sm whitespace-nowrap size-0"> all sign option</p>
+                </div>
+              </button>
               <EmailLoginForm />
             </div>
           </>

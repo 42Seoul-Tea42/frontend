@@ -6,7 +6,6 @@ import UserDetailsModal from '../components/UserDetailsModal';
 import axiosInstance from '../../utils/axios';
 import FancyButton from '../fancy/components/FancyButton';
 import DirectionSVG from '../../svg/DirectionSVG';
-import { useCookies } from 'react-cookie';
 
 const Home: React.FC = () => {
   const [isTimePulse, setIsTimePulse] = useState<boolean>(false);
