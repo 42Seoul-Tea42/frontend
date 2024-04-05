@@ -2,7 +2,6 @@
 
 <details>
 <summary> 문서 규약 </summary>
-
 UML의 일종인 mermaid를 사용하여 프로젝트의 구조를 설명합니다.
 
 - rule1: 최종구현체는 -Slice의 형태로 끝납니다.
@@ -14,9 +13,20 @@ UML의 일종인 mermaid를 사용하여 프로젝트의 구조를 설명합니�
 </details>
 
 <details>
-<summary> slice의 구분 기준 </summary>
+<summary> 요구사항 </summary>
 
-> 공통의 인터페이스를 정의한 후 필요한 데이터값에 따라서 특수화
+### 발생한 문제
+
+1. 중복되는 의미를 가진 데이터를 여러 서비스에서 사용해야해서 의미가 모호한 상황입니다.
+2. 특정 페이지(서비스)에서 잘못된 데이터를 참조하는 문제가 있습니다.
+3. 민감한 정보와 공개정보가 구분되어있지 않아서 보안에 취약한 상태입니다.
+
+### 설계방식으로 해결하기
+
+1. 정보의 접근 권한과 데이터의 의미를 고려하여 인터페이스를 분리합니다.
+2. 인터페이스 조합을 사용해서 새로운 인터페이스를 생성하고 서비스별로 필요한 데이터를 제공합니다.
+
+리듀서의 구분 기준
 
 - 동기 데이터 (회원가입 입력, 검색옵션 등)
 - 비동기 데이터 (api, socket)
@@ -24,157 +34,213 @@ UML의 일종인 mermaid를 사용하여 프로젝트의 구조를 설명합니�
 
 </details>
 
-## 서비스 별 리듀서 인터페이스, 슬라이스 구조
+## 인터페이스 계층
 
-- 인터페이스 `I-`
-- 슬라이스 `S-`
-- 상속관계 `--|>`
-- 인스턴스 `..|>`
-- 동기 상태 `S`
-- 비동기 상태 `A`
+다루는 데이터를 정보의 민감성에 따라 3단계로 구분해서 명시합니다.
+
+- Public : 모든 사용자가 접근가능한 정보
+- Sensitive : 조회기록이 남는 정보
+- Private : 사용자 본인만 접근가능한 정보
 
 ```mermaid
-
 classDiagram
 
-I-User --|> I-UserFancy
+direction LR
 
-I-Location --|> I-UserDetailAccount
-I-User --|> I-UserDetail
-I-User --|> I-UserChatting : api
-I-Message --|> I-UserChatting : socket
-I-UserDetail --|> I-UserDetailAccount
+namespace User-Interface {
+    class Identity {
+        <<Public>>
+        id: string
+        firstname: string
+        lastname: string
+    }
 
-I-UserFancy ..|> S-fancySlice : Fancy Service
-I-UserFancy ..|> S-homeSlice : Suggestion Service
-I-UserFancy ..|> S-historySlice : History Service
-I-UserChatting ..|> S-chattingSlice: Chatting Service
-I-UserDetailAccount ..|> S-accountSlice : Account Service
+    class AgeGender {
+        <<Public>>
+        age: number
+        gender: string
+    }
 
-I-UserDetail ..|> S-profileInquirySlice : Profile Inquiry Service
-I-SearchParams ..|> S-searchSlice : Search Service
-I-UserDetail ..|> S-searchSlice
+    class Account {
+        <<Private>>
+        email: string
+        password: string
+    }
 
+    class Authentication {
+        <<Private>>
+        accessToken: string
+        refreshToken: string
+    }
 
-class I-User {
-   A id: string
-   A name: string
-   A age: number
-   A distance: number
-   A gender: string
-   A picture: string
+    class Profile {
+        <<Sensitive>>
+        pictures: string[]
+        interests: Interests[]
+        rating: number
+        sexualPreference: string
+        introduction: string
+    }
+
+    class UserRelation {
+        <<Public>>
+        fancy: boolean
+        distance: number
+    }
 }
 
-class I-UserFancy {
-   A fancy: boolean
+namespace Util-Interface {
+    class Message {
+        <<Sensitive>>
+        id: string
+        name: string
+        time: string
+    }
+
+    class Chatting {
+        <<Sensitive>>
+        messages: Message[]
+        connect: boolean
+        noti: boolean
+    }
+
+    class Location {
+        <<Private>>
+        latitude: number
+        longitude: number
+    }
+
+    class SearchParams {
+        <<Public>>
+        ageRange: number[]
+        distance: number
+        fame: number
+        interests: Interests[]
+    }
+
+    class RegisterSteps {
+        <<Private>>
+        emailCheck: boolean
+        profileCheck: boolean
+        emojiCheck: boolean
+    }
 }
 
-class I-Message {
-    A id: string
-    A name: string
-    A time: string
-}
-
-class I-UserChatting {
-    A user: User
-    A messages: Message[]
-    A connect: boolean
-    S noti: boolean
-}
-
-class I-UserDetail {
-   A subPicture: string[]
-   A tag: Tag[]
-   A rating: number
-   A taste: string
-}
-
-class I-Location {
-    A latitude: number
-    A longitude: number
-}
-
-class I-UserDetailAccount {
-    A location: Location
-    A email: string
-    A token: string
-    A refreshToken: string
-}
-
-class I-SearchParams {
-    S ageRange: number[]
-    S distance: number
-    S fame: number
-    S tag: Tag[]
-}
-
-class S-homeSlice {
-    A users: UserFancy[]
-}
-
-class S-fancySlice {
-    A users: UserFancy[]
-    S noti: boolean
-}
-
-class S-historySlice {
-    A users: UserFancy[]
-    S noti: boolean
-}
-
-class S-chattingSlice {
-    A users: UserChatting[]
-}
-
-class S-profileInquirySlice {
-    A user: UserDetail
-    S block: boolean
-    S report: boolean
-    S reason: string
-}
-
-class S-accountSlice {
-    A user: UserDetailAccount
-}
-
-class S-searchSlice {
-    A users: UserDetail[]
-    S searchParams: SearchParams
-}
 
 ```
 
-## 회원가입 & 최초 접속
+## 서비스 계층
 
-- DB, api사양에 의존적으로 구현
+- 하위 인터페이스의 집합을 통해 추상화된 유저의 데이터를 정의합니다.
+- 해당 집합의 등급보다 높은 보안등급을 가진 하위 인터페이스는 조합할 수 없습니다.
 
 ```mermaid
-
 classDiagram
 
-I-UserSignup ..|> S-signupSlice
-I-RegisterSteps ..|> S-loginSlice
+direction TB
 
-class I-UserSignup {
-    s email: string
-    s id: string
-    s password: string
-    s firstname: string
-    s lastname: string
+namespace Interface-Set {
+
+    class PublicSet {
+        <<Public>>
+        Identity
+        AgeGender
+        UserRelation
+    }
+
+    class ChattingSet {
+        <<Sensitive>>
+        Identity
+        UserRelation
+        AgeGender
+        Chatting
+    }
+
+    class AccountSet {
+        <<Private>>
+        Identity
+        Account
+        Authentication
+        AgeGender
+        Profile
+        Location
+    }
+
+    class ProfileInquirySet {
+        <<Sensitive>>
+        Identity
+        Profile
+        UserRelation
+        AgeGender
+    }
+
+    class SignupSet {
+        <<Private>>
+        Identity
+        Account
+    }
+
+    class LoginSet {
+        <<Private>>
+        Identity
+        Profile
+        Authentication
+        Account
+        RegisterSteps
+    }
 }
 
-class I-RegisterSteps {
-    A emailCheck: boolean
-    A profileCheck: boolean
-    A emojiCheck: boolean
-}
+PublicSet ..|> homeSlice : Suggestion Service
+PublicSet ..|> historySlice : History Service
+PublicSet ..|> fancySlice : Fancy Service
+ChattingSet ..|> chattingSlice : Chatting Service
+AccountSet ..|> accountSlice : Account Service
+ProfileInquirySet ..|> profileInquirySlice : Profile Inquiry Service
+ProfileInquirySet ..|> searchSlice : Search Service
+SignupSet ..|> signupSlice : Signup Service
+LoginSet ..|> loginSlice : Signup Service
 
-class S-signupSlice {
-    S user: UserSignup
-}
+namespace Reducer {
 
-class S-loginSlice {
-    A steps: RegisterSteps
-}
+    class homeSlice {
+        users: PublicSet[]
+    }
 
+    class fancySlice {
+        users: PublicSet[]
+        noti: boolean
+    }
+
+    class historySlice {
+        users: PublicSet[]
+        noti: boolean
+    }
+
+    class chattingSlice {
+        users: ChattingSet[]
+    }
+
+    class profileInquirySlice {
+        user: ProfileInquirySet
+        block: boolean
+        report: boolean
+        reason: string
+    }
+
+    class accountSlice {
+        account: AccountSet
+    }
+
+    class searchSlice {
+        users: UserProfile[]
+        searchParams: SearchParams
+    }
+
+    class signupSlice {
+    }
+
+    class loginSlice {
+        steps: RegisterSteps
+    }
+}
 ```
