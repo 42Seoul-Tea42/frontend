@@ -1,47 +1,7 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import ResetPassword from './ResetPassword';
-import SettingPassword from './SettingPassword';
-import ConfirmEmail from './ConfirmEmail';
-import VerifyEmail from './VerifyEmail';
-
-enum UserFormType {
-  VERIFY_EMAIL = 0,
-  RESET_PASSWORD = 1,
-  SETTING_PASSWORD = 2,
-  CONFIRM_EMAIL = 3
+const Page = () => {
+  return <div>Page</div>
 }
 
-const UserPage = () => {
-  const [viewPage, setViewPage] = useState<JSX.Element | null>(null);
-
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page');
-
-  const selectPage = (value: number) => {
-    switch (value) {
-      case UserFormType.VERIFY_EMAIL:
-        setViewPage(<VerifyEmail />);
-        break;
-      case UserFormType.RESET_PASSWORD:
-        setViewPage(<ResetPassword />);
-        break;
-      case UserFormType.SETTING_PASSWORD:
-        setViewPage(<SettingPassword />);
-        break;
-      case UserFormType.CONFIRM_EMAIL:
-        setViewPage(<ConfirmEmail />);
-        break;
-    }
-  };
-
-  useEffect(() => {
-    selectPage(parseInt(page ?? ''));
-  }, []);
-
-  return <div className="flex items-center justify-center w-full h-screen">{viewPage}</div>;
-};
-
-export default UserPage;
+export default Page

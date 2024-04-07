@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import axiosInstance from '../../utils/axios';
 import { useSearchParams } from 'next/navigation';
 
@@ -28,35 +28,37 @@ const SettingPassword: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="mb-5">
-        <input
-          type="password"
-          id="password"
-          className="block py-2.5 w-full text-sm text-gray-900"
-          placeholder="비밀번호를 입력해주세요."
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
+    <Suspense fallback={<div>Loading...</div>}>
+      <div>
+        <div className="mb-5">
+          <input
+            type="password"
+            id="password"
+            className="block py-2.5 w-full text-sm text-gray-900"
+            placeholder="비밀번호를 입력해주세요."
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-5">
+          <input
+            type="password"
+            id="confirm password"
+            className="block py-2.5 w-full text-sm text-gray-900"
+            placeholder="비밀번호를 다시 입력해주세요."
+            required
+            onChange={e => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        <button
+          type="button"
+          onClick={handleSettingPassword}
+          className="text-white mt-5 bg-gray-700 hover:bg-black-800 focus:ring-4 focus:outline-none focus:ring-black-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-black-600 dark:hover:bg-black-700 dark:focus:ring-black-800"
+        >
+          submit
+        </button>
       </div>
-      <div className="mb-5">
-        <input
-          type="password"
-          id="confirm password"
-          className="block py-2.5 w-full text-sm text-gray-900"
-          placeholder="비밀번호를 다시 입력해주세요."
-          required
-          onChange={e => setConfirmPassword(e.target.value)}
-        />
-      </div>
-      <button
-        type="button"
-        onClick={handleSettingPassword}
-        className="text-white mt-5 bg-gray-700 hover:bg-black-800 focus:ring-4 focus:outline-none focus:ring-black-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-black-600 dark:hover:bg-black-700 dark:focus:ring-black-800"
-      >
-        submit
-      </button>
-    </div>
+    </Suspense>
   );
 };
 
