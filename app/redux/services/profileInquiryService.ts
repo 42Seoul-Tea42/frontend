@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserProfileInquirySet, UserReportSet } from '../interface';
+import { UserProfileInquirySet } from '../interface';
 
 interface ProfileInquiryState {
   user: UserProfileInquirySet;

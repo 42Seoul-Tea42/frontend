@@ -74,15 +74,16 @@ namespace User-Interface {
 
     class Profile {
         <<Sensitive>>
-        pictures: string[]
+        photos: string[]
         interests: Interests[]
         rating: number
         sexualPreference: string
         introduction: string
     }
 
-    class UserRelation {
+    class Another {
         <<Public>>
+        photo: string
         fancy: boolean
         distance: number
     }
@@ -143,13 +144,13 @@ namespace Interface-Set {
         <<Public>>
         Identity
         AgeGender
-        UserRelation
+        Another
     }
 
     class UserChattingSet {
         <<Sensitive>>
         Identity
-        UserRelation
+        Another
         AgeGender
         Chatting
     }
@@ -168,7 +169,7 @@ namespace Interface-Set {
         <<Sensitive>>
         Identity
         Profile
-        UserRelation
+        Another
         AgeGender
     }
 
