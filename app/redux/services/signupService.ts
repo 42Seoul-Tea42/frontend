@@ -1,14 +1,20 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserPublicSet } from '../interface';
+import { UserSignupSet } from '../interface';
 
 interface SignupState {
-  users: UserPublicSet[];
+  user: UserSignupSet;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: SignupState = {
-  users: [],
+  user: {
+    id: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: ''
+  },
   loading: false,
   error: null
 };
@@ -30,8 +36,8 @@ const signupSlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserPublicSet[]>) => {
-      state.users = [...state.users, ...action.payload];
+    builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserSignupSet>) => {
+      state.user = action.payload;
     });
     builder.addCase(asyncUpdate.rejected, (state, action) => {
       state.loading = false;

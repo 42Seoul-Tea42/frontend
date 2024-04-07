@@ -1,8 +1,7 @@
 # 프로젝트 사양
 
 <details>
-<summary> 문서 규약 </summary>
-UML의 일종인 mermaid를 사용하여 프로젝트의 구조를 설명합니다.
+<summary> 문서 규약 </summary> UML의 일종인 mermaid를 사용하여 프로젝트의 구조를 설명합니다.
 
 - rule1: 최종구현체는 -Slice의 형태로 끝납니다.
 - rule2: 인터페이스는 리듀서들의 인스턴스 타입을 정의합니다.
@@ -36,7 +35,7 @@ UML의 일종인 mermaid를 사용하여 프로젝트의 구조를 설명합니�
 
 ## 인터페이스 계층
 
-다루는 데이터를 정보의 민감성에 따라 3단계로 구분해서 명시합니다.
+다루는 유저 데이터를 정보의 민감성에 따라 3단계로 구분했습니다.
 
 - Public : 모든 사용자가 접근가능한 정보
 - Sensitive : 조회기록이 남는 정보
@@ -126,12 +125,11 @@ namespace Util-Interface {
     }
 }
 
-
 ```
 
 ## 서비스 계층
 
-- 하위 인터페이스의 집합을 통해 추상화된 유저의 데이터를 정의합니다.
+- 하위 인터페이스의 집합을 통해 추상화된 유저데이터의 형태를 정의합니다.
 - 해당 집합의 등급보다 높은 보안등급을 가진 하위 인터페이스는 조합할 수 없습니다.
 
 ```mermaid
@@ -141,14 +139,14 @@ direction TB
 
 namespace Interface-Set {
 
-    class PublicSet {
+    class UserPublicSet {
         <<Public>>
         Identity
         AgeGender
         UserRelation
     }
 
-    class ChattingSet {
+    class UserChattingSet {
         <<Sensitive>>
         Identity
         UserRelation
@@ -156,7 +154,7 @@ namespace Interface-Set {
         Chatting
     }
 
-    class AccountSet {
+    class UserAccountSet {
         <<Private>>
         Identity
         Account
@@ -166,7 +164,7 @@ namespace Interface-Set {
         Location
     }
 
-    class ProfileInquirySet {
+    class UserProfileInquirySet {
         <<Sensitive>>
         Identity
         Profile
@@ -174,13 +172,13 @@ namespace Interface-Set {
         AgeGender
     }
 
-    class SignupSet {
+    class UserSignupSet {
         <<Private>>
         Identity
         Account
     }
 
-    class LoginSet {
+    class UserLoginSet {
         <<Private>>
         Identity
         Profile
@@ -190,30 +188,28 @@ namespace Interface-Set {
     }
 }
 
-PublicSet ..|> homeSlice : Suggestion Service
-PublicSet ..|> historySlice : History Service
-PublicSet ..|> fancySlice : Fancy Service
-ChattingSet ..|> chattingSlice : Chatting Service
-AccountSet ..|> accountSlice : Account Service
-ProfileInquirySet ..|> profileInquirySlice : Profile Inquiry Service
-ProfileInquirySet ..|> searchSlice : Search Service
-SignupSet ..|> signupSlice : Signup Service
-LoginSet ..|> loginSlice : Signup Service
+UserPublicSet ..|> suggestionSlice : Suggestion Service
+UserPublicSet ..|> historySlice : History Service
+UserPublicSet ..|> fancySlice : Fancy Service
+UserChattingSet ..|> chattingSlice : Chatting Service
+UserAccountSet ..|> accountSlice : Account Service
+UserProfileInquirySet ..|> profileInquirySlice : Profile Inquiry Service
+UserProfileInquirySet ..|> searchSlice : Search Service
+UserSignupSet ..|> signupSlice : Signup Service
+UserLoginSet ..|> loginSlice : Login Service
 
 namespace Reducer {
 
-    class homeSlice {
+    class suggestionSlice {
         users: PublicSet[]
     }
 
     class fancySlice {
         users: PublicSet[]
-        noti: boolean
     }
 
     class historySlice {
         users: PublicSet[]
-        noti: boolean
     }
 
     class chattingSlice {
@@ -222,25 +218,24 @@ namespace Reducer {
 
     class profileInquirySlice {
         user: ProfileInquirySet
-        block: boolean
-        report: boolean
-        reason: string
+        reportUser: UserReportSet
     }
 
     class accountSlice {
-        account: AccountSet
+        user: AccountSet
     }
 
     class searchSlice {
         users: UserProfile[]
-        searchParams: SearchParams
     }
 
     class signupSlice {
+        user: SignupSet
     }
 
     class loginSlice {
-        steps: RegisterSteps
+        user: LoginSet
     }
 }
+
 ```

@@ -10,11 +10,6 @@ export interface Chatting {
   noti: boolean;
 }
 
-export interface Location {
-  latitude: number;
-  longitude: number;
-}
-
 export enum Interests {
   SPORTS = 1 << 0,
   TRAVEL = 1 << 1,

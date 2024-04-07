@@ -33,3 +33,8 @@ export interface UserRelation {
   fancy: boolean;
   distance: number;
 }
+
+export interface Position {
+  latitude: number;
+  longitude: number;
+}
