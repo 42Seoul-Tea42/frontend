@@ -1,15 +1,3 @@
-interface User {
-  picture: string;
-  name: string;
-  age: number;
-  distance: number;
-  gender: string;
-}
-
-export interface UserFancy extends User {
-  fancy: boolean;
-}
-
 export enum Tag {
   SPORTS = 1 << 0,
   TRAVEL = 1 << 1,
@@ -24,28 +12,4 @@ export enum Tag {
   ART = 1 << 10,
   SMOKE = 1 << 11,
   DRINK = 1 << 12
-}
-
-export interface UserDetail extends User {
-  subPicture: string[];
-  tag: Tag;
-  rating: number;
-  taste: string;
-}
-
-interface Message {
-  id: number;
-  content: string;
-  time: string;
-}
-
-export interface UserChatting {
-  message: Message[];
-  connect: boolean;
-}
-
-export interface UserDetailAuth extends UserDetail {
-  password: string;
-  email: string;
-  token: string;
 }
