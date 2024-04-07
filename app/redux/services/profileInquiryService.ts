@@ -12,6 +12,7 @@ const initialState: ProfileInquiryState = {
     id: '',
     firstname: '',
     lastname: '',
+    subPhotos: [],
     interests: [],
     rating: 0,
     sexualPreference: '',
@@ -20,7 +21,6 @@ const initialState: ProfileInquiryState = {
     distance: 0,
     age: 0,
     gender: '',
-    subPhotos: [],
     mainPhoto: ''
   },
   loading: false,
@@ -28,7 +28,7 @@ const initialState: ProfileInquiryState = {
 };
 
 export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () => {
-  const response = await fetch('https://api.example.com/data', {
+  const response = await axiosInstance('https://api.example.com/data', {
     method: 'POST'
     // body: JSON.stringify();
   });

@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserPublicSet } from '../interface';
+import axiosInstance from '../../utils/axios';
 
 interface suggestionState {
   users: UserPublicSet[];
@@ -13,8 +14,8 @@ const initialState: suggestionState = {
   error: null
 };
 
-export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () => {
-  const response = await fetch('https://api.example.com/data', {
+export const fetchSuggestionUsers = createAsyncThunk('suggestionSlice/fetchSuggestionUsers', async () => {
+  const response = await axiosInstance('https://api.example.com/data', {
     method: 'POST'
     // body: JSON.stringify();
   });
@@ -26,14 +27,14 @@ const suggestionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(asyncUpdate.pending, state => {
+    builder.addCase(fetchSuggestionUsers.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserPublicSet[]>) => {
+    builder.addCase(fetchSuggestionUsers.fulfilled, (state, action: PayloadAction<UserPublicSet[]>) => {
       state.users = [...state.users, ...action.payload];
     });
-    builder.addCase(asyncUpdate.rejected, (state, action) => {
+    builder.addCase(fetchSuggestionUsers.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

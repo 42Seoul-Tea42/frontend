@@ -20,7 +20,7 @@ const initialState: SignupState = {
 };
 
 export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () => {
-  const response = await fetch('https://api.example.com/data', {
+  const response = await axiosInstance('https://api.example.com/data', {
     method: 'POST'
     // body: JSON.stringify();
   });
