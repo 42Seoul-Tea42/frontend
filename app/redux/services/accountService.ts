@@ -18,13 +18,14 @@ const initialState: AccountState = {
     refreshToken: '',
     age: 0,
     gender: '',
-    pictures: [],
     interests: [],
     rating: 0,
     sexualPreference: '',
     introduction: '',
     latitude: 0,
-    longitude: 0
+    longitude: 0,
+    subPhotos: [],
+    mainPhoto: ''
   },
   loading: false,
   error: null

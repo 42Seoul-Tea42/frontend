@@ -22,15 +22,18 @@ export interface Authentication {
 }
 
 export interface Profile {
-  photos: string[];
+  subPhotos: string[];
   interests: Interests[];
   rating: number;
   sexualPreference: string;
   introduction: string;
 }
 
+export interface Photo {
+  mainPhoto: string;
+}
+
 export interface Another {
-  photo: string;
   fancy: boolean;
   distance: number;
 }

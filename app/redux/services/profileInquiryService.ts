@@ -12,7 +12,6 @@ const initialState: ProfileInquiryState = {
     id: '',
     firstname: '',
     lastname: '',
-    pictures: [],
     interests: [],
     rating: 0,
     sexualPreference: '',
@@ -20,7 +19,9 @@ const initialState: ProfileInquiryState = {
     fancy: false,
     distance: 0,
     age: 0,
-    gender: ''
+    gender: '',
+    subPhotos: [],
+    mainPhoto: ''
   },
   loading: false,
   error: null
