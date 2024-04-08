@@ -9,7 +9,7 @@ import SexualPreferenceRadioList from '../../(auth)/signup/components/SexualPref
 import TagSelector from '../../(auth)/signup/components/TagSelector';
 import EmojiGridList from '../../(auth)/login/components/EmojiGridList';
 import ImageUploadForm from '../../(auth)/signup/components/ImageUploadForm';
-import DirectionSVG from '../../svg/DirectionSVG';
+import { DirectionSVG } from '../../svg';
 
 const Setting: React.FC = () => {
   const accordionItems = [
@@ -27,9 +27,7 @@ const Setting: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean[]>(initialState);
 
   const toggleAccordion = (index: number) => {
-    setIsOpen((prevState: boolean[]) =>
-      prevState.map((state, idx) => (idx === index ? !state : false))
-    );
+    setIsOpen((prevState: boolean[]) => prevState.map((state, idx) => (idx === index ? !state : false)));
   };
 
   return (

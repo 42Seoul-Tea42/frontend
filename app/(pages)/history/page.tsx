@@ -1,14 +1,13 @@
-'use clㅓient';
+'use client';
 
 import Image from 'next/image';
 import { Key, useEffect, useState } from 'react';
-import UserDetailsModal from '../../components/UserDetailsModal';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 import FancyButton from '../fancy/components';
 import { fetchHistoryUsers } from '../../redux/services/historyService';
 import { UserPublicSet } from '../../redux/interface';
+import { RootState } from '../../redux/store';
+import UserDetailsModal from '../components/UserDetailsModal';
 
 const History = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -16,7 +15,7 @@ const History = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchHistoryUsers(new Date()));
+    dispatch(fetchHistoryUsers(new Date()) as any);
   }, []);
 
   return (

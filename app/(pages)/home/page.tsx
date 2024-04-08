@@ -1,14 +1,14 @@
-'use clㅓient';
+'use client';
 
 import Image from 'next/image';
 import { Key, useEffect, useState } from 'react';
-import FancyButton from './FancyButton';
-import { useDispatch } from 'react-redux';
-import UserDetailsModal from '../../components/UserDetailsModal';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSuggestionUsers } from '../../redux/services/suggestionService';
 import { UserPublicSet } from '../../redux/interface';
+import FancyButton from '../fancy/components';
+import UserDetailsModal from '../components/UserDetailsModal';
+import { RootState } from '../../redux/store';
+import { ImageSkeletonSVG } from '../../svg';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -16,7 +16,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSuggestionUsers());
+    dispatch(fetchSuggestionUsers() as any);
   }, []);
 
   return (
@@ -33,32 +33,53 @@ const Home = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
-          {users.map((user: UserPublicSet, index: Key) => (
-            <div className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
-              <button
-                type="button"
-                onClick={() => setIsModalOpen(!isModalOpen)}
-                key={index}
-                className="relative w-48 h-48 rounded-t-xl"
-              >
-                <Image
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  src={`/emoji/${user.mainPhoto}`}
-                  alt={`Preview ${index}`}
-                  className="rounded-t-lg object-cover hover:brightness-75"
-                  draggable="false"
-                />
-              </button>
-              <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
-                <div className="flex items-end gap-4">
-                  <p className="font-semibold text-2xl text-gray-700">name</p>
-                  <p className="font-normal text-gray-700">3km</p>
-                  <FancyButton targetId={Number(user.id)} />
+          {users.length > 0
+            ? users.map((user: UserPublicSet, index: Key) => (
+                <div key={index} className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(!isModalOpen)}
+                    className="relative w-48 h-48 rounded-t-xl"
+                  >
+                    {user ? (
+                      <Image
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        src={`/emoji/${user.mainPhoto}`}
+                        alt={`Preview ${index}`}
+                        className="rounded-t-lg object-cover hover:brightness-75"
+                        draggable="false"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 animate-pulse" />
+                    )}
+                  </button>
+                  <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
+                    <div className="flex items-end gap-4">
+                      <p className="font-semibold text-2xl text-gray-700">{user ? user.name : 'Loading...'}</p>
+                      <p className="font-normal text-gray-700">{user ? '3km' : 'Loading...'}</p>
+                      {user ? (
+                        <FancyButton targetId={Number(user.id)} />
+                      ) : (
+                        <div className="w-20 h-8 bg-gray-200 animate-pulse" />
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ))
+            : Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
+                  <ImageSkeletonSVG />
+                  <div className="relative w-48 h-48 rounded-t-xl bg-gray-200 animate-pulse" />
+                  <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
+                    <div className="flex items-end gap-4">
+                      <p className="font-semibold text-2xl text-gray-700">Loading...</p>
+                      <p className="font-normal text-gray-700">Loading...</p>
+                      <div className="w-20 h-8 bg-gray-200 animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+              ))}
         </div>
         <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>

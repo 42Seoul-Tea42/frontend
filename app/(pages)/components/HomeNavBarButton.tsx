@@ -7,12 +7,7 @@ interface HomeNavBarButtonProps {
   handleClick?: () => void;
 }
 
-const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({
-  buttonName,
-  icon,
-  iconStyle,
-  handleClick
-}) => {
+const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ buttonName, icon, iconStyle, handleClick }) => {
   return (
     <div className="text-gray-500 hover:text-red-400">
       <button type="button" onClick={handleClick} className="flex gap-2">
@@ -24,14 +19,3 @@ const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({
 };
 
 export default HomeNavBarButton;
-
-// const selectIconStyle = (itemName: string) => {
-//   let iconStyle = '';
-//   if (itemName === 'Fancy' && !fancyNoti) {
-//     iconStyle = 'text-yellow-400 animate-pulse';
-//   }
-//   if (itemName === 'History' && !historyNoti) {
-//     iconStyle = 'text-green-400 animate-pulse';
-//   }
-//   return iconStyle;
-// };

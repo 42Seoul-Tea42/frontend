@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import DirectionSVG from '../../svg/DirectionSVG';
+import { DirectionSVG } from '../../svg';
 
 interface UserProfileCarouselProps {
   images: string[];
@@ -27,9 +27,7 @@ const UserProfileCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => 
         {images.map((image, index) => (
           <div
             key={index}
-            className={`duration-700 ease-in-out ${
-              index === activeIndex ? 'block' : 'hidden'
-            } absolute w-full h-full`}
+            className={`duration-700 ease-in-out ${index === activeIndex ? 'block' : 'hidden'} absolute w-full h-full`}
           >
             <Image
               fill

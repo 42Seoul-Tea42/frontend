@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import Cup from './Cup';
 import LearnMorePage from './LearnMorePage';
-import DirectionSVG from './svg/DirectionSVG';
 import { useEffect } from 'react';
+import { DirectionSVG } from './svg';
 
 const LandingPage: React.FC = () => {
   const router = useRouter();

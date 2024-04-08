@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import ChattingRoomListItem, { ChattingRoomListItemProps } from './ChattingRoomListItem';
-import DirectionSVG from '../../../svg/DirectionSVG';
 import React from 'react';
 interface ChattingRoomListProps {
   isModalOpen: boolean;

@@ -4,8 +4,8 @@ import GoogleLoginButton from './components/GoogleLoginButton';
 import KakaoLoginButton from './components/KakaoLoginButton';
 import EmailLoginButton from './components/EmailLoginButton';
 import CreateAccountButton from './components/CreateAccountButton';
-import DirectionSVG from '../../svg/DirectionSVG';
 import EmailLoginForm from './components/EmailLoginForm';
+import { DirectionSVG } from '../../svg';
 
 const LoginPage: React.FC = () => {
   const [emailFormView, setEmailFormView] = useState(false);

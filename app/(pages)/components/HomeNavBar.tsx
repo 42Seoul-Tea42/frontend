@@ -3,18 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import HomeNavBarButton from './HomeNavBarButton';
-import {
-  HamburgerSVG,
-  HistorySVG,
-  HomeFillSVG,
-  SearchSVG,
-  StarFullSVG,
-  UserSVG
-} from '../../svg/HomeNavBarSVG';
+
 import getGeoLocation from '../../utils/location';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFancyNoti, setHistoryNoti } from '../../redux/slices/socketEventSlice';
 import { RootState } from '../../redux/store';
+import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -89,10 +83,7 @@ const HomeNavBar: React.FC = () => {
           <span className="sr-only">Open main menu</span>
           <HamburgerSVG />
         </button>
-        <div
-          className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`}
-          id="navbar-default"
-        >
+        <div className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`} id="navbar-default">
           <ul className="flex flex-col p-4 gap-5 md:p-0 mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 text-xl">
             <li>
               <HomeNavBarButton
@@ -112,11 +103,7 @@ const HomeNavBar: React.FC = () => {
             </li>
             {NavigationItems.map((item, idx) => (
               <li key={idx} className="">
-                <HomeNavBarButton
-                  buttonName={item.name}
-                  icon={item.icon}
-                  handleClick={() => pushPathPage(item.name)}
-                />
+                <HomeNavBarButton buttonName={item.name} icon={item.icon} handleClick={() => pushPathPage(item.name)} />
               </li>
             ))}
           </ul>

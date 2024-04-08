@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import HeartSVG from '../../../svg/HeartSVG';
+import { HeartSVG } from '../../../svg';
 
 interface FancyButtonProps {
   targetId: number;

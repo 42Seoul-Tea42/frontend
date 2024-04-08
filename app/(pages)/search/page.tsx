@@ -5,10 +5,9 @@ import { RootState } from '../../redux/store';
 import InputRangeStarBar from './components/InputRangeStarBar';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
-import { SearchSVG } from '../../svg/HomeNavBarSVG';
 import SearchResultTable from './components/SearchResultTable';
-import DirectionSVG from '../../svg/DirectionSVG';
 import TagSelector from '../../(auth)/signup/components/TagSelector';
+import { DirectionSVG, SearchSVG } from '../../svg';
 
 const Search: React.FC = () => {
   const minAge = useSelector((state: RootState) => state.searchParam.minAge);
@@ -99,9 +98,7 @@ const Search: React.FC = () => {
               <div className="md:min-w-72 md:grid md:grid-cols-2">
                 {drawerItems.map((item, index) => (
                   <div key={index} className="p-4 border border-gray-200 dark:border-gray-700">
-                    <h3 className="text-lg mb-5 font-medium text-gray-800 dark:text-gray-200">
-                      {item.title}
-                    </h3>
+                    <h3 className="text-lg mb-5 font-medium text-gray-800 dark:text-gray-200">{item.title}</h3>
                     {item.content}
                   </div>
                 ))}

@@ -1,4 +1,4 @@
-import DirectionSVG from '../../../svg/DirectionSVG';
+import { DirectionSVG } from '../../../svg';
 
 const SendMessageForm = () => {
   enum SendMessage {

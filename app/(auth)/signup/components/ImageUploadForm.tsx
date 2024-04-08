@@ -2,10 +2,10 @@
 
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
-import CloudUploadSVG from '../../../svg/CloudUploadSVG';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { setProfileImage } from '../../../redux/slices/signupSlice';
+import { CloudUploadSVG } from '../../../svg';
 
 interface ImageUploadFormProps {
   width: number;
@@ -35,16 +35,8 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
     <>
       <label className="flex flex-col items-center justify-center border border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
         {previewImage ? (
-          <div
-            style={{ width: `${width}px`, height: `${height}px` }}
-            className="relative rounded-lg overflow-hidden"
-          >
-            <Image
-              src={previewImage}
-              alt="Preview"
-              layout="fill"
-              className="rounded-lg object-cover"
-            />
+          <div style={{ width: `${width}px`, height: `${height}px` }} className="relative rounded-lg overflow-hidden">
+            <Image src={previewImage} alt="Preview" layout="fill" className="rounded-lg object-cover" />
           </div>
         ) : (
           <div
@@ -59,12 +51,7 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
             <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG (max 5MB)</p>
           </div>
         )}
-        <input
-          type="file"
-          className="hidden"
-          accept=".jpg, .jpeg, .png"
-          onChange={dispatchSignupImage}
-        />
+        <input type="file" className="hidden" accept=".jpg, .jpeg, .png" onChange={dispatchSignupImage} />
       </label>
     </>
   );

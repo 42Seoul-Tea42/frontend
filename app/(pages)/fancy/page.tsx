@@ -1,13 +1,13 @@
 'use client';
+
 import Image from 'next/image';
-import { Key, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import FancyButton from './FancyButton';
-import UserDetailsModal from '../../components/UserDetailsModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UserPublicSet } from '../../redux/interface';
 import { fetchFancyUsers } from '../../redux/services/fancyService';
 import { RootState } from '../../redux/store';
+import FancyButton from './components';
+import UserDetailsModal from '../components/UserDetailsModal';
+import { Key, useEffect, useState } from 'react';
 
 const Fancy = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -16,7 +16,7 @@ const Fancy = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchFancyUsers(new Date()));
+    dispatch(fetchFancyUsers(new Date()) as any);
   }, []);
 
   return (
