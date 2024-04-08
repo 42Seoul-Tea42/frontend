@@ -8,7 +8,7 @@ import { UserPublicSet } from '../../redux/interface';
 import FancyButton from '../fancy/components';
 import UserDetailsModal from '../components/UserDetailsModal';
 import { RootState } from '../../redux/store';
-import { ImageSkeletonSVG } from '../../svg';
+import Skeleton from './Skeleton';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -30,56 +30,42 @@ const Home = () => {
           <div className="flex justify-center items-center gap-4">
             <p className="font-semibold text-lg text-gray-600">test2</p>
             <span className="text-red-200 w-10 h-5 border-2 border-white dark:border-gray-800 rounded-full"></span>
-          </div>
+          </div>{' '}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
-          {users.length > 0
-            ? users.map((user: UserPublicSet, index: Key) => (
-                <div key={index} className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
-                  <button
-                    type="button"
-                    onClick={() => setIsModalOpen(!isModalOpen)}
-                    className="relative w-48 h-48 rounded-t-xl"
-                  >
-                    {user ? (
-                      <Image
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        src={`/emoji/${user.mainPhoto}`}
-                        alt={`Preview ${index}`}
-                        className="rounded-t-lg object-cover hover:brightness-75"
-                        draggable="false"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-200 animate-pulse" />
-                    )}
-                  </button>
-                  <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
-                    <div className="flex items-end gap-4">
-                      <p className="font-semibold text-2xl text-gray-700">{user ? user.name : 'Loading...'}</p>
-                      <p className="font-normal text-gray-700">{user ? '3km' : 'Loading...'}</p>
-                      {user ? (
-                        <FancyButton targetId={Number(user.id)} />
-                      ) : (
-                        <div className="w-20 h-8 bg-gray-200 animate-pulse" />
-                      )}
-                    </div>
+          {users.length > 0 ? (
+            users.map((user: UserPublicSet, index: Key) => (
+              <div key={index} className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(!isModalOpen)}
+                  className="relative w-48 h-48 rounded-t-xl"
+                >
+                  {user ? (
+                    <Image
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      src={`/emoji/${user.mainPhoto}`}
+                      alt={`Preview ${index}`}
+                      className="rounded-t-lg object-cover hover:brightness-75"
+                      draggable="false"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-200 animate-pulse" />
+                  )}
+                </button>
+                <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
+                  <div className="flex items-end gap-4">
+                    <p className="font-semibold text-2xl text-gray-700">{user.lastname + user.firstname}</p>
+                    <p className="font-normal text-gray-700">{user.distance}</p>
+                    <FancyButton targetId={Number(user.id)} />
                   </div>
                 </div>
-              ))
-            : Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
-                  <ImageSkeletonSVG />
-                  <div className="relative w-48 h-48 rounded-t-xl bg-gray-200 animate-pulse" />
-                  <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
-                    <div className="flex items-end gap-4">
-                      <p className="font-semibold text-2xl text-gray-700">Loading...</p>
-                      <p className="font-normal text-gray-700">Loading...</p>
-                      <div className="w-20 h-8 bg-gray-200 animate-pulse" />
-                    </div>
-                  </div>
-                </div>
-              ))}
+              </div>
+            ))
+          ) : (
+            <Skeleton cssColor="bg-red-300 opacity-50" />
+          )}
         </div>
         <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
