@@ -1,14 +1,14 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { UserPublicSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 
-interface suggestionState {
+interface SuggestionState {
   users: UserPublicSet[];
   loading: boolean;
   error: string | null;
 }
 
-const initialState: suggestionState = {
+const initialState: SuggestionState = {
   users: [],
   loading: false,
   error: null
@@ -25,6 +25,7 @@ export const fetchSuggestionUsers = createAsyncThunk('suggestionSlice/fetchSugge
     age: user.birthday,
     gender: user.gender
   }));
+  // 한번에 이미지 여러장 받는 api 있는지 물어보기
   users.forEach(async (user: any) => {
     const photo = await axiosInstance.post('/user/getPicture', {
       target_id: user.id
@@ -38,7 +39,7 @@ const suggestionSlice = createSlice({
   name: 'suggestionSlice',
   initialState,
   reducers: {},
-  extraReducers: (builder: any) => {
+  extraReducers: (builder: ActionReducerMapBuilder<SuggestionState>) => {
     builder.addCase(fetchSuggestionUsers.pending, (state: { loading: boolean; error: null }) => {
       state.loading = true;
       state.error = null;
@@ -46,7 +47,8 @@ const suggestionSlice = createSlice({
     builder.addCase(
       fetchSuggestionUsers.fulfilled,
       (state: { users: UserPublicSet[] }, action: PayloadAction<UserPublicSet[]>) => {
-        state.users = [...state.users, ...action.payload];
+        // 6명 한번에 변경
+        state.users = action.payload;
       }
     );
     builder.addCase(
