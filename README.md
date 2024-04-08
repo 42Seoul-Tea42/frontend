@@ -6,6 +6,9 @@ Tea For Two는 소셜 데이팅 애플리케이션 서비스 Matcha를 기반으
 - 프론트엔드: JaeJunday
 - 백엔드: zestina.Oh
 
+## 프론트엔드 개발문서
+https://42seoul-tea42.github.io/frontend/
+
 ## 주요 기능
 
 - 실시간 채팅: 매칭이 연결된 상대간에 실시간 채팅을 제공합니다.
