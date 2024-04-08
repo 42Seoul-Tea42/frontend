@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import axiosInstance from '../../../utils/axios';
-import { setUserData } from '../../../redux/slices/userDataSlice';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 
@@ -30,9 +28,7 @@ const EmailLoginForm: React.FC = () => {
   return (
     <div className="space-y-6 mb-1 text-start">
       <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Your ID
-        </label>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your ID</label>
         <input
           type="id"
           name="id"
@@ -43,10 +39,7 @@ const EmailLoginForm: React.FC = () => {
         ></input>
       </div>
       <div>
-        <label
-          htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
+        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Your password
         </label>
         <input
@@ -59,10 +52,7 @@ const EmailLoginForm: React.FC = () => {
           required
         ></input>
       </div>
-      <button
-        onClick={findPassword}
-        className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-      >
+      <button onClick={findPassword} className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">
         Lost Password?
       </button>
       <button

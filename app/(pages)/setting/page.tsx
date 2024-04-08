@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import UserNameForm from '../../(auth)/signup/components/UserNameForm';
+import UserNameForm from '../../(auth)/signup/components/UserNameInput';
 import DateOfBirthForm from '../../(auth)/signup/components/DateOfBirthForm';
 import PasswordForm from '../../(auth)/signup/components/PasswordForm';
 import GenderRadioList from '../../(auth)/signup/components/GenderRadioList';

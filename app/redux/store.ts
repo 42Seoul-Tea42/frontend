@@ -10,6 +10,7 @@ import { thunk } from 'redux-thunk';
 import historyService from './services/historyService';
 import suggestionService from './services/suggestionService';
 import fancyService from './services/fancyService';
+import signupService from './services/signupService';
 
 // Import the Tuple type from the 'redux' package
 
@@ -25,7 +26,8 @@ const store = configureStore({
     profileService: profileServiceSlice,
     historyService: historyService,
     fancyService: fancyService,
-    suggestionService: suggestionService
+    suggestionService: suggestionService,
+    singupService: signupService
   },
   middleware: (
     getDefaultMiddleware: (arg0: {
