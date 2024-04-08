@@ -40,7 +40,7 @@ const suggestionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<SuggestionState>) => {
-    builder.addCase(fetchSuggestionUsers.pending, (state: { loading: boolean; error: null }) => {
+    builder.addCase(fetchSuggestionUsers.pending, state => {
       state.loading = true;
       state.error = null;
     });
@@ -51,13 +51,10 @@ const suggestionSlice = createSlice({
         state.users = action.payload;
       }
     );
-    builder.addCase(
-      fetchSuggestionUsers.rejected,
-      (state: { loading: boolean; error: any }, action: { error: { message: null } }) => {
-        state.loading = false;
-        state.error = action.error.message ?? null;
-      }
-    );
+    builder.addCase(fetchSuggestionUsers.rejected, state => {
+      state.loading = false;
+      state.error = 'error';
+    });
   }
 });
 

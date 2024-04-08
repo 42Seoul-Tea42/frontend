@@ -9,8 +9,8 @@ import { RootState } from '../../../redux/store';
 
 const SignupForm: React.FC = () => {
   const router = useRouter();
-  const password = useSelector((state: RootState) => state.singupService.user.password);
-  const reEnterPassword = useSelector((state: RootState) => state.singupService.reEnterPassword);
+  const password = useSelector((state: RootState) => state.accountService.user.password);
+  const reEnterPassword = useSelector((state: RootState) => state.accountService.reEnterPassword);
 
   /** 비밀번호와 재입력이 같지 않은경우 예외처리 */
   const validatePasswordMatch = (): boolean => password === reEnterPassword;

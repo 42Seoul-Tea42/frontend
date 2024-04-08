@@ -43,28 +43,23 @@ const fancySlice = createSlice({
   name: 'fancySlice',
   initialState,
   reducers: {
-    setFancyNotification: (state: { notification: boolean }, action: { payload: boolean }) => {
+    setFancyNotification: (state, action: PayloadAction<boolean>) => {
       state.notification = action.payload;
     }
   },
-  extraReducers: (builder: ActionReducerMapBuilder<FancyState>) => {
-    builder.addCase(fetchFancyUsers.pending, (state: { loading: boolean; error: null }) => {
+  extraReducers: builder => {
+    builder.addCase(fetchFancyUsers.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(
-      fetchFancyUsers.fulfilled,
-      (state: { users: UserPublicSet[] }, action: { payload: PayloadAction<UserPublicSet[]> }) => {
-        state.users = [...state.users, ...action.payload];
-      }
-    );
-    builder.addCase(
-      fetchFancyUsers.rejected,
-      (state: { loading: boolean; error: any }, action: { error: { message: null } }) => {
-        state.loading = false;
-        state.error = action.error.message ?? null;
-      }
-    );
+    builder.addCase(fetchFancyUsers.fulfilled, (state, action: PayloadAction<UserPublicSet[]>) => {
+      state.loading = false;
+      state.users = [...state.users, ...action.payload];
+    });
+    builder.addCase(fetchFancyUsers.rejected, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   }
 });
 

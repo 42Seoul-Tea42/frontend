@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setSignupEmail } from '../../../redux/services/signupService';
+import { setAccountEmail } from '../../../redux/services/accountService';
 
 const EmailVerificationForm: React.FC = () => {
   const dispatch = useDispatch();
-  const email = useSelector((state: RootState) => state.singupService.user.email);
+  const email = useSelector((state: RootState) => state.accountService.user.email);
 
   const verifyEmail = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
@@ -20,7 +20,7 @@ const EmailVerificationForm: React.FC = () => {
         <input
           type="email"
           value={email}
-          onChange={e => dispatch(setSignupEmail(e.target.value))}
+          onChange={e => dispatch(setAccountEmail(e.target.value))}
           id="floating_email"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           required

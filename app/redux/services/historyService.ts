@@ -48,7 +48,7 @@ const historySlice = createSlice({
     }
   },
   extraReducers: (builder: ActionReducerMapBuilder<HistoryState>) => {
-    builder.addCase(fetchHistoryUsers.pending, (state: { loading: boolean; error: null }) => {
+    builder.addCase(fetchHistoryUsers.pending, state => {
       state.loading = true;
       state.error = null;
     });
@@ -58,13 +58,10 @@ const historySlice = createSlice({
         state.users = [...state.users, ...action.payload];
       }
     );
-    builder.addCase(
-      fetchHistoryUsers.rejected,
-      (state: { loading: boolean; error: any }, action: { error: { message: null } }) => {
-        state.loading = false;
-        state.error = action.error.message ?? null;
-      }
-    );
+    builder.addCase(fetchHistoryUsers.rejected, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   }
 });
 
