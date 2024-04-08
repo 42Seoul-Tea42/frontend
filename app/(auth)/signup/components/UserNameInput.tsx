@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setSignupFirstname, setSignupLastname } from '../../../redux/services/signupService';
+import { setAccountFirstname, setAccountLastname } from '../../../redux/services/accountService';
 
 const UserNameInput: React.FC = () => {
   const dispatch = useDispatch();
 
-  const firstname = useSelector((state: RootState) => state.singupService.user.firstname);
-  const lastname = useSelector((state: RootState) => state.singupService.user.lastname);
+  const firstname = useSelector((state: RootState) => state.accountService.user.firstname);
+  const lastname = useSelector((state: RootState) => state.accountService.user.lastname);
 
   return (
     <div className="grid md:grid-cols-2 md:gap-6">
@@ -14,7 +14,7 @@ const UserNameInput: React.FC = () => {
         <input
           type="text"
           value={firstname}
-          onChange={e => dispatch(setSignupFirstname(e.target.value))}
+          onChange={e => dispatch(setAccountFirstname(e.target.value))}
           name="floating_first_name"
           id="floating_first_name"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -32,7 +32,7 @@ const UserNameInput: React.FC = () => {
         <input
           type="text"
           value={lastname}
-          onChange={e => dispatch(setSignupLastname(e.target.value))}
+          onChange={e => dispatch(setAccountLastname(e.target.value))}
           name="floating_last_name"
           id="floating_last_name"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"

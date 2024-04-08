@@ -43,26 +43,6 @@ export interface UserChattingSet extends Identity, Another, AgeGender, Chatting,
 export interface UserProfileInquirySet extends Identity, Profile, Another, AgeGender, Photo {}
 
 /**
- * Interface representing user signup set including identity and account details.
- * @interface
- * @extends {Identity}
- * @extends {Account}
- */
-export interface UserSignupSet extends Identity, Account {}
-
-/**
- * Interface representing user login set including identity, profile details, authentication details, account details, registration steps, and photo.
- * @interface
- * @extends {Identity}
- * @extends {Profile}
- * @extends {Authentication}
- * @extends {Account}
- * @extends {RegisterSteps}
- * @extends {Photo}
- */
-export interface UserLoginSet extends Identity, Profile, Authentication, Account, RegisterSteps, Photo {}
-
-/**
  * Interface representing user account set including identity, account details, authentication details, age, gender, profile details, position, and photo.
  * @interface
  * @extends {Identity}

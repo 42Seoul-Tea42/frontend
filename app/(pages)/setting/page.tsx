@@ -2,20 +2,20 @@
 import { useState } from 'react';
 
 import UserNameForm from '../../(auth)/signup/components/UserNameInput';
-import DateOfBirthForm from '../../(auth)/signup/components/DateOfBirthForm';
-import PasswordForm from '../../(auth)/signup/components/PasswordForm';
+import DateOfBirthForm from '../../(auth)/signup/components/AgeInput';
 import GenderRadioList from '../../(auth)/signup/components/GenderRadioList';
 import SexualPreferenceRadioList from '../../(auth)/signup/components/SexualPreferenceRadioList';
 import TagSelector from '../../(auth)/signup/components/TagSelector';
 import EmojiGridList from '../../(auth)/login/components/EmojiGridList';
 import ImageUploadForm from '../../(auth)/signup/components/ImageUploadForm';
 import { DirectionSVG } from '../../svg';
+import PasswordInput from '../../(auth)/signup/components/PasswordInput';
 
 const Setting: React.FC = () => {
   const accordionItems = [
     { title: '이름변경', content: <UserNameForm /> },
     { title: '생년월일 재설정', content: <DateOfBirthForm /> },
-    { title: '비밀번호 재설정', content: <PasswordForm /> },
+    { title: '비밀번호 재설정', content: <PasswordInput /> },
     { title: '나의 성별 선택', content: <GenderRadioList /> },
     { title: '성적 취향 선택', content: <SexualPreferenceRadioList /> },
     { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> },

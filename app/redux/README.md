@@ -180,22 +180,6 @@ namespace Interface-Set {
         Another
         AgeGender
     }
-
-    class UserSignupSet {
-        <<Private>>
-        Identity
-        Account
-    }
-
-    class UserLoginSet {
-        <<Private>>
-        Identity
-        Photo
-        Profile
-        Authentication
-        Account
-        RegisterSteps
-    }
 }
 
 UserPublicSet ..|> suggestionSlice : Suggestion Service
@@ -203,10 +187,10 @@ UserPublicSet ..|> historySlice : History Service
 UserPublicSet ..|> fancySlice : Fancy Service
 UserChattingSet ..|> chattingSlice : Chatting Service
 UserAccountSet ..|> accountSlice : Account Service
+UserAccountSet ..|> UserSignup: Signup Service
+UserAccountSet ..|> UserLogin: Login Service
 UserProfileInquirySet ..|> profileInquirySlice : Profile Inquiry Service
 UserProfileInquirySet ..|> searchSlice : Search Service
-UserSignupSet ..|> signupSlice : Signup Service
-UserLoginSet ..|> loginSlice : Login Service
 
 namespace Reducer {
 
@@ -231,20 +215,18 @@ namespace Reducer {
         reportUser: UserReportSet
     }
 
-    class accountSlice {
-        user: AccountSet
-    }
-
     class searchSlice {
         users: UserProfile[]
     }
 
-    class signupSlice {
-        user: SignupSet
+    class accountSlice {
+        user: AccountSet
     }
 
-    class loginSlice {
-        user: LoginSet
+    class UserSignup {
+    }
+
+    class UserLogin {
     }
 }
 

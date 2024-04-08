@@ -8,7 +8,6 @@ interface SignupState {
   loading: boolean;
   error: string | null;
 }
-
 const initialState: SignupState = {
   user: {
     id: '',

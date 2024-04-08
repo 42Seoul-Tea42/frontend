@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { setBirthDate } from '../../../redux/slices/signupSlice';
 
-const DateOfBirthForm: React.FC = () => {
+const AgeInput: React.FC = () => {
   const dispatch = useDispatch();
   const dateOfBirth = useSelector((state: RootState) => state.signup.dateOfBirth);
 
@@ -27,4 +27,4 @@ const DateOfBirthForm: React.FC = () => {
   );
 };
 
-export default DateOfBirthForm;
+export default AgeInput;

@@ -11,6 +11,7 @@ import historyService from './services/historyService';
 import suggestionService from './services/suggestionService';
 import fancyService from './services/fancyService';
 import signupService from './services/signupService';
+import accountService from './services/accountService';
 
 // Import the Tuple type from the 'redux' package
 
@@ -27,7 +28,7 @@ const store = configureStore({
     historyService: historyService,
     fancyService: fancyService,
     suggestionService: suggestionService,
-    singupService: signupService
+    accountService: accountService
   },
   middleware: (
     getDefaultMiddleware: (arg0: {
