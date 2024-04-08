@@ -1,6 +1,6 @@
 import React from 'react';
 import TagButton from './TagButton';
-import { Tag } from '../../../redux/thunks/interface';
+import { Interests } from '../../../redux/interface/submodules/utilInterface';
 
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0) + str.slice(1).toLowerCase();
@@ -9,7 +9,7 @@ export const capitalizeFirstLetter = (str: string) => {
 const TagSelector: React.FC = () => {
   return (
     <>
-      {Object.entries(Tag)
+      {Object.entries(Interests)
         .filter(([_, value]) => typeof value === 'number')
         .map(([key, dtoValue], index) => {
           const text = capitalizeFirstLetter(key.replace('_', ' / '));

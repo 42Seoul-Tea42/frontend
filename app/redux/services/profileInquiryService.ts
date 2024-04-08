@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
+import axiosInstance from '../../utils/axios';
 
 interface ProfileInquiryState {
   user: UserProfileInquirySet;
@@ -32,7 +33,7 @@ export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () =>
     method: 'POST'
     // body: JSON.stringify();
   });
-  return response.json();
+  return response.data;
 });
 
 const profileInquirySlice = createSlice({

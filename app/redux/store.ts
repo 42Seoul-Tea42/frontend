@@ -7,7 +7,6 @@ import socketEventSlice from './slices/socketEventSlice';
 import profileServiceSlice from './slices/profileServiceSlice';
 import logger from 'redux-logger';
 import { thunk } from 'redux-thunk';
-import homeSlice from './thunks/homeSlice';
 
 // Import the Tuple type from the 'redux' package
 
@@ -20,21 +19,20 @@ const store = configureStore({
     suggestProfile: suggestProfileSlice,
     userData: userDataSlice,
     socketEvent: socketEventSlice,
-    profileService: profileServiceSlice,
-    home: homeSlice
-  },
-  middleware: getDefaultMiddleware => {
-    const middlewares = getDefaultMiddleware({
-      serializableCheck: false, // dev: false, prod: true
-      immutableCheck: false // dev: false, prod: true
-    });
-
-    // 추가적인 미들웨어를 배열로 연결
-    middlewares.push(logger); // 예시로 Redux Logger 미들웨어를 추가
-    middlewares.push(thunk);
-
-    return middlewares;
+    profileService: profileServiceSlice
   }
+  // middleware: getDefaultMiddleware => {
+  //   const middlewares = getDefaultMiddleware({
+  //     serializableCheck: false, // dev: false, prod: true
+  //     immutableCheck: false // dev: false, prod: true
+  //   });
+
+  //   // 추가적인 미들웨어를 배열로 연결
+  //   middlewares.push(logger); // 예시로 Redux Logger 미들웨어를 추가
+  //   middlewares.push(thunk);
+
+  //   return middlewares;
+  // }
 });
 
 export default store;

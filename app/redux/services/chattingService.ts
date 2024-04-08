@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserChattingSet } from '../interface';
+import axiosInstance from '../../utils/axios';
 
 interface ChattingState {
   users: UserChattingSet[];
@@ -18,7 +19,7 @@ export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () =>
     method: 'POST'
     // body: JSON.stringify();
   });
-  return response.json();
+  return response.data;
 });
 
 const chattingSlice = createSlice({
@@ -30,7 +31,7 @@ const chattingSlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserPublicSet[]>) => {
+    builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserChattingSet[]>) => {
       state.users = [...state.users, ...action.payload];
     });
     builder.addCase(asyncUpdate.rejected, (state, action) => {

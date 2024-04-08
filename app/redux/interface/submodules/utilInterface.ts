@@ -1,9 +1,5 @@
 /**
- * 채팅 메시지를 나타내는 인터페이스
- *
- * - `id`: 메시지의 고유 식별자
- * - `name`: 보낸 사용자의 이름
- * - `time`: 메시지를 보낸 시간
+ * @type {id: string; name: string; time: string;}
  */
 export interface Message {
   id: string; // 메시지의 고유 식별자
@@ -12,11 +8,7 @@ export interface Message {
 }
 
 /**
- * 채팅 상태 정보를 나타내는 인터페이스
- *
- * - `messages`: 채팅 메시지 배열
- * - `connect`: 연결 여부
- * - `noti`: 알림 여부
+ * @type {messages: Message[]; connect: boolean; noti: boolean;}
  */
 export interface Chatting {
   messages: Message[]; // 채팅 메시지 배열
@@ -25,7 +17,7 @@ export interface Chatting {
 }
 
 /**
- * 사용자 관심사를 정의하는 열거형
+ * @type {SPORTS: number; TRAVEL: number; FOOD: number; GAME: number; BOOK: number; IT_SCIENCE: number; VIDEO: number; LANGUAGE: number; FASHION: number; PETS: number; ART: number; SMOKE: number; DRINK: number;}
  */
 export enum Interests {
   SPORTS = 1 << 0,
@@ -44,12 +36,7 @@ export enum Interests {
 }
 
 /**
- * 검색 조건을 나타내는 인터페이스
- *
- * - `ageRange`: 나이 범위 배열
- * - `distance`: 거리
- * - `fame`: 명성
- * - `interests`: 관심사 배열
+ * @type {ageRange: number[]; distance: number; fame: number; interests: Interests[];}
  */
 export interface SearchParams {
   ageRange: number[]; // 나이 범위 배열
@@ -59,11 +46,7 @@ export interface SearchParams {
 }
 
 /**
- * 회원가입 단계를 나타내는 인터페이스
- *
- * - `emailCheck`: 이메일 확인 단계 여부
- * - `profileCheck`: 프로필 확인 단계 여부
- * - `emojiCheck`: 이모티콘 확인 단계 여부
+ * @type {emailCheck: boolean; profileCheck: boolean; emojiCheck: boolean;}
  */
 export interface RegisterSteps {
   emailCheck: boolean; // 이메일 확인 단계 여부

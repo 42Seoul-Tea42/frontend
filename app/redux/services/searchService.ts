@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserPublicSet } from '../interface';
+import axiosInstance from '../../utils/axios';
 
 interface SearchState {
   users: UserPublicSet[];
@@ -18,7 +19,7 @@ export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () =>
     method: 'POST'
     // body: JSON.stringify();
   });
-  return response.json();
+  return response.data;
 });
 
 const fancySlice = createSlice({

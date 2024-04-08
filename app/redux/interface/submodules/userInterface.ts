@@ -1,11 +1,7 @@
 import { Interests } from './utilInterface';
 
 /**
- * 사용자의 신원 정보를 나타내는 인터페이스
- *
- * - `id`: 사용자의 고유 식별자
- * - `firstname`: 사용자의 이름
- * - `lastname`: 사용자의 성
+ * @type {id: string; firstname: string; lastname: string;}
  */
 export interface Identity {
   id: string;
@@ -14,10 +10,7 @@ export interface Identity {
 }
 
 /**
- * 사용자의 나이와 성별 정보를 나타내는 인터페이스
- *
- * - `age`: 사용자의 나이
- * - `gender`: 사용자의 성별
+ * @type {age: number; gender: string;}
  */
 export interface AgeGender {
   age: number;
@@ -25,10 +18,7 @@ export interface AgeGender {
 }
 
 /**
- * 사용자의 계정 정보를 나타내는 인터페이스
- *
- * - `email`: 사용자의 이메일 주소
- * - `password`: 사용자의 비밀번호
+ * @type {email: string; password: string;}
  */
 export interface Account {
   email: string;
@@ -36,60 +26,43 @@ export interface Account {
 }
 
 /**
- * 사용자의 인증 정보를 나타내는 인터페이스
- *
- * - `accessToken`: 액세스 토큰
- * - `refreshToken`: 리프레시 토큰
+ * @type {accessToken: string; refreshToken: string;}
  */
 export interface Authentication {
-  accessToken: string; // 액세스 토큰
-  refreshToken: string; // 리프레시 토큰
+  accessToken: string;
+  refreshToken: string;
 }
 
 /**
- * 사용자의 프로필 정보를 나타내는 인터페이스
- *
- * - `subPhotos`: 부가 사진 경로 배열
- * - `interests`: 관심사 배열
- * - `rating`: 평점
- * - `sexualPreference`: 성적 취향
- * - `introduction`: 자기 소개
+ * @type {subPhotos: string[]; interests: Interests[]; rating: number; sexualPreference: string; introduction: string;}
  */
 export interface Profile {
-  subPhotos: string[]; // 부가 사진 경로 배열
-  interests: Interests[]; // 관심사 배열
-  rating: number; // 평점
-  sexualPreference: string; // 성적 취향
-  introduction: string; // 자기 소개
+  subPhotos: string[];
+  interests: Interests[];
+  rating: number;
+  sexualPreference: string;
+  introduction: string;
 }
 
 /**
- * 사용자의 사진 정보를 나타내는 인터페이스
- *
- * - `mainPhoto`: 주요 사진 경로
+ * @type {mainPhoto: string;}
  */
 export interface Photo {
   mainPhoto: string; // 주요 사진 경로
 }
 
 /**
- * 추가적인 사용자 정보를 나타내는 인터페이스
- *
- * - `fancy`: 추가 정보 1
- * - `distance`: 추가 정보 2
+ * @type {fancy: boolean; distance: number;}
  */
 export interface Another {
-  fancy: boolean; // 추가 정보 1
-  distance: number; // 추가 정보 2
+  fancy: boolean;
+  distance: number;
 }
 
 /**
- * 사용자의 위치 정보를 나타내는 인터페이스
- *
- * - `latitude`: 위도
- * - `longitude`: 경도
+ * @type {latitude: number; longitude: number;}
  */
 export interface Position {
-  latitude: number; // 위도
-  longitude: number; // 경도
+  latitude: number;
+  longitude: number;
 }

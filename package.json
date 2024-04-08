@@ -8,7 +8,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "typedoc-redux": "typedoc --entryPointStrategy expand app/redux/ && gh-pages -d docs"
   },
   "dependencies": {
     "@next/third-parties": "^14.1.4",
@@ -36,6 +37,7 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "flowbite-react": "^0.7.8",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.38",
     "react-cookie": "^7.1.4",
     "react-devtools": "^5.0.2",
@@ -46,6 +48,7 @@
     "socket.io-client": "^4.7.5",
     "tailwindcss": "^3.4.3",
     "three": "^0.160.1",
+    "typedoc": "^0.25.13",
     "typescript": "^5.4.4"
   }
 }
