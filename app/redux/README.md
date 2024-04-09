@@ -66,12 +66,6 @@ namespace User-Interface {
         password: string
     }
 
-    class Authentication {
-        <<Private>>
-        accessToken: string
-        refreshToken: string
-    }
-
     class Profile {
         <<Sensitive>>
         subPhotos: string[]
@@ -166,7 +160,6 @@ namespace Interface-Set {
         Identity
         Photo
         Account
-        Authentication
         AgeGender
         Profile
         Location

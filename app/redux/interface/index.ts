@@ -1,13 +1,4 @@
-import {
-  Account,
-  AgeGender,
-  Authentication,
-  Position,
-  Profile,
-  Another,
-  Photo,
-  Identity
-} from './submodules/userInterface';
+import { Account, AgeGender, Position, Profile, Another, Photo, Identity } from './submodules/userInterface';
 import { Chatting, RegisterSteps } from './submodules/utilInterface';
 
 /**
@@ -47,10 +38,9 @@ export interface UserProfileInquirySet extends Identity, Profile, Another, AgeGe
  * @interface
  * @extends {Identity}
  * @extends {Account}
- * @extends {Authentication}
  * @extends {AgeGender}
  * @extends {Profile}
  * @extends {Position}
  * @extends {Photo}
  */
-export interface UserAccountSet extends Identity, Account, Authentication, AgeGender, Profile, Position, Photo {}
+export interface UserAccountSet extends Identity, Account, AgeGender, Profile, Position, Photo {}
