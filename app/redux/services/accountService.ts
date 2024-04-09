@@ -8,7 +8,7 @@ export interface AccountState {
   reEnterPassword: string;
   isSignup: boolean;
   isEmailDuplicateChecked: boolean;
-  verificationEmail: boolean;
+  isEmailVerifyChecked: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -35,7 +35,7 @@ const initialState: AccountState = {
   },
   isSignup: false,
   isEmailDuplicateChecked: false,
-  verificationEmail: false,
+  isEmailVerifyChecked: false,
   reEnterPassword: '',
   loading: false,
   error: null
@@ -131,7 +131,6 @@ const accountSlice = createSlice({
       state.loading = false;
       state.error = action.error.message ?? null;
     });
-
     builder.addCase(postVerifyEmailToServer.pending, state => {
       state.loading = true;
       state.error = null;
