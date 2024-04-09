@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Key, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSuggestionUsers } from '../../redux/services/suggestionService';
+import { getSuggestionUsersFromServer } from '../../redux/services/suggestionService';
 import { UserPublicSet } from '../../redux/interface';
 import FancyButton from '../fancy/components';
 import UserDetailsModal from '../components/UserDetailsModal';
@@ -16,7 +16,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSuggestionUsers() as any);
+    dispatch(getSuggestionUsersFromServer() as any);
   }, []);
 
   return (

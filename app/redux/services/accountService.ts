@@ -5,6 +5,8 @@ import axiosInstance from '../../utils/axios';
 interface AccountState {
   user: UserAccountSet;
   reEnterPassword: string;
+  isSignup: boolean;
+  verificationEmail: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -17,9 +19,6 @@ const initialState: AccountState = {
     lastname: '',
     email: '',
     password: '',
-    /** authentification */
-    accessToken: '',
-    refreshToken: '',
     /** Profile info */
     age: 0,
     gender: '',
@@ -32,15 +31,31 @@ const initialState: AccountState = {
     longitude: 0,
     mainPhoto: ''
   },
+  isSignup: false,
+  verificationEmail: false,
   reEnterPassword: '',
   loading: false,
   error: null
 };
 
-export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () => {
-  const response = await axiosInstance('https://api.example.com/data', {
-    method: 'POST'
-    // body: JSON.stringify();
+export const postSignupDataToServer = createAsyncThunk('homeSlice/asyncUpdate', async () => {
+  const response = await axiosInstance.post('https://api.example.com/data', {
+    body: {
+      email: accountSlice.user.email,
+      login_id: accountSlice.user.id,
+      pw: accountSlice.user.password,
+      last_name: accountSlice.user.lastname,
+      name: accountSlice.user.firstname
+    }
+  });
+  return response.data;
+});
+
+export const getVerifyEmailToServer = createAsyncThunk('homeSlice/asyncUpdate', async () => {
+  const response = await axiosInstance.post('https://api.example.com/data', {
+    body: {
+      email: accountSlice.user.email
+    }
   });
   return response.data;
 });
@@ -49,34 +64,45 @@ const accountSlice = createSlice({
   name: 'accountSlice',
   initialState,
   reducers: {
-    setAccountId: (state, action: PayloadAction<string>) => {
+    setAccountId: (state: AccountState, action: PayloadAction<string>) => {
       state.user.id = action.payload;
     },
-    setAccountPassword: (state, action: PayloadAction<string>) => {
+    setAccountPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.user.password = action.payload;
     },
-    setAccountReEnterPassword: (state, action: PayloadAction<string>) => {
+    setAccountReEnterPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.reEnterPassword = action.payload;
     },
-    setAccountFirstname: (state, action: PayloadAction<string>) => {
+    setAccountFirstname: (state: AccountState, action: PayloadAction<string>) => {
       state.user.firstname = action.payload;
     },
-    setAccountLastname: (state, action: PayloadAction<string>) => {
+    setAccountLastname: (state: AccountState, action: PayloadAction<string>) => {
       state.user.lastname = action.payload;
     },
-    setAccountEmail: (state, action: PayloadAction<string>) => {
+    setAccountEmail: (state: AccountState, action: PayloadAction<string>) => {
       state.user.email = action.payload;
     }
   },
   extraReducers: builder => {
-    builder.addCase(asyncUpdate.pending, state => {
+    builder.addCase(postSignupDataToServer.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserAccountSet>) => {
-      state.user = action.payload;
+    builder.addCase(postSignupDataToServer.fulfilled, (state, action) => {
+      state.isSignup = true;
     });
-    builder.addCase(asyncUpdate.rejected, (state, action) => {
+    builder.addCase(postSignupDataToServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+    builder.addCase(getVerifyEmailToServer.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getVerifyEmailToServer.fulfilled, (state, action) => {
+      state.verificationEmail = true;
+    });
+    builder.addCase(getVerifyEmailToServer.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
