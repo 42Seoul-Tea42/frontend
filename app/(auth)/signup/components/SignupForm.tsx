@@ -1,14 +1,18 @@
 'use client';
 
+import { useDispatch } from 'react-redux';
+import { postCheckDuplicateEmailToServer } from '../../../redux/services/accountService';
 import IdInput from './IdInput';
 import PasswordInput from './PasswordInput';
 import UserNameInput from './UserNameInput';
+import EmailInput from './emailInput';
 
 interface SignupFormProps {
   handler: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const SignupForm: React.FC<SignupFormProps> = ({ handler }) => {
+  const dispatch = useDispatch();
   return (
     <form
       onSubmit={handler}
@@ -18,6 +22,12 @@ const SignupForm: React.FC<SignupFormProps> = ({ handler }) => {
         회원가입을 위한 계정정보를 입력해주세요.
       </h5>
 
+      <div className="flex">
+        <EmailInput />
+        <button type="button" onClick={() => dispatch<any>(postCheckDuplicateEmailToServer())}>
+          emailcheck
+        </button>
+      </div>
       <UserNameInput />
       <IdInput />
       <PasswordInput />
@@ -27,7 +37,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ handler }) => {
           type="submit"
           className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Next Step
+          Sign Up
         </button>
       </div>
     </form>

@@ -6,7 +6,6 @@ import userDataSlice from './slices/userDataSlice';
 import socketEventSlice from './slices/socketEventSlice';
 import profileServiceSlice from './slices/profileServiceSlice';
 import logger from 'redux-logger';
-import { thunk } from 'redux-thunk';
 import historyService from './services/historyService';
 import suggestionService from './services/suggestionService';
 import fancyService from './services/fancyService';
@@ -42,7 +41,6 @@ const store = configureStore({
 
     // 추가적인 미들웨어를 배열로 연결
     middlewares.push(logger); // 예시로 Redux Logger 미들웨어를 추가
-    middlewares.push(thunk);
 
     return middlewares;
   }
