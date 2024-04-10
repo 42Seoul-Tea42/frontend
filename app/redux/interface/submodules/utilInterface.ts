@@ -18,6 +18,7 @@ export interface Chatting {
 
 /**
  * @type {SPORTS: number; TRAVEL: number; FOOD: number; GAME: number; BOOK: number; IT_SCIENCE: number; VIDEO: number; LANGUAGE: number; FASHION: number; PETS: number; ART: number; SMOKE: number; DRINK: number;}
+ * @description DB에서 비트연산을 이용한 '한번에 가져오기 기능'을 사용하기 위해 비트쉬프팅으로 정의 - juhoh님께 문의
  */
 export enum Interests {
   SPORTS = 1 << 0,
