@@ -3,7 +3,7 @@ import { UserAccountSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 import { AxiosResponse } from 'axios';
 
-export interface AccountState {
+interface AccountState {
   user: UserAccountSet;
   reEnterPassword: string;
   isSignup: boolean;
@@ -15,23 +15,33 @@ export interface AccountState {
 
 const initialState: AccountState = {
   user: {
-    /** Signup Info */
-    id: '',
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    /** Profile info */
-    age: 0,
-    gender: '',
-    subPhotos: [],
-    interests: [],
-    rating: 0,
-    sexualPreference: '',
-    introduction: '',
-    latitude: 0,
-    longitude: 0,
-    mainPhoto: ''
+    identity : {
+      id: '',
+      firstname: '',
+      lastname: '',
+    },
+    account: {
+      email: '',
+      password: '',
+    },
+    profile: {
+      subPhotos: [],
+      interests: [],
+      rating: 0,
+      sexualPreference: '',
+      introduction: '',
+    },
+    position: {
+      latitude: 0,
+      longitude: 0,
+    },
+    ageGender: {
+      age: 0,
+      gender: '',
+    },
+    photo: {
+      mainPhoto: ''
+    }
   },
   isSignup: false,
   isEmailDuplicateChecked: false,
@@ -50,11 +60,11 @@ export const postSignupDataToServer = createAsyncThunk(
 
     const response = await axiosInstance.post('https://api.example.com/data', {
       body: {
-        email: user.email,
-        login_id: user.id,
-        pw: user.password,
-        last_name: user.lastname,
-        name: user.firstname
+        login_id: user.identity.id,
+        email: user.account.email,
+        pw: user.account.password,
+        last_name: user.identity.lastname,
+        name: user.identity.firstname
       }
     });
     return response.status;
@@ -70,7 +80,7 @@ export const postVerifyEmailToServer = createAsyncThunk(
 
     const response = await axiosInstance.post('https://api.example.com/data', {
       body: {
-        email: user.email
+        email: user.account.email
       }
     });
     return response.status;
@@ -86,7 +96,7 @@ export const postCheckDuplicateEmailToServer = createAsyncThunk(
 
     const response = await axiosInstance.post('https://api.example.com/data', {
       body: {
-        email: user.email
+        email: user.account.email
       }
     });
     return response.status;
@@ -98,22 +108,22 @@ const accountSlice = createSlice({
   initialState,
   reducers: {
     setAccountId: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.id = action.payload;
+      state.user.identity.id = action.payload;
     },
     setAccountPassword: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.password = action.payload;
+      state.user.account.password = action.payload;
     },
     setAccountReEnterPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.reEnterPassword = action.payload;
     },
     setAccountFirstname: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.firstname = action.payload;
+      state.user.identity.firstname = action.payload;
     },
     setAccountLastname: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.lastname = action.payload;
+      state.user.identity.lastname = action.payload;
     },
     setAccountEmail: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.email = action.payload;
+      state.user.account.email = action.payload;
     }
   },
   extraReducers: builder => {

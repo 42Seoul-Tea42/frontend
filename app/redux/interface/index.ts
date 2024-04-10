@@ -4,43 +4,67 @@ import { Chatting, RegisterSteps } from './submodules/utilInterface';
 /**
  * Interface representing public user set including identity, age, gender, and other details.
  * @interface
- * @extends {Identity}
- * @extends {AgeGender}
- * @extends {Another}
- * @extends {Photo}
+ * @member {Identity}
+ * @member {AgeGender}
+ * @member {Another}
+ * @member {Photo}
  */
-export interface UserPublicSet extends Identity, AgeGender, Another, Photo {}
+export interface UserPublicSet {
+    identity: Identity;
+    ageGender: AgeGender;
+    another: Another;
+    photo: Photo;
+}
 
 /**
  * Interface representing user chatting set including identity, another detail, age, gender, chatting details, and photo.
  * @interface
- * @extends {Identity}
- * @extends {Another}
- * @extends {AgeGender}
- * @extends {Chatting}
- * @extends {Photo}
+ * @member {Identity}
+ * @member {Another}
+ * @member {AgeGender}
+ * @member {Chatting}
+ * @member {Photo}
  */
-export interface UserChattingSet extends Identity, Another, AgeGender, Chatting, Photo {}
+export interface UserChattingSet {
+    identity: Identity;
+    another: Another;
+    ageGender: AgeGender;
+    chatting: Chatting;
+    photo: Photo;
+}
 
 /**
  * Interface representing user profile inquiry set including identity, profile details, another detail, age, gender, and photo.
  * @interface
- * @extends {Identity}
- * @extends {Profile}
- * @extends {Another}
- * @extends {AgeGender}
- * @extends {Photo}
+ * @member {Identity}
+ * @member {Profile}
+ * @member {Another}
+ * @member {AgeGender}
+ * @member {Photo}
  */
-export interface UserProfileInquirySet extends Identity, Profile, Another, AgeGender, Photo {}
+export interface UserProfileInquirySet {
+    identity: Identity;
+    profile: Profile;
+    another: Another;
+    ageGender: AgeGender;
+    photo: Photo;
+}
 
 /**
- * Interface representing user account set including identity, account details, authentication details, age, gender, profile details, position, and photo.
+ * Interface representing user account set including identity, account details, age and gender, profile details, position, and photo.
  * @interface
- * @extends {Identity}
- * @extends {Account}
- * @extends {AgeGender}
- * @extends {Profile}
- * @extends {Position}
- * @extends {Photo}
+ * @member {Identity} 
+ * @member {Account}
+ * @member {AgeGender}
+ * @member {Profile}
+ * @member {Position}
+ * @member {Photo}
  */
-export interface UserAccountSet extends Identity, Account, AgeGender, Profile, Position, Photo {}
+export interface UserAccountSet {
+    identity: Identity;
+    account: Account;
+    ageGender: AgeGender;
+    profile: Profile;
+    position: Position;
+    photo: Photo;
+}

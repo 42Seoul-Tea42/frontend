@@ -10,19 +10,29 @@ interface ProfileInquiryState {
 
 const initialState: ProfileInquiryState = {
   user: {
-    id: '',
-    firstname: '',
-    lastname: '',
-    subPhotos: [],
-    interests: [],
-    rating: 0,
-    sexualPreference: '',
-    introduction: '',
-    fancy: false,
-    distance: 0,
-    age: 0,
-    gender: '',
-    mainPhoto: ''
+    identity: {
+      id: '',
+      firstname: '',
+      lastname: '',
+    },
+    profile: {
+      subPhotos: [],
+      interests: [],
+      rating: 0,
+      sexualPreference: '',
+      introduction: '',
+    },
+    another: {
+      fancy: false,
+      distance: 0,
+    },
+    ageGender: {
+      age: 0,
+      gender: '',
+    },
+    photo: {
+      mainPhoto: ''
+    }
   },
   loading: false,
   error: null

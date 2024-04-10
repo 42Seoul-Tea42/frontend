@@ -24,9 +24,16 @@ const Signup: React.FC = () => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
 
+    /** 아이디 중복체크 검사 */
+    // if (isIdDuplicateChecked) {
+    //  alert('아이디 중복체크를 완료해주세요.');
+    //  return;
+    // }
+    // 
+
     /** 이메일 중복체크 검사 */
     // if (!isEmailDuplicateChecked) {
-    //   alert('이메일 중복체크를 검사해주세요.');
+    //   alert('이메일 중복체크를 완료해주세요.');
     //   return;
     // }
 
@@ -40,9 +47,8 @@ const Signup: React.FC = () => {
     // 빈 값
     // 이상한 문자 & 길이
 
-    // 회원가입 버튼을 누르면 자동으로 이메일 인증까지 보내버리기
+    // 회원가입 버튼을 누르면 서버로 회원가입 데이터를 전송
     dispatch<any>(postSignupDataToServer());
-    dispatch<any>(postVerifyEmailToServer());
   };
 
   useEffect(() => {
@@ -50,13 +56,6 @@ const Signup: React.FC = () => {
       alert(`회원가입이 완료되었습니다. 가입하신 이메일 ${email} 로 인증을 진행해주세요.`);
     }
   }, [isSignup]);
-
-  useEffect(() => {
-    if (isEmailVerifyChecked) {
-      alert('이메일 인증이 완료되었습니다. 로그인해주세요.');
-      router.push('/login');
-    }
-  }, [isEmailVerifyChecked]);
 
   return (
     <div className="w-full h-screen flex justify-center">
