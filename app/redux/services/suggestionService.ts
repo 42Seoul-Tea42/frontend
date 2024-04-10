@@ -20,7 +20,7 @@ export const getSuggestionUsersFromServer = createAsyncThunk(
     const response = await axiosInstance.get('/tea');
     const users = response.data.map((user: any) => ({
       identity: {
-        id: user.id,
+        id: user.identity.id,
         firstname: user.name,
         lastname: user.last_name,
       },
@@ -30,13 +30,13 @@ export const getSuggestionUsersFromServer = createAsyncThunk(
       },
       another: {
         fancy: user.fancy,
-        distance: user.distance,
+        distance: user.another.distance,
       }
     }));
     // 한번에 이미지 여러장 받는 api 있는지 물어보기
     users.forEach(async (user: any) => {
       const photo = await axiosInstance.post('/user/getPicture', {
-        target_id: user.id
+        target_id: user.identity.id
       });
       users.photo.mainPhoto = photo.data;
     });

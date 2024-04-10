@@ -8,9 +8,9 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const Signup: React.FC = () => {
-  const password = useSelector((state: RootState) => state.accountService.user.password);
+  const password = useSelector((state: RootState) => state.accountService.user.account.password);
   const reEnterPassword = useSelector((state: RootState) => state.accountService.reEnterPassword);
-  const email = useSelector((state: RootState) => state.accountService.user.email);
+  const email = useSelector((state: RootState) => state.accountService.user.account.email);
   const isEmailDuplicateChecked = useSelector((state: RootState) => state.accountService.isEmailDuplicateChecked);
   const isEmailVerifyChecked = useSelector((state: RootState) => state.accountService.isEmailVerifyChecked);
   const isSignup = useSelector((state: RootState) => state.accountService.isSignup);

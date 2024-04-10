@@ -45,7 +45,7 @@ const Home = () => {
                     <Image
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      src={`/emoji/${user.mainPhoto}`}
+                      src={`/emoji/${user.photo.mainPhoto}`}
                       alt={`Preview ${index}`}
                       className="rounded-t-lg object-cover hover:brightness-75"
                       draggable="false"
@@ -56,9 +56,9 @@ const Home = () => {
                 </button>
                 <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
                   <div className="flex items-end gap-4">
-                    <p className="font-semibold text-2xl text-gray-700">{user.lastname + user.firstname}</p>
-                    <p className="font-normal text-gray-700">{user.distance}</p>
-                    <FancyButton targetId={Number(user.id)} />
+                    <p className="font-semibold text-2xl text-gray-700">{user.identity.lastname + user.identity.firstname}</p>
+                    <p className="font-normal text-gray-700">{user.another.distance}</p>
+                    <FancyButton targetId={Number(user.identity.id)} />
                   </div>
                 </div>
               </div>

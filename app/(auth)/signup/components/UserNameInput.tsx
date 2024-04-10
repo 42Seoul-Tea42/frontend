@@ -5,8 +5,8 @@ import { setAccountFirstname, setAccountLastname } from '../../../redux/services
 const UserNameInput: React.FC = () => {
   const dispatch = useDispatch();
 
-  const firstname = useSelector((state: RootState) => state.accountService.user.firstname);
-  const lastname = useSelector((state: RootState) => state.accountService.user.lastname);
+  const firstname = useSelector((state: RootState) => state.accountService.user.identity.firstname);
+  const lastname = useSelector((state: RootState) => state.accountService.user.identity.lastname);
 
   return (
     <div className="grid md:grid-cols-2 md:gap-6">

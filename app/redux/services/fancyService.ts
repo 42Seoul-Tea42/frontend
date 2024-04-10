@@ -22,17 +22,17 @@ const initialState: FancyState = {
 export const fetchFancyUsers = createAsyncThunk('fancySlice/fetchFancyUsers', async (time: Date) => {
   const response = await axiosInstance.get(`/history/checkFancy?breakpoint=${time.toISOString()}`);
   const users = response.data.map((user: any) => ({
-    id: user.id,
+    id: user.identity.id,
     firstname: user.name,
     lastname: user.last_name,
     fancy: user.fancy,
-    distance: user.distance,
+    distance: user.another.distance,
     age: user.birthday,
     gender: user.gender
   }));
   users.forEach(async (user: any) => {
     const photo = await axiosInstance.post('/user/getPicture', {
-      target_id: user.id
+      target_id: user.identity.id
     });
     users.mainPhoto = photo.data;
   });

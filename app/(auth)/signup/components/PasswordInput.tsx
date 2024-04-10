@@ -4,7 +4,7 @@ import { setAccountPassword, setAccountReEnterPassword } from '../../../redux/se
 
 const PasswordInput: React.FC = () => {
   const dispatch = useDispatch();
-  const password = useSelector((state: RootState) => state.accountService.user.password);
+  const password = useSelector((state: RootState) => state.accountService.user.account.password);
   const reEnterPassword = useSelector((state: RootState) => state.accountService.reEnterPassword);
 
   return (

@@ -4,7 +4,7 @@ import { postCheckDuplicateEmailToServer, setAccountEmail } from '../../../redux
 
 const EmailInput: React.FC = () => {
   const dispatch = useDispatch();
-  const email = useSelector((state: RootState) => state.accountService.user.email);
+  const email = useSelector((state: RootState) => state.accountService.user.account.email);
 
   return (
     <div className="relative z-0 w-full mb-5 group">
