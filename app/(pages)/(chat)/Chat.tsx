@@ -8,7 +8,7 @@ import Draggable from 'react-draggable';
 import Image from 'next/image';
 import ChatButton from './ChatButton';
 import { useDispatch } from 'react-redux';
-import { setChatNoti } from '../../redux/slices/socketEventSlice';
+import { setChatNoti } from '../../redux/oldslices/socketEventSlice';
 import { useSocket } from '../../utils/socketContext';
 import { HamburgerSVG } from '../../svg';
 

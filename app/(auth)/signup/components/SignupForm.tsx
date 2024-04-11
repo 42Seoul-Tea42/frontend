@@ -1,21 +1,21 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { postCheckDuplicateEmailToServer } from '../../../redux/services/accountService';
+import { postCheckDuplicateEmailToServer } from '../../../redux/oldslices/accountSlice';
 import IdInput from './IdInput';
 import PasswordInput from './PasswordInput';
 import UserNameInput from './UserNameInput';
 import EmailInput from './emailInput';
 
 interface SignupFormProps {
-  handler: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const SignupForm: React.FC<SignupFormProps> = ({ handler }) => {
+const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
   const dispatch = useDispatch();
   return (
     <form
-      onSubmit={handler}
+      onSubmit={onSubmit}
       className="max-w-md min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">

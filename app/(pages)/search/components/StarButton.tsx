@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { setStarCount } from '../../../redux/slices/searchParamSlice';
+import { setStarCount } from '../../../redux/oldslices/searchParamSlice';
 import StarSVG from '../../../svg/StarSVG';
 
 interface StarButtonProps {

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Key, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSuggestionUsersFromServer } from '../../redux/services/suggestionService';
+import { getSuggestionUsersFromServer } from '../../redux/oldslices/suggestionSlice';
 import { UserPublicSet } from '../../redux/interface';
 import FancyButton from '../fancy/components';
 import UserDetailsModal from '../components/UserDetailsModal';
@@ -12,7 +12,7 @@ import Skeleton from './Skeleton';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const users = useSelector((state: RootState) => state.suggestionService.users);
+  const users = useSelector((state: RootState) => state.suggestionSlice.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -56,7 +56,9 @@ const Home = () => {
                 </button>
                 <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
                   <div className="flex items-end gap-4">
-                    <p className="font-semibold text-2xl text-gray-700">{user.identity.lastname + user.identity.firstname}</p>
+                    <p className="font-semibold text-2xl text-gray-700">
+                      {user.identity.lastname + user.identity.firstname}
+                    </p>
                     <p className="font-normal text-gray-700">{user.another.distance}</p>
                     <FancyButton targetId={Number(user.identity.id)} />
                   </div>

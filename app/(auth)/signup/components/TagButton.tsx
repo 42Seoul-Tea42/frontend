@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addSelectedTags, removeSelectedTags } from '../../../redux/slices/signupSlice';
+import { addSelectedTags, removeSelectedTags } from '../../../redux/oldslices/signupSlice';
 
 interface TagButtonProps {
   text: string;
@@ -20,9 +20,7 @@ const TagButton: React.FC<TagButtonProps> = ({ text, gradientFrom, gradientTo, d
   };
 
   const tagStyle = {
-    backgroundImage: isClicked
-      ? `linear-gradient(to bottom right, ${gradientFrom}, ${gradientTo})`
-      : 'none',
+    backgroundImage: isClicked ? `linear-gradient(to bottom right, ${gradientFrom}, ${gradientTo})` : 'none',
     fontWeight: isClicked ? 'bold' : 'normal'
   };
 

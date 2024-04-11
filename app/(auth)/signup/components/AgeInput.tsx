@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setBirthDate } from '../../../redux/slices/signupSlice';
+import { setBirthDate } from '../../../redux/oldslices/signupSlice';
 
 const AgeInput: React.FC = () => {
   const dispatch = useDispatch();

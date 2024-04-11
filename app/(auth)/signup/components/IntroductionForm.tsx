@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setIntrodution } from '../../../redux/slices/signupSlice';
+import { setIntrodution } from '../../../redux/oldslices/signupSlice';
 
 const IntroductionForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,10 +11,7 @@ const IntroductionForm: React.FC = () => {
   return (
     <>
       <div className="mb-10">
-        <label
-          htmlFor="message"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
+        <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           한줄소개를 작성해주세요.
         </label>
         <textarea

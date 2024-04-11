@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Reaction, setReaction } from '../../../redux/slices/signupSlice';
+import { Reaction, setReaction } from '../../../redux/oldslices/signupSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 

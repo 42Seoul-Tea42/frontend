@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { postCheckDuplicateEmailToServer, setAccountEmail } from '../../../redux/services/accountService';
+import { postCheckDuplicateEmailToServer, setAccountEmail } from '../../../redux/oldslices/accountSlice';
 
 const EmailInput: React.FC = () => {
   const dispatch = useDispatch();
-  const email = useSelector((state: RootState) => state.accountService.user.account.email);
+  const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
 
   return (
     <div className="relative z-0 w-full mb-5 group">

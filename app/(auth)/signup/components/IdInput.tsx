@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setAccountId } from '../../../redux/services/accountService';
+import { setAccountId } from '../../../redux/oldslices/accountSlice';
 
 const IdInput: React.FC = () => {
   const dispatch = useDispatch();
-  const id = useSelector((state: RootState) => state.accountService.user.identity.id);
+  const id = useSelector((state: RootState) => state.accountSlice.user.identity.id);
 
   return (
     <div className="relative z-0 w-full mb-5 group">

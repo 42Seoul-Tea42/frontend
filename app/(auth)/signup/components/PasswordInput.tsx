@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setAccountPassword, setAccountReEnterPassword } from '../../../redux/services/accountService';
 
 const PasswordInput: React.FC = () => {
   const dispatch = useDispatch();
-  const password = useSelector((state: RootState) => state.accountService.user.account.password);
-  const reEnterPassword = useSelector((state: RootState) => state.accountService.reEnterPassword);
+  const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
+  const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
 
   return (
     <div>

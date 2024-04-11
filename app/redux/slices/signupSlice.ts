@@ -1,128 +1,138 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-export enum Reaction {
-  Like = 'like',
-  Dislike = 'dislike',
-  None = 'none'
-}
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { UserAccountSet } from '../interface';
+import axiosInstance from '../../utils/axios';
+import { AxiosResponse } from 'axios';
+import { AccountState } from './accountSlice';
 
 interface SignupState {
-  profileImage: string;
-  dateOfBirth: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  id: string;
-  password: string;
-  birthDate: string;
-  gender: string;
-  sexualPreference: string;
-  introduction: string;
-  selectedTags: number[];
-  selectedReactions: Reaction[];
+  validation: {
+    reEnterPassword: string;
+    isSignup: boolean;
+    isEmailDuplicateChecked: boolean;
+    isEmailVerifyChecked: boolean;
+  };
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: SignupState = {
-  profileImage: '',
-  firstname: '',
-  lastname: '',
-  email: '',
-  id: '',
-  password: '',
-  birthDate: '',
-  gender: '',
-  sexualPreference: '',
-  introduction: '',
-  selectedTags: [],
-  dateOfBirth: new Date().toISOString(),
-  selectedReactions: Array.from({ length: 16 }, () => Reaction.None)
+  validation: {
+    isSignup: false,
+    isEmailDuplicateChecked: false,
+    isEmailVerifyChecked: false,
+    reEnterPassword: ''
+  },
+  loading: false,
+  error: null
 };
+
+// 회원가입 정보 서버로 전송
+export const postSignupDataToServer = createAsyncThunk(
+  'accountSlice/postSignupDataToServer',
+  async (_, { getState }) => {
+    const state = getState() as { accountSlice: AccountState };
+    const { user } = state.accountSlice;
+
+    const response = await axiosInstance.post('https://api.example.com/data', {
+      body: {
+        login_id: user.identity.id,
+        email: user.account.email,
+        pw: user.account.password,
+        last_name: user.identity.lastname,
+        name: user.identity.firstname
+      }
+    });
+    return response.status;
+  }
+);
+
+// 이메일 인증 요청
+export const postVerifyEmailToServer = createAsyncThunk(
+  'accountSlice/postVerifyEmailToServer',
+  async (_, { getState }) => {
+    const state = getState() as { accountSlice: AccountState };
+    const { user } = state.accountSlice;
+
+    const response = await axiosInstance.post('https://api.example.com/data', {
+      body: {
+        email: user.account.email
+      }
+    });
+    return response.status;
+  }
+);
+
+// 재가입 방지 이메일 중복체크
+export const postCheckDuplicateEmailToServer = createAsyncThunk(
+  'accountSlice/postCheckDuplicateEmailToServer',
+  async (_, { getState }) => {
+    const state = getState() as { accountSlice: AccountState };
+    const { user } = state.accountSlice;
+
+    const response = await axiosInstance.post('https://api.example.com/data', {
+      body: {
+        email: user.account.email
+      }
+    });
+    return response.status;
+  }
+);
 
 const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
   reducers: {
-    setProfileImage: (state: SignupState, action: { payload: string }) => {
-      state.profileImage = action.payload;
-      console.table(state.profileImage);
-    },
-    setFirstname: (state: SignupState, action: { payload: string }) => {
-      state.firstname = action.payload;
-      console.table(state.firstname);
-    },
-    setLastname: (state: SignupState, action: { payload: string }) => {
-      state.lastname = action.payload;
-      console.table(state.lastname);
-    },
-    setEmail: (state: SignupState, action: { payload: string }) => {
-      state.email = action.payload;
-      console.table(state.email);
-    },
-    setId: (state: SignupState, action: { payload: string }) => {
-      state.id = action.payload;
-      console.table(state.id);
-    },
-    setPassword: (state: SignupState, action: { payload: string }) => {
-      state.password = action.payload;
-      console.table(state.password);
-    },
-    setBirthDate: (state: SignupState, action: { payload: string }) => {
-      state.birthDate = action.payload;
-      console.table(state.birthDate);
-    },
-    setGender: (state: SignupState, action: { payload: string }) => {
-      state.gender = action.payload;
-      console.table(state.gender);
-    },
-    setSexualPreference: (state: SignupState, action: { payload: string }) => {
-      state.sexualPreference = action.payload;
-      console.table(state.sexualPreference);
-    },
-    setIntrodution: (state: SignupState, action: { payload: string }) => {
-      state.introduction = action.payload;
-      console.table(state.introduction);
-    },
-    addSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
-      state.selectedTags = [...state.selectedTags, action.payload];
-      console.table(state.selectedTags);
-    },
-    removeSelectedTags: (state: { selectedTags: number[] }, action: { payload: number }) => {
-      state.selectedTags = state.selectedTags.filter(tag => tag !== action.payload);
-      console.table(state.selectedTags);
-    },
-    setReaction: (
-      state: { selectedReactions: Reaction[] },
-      action: { payload: { id: number } }
-    ) => {
-      switch (state.selectedReactions[action.payload.id]) {
-        case Reaction.Like:
-          state.selectedReactions[action.payload.id] = Reaction.Dislike;
-          break;
-        case Reaction.Dislike:
-          state.selectedReactions[action.payload.id] = Reaction.None;
-          break;
-        case Reaction.None:
-          state.selectedReactions[action.payload.id] = Reaction.Like;
-          break;
-      }
+    setAccountReEnterPassword: (state: SignupState, action: PayloadAction<string>) => {
+      state.validation.reEnterPassword = action.payload;
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(postSignupDataToServer.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postSignupDataToServer.fulfilled, (state, action) => {
+      if (action.payload === 200) {
+        state.validation.isSignup = true;
+      }
+    });
+    builder.addCase(postSignupDataToServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+    builder.addCase(postVerifyEmailToServer.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postVerifyEmailToServer.fulfilled, (state, action) => {
+      if (action.payload === 200) {
+        // state.verify
+      }
+    });
+    builder.addCase(postVerifyEmailToServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+    builder.addCase(postCheckDuplicateEmailToServer.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postCheckDuplicateEmailToServer.fulfilled, (state, action) => {
+      if (action.payload === 200) {
+        state.validation.isEmailVerifyChecked = true;
+      }
+    });
+    builder.addCase(postCheckDuplicateEmailToServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
   }
 });
 
-export const {
-  setProfileImage,
-  setFirstname,
-  setLastname,
-  setEmail,
-  setId,
-  setPassword,
-  setBirthDate,
-  setGender,
-  setSexualPreference,
-  setIntrodution,
-  addSelectedTags,
-  removeSelectedTags,
-  setReaction
-} = signupSlice.actions;
+export const { setAccountReEnterPassword } = signupSlice.actions;
+export const extraReducers = signupSlice.reducer;
 
 export default signupSlice.reducer;
+function getState(): { accountSlice: AccountState } {
+  throw new Error('Function not implemented.');
+}

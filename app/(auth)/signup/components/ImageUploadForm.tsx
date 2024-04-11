@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setProfileImage } from '../../../redux/slices/signupSlice';
+import { setProfileImage } from '../../../redux/oldslices/signupSlice';
 import { CloudUploadSVG } from '../../../svg';
 
 interface ImageUploadFormProps {

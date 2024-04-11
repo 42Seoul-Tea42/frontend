@@ -11,16 +11,16 @@ export interface Profile {
   tags: number[];
 }
 
-interface ProfileServiceState {
+interface ProfileSliceState {
   profiles: Profile[];
 }
 
-const initialState: ProfileServiceState = {
+const initialState: ProfileSliceState = {
   profiles: []
 };
 
-const profileServiceSlice = createSlice({
-  name: 'profileServiceSlice',
+const profileSliceSlice = createSlice({
+  name: 'profileSliceSlice',
   initialState,
   reducers: {
     setProfiles: (state: { profiles: Profile[] }, actions: PayloadAction<Profile[]>) => {
@@ -29,6 +29,6 @@ const profileServiceSlice = createSlice({
   }
 });
 
-export const { setProfiles } = profileServiceSlice.actions;
+export const { setProfiles } = profileSliceSlice.actions;
 
-export default profileServiceSlice.reducer;
+export default profileSliceSlice.reducer;

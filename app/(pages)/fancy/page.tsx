@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserPublicSet } from '../../redux/interface';
-import { fetchFancyUsers } from '../../redux/services/fancyService';
+import { fetchFancyUsers } from '../../redux/oldslices/fancySlice';
 import { RootState } from '../../redux/store';
 import FancyButton from './components';
 import UserDetailsModal from '../components/UserDetailsModal';
@@ -12,7 +12,7 @@ import Skeleton from '../home/Skeleton';
 
 const Fancy = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const users = useSelector((state: RootState) => state.fancyService.users);
+  const users = useSelector((state: RootState) => state.fancySlice.users);
 
   const dispatch = useDispatch();
 
@@ -57,7 +57,9 @@ const Fancy = () => {
                 </button>
                 <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
                   <div className="flex items-end gap-4">
-                    <p className="font-semibold text-2xl text-gray-700">{user.identity.lastname + user.identity.firstname}</p>
+                    <p className="font-semibold text-2xl text-gray-700">
+                      {user.identity.lastname + user.identity.firstname}
+                    </p>
                     <p className="font-normal text-gray-700">{user.another.distance}</p>
                     <FancyButton targetId={Number(user.identity.id)} />
                   </div>

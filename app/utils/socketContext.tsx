@@ -6,7 +6,7 @@ import { Events, createSocketOption, registerSocketEvent, unRegisterSocketEvent 
 import { SERVER_URL } from '../../global';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { setChatNoti, setFancyNoti, setHistoryNoti } from '../redux/slices/socketEventSlice';
+import { setChatNoti, setFancyNoti, setHistoryNoti } from '../redux/oldslices/socketEventSlice';
 
 // SocketContext 생성
 const SocketContext = createContext<Socket | undefined>(undefined);

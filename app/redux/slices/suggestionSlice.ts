@@ -15,14 +15,14 @@ const initialState: SuggestionState = {
 };
 
 export const getSuggestionUsersFromServer = createAsyncThunk(
-  'suggestionService/getSuggestionUsersFromServer',
+  'suggestionSlice/getSuggestionUsersFromServer',
   async () => {
     const response = await axiosInstance.get('/tea');
     const users = response.data.map((user: any) => ({
       identity: {
         id: user.identity.id,
         firstname: user.name,
-        lastname: user.last_name,
+        lastname: user.last_name
       },
       ageGender: {
         age: user.birthday,
@@ -30,7 +30,7 @@ export const getSuggestionUsersFromServer = createAsyncThunk(
       },
       another: {
         fancy: user.fancy,
-        distance: user.another.distance,
+        distance: user.another.distance
       }
     }));
     // 한번에 이미지 여러장 받는 api 있는지 물어보기
@@ -57,7 +57,6 @@ const suggestionSlice = createSlice({
       getSuggestionUsersFromServer.fulfilled,
       (state: { users: UserPublicSet[] }, action: PayloadAction<UserPublicSet[]>) => {
         // 6명 한번에 변경
-        
       }
     );
     builder.addCase(getSuggestionUsersFromServer.rejected, state => {

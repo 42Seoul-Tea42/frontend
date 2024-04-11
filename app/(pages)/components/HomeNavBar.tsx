@@ -6,7 +6,7 @@ import HomeNavBarButton from './HomeNavBarButton';
 
 import getGeoLocation from '../../utils/location';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFancyNoti, setHistoryNoti } from '../../redux/slices/socketEventSlice';
+import { setFancyNoti, setHistoryNoti } from '../../redux/oldslices/socketEventSlice';
 import { RootState } from '../../redux/store';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
 

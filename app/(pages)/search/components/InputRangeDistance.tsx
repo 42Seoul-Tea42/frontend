@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setDistance } from '../../../redux/slices/searchParamSlice';
+import { setDistance } from '../../../redux/oldslices/searchParamSlice';
 
 const InputRangeDistance: React.FC = () => {
   const distance = useSelector((state: RootState) => state.searchParam.distance);
@@ -29,12 +29,8 @@ const InputRangeDistance: React.FC = () => {
       >
         {distance}km
       </div>
-      <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">
-        1km
-      </span>
-      <span className="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">
-        100km
-      </span>
+      <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">1km</span>
+      <span className="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">100km</span>
     </div>
   );
 };

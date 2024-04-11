@@ -1,32 +1,31 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchPageSlice from './slices/searchParamSlice';
-import signupSlice from './slices/signupSlice';
-import suggestProfileSlice from './slices/suggestProfileSlice';
-import userDataSlice from './slices/userDataSlice';
-import socketEventSlice from './slices/socketEventSlice';
-import profileServiceSlice from './slices/profileServiceSlice';
-import logger from 'redux-logger';
-import historyService from './services/historyService';
-import suggestionService from './services/suggestionService';
-import fancyService from './services/fancyService';
-import accountService from './services/accountService';
+import searchPageSlice from './oldslices/searchParamSlice';
+import suggestProfileSlice from './oldslices/suggestProfileSlice';
+import userDataSlice from './oldslices/userDataSlice';
 
+import logger from 'redux-logger';
+import socketEventSlice from './oldslices/socketEventSlice';
+import historySlice from './slices/historySlice';
+import fancySlice from './slices/fancySlice';
+import suggestionSlice from './slices/suggestionSlice';
+import accountSlice from './slices/accountSlice';
 // Import the Tuple type from the 'redux' package
 
 type AppActions = any;
 
 const store = configureStore({
   reducer: {
+    // legacy
     searchParam: searchPageSlice,
-    signup: signupSlice,
     suggestProfile: suggestProfileSlice,
     userData: userDataSlice,
     socketEvent: socketEventSlice,
-    profileService: profileServiceSlice,
-    historyService: historyService,
-    fancyService: fancyService,
-    suggestionService: suggestionService,
-    accountService: accountService
+
+    //new
+    historySlice: historySlice,
+    fancySlice: fancySlice,
+    suggestionSlice: suggestionSlice,
+    accountSlice: accountSlice
   },
   middleware: (
     getDefaultMiddleware: (arg0: {
@@ -47,5 +46,3 @@ const store = configureStore({
 });
 
 export default store;
-
-export type RootState = ReturnType<typeof store.getState>;
