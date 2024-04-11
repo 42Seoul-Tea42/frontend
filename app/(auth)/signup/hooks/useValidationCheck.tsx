@@ -1,13 +1,21 @@
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 export const useValidationCheck = () => {
   const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
-  const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
-  const isEmailDuplicateChecked = useSelector((state: RootState) => state.accountSlice.isEmailDuplicateChecked);
+  const reEnterPassword = useSelector((state: RootState) => state.signupSlice.validation.reEnterPassword);
+  const isIdDuplicateChecked = useSelector((state: RootState) => state.signupSlice.validation.isIdDuplicateChecked);
+  const isEmailDuplicateChecked = useSelector(
+    (state: RootState) => state.signupSlice.validation.isEmailDuplicateChecked
+  );
 
   const isPasswordMatching = () => password === reEnterPassword;
 
   const checkEmailDuplicate = () => isEmailDuplicateChecked;
+
+  const checkIdDuplicate = () => isIdDuplicateChecked;
+
+  const checkPasswordLength = () => password.length >= 8;
 
   const showAlertsForValidation = () => {
     if (!isPasswordMatching()) {
@@ -20,7 +28,15 @@ export const useValidationCheck = () => {
       return false;
     }
 
-    // 여기에 추가적인 입력값의 유효성 검사 로직을 추가할 수 있습니다.
+    if (!checkIdDuplicate()) {
+      alert('아이디 중복체크를 완료해주세요.');
+      return false;
+    }
+
+    if (!checkPasswordLength()) {
+      alert('비밀번호는 8자 이상이어야 합니다.');
+      return false;
+    }
 
     return true;
   };

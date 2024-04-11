@@ -10,6 +10,7 @@ interface SignupState {
     isSignup: boolean;
     isEmailDuplicateChecked: boolean;
     isEmailVerifyChecked: boolean;
+    isIdDuplicateChecked: boolean;
   };
   loading: boolean;
   error: string | null;
@@ -20,6 +21,7 @@ const initialState: SignupState = {
     isSignup: false,
     isEmailDuplicateChecked: false,
     isEmailVerifyChecked: false,
+    isIdDuplicateChecked: false,
     reEnterPassword: ''
   },
   loading: false,
@@ -78,6 +80,22 @@ export const postCheckDuplicateEmailToServer = createAsyncThunk(
   }
 );
 
+// 아이디 중복체크
+export const postCheckDuplicateIdToServer = createAsyncThunk(
+  'accountSlice/postCheckDuplicateIdToServer',
+  async (_, { getState }) => {
+    const state = getState() as { accountSlice: AccountState };
+    const { user } = state.accountSlice;
+
+    const response = await axiosInstance.post('https://api.example.com/data', {
+      body: {
+        id: user.identity.id
+      }
+    });
+    return response.status;
+  }
+);
+
 const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
@@ -87,6 +105,7 @@ const signupSlice = createSlice({
     }
   },
   extraReducers: builder => {
+    // 회원가입 정보 서버로 전송
     builder.addCase(postSignupDataToServer.pending, state => {
       state.loading = true;
       state.error = null;
@@ -100,6 +119,8 @@ const signupSlice = createSlice({
       state.loading = false;
       state.error = action.error.message ?? null;
     });
+
+    // 이메일 인증 요청
     builder.addCase(postVerifyEmailToServer.pending, state => {
       state.loading = true;
       state.error = null;
@@ -113,6 +134,8 @@ const signupSlice = createSlice({
       state.loading = false;
       state.error = action.error.message ?? null;
     });
+
+    // 이메일 중복체크
     builder.addCase(postCheckDuplicateEmailToServer.pending, state => {
       state.loading = true;
       state.error = null;
@@ -126,13 +149,23 @@ const signupSlice = createSlice({
       state.loading = false;
       state.error = action.error.message ?? null;
     });
+
+    // id 중복체크
+    builder.addCase(postCheckDuplicateIdToServer.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postCheckDuplicateIdToServer.fulfilled, (state, action) => {
+      if (action.payload === 200) {
+        state.validation.isIdDuplicateChecked = true;
+      }
+    });
+    builder.addCase(postCheckDuplicateIdToServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
   }
 });
 
 export const { setAccountReEnterPassword } = signupSlice.actions;
 export const extraReducers = signupSlice.reducer;
-
-export default signupSlice.reducer;
-function getState(): { accountSlice: AccountState } {
-  throw new Error('Function not implemented.');
-}

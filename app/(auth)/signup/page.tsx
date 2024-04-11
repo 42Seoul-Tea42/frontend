@@ -2,15 +2,13 @@
 
 import SignupForm from './components/SignupForm';
 import { useSelector, useDispatch } from 'react-redux';
-import { postSignupDataToServer, postVerifyEmailToServer } from '../../redux/oldslices/accountSlice';
 import { RootState } from '../../redux/store';
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
+import { postSignupDataToServer } from '../../redux/slices/signupSlice';
 
 const Signup: React.FC = () => {
   const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
-  const isSignup = useSelector((state: RootState) => state.accountSlice.isSignup);
   const showAlertsForValidation = useValidationCheck();
 
   const dispatch = useDispatch();
@@ -26,12 +24,6 @@ const Signup: React.FC = () => {
     // 서버로 회원가입 데이터를 전송
     dispatch<any>(postSignupDataToServer());
   };
-
-  useEffect(() => {
-    if (isSignup) {
-      alert(`회원가입이 완료되었습니다. 가입하신 이메일 ${email} 로 인증을 진행해주세요.`);
-    }
-  }, [isSignup]);
 
   return (
     <div className="w-full h-screen flex justify-center">

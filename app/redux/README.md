@@ -175,15 +175,15 @@ namespace Interface-Set {
     }
 }
 
-UserPublicSet ..|> suggestionSlice : Suggestion Slice
-UserPublicSet ..|> historySlice : History Slice
-UserPublicSet ..|> fancySlice : Fancy Slice
-UserChattingSet ..|> chattingSlice : Chatting Slice
-UserAccountSet ..|> accountSlice : Account Slice
-UserAccountSet ..|> UserSignup: Signup Slice
-UserAccountSet ..|> UserLogin: Login Slice
-UserProfileInquirySet ..|> profileInquirySlice : Profile Inquiry Slice
-UserProfileInquirySet ..|> searchSlice : Search Slice
+UserPublicSet ..|> suggestionSlice : Suggestion Service
+UserPublicSet ..|> historySlice : History Service
+UserPublicSet ..|> fancySlice : Fancy Service
+UserChattingSet ..|> chattingSlice : Chatting Service
+UserAccountSet ..|> accountSlice : Account Service
+UserAccountSet ..|> UserSignup: Signup Service
+UserAccountSet ..|> UserLogin: Login Service
+UserProfileInquirySet ..|> profileInquirySlice : Profile Inquiry Service
+UserProfileInquirySet ..|> searchSlice : Search Service
 
 namespace Reducer {
 

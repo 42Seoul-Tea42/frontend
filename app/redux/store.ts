@@ -9,7 +9,7 @@ import historySlice from './slices/historySlice';
 import fancySlice from './slices/fancySlice';
 import suggestionSlice from './slices/suggestionSlice';
 import accountSlice from './slices/accountSlice';
-// Import the Tuple type from the 'redux' package
+import signupSlice from './slices/signupSlice';
 
 type AppActions = any;
 
@@ -25,7 +25,8 @@ const store = configureStore({
     historySlice: historySlice,
     fancySlice: fancySlice,
     suggestionSlice: suggestionSlice,
-    accountSlice: accountSlice
+    accountSlice: accountSlice,
+    signupSlice: signupSlice
   },
   middleware: (
     getDefaultMiddleware: (arg0: {
@@ -45,4 +46,4 @@ const store = configureStore({
   }
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
