@@ -5,6 +5,7 @@ import { AxiosResponse } from 'axios';
 
 export interface AccountState {
   user: UserAccountSet;
+  reEnterPassword: string;
   loading: boolean;
   error: string | null;
 }
@@ -39,6 +40,7 @@ const initialState: AccountState = {
       mainPhoto: ''
     }
   },
+  reEnterPassword: '',
   loading: false,
   error: null
 };
@@ -82,6 +84,9 @@ const accountSlice = createSlice({
     },
     setAccountEmail: (state: AccountState, action: PayloadAction<string>) => {
       state.user.account.email = action.payload;
+    },
+    setReEnterPassword: (state: AccountState, action: PayloadAction<string>) => {
+      state.reEnterPassword = action.payload;
     }
   },
   extraReducers: builder => {
@@ -102,8 +107,14 @@ const accountSlice = createSlice({
   }
 });
 
-export const { setAccountId, setAccountPassword, setAccountEmail, setAccountFirstname, setAccountLastname } =
-  accountSlice.actions;
+export const {
+  setAccountId,
+  setAccountPassword,
+  setAccountEmail,
+  setAccountFirstname,
+  setAccountLastname,
+  setReEnterPassword
+} = accountSlice.actions;
 export const extraReducers = accountSlice.reducer;
 
 export default accountSlice.reducer;

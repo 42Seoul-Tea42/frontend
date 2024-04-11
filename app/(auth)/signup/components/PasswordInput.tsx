@@ -1,19 +1,26 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import React from 'react';
 
-const PasswordInput: React.FC = () => {
-  const dispatch = useDispatch();
-  const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
-  const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
+interface PasswordInputProps {
+  password: string;
+  reEnterPassword: string;
+  setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setReEnterPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
+const PasswordInput: React.FC<PasswordInputProps> = ({
+  password,
+  reEnterPassword,
+  setPassword,
+  setReEnterPassword
+}) => {
   return (
     <div>
       <div className="relative z-0 w-full mb-5 group">
         <input
-          value={password}
           type="password"
           name="floating_password"
-          onChange={e => dispatch(setAccountPassword(e.target.value))}
+          value={password}
+          onChange={setPassword}
           id="floating_password"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
@@ -28,10 +35,10 @@ const PasswordInput: React.FC = () => {
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
-          value={reEnterPassword}
           type="password"
           name="floating_confirm_password"
-          onChange={e => dispatch(setAccountReEnterPassword(e.target.value))}
+          value={reEnterPassword}
+          onChange={setReEnterPassword}
           id="re_enter_floating_password"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "

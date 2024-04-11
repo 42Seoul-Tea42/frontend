@@ -8,7 +8,6 @@ import { useValidationCheck } from './hooks/useValidationCheck';
 import { postSignupDataToServer } from '../../redux/slices/signupSlice';
 
 const Signup: React.FC = () => {
-  const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
   const showAlertsForValidation = useValidationCheck();
 
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const Signup: React.FC = () => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
 
-    // 예외처리
+    // 예외처리 유효성 검사
     if (!showAlertsForValidation()) return;
 
     // 서버로 회원가입 데이터를 전송

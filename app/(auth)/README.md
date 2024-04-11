@@ -3,7 +3,6 @@
 ## 회원가입
 
 ```mermaid
-
 sequenceDiagram
     participant Client
     participant Server
@@ -31,23 +30,19 @@ sequenceDiagram
     Server-->Client: jwt 토큰 쿠키 헤더 설정, 유저 인증단계 전달
 ```
 
-### 인증단계에 따른 유저페이지
+## 인증단계 (이메일 인증)
 
 ```mermaid
-flowchart LR
-
-step(유저 인증단계)
-email(이메일인증)
-link(링크클릭)
-server(서버)
-
-step --> email[이메일인증]
-step --> 프로필설정
-step --> 취향선택설정
-
-email --  인증 메일 발송 --> link -- 콜백 url --> step
-step -- 쿼리파싱 --> server
-server -- 인증완료 --> step
+sequenceDiagram
+    participant Client
+    participant Server
+    participant DB
+    Client->>Server: 이메일 인증 요청
+    Server-->Client: 이메일 전송
+    Client->>Server: 이메일 링크의 쿼리 검증 요청
+    Server->>DB: 인증코드 검증
+    DB-->Server: 인증완료
+    Server-->Client: 인증완료
 ```
 
 해당 인증 방식의 한계점

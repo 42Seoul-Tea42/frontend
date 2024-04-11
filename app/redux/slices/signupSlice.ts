@@ -6,7 +6,6 @@ import { AccountState } from './accountSlice';
 
 interface SignupState {
   validation: {
-    reEnterPassword: string;
     isSignup: boolean;
     isEmailDuplicateChecked: boolean;
     isEmailVerifyChecked: boolean;
@@ -21,8 +20,7 @@ const initialState: SignupState = {
     isSignup: false,
     isEmailDuplicateChecked: false,
     isEmailVerifyChecked: false,
-    isIdDuplicateChecked: false,
-    reEnterPassword: ''
+    isIdDuplicateChecked: false
   },
   loading: false,
   error: null
@@ -99,11 +97,7 @@ export const postCheckDuplicateIdToServer = createAsyncThunk(
 const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
-  reducers: {
-    setAccountReEnterPassword: (state: SignupState, action: PayloadAction<string>) => {
-      state.validation.reEnterPassword = action.payload;
-    }
-  },
+  reducers: {},
   extraReducers: builder => {
     // 회원가입 정보 서버로 전송
     builder.addCase(postSignupDataToServer.pending, state => {
@@ -167,5 +161,8 @@ const signupSlice = createSlice({
   }
 });
 
-export const { setAccountReEnterPassword } = signupSlice.actions;
+export const {} = signupSlice.actions;
+
 export const extraReducers = signupSlice.reducer;
+
+export default signupSlice.reducer;

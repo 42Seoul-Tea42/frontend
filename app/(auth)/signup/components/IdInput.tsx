@@ -1,18 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setAccountId } from '../../../redux/oldslices/accountSlice';
+interface IdInputProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-const IdInput: React.FC = () => {
-  const dispatch = useDispatch();
-  const id = useSelector((state: RootState) => state.accountSlice.user.identity.id);
-
+const IdInput: React.FC<IdInputProps> = ({ value, onChange }) => {
   return (
     <div className="relative z-0 w-full mb-5 group">
       <input
         type="id"
         name="floating_id"
-        value={id}
-        onChange={e => dispatch(setAccountId(e.target.value))}
+        value={value}
+        onChange={onChange}
         id="floating_id"
         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         placeholder=" "
