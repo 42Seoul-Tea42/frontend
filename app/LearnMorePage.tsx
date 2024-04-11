@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 const LearnMorePage: React.FC = () => {
   const router = useRouter();
   const handleStart = () => {
-    router.push('/login');
+    router.push('auth/login');
   };
 
   return (
@@ -17,8 +17,7 @@ const LearnMorePage: React.FC = () => {
           Discover your match for new experiences, make new friends, and perhaps find a lover,
           <br></br>
           all as effortlessly as sipping a cup of tea.<br></br>
-          Prepare an open-minded cup (yes, it means you!) and get ready for heartwarming
-          connections!
+          Prepare an open-minded cup (yes, it means you!) and get ready for heartwarming connections!
           <br></br>
         </p>
         <button

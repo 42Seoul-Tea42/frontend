@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -22,7 +21,7 @@ const EmailLoginForm: React.FC = () => {
   };
 
   const findPassword = () => {
-    router.push('/user/reset-password');
+    // router.push('/user/reset-password');
   };
 
   return (

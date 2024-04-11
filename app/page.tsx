@@ -17,7 +17,7 @@ const LandingPage: React.FC = () => {
   };
 
   const pushLoginPage = () => {
-    router.push('/login');
+    router.push('auth/login');
   };
 
   return (

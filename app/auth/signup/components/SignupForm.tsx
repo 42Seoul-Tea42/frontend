@@ -22,11 +22,7 @@ interface SignupFormProps {
 
 // ui 부분만 분리시켜서 form이 컨트롤하는 데이터만 주입
 const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
-  const id = useSelector((state: RootState) => state.accountSlice.user.identity.id);
-  const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
-  const firstname = useSelector((state: RootState) => state.accountSlice.user.identity.firstname);
-  const lastname = useSelector((state: RootState) => state.accountSlice.user.identity.lastname);
-  const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
+  const user = useSelector((state: RootState) => state.accountSlice.user);
   const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
 
   const dispatch = useDispatch();
@@ -40,26 +36,26 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       </h5>
 
       <div className="flex">
-        <EmailInput value={email} onChange={e => dispatch(setAccountEmail(e.target.value))} />
+        <EmailInput value={user.account.email} onChange={e => dispatch(setAccountEmail(e.target.value))} />
         <button type="button" onClick={() => dispatch<any>(postCheckDuplicateEmailToServer())}>
           emailcheck
         </button>
       </div>
       <UserNameInput
-        firstname={firstname}
-        lastname={lastname}
+        firstname={user.identity.firstname}
+        lastname={user.identity.lastname}
         setFirstname={e => dispatch(setAccountFirstname(e.target.value))}
         setLastname={e => dispatch(setAccountLastname(e.target.value))}
       />
       <div className="flex">
-        <IdInput value={id} onChange={e => dispatch(setAccountId(e.target.value))} />
+        <IdInput value={user.identity.id} onChange={e => dispatch(setAccountId(e.target.value))} />
         <button type="button" onClick={() => dispatch<any>(postCheckDuplicateIdToServer())}>
           ID Check
         </button>
       </div>
 
       <PasswordInput
-        password={password}
+        password={user.account.password}
         reEnterPassword={reEnterPassword}
         setPassword={e => dispatch(setAccountPassword(e.target.value))}
         setReEnterPassword={e => dispatch(setReEnterPassword(e.target.value))}

@@ -1,15 +1,15 @@
 'use client';
 import { useState } from 'react';
 
-import UserNameForm from '../../(auth)/signup/components/UserNameInput';
-import DateOfBirthForm from '../../(auth)/signup/components/AgeInput';
-import GenderRadioList from '../../(auth)/signup/components/GenderRadioList';
-import SexualPreferenceRadioList from '../../(auth)/signup/components/SexualPreferenceRadioList';
-import TagSelector from '../../(auth)/signup/components/TagSelector';
-import EmojiGridList from '../../(auth)/login/components/EmojiGridList';
-import ImageUploadForm from '../../(auth)/signup/components/ImageUploadForm';
+import UserNameForm from '../../auth/signup/components/UserNameInput';
+import DateOfBirthForm from '../../auth/signup/components/AgeInput';
+import GenderRadioList from '../../auth/signup/components/GenderRadioList';
+import SexualPreferenceRadioList from '../../auth/signup/components/SexualPreferenceRadioList';
+import TagSelector from '../../auth/signup/components/TagSelector';
+import EmojiGridList from '../../auth/login/components/EmojiGridList';
+import ImageUploadForm from '../../auth/signup/components/ImageUploadForm';
 import { DirectionSVG } from '../../svg';
-import PasswordInput from '../../(auth)/signup/components/PasswordInput';
+import PasswordInput from '../../auth/signup/components/PasswordInput';
 
 const Setting: React.FC = () => {
   const accordionItems = [

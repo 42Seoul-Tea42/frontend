@@ -6,7 +6,7 @@ import InputRangeStarBar from './components/InputRangeStarBar';
 import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
 import SearchResultTable from './components/SearchResultTable';
-import TagSelector from '../../(auth)/signup/components/TagSelector';
+import TagSelector from '../../auth/signup/components/TagSelector';
 import { DirectionSVG, SearchSVG } from '../../svg';
 
 const Search: React.FC = () => {
