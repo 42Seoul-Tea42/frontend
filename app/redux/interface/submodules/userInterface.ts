@@ -3,66 +3,66 @@ import { Interests } from './utilInterface';
 /**
  * @type {id: string; firstname: string; lastname: string;}
  */
-export interface Identity {
+export type Identity = {
   id: string;
   firstname: string;
   lastname: string;
-}
+};
 
 /**
  * @type {age: number; gender: string;}
  */
-export interface AgeGender {
+export type AgeGender = {
   age: number;
   gender: string;
-}
+};
 
 /**
  * @type {email: string; password: string;}
  */
-export interface Account {
+export type Account = {
   email: string;
   password: string;
-}
+};
 
 /**
  * @type {accessToken: string; refreshToken: string;}
  */
-export interface Authentication {
+export type Authentication = {
   accessToken: string;
   refreshToken: string;
-}
+};
 
 /**
  * @type {subPhotos: string[]; interests: Interests[]; rating: number; sexualPreference: string; introduction: string;}
  */
-export interface Profile {
+export type Profile = {
   subPhotos: string[];
   interests: Interests[];
   rating: number;
   sexualPreference: string;
   introduction: string;
-}
+};
 
 /**
  * @type {mainPhoto: string;}
  */
-export interface Photo {
+export type Photo = {
   mainPhoto: string; // 주요 사진 경로
-}
+};
 
 /**
  * @type {fancy: boolean; distance: number;}
  */
-export interface Another {
+export type Another = {
   fancy: boolean;
   distance: number;
-}
+};
 
 /**
  * @type {latitude: number; longitude: number;}
  */
-export interface Position {
+export type Position = {
   latitude: number;
   longitude: number;
-}
+};

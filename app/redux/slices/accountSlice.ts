@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserAccountSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 import { AxiosResponse } from 'axios';
+import { postLoginToServer } from './loginSlice';
 
 export interface AccountState {
   user: UserAccountSet;
@@ -46,8 +47,8 @@ const initialState: AccountState = {
 };
 
 // // 회원가입 정보 서버로 전송
-// export const postSignupDataToServer = createAsyncThunk(
-//   'accountSlice/postSignupDataToServer',
+// export const postSignupToServer = createAsyncThunk(
+//   'accountSlice/postSignupToServer',
 //   async (_, { getState }) => {
 //     const state = getState() as { accountSlice: AccountState };
 //     const { user } = state.accountSlice;
@@ -90,20 +91,26 @@ const accountSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    // builder.addCase(postSignupDataToServer.pending, state => {
+    // builder.addCase(postSignupToServer.pending, state => {
     //   state.loading = true;
     //   state.error = null;
     // });
-    // builder.addCase(postSignupDataToServer.fulfilled, (state, action) => {
+    // builder.addCase(postSignupToServer.fulfilled, (state, action) => {
     //   if (action.payload === 200) {
     //     state.isSignup = true;
     //   }
     //   state.user = initialState.user;
     // });
-    // builder.addCase(postSignupDataToServer.rejected, (state, action) => {
+    // builder.addCase(postSignupToServer.rejected, (state, action) => {
     //   state.loading = false;
     //   state.error = action.error.message ?? null;
     // });
+    builder.addCase(postLoginToServer.fulfilled, (state, action) => {
+      state.user.identity.id = action.payload.id;
+      state.user.identity.firstname = action.payload.name;
+      state.user.identity.lastname = action.payload.last_name;
+      state.user.ageGender.age = action.payload.birthday;
+    });
   }
 });
 

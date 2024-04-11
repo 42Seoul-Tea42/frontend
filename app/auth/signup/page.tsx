@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
-import { postSignupDataToServer } from '../../redux/slices/signupSlice';
+import { postSignupToServer } from '../../redux/slices/signupSlice';
+import { useEffect } from 'react';
 
 const Signup: React.FC = () => {
+  const error = useSelector((state: RootState) => state.signupSlice.error);
   const showAlertsForValidation = useValidationCheck();
 
   const dispatch = useDispatch();
@@ -18,11 +20,20 @@ const Signup: React.FC = () => {
     event.preventDefault();
 
     // 예외처리 유효성 검사
-    if (!showAlertsForValidation()) return;
+    // if (!showAlertsForValidation()) return;
 
     // 서버로 회원가입 데이터를 전송
-    dispatch<any>(postSignupDataToServer());
+    // dispatch<any>(postSignupToServer());
+
+    alert('회원가입이 완료되었습니다. 로그인 해주세요~');
+    router.push('/auth/login');
   };
+
+  useEffect(() => {
+    if (error) {
+      alert(error + ': 다시 시도해주세요.');
+    }
+  }, [error]);
 
   return (
     <div className="w-full h-screen flex justify-center">

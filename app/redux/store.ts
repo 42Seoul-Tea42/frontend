@@ -10,6 +10,7 @@ import fancySlice from './slices/fancySlice';
 import suggestionSlice from './slices/suggestionSlice';
 import accountSlice from './slices/accountSlice';
 import signupSlice from './slices/signupSlice';
+import loginSlice from './slices/loginSlice';
 
 type AppActions = any;
 
@@ -26,7 +27,8 @@ const store = configureStore({
     fancySlice: fancySlice,
     suggestionSlice: suggestionSlice,
     accountSlice: accountSlice,
-    signupSlice: signupSlice
+    signupSlice: signupSlice,
+    loginSlice: loginSlice
   },
   middleware: (
     getDefaultMiddleware: (arg0: {

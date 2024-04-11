@@ -34,11 +34,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">
         회원가입을 위한 계정정보를 입력해주세요.
       </h5>
-
-      <div className="flex">
+      <div className="flex gap-4 items-start">
         <EmailInput value={user.account.email} onChange={e => dispatch(setAccountEmail(e.target.value))} />
-        <button type="button" onClick={() => dispatch<any>(postCheckDuplicateEmailToServer())}>
-          emailcheck
+        <button
+          type="button"
+          className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={() => dispatch<any>(postCheckDuplicateEmailToServer())}
+        >
+          <p className="">check</p>
         </button>
       </div>
       <UserNameInput
@@ -47,10 +50,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         setFirstname={e => dispatch(setAccountFirstname(e.target.value))}
         setLastname={e => dispatch(setAccountLastname(e.target.value))}
       />
-      <div className="flex">
+      <div className="flex gap-4 items-start">
         <IdInput value={user.identity.id} onChange={e => dispatch(setAccountId(e.target.value))} />
-        <button type="button" onClick={() => dispatch<any>(postCheckDuplicateIdToServer())}>
-          ID Check
+        <button
+          type="button"
+          className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={() => dispatch<any>(postCheckDuplicateIdToServer())}
+        >
+          check
         </button>
       </div>
 
@@ -64,9 +71,9 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       <div className="flex justify-end mt-10">
         <button
           type="submit"
-          className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="max-w-24 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Sign Up
+          Sign up
         </button>
       </div>
     </form>

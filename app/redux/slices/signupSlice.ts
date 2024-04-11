@@ -27,26 +27,23 @@ const initialState: SignupState = {
 };
 
 // 회원가입 정보 서버로 전송
-export const postSignupDataToServer = createAsyncThunk(
-  'accountSlice/postSignupDataToServer',
-  async (_, { getState }) => {
-    const state = getState() as { accountSlice: AccountState };
-    const { user } = state.accountSlice;
+export const postSignupToServer = createAsyncThunk('accountSlice/postSignupToServer', async (_, { getState }) => {
+  const state = getState() as { accountSlice: AccountState };
+  const { user } = state.accountSlice;
 
-    const response = await axiosInstance.post('https://api.example.com/data', {
-      body: {
-        login_id: user.identity.id,
-        email: user.account.email,
-        pw: user.account.password,
-        last_name: user.identity.lastname,
-        name: user.identity.firstname
-      }
-    });
-    return response.status;
-  }
-);
+  const response = await axiosInstance.post('https://api.example.com/data', {
+    body: {
+      login_id: user.identity.id,
+      email: user.account.email,
+      pw: user.account.password,
+      last_name: user.identity.lastname,
+      name: user.identity.firstname
+    }
+  });
+  return response.status;
+});
 
-// 이메일 인증 요청
+// 이메일로 링크보내기 요청
 export const postVerifyEmailToServer = createAsyncThunk(
   'accountSlice/postVerifyEmailToServer',
   async (_, { getState }) => {
@@ -100,16 +97,16 @@ const signupSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     // 회원가입 정보 서버로 전송
-    builder.addCase(postSignupDataToServer.pending, state => {
+    builder.addCase(postSignupToServer.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postSignupDataToServer.fulfilled, (state, action) => {
+    builder.addCase(postSignupToServer.fulfilled, (state, action) => {
       if (action.payload === 200) {
         state.validation.isSignup = true;
       }
     });
-    builder.addCase(postSignupDataToServer.rejected, (state, action) => {
+    builder.addCase(postSignupToServer.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
