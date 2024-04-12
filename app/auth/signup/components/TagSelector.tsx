@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
 import TagButton from './TagButton';
 import { Interests } from '../../../redux/interface/submodules/utilInterface';
+import { toggleInterests, } from '../../../redux/slices/searchSlice';
+import { useDispatch } from 'react-redux';
 
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0) + str.slice(1).toLowerCase();
 };
 
 const TagSelector: React.FC = () => {
+
+  const dispatch = useDispatch();
+
   const userInterests: Interests = {
     SPORTS: 1 << 0,
     TRAVEL: 1 << 1,
@@ -23,16 +28,18 @@ const TagSelector: React.FC = () => {
     DRINK: 1 << 12
   };
 
-  const keys = Object.keys(userInterests);
-  const texts = keys.map((key) => capitalizeFirstLetter(key.replace('_', ' / ')));
+  const items = Object.entries(userInterests).map(([key, value]) => ({
+    text: capitalizeFirstLetter(key.replace('_', ' / ')),
+    value: value as number // 해당 관심사의 넘버 값을 가져옵니다.
+  }));
 
   return (
     <>
-      {texts.map((text, index) => (
+      {items.map((item, index) => (
         <TagButton
-          onClick={() => {}}
+          onClick={() => dispatch(toggleInterests(item.value))}
           key={index}
-          text={text}
+          text={item.text}
         />
       ))}
     </>

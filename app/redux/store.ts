@@ -11,6 +11,7 @@ import suggestionSlice from './slices/suggestionSlice';
 import accountSlice from './slices/accountSlice';
 import signupSlice from './slices/signupSlice';
 import loginSlice from './slices/loginSlice';
+import searchSlice from './slices/searchSlice';
 
 type AppActions = any;
 
@@ -28,7 +29,8 @@ const store = configureStore({
     suggestionSlice: suggestionSlice,
     accountSlice: accountSlice,
     signupSlice: signupSlice,
-    loginSlice: loginSlice
+    loginSlice: loginSlice,
+    searchSlice: searchSlice
   },
   middleware: (
     getDefaultMiddleware: (arg0: {
