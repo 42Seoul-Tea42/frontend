@@ -20,21 +20,22 @@ export type Chatting = {
  * @type {SPORTS: number; TRAVEL: number; FOOD: number; GAME: number; BOOK: number; IT_SCIENCE: number; VIDEO: number; LANGUAGE: number; FASHION: number; PETS: number; ART: number; SMOKE: number; DRINK: number;}
  * @description DB에서 비트연산을 이용한 '한번에 가져오기 기능'을 사용하기 위해 비트쉬프팅으로 정의 - juhoh님께 문의
  */
-export enum Interests {
-  SPORTS = 1 << 0,
-  TRAVEL = 1 << 1,
-  FOOD = 1 << 2,
-  GAME = 1 << 3,
-  BOOK = 1 << 4,
-  IT_SCIENCE = 1 << 5,
-  VIDEO = 1 << 6,
-  LANGUAGE = 1 << 7,
-  FASHION = 1 << 8,
-  PETS = 1 << 9,
-  ART = 1 << 10,
-  SMOKE = 1 << 11,
-  DRINK = 1 << 12
+export interface Interests {
+  SPORTS: number;
+  TRAVEL: number;
+  FOOD: number;
+  GAME: number;
+  BOOK: number;
+  IT_SCIENCE: number;
+  VIDEO: number;
+  LANGUAGE: number;
+  FASHION: number;
+  PETS: number;
+  ART: number;
+  SMOKE: number;
+  DRINK: number;
 }
+
 
 /**
  * @type {ageRange: number[]; distance: number; fame: number; interests: Interests[];}

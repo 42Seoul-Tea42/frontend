@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import { Key, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSuggestionUsersFromServer } from '../../redux/oldslices/suggestionSlice';
 import { UserPublicSet } from '../../redux/interface';
 import FancyButton from '../fancy/components';
 import UserDetailsModal from '../components/UserDetailsModal';
 import { RootState } from '../../redux/store';
 import Skeleton from './Skeleton';
+import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
