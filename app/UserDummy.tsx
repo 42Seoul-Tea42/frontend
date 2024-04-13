@@ -46,7 +46,57 @@ export const usersInquirySetDummy = [
       gender: ''
     },
     photo: {
-      mainPhoto: '/emoji/1.jpg'
+      mainPhoto: '/emoji/7.jpg'
+    }
+  },
+  {
+    identity: {
+      id: '3',
+      firstname: '경민',
+      lastname: '김'
+    },
+    profile: {
+      subPhotos: [],
+      interests: [],
+      rating: 3,
+      sexualPreference: '',
+      introduction: ''
+    },
+    another: {
+      fancy: false,
+      distance: 20
+    },
+    ageGender: {
+      age: 30,
+      gender: ''
+    },
+    photo: {
+      mainPhoto: '/emoji/4.jpg'
+    }
+  },
+  {
+    identity: {
+      id: '4',
+      firstname: '준형',
+      lastname: '박'
+    },
+    profile: {
+      subPhotos: [],
+      interests: [],
+      rating: 4,
+      sexualPreference: '',
+      introduction: ''
+    },
+    another: {
+      fancy: false,
+      distance: 12
+    },
+    ageGender: {
+      age: 32,
+      gender: ''
+    },
+    photo: {
+      mainPhoto: '/emoji/8.jpg'
     }
   }
 ];

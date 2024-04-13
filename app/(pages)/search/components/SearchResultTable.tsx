@@ -44,7 +44,7 @@ const SearchResultTable: React.FC<SearchResultTableProps> = ({ users, schema }) 
           {sortedUsers.map((user, index) => (
             <SearchResultTableRow
               key={index}
-              name={user.identity.name}
+              name={user.identity.firstname}
               age={user.ageGender.age}
               distance={user.another.distance}
               fame={user.profile.rating}

@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SendMessageForm from './components/SendMessageForm';
 import ViewMessageForm from './components/ViewMessageForm';
 import ChattingRoomList from './components/ChattingRoomList';
 import Draggable from 'react-draggable';
 import Image from 'next/image';
-import ChatButton from './ChatButton';
+import ChatButton from './components/ChatButton';
 import { useDispatch } from 'react-redux';
 import { setChatNoti } from '../../redux/oldslices/socketEventSlice';
 import { useSocket } from '../../utils/socketContext';
@@ -33,8 +33,22 @@ const Chat: React.FC = () => {
     setVisible(!visible);
   };
 
+  // 채팅창 밖을 클릭하면 채팅창 닫기 동작
+  const dragRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dragRef.current && !dragRef.current.contains(event.target as Node)) {
+        setVisible(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="fixed right-10 bottom-36 z-50">
+    <div ref={dragRef} className="fixed right-10 bottom-36 z-50">
       <div className={visible ? '' : 'hidden'}>
         <Draggable>
           <div className="items-center max-w-96 bg-white rounded-xl shadow-lg">

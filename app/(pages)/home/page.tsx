@@ -55,6 +55,7 @@ const Home = () => {
                   imgSrc={user.photo.mainPhoto}
                   alt={index.toString()}
                   name={user.identity.firstname}
+                  age={user.ageGender.age}
                   distance={user.another.distance}
                   fancyTargetId={user.identity.id}
                 />

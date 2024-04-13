@@ -1,17 +1,17 @@
 import FancyButton from '../fancy/components';
 import Image from 'next/image';
-
 type UserCardProps = {
   imgSrc: string;
   alt: string;
+  age: number;
   name: string;
   distance: number;
   fancyTargetId: string;
 };
 
-const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, name, distance, fancyTargetId }) => {
+const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, age, name, distance, fancyTargetId }) => {
   return (
-    <div className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
+    <div className="shadow-xl rounded-xl border-4 border-gray-300 w-[200px]">
       <button type="button" className="relative w-48 h-48 rounded-t-xl">
         <Image
           fill
@@ -23,10 +23,11 @@ const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, name, distance, fancyT
           draggable="false"
         />
       </button>
-      <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
-        <div className="flex items-end gap-4">
+      <div className="w-48 h-12 bg-white rounded-b-lg border-t-2 p-1 pl-2">
+        <div className="flex items-end gap-2">
           <p className="font-semibold text-2xl text-gray-700">{name}</p>
-          <p className="font-normal text-gray-700">{distance}km</p>
+          <p className="mr-2 font-md text-xl text-gray-500">{age}</p>
+          <p className="font-thin text-base text-gray-900">{distance}km</p>
           <FancyButton targetId={fancyTargetId} />
         </div>
       </div>

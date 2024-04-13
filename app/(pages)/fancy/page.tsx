@@ -1,23 +1,22 @@
 'use client';
 
-import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
 import { UserPublicSet } from '../../redux/interface';
-import { fetchFancyUsers } from '../../redux/oldslices/fancySlice';
-import { RootState } from '../../redux/store';
-import FancyButton from './components';
 import UserDetailsModal from '../components/UserDetailsModal';
 import { Key, useEffect, useState } from 'react';
 import Skeleton from '../home/Skeleton';
+import UserCard from '../home/UserCard';
+import { usersInquirySetDummy } from '../../UserDummy';
+import ColorPickerUserCard from './components/ColorPickerUserCard';
 
 const Fancy = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const users = useSelector((state: RootState) => state.fancySlice.users);
+  // const users = useSelector((state: RootState) => state.fancySlice.users);
+  const users = usersInquirySetDummy;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchFancyUsers(new Date()) as any);
+    // dispatch(fetchFancyUsers(new Date()) as any);
   }, []);
 
   return (
@@ -36,38 +35,24 @@ const Fancy = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
           {users.length > 0 ? (
             users.map((user: UserPublicSet, index: Key) => (
-              <div key={index} className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(!isModalOpen)}
-                  className="relative w-48 h-48 rounded-t-xl"
-                >
-                  {user ? (
-                    <Image
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      src={`/emoji/${user.photo.mainPhoto}`}
-                      alt={`Preview ${index}`}
-                      className="rounded-t-lg object-cover hover:brightness-75"
-                      draggable="false"
+              <div key={index}>
+                <ColorPickerUserCard
+                  style={'p-2 border rounded-xl bg-blue-200'}
+                  userCard={
+                    <UserCard
+                      imgSrc={user.photo.mainPhoto}
+                      alt={index.toString()}
+                      name={user.identity.firstname}
+                      age={user.ageGender.age}
+                      distance={user.another.distance}
+                      fancyTargetId={user.identity.id}
                     />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200 animate-pulse" />
-                  )}
-                </button>
-                <div className="w-48 h-12 bg-white rounded-b-lg border-2 p-1 pl-2">
-                  <div className="flex items-end gap-4">
-                    <p className="font-semibold text-2xl text-gray-700">
-                      {user.identity.lastname + user.identity.firstname}
-                    </p>
-                    <p className="font-normal text-gray-700">{user.another.distance}</p>
-                    <FancyButton targetId={Number(user.identity.id)} />
-                  </div>
-                </div>
+                  }
+                />
               </div>
             ))
           ) : (
-            <Skeleton cssColor="bg-yellow-300 opacity-50" />
+            <Skeleton style="bg-yellow-300 opacity-50" />
           )}
         </div>
         <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
