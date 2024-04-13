@@ -2,23 +2,23 @@
 
 import { UserPublicSet } from '../../redux/interface';
 import UserDetailsModal from '../components/UserDetailsModal';
-import { Key, useEffect, useState } from 'react';
+import { Key, useEffect } from 'react';
 import Skeleton from '../home/Skeleton';
 import UserCard from '../home/UserCard';
 import { usersInquirySetDummy } from '../../UserDummy';
 import ColorPickerUserCard from './components/ColorPickerUserCard';
+import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
+import { useDispatch } from 'react-redux';
 
 const Fancy = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // const users = useSelector((state: RootState) => state.fancySlice.users);
   const users = usersInquirySetDummy;
-
-  // const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(fetchFancyUsers(new Date()) as any);
   }, []);
 
+  const dispatch = useDispatch();
   return (
     <div className="flex flex-wrap justify-center min-h-screen h-relative">
       <div className="mx-auto m-20">
@@ -30,7 +30,7 @@ const Fancy = () => {
           <div className="flex justify-center items-center gap-4">
             <p className="font-semibold text-lg text-gray-600">test2</p>
             <span className="text-red-200 w-10 h-5 border-2 border-white dark:border-gray-800 rounded-full"></span>
-          </div>{' '}
+          </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
           {users.length > 0 ? (
@@ -40,6 +40,7 @@ const Fancy = () => {
                   style={'p-2 border rounded-xl bg-blue-200'}
                   userCard={
                     <UserCard
+                      onClick={() => dispatch(setProfileModalVisible(true))}
                       imgSrc={user.photo.mainPhoto}
                       alt={index.toString()}
                       name={user.identity.firstname}
@@ -55,7 +56,7 @@ const Fancy = () => {
             <Skeleton style="bg-yellow-300 opacity-50" />
           )}
         </div>
-        <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <UserDetailsModal targetId={1} />
       </div>
     </div>
   );

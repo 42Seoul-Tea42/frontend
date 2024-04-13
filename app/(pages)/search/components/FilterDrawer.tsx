@@ -6,27 +6,16 @@ import InputRangeStarBar from './InputRangeStarBar';
 import InputRangeDistance from './InputRangeDistance';
 import TagSelector from '../../../auth/signup/components/InterestsSelector';
 import InputMinMaxAge from './InputMinMaxAge';
+import useCloseOnOutsideClick from '../../hooks/useCloseOnOutsideClick';
 
 type FilterDrawerProps = {
   onClick: () => void;
 };
 
 const FilterDrawer: React.FC<FilterDrawerProps> = ({ onClick }) => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-
-  // 드로어 밖을 클릭하면 드로어를 닫기.
   const drawerRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
-        setIsDrawerOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  useCloseOnOutsideClick(drawerRef, isDrawerOpen, () => setIsDrawerOpen(false));
 
   // 드로어 폼 제출시 동작정의
   const submitDrawer = () => {

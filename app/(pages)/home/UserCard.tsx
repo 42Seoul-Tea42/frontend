@@ -7,12 +7,13 @@ type UserCardProps = {
   name: string;
   distance: number;
   fancyTargetId: string;
+  onClick: () => void;
 };
 
-const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, age, name, distance, fancyTargetId }) => {
+const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, age, name, distance, fancyTargetId, onClick }) => {
   return (
     <div className="shadow-xl rounded-xl border-4 border-gray-300 w-[200px]">
-      <button type="button" className="relative w-48 h-48 rounded-t-xl">
+      <button type="button" onClick={onClick} className="relative w-48 h-48 rounded-t-xl">
         <Image
           fill
           priority

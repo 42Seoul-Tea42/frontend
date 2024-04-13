@@ -7,9 +7,11 @@ import Skeleton from '../home/Skeleton';
 import UserCard from '../home/UserCard';
 import ColorPickerUserCard from '../fancy/components/ColorPickerUserCard';
 import { usersInquirySetDummy } from '../../UserDummy';
+import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
+import { useDispatch } from 'react-redux';
 
 const History = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const dispatch = useDispatch();
   // const users = useSelector((state: RootState) => state.historySlice.users);
   const users = usersInquirySetDummy;
   // const dispatch = useDispatch();
@@ -39,6 +41,7 @@ const History = () => {
                   style={'p-2 border rounded-xl bg-blue-200'}
                   userCard={
                     <UserCard
+                      onClick={() => dispatch(setProfileModalVisible(true))}
                       imgSrc={user.photo.mainPhoto}
                       alt={index.toString()}
                       name={user.identity.firstname}
@@ -54,7 +57,7 @@ const History = () => {
             <Skeleton style="bg-blue-300 opacity-50" />
           )}
         </div>
-        <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <UserDetailsModal targetId={1} />
       </div>
     </div>
   );

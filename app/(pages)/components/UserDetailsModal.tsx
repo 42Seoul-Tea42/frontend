@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import UserProfileCarousel from './UserProfileCarousel';
 import UserDetailsList from './UserDetailList';
-import axiosInstance from '../../utils/axios';
+import { RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
+import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
+import ProfileModalContents from './ProfileModalContents';
 
 interface UserDetailsModalProps {
   targetId: number;
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
 }
 
-const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
-  targetId,
-  isModalOpen,
-  setIsModalOpen
-}) => {
-  const modalRef = React.createRef<HTMLDivElement>();
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      setIsModalOpen(false);
-    }
-  };
+const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ targetId }) => {
+  const dispatch = useDispatch();
+  const profileModalRef = useRef<HTMLDivElement>(null);
+  const profileModalVisible = useSelector((state: RootState) => state.profileInquirySlice.profileModalVisible);
+  useCloseOnOutsideClick(profileModalRef, profileModalVisible, () => {
+    dispatch(setProfileModalVisible(false));
+  });
 
   const blockUser = async () => {
     //  const response = await axiosInstance.post('/user/block', {
@@ -46,44 +43,40 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
   };
 
   useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isModalOpen]);
-
-  useEffect(() => {
     getUserProfileDetails();
   }, []);
 
   return (
     <>
-      {isModalOpen && (
+      {profileModalVisible && (
         <div
           id="default-modal"
           tabIndex={-1}
           aria-hidden={false}
           className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50"
         >
-          <div ref={modalRef} className="bg-white w-full max-w-3xl p-5 rounded-lg shadow-lg">
-            <div className="md:grid md:grid-cols-2 items-center gap-4">
-              <UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />
-              <div>
-                <UserDetailsList />
-                <div className="flex justify-center text-gray-400 mt-10">
-                  <p onClick={blockUser} className="hover:text-blue-600 hover:underline">
-                    차단
-                  </p>
-                  <p className="ml-2 mr-2"> / </p>
-                  <p onClick={reportUser} className="hover:text-blue-600 hover:underline">
-                    신고
-                  </p>
+          <ProfileModalContents
+            forwardedRef={profileModalRef}
+            content={
+              <div className="bg-white w-full max-w-3xl p-5 rounded-lg shadow-lg">
+                <div className="md:grid md:grid-cols-2 items-center gap-4">
+                  <UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />
+                  <div>
+                    <UserDetailsList />
+                    <div className="flex justify-center text-gray-400 mt-10">
+                      <p onClick={blockUser} className="hover:text-blue-600 hover:underline">
+                        차단
+                      </p>
+                      <p className="ml-2 mr-2"> / </p>
+                      <p onClick={reportUser} className="hover:text-blue-600 hover:underline">
+                        신고
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            }
+          />
         </div>
       )}
     </>

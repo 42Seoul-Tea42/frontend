@@ -11,10 +11,14 @@ import { useDispatch } from 'react-redux';
 import { setChatNoti } from '../../redux/oldslices/socketEventSlice';
 import { useSocket } from '../../utils/socketContext';
 import { HamburgerSVG } from '../../svg';
+import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
 
 const Chat: React.FC = () => {
+  const dragRef = useRef<HTMLDivElement>(null);
+  const [isFloatingChatVisible, setFloatingChatVisible] = useState<boolean>(false);
+  useCloseOnOutsideClick(dragRef, isFloatingChatVisible, () => setFloatingChatVisible(false));
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
   const chatSocket = useSocket();
 
@@ -30,26 +34,12 @@ const Chat: React.FC = () => {
 
   const clickChatButton = () => {
     dispatch(setChatNoti(false));
-    setVisible(!visible);
+    setFloatingChatVisible(!isFloatingChatVisible);
   };
-
-  // 채팅창 밖을 클릭하면 채팅창 닫기 동작
-  const dragRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dragRef.current && !dragRef.current.contains(event.target as Node)) {
-        setVisible(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
     <div ref={dragRef} className="fixed right-10 bottom-36 z-50">
-      <div className={visible ? '' : 'hidden'}>
+      <div className={isFloatingChatVisible ? '' : 'hidden'}>
         <Draggable>
           <div className="items-center max-w-96 bg-white rounded-xl shadow-lg">
             <div className="flex items-center p-4 border rounded-t-xl">

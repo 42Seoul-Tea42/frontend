@@ -14,7 +14,7 @@ const InterestsButton: React.FC<InterestsButtonProps> = ({ text, onClick, value 
     <button
       type="button"
       className={`${
-        interests.includes(value) && 'bg-blue-500'
+        interests.includes(value) && 'border-2 border-blue-500'
       } relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium bg-gray-300 text-gray-900 rounded-lg group 
                    hover:text-white dark:text-white focus:ring-4 focus:outline-none`}
       onClick={onClick}

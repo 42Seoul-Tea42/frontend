@@ -11,9 +11,9 @@ import CardsSkeleton from './Skeleton';
 import SortControlBar from './SortControlBar';
 import FilterDrawer from '../search/components/FilterDrawer';
 import UserCard from './UserCard';
+import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
 
 const Home = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // const users = useSelector((state: RootState) => state.suggestionSlice.users);
   const users = usersInquirySetDummy;
 
@@ -52,6 +52,7 @@ const Home = () => {
             sortedUsers.map((user: UserProfileInquirySet, index: Key) => (
               <div key={index}>
                 <UserCard
+                  onClick={() => dispatch(setProfileModalVisible(true))}
                   imgSrc={user.photo.mainPhoto}
                   alt={index.toString()}
                   name={user.identity.firstname}
@@ -65,7 +66,7 @@ const Home = () => {
             <CardsSkeleton style="bg-red-300 opacity-50" />
           )}
         </div>
-        <UserDetailsModal targetId={1} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <UserDetailsModal targetId={1} />
       </div>
     </div>
   );

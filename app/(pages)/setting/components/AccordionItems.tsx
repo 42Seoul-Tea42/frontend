@@ -48,7 +48,7 @@ const AccordionItems: React.FC<AccordionItemsProps> = ({ items }) => {
             </h2>
             <div
               id={`accordion-collapse-body-${index}`}
-              className={`${isOpen[index] ? 'border-2 border-t-0 border-blue-500' : 'hidden'}`}
+              className={`${isOpen[index] ? 'border-2 border-blue-500' : 'hidden'}`}
               aria-labelledby={`accordion-collapse-heading-${index}`}
             >
               <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">

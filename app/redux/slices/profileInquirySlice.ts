@@ -4,6 +4,7 @@ import axiosInstance from '../../utils/axios';
 
 interface ProfileInquiryState {
   user: UserProfileInquirySet;
+  profileModalVisible: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -13,27 +14,28 @@ const initialState: ProfileInquiryState = {
     identity: {
       id: '',
       firstname: '',
-      lastname: '',
+      lastname: ''
     },
     profile: {
       subPhotos: [],
       interests: [],
       rating: 0,
       sexualPreference: '',
-      introduction: '',
+      introduction: ''
     },
     another: {
       fancy: false,
-      distance: 0,
+      distance: 0
     },
     ageGender: {
       age: 0,
-      gender: '',
+      gender: ''
     },
     photo: {
       mainPhoto: ''
     }
   },
+  profileModalVisible: false,
   loading: false,
   error: null
 };
@@ -49,7 +51,11 @@ export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () =>
 const profileInquirySlice = createSlice({
   name: 'profileInquirySlice',
   initialState,
-  reducers: {},
+  reducers: {
+    setProfileModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.profileModalVisible = action.payload;
+    }
+  },
   extraReducers: builder => {
     builder.addCase(asyncUpdate.pending, state => {
       state.loading = true;
@@ -65,6 +71,7 @@ const profileInquirySlice = createSlice({
   }
 });
 
+export const { setProfileModalVisible } = profileInquirySlice.actions;
 export const extraReducers = profileInquirySlice.reducer;
 
 export default profileInquirySlice.reducer;
