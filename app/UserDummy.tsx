@@ -42,7 +42,7 @@ export const usersInquirySetDummy = [
       distance: 1
     },
     ageGender: {
-      age: 0,
+      age: 3,
       gender: ''
     },
     photo: {

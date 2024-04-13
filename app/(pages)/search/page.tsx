@@ -8,7 +8,6 @@ import InputRangeDistance from './components/InputRangeDistance';
 import SearchResultTable from './components/SearchResultTable';
 import TagSelector from '../../auth/signup/components/TagSelector';
 import DrawerOpenButton from './components/DrawerOpenButton';
-import { SearchSVG } from '../../svg';
 import SearchButton from './components/SearchButton';
 
 const Search: React.FC = () => {

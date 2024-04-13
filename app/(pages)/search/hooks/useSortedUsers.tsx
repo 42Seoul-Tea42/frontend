@@ -13,7 +13,6 @@ const useSortedUsers = ({ users, sortBy, sortOrder }: useSortedUsersProps) => {
   useEffect(() => {
     if (users && users.length > 0) {
       const sorted = [...users].sort((a, b) => {
-        console.log(a, b, sortBy, sortOrder);
         const aValue = get(a, sortBy);
         const bValue = get(b, sortBy);
         let comparison = 0;

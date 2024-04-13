@@ -11,8 +11,8 @@ import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice
 import SuggestionCard from './SuggestionCard';
 import useSortedUsers from '../search/hooks/useSortedUsers';
 import { usersInquirySetDummy } from '../../UserDummy';
-import SortButton from '../search/components/SortButton';
 import CardsSkeleton from './Skeleton';
+import SortControlBar from './SortControlBar';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -37,15 +37,16 @@ const Home = () => {
     <div className="flex flex-wrap justify-center min-h-screen h-relative">
       <div className="mx-auto m-20">
         <div className="flex flex-col m-10">
-          <div className="flex justify-center items-center gap-4">
-            <p className="font-semibold text-lg text-gray-600">test1</p>
-            <SortButton upClick={() => setSortOrder('descending')} downClick={() => setSortOrder('ascending')} />
-            <span className="text-red-200 w-10 h-5 border-2 border-white dark:border-gray-800 rounded-full"></span>
-          </div>
-          <div className="flex justify-center items-center gap-4">
-            <p className="font-semibold text-lg text-gray-600">test2</p>
-            <span className="text-red-200 w-10 h-5 border-2 border-white dark:border-gray-800 rounded-full"></span>
-          </div>
+          <SortControlBar
+            items={[
+              { text: '나이', setSortBy: 'ageGender.age' },
+              { text: '거리', setSortBy: 'another.distance' },
+              { text: '등급', setSortBy: 'profile.fame' },
+              { text: '관심사', setSortBy: 'profile.interests' }
+            ]}
+            setSortBy={setSortBy}
+            setSortOrder={setSortOrder}
+          />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
           {sortedUsers.length > 0 ? (
