@@ -166,7 +166,7 @@ namespace Interface-Set {
     }
 
     class UserProfileInquirySet {
-        <<Sensitive>>
+        <<Public>>
         Identity
         Photo
         Profile
@@ -175,20 +175,20 @@ namespace Interface-Set {
     }
 }
 
-UserPublicSet ..|> suggestionSlice : Suggestion Service
 UserPublicSet ..|> historySlice : History Service
 UserPublicSet ..|> fancySlice : Fancy Service
 UserChattingSet ..|> chattingSlice : Chatting Service
 UserAccountSet ..|> accountSlice : Account Service
 UserAccountSet ..|> UserSignup: Signup Service
 UserAccountSet ..|> UserLogin: Login Service
+UserProfileInquirySet ..|> suggestionSlice : Suggestion Service
 UserProfileInquirySet ..|> profileInquirySlice : Profile Inquiry Service
 UserProfileInquirySet ..|> searchSlice : Search Service
 
 namespace Reducer {
 
     class suggestionSlice {
-        users: PublicSet[]
+        users: profileInquirySet[]
     }
 
     class fancySlice {
@@ -209,7 +209,7 @@ namespace Reducer {
     }
 
     class searchSlice {
-        users: UserProfile[]
+        users: ProfileInquirySet[]
     }
 
     class accountSlice {

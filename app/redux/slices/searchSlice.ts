@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserPublicSet } from '../interface';
+import { UserProfileInquirySet } from '../interface';
 import axiosInstance from '../../utils/axios';
 
 interface SearchParams {
@@ -11,7 +11,7 @@ interface SearchParams {
 }
 
 interface SearchState {
-  users: UserPublicSet[];
+  users: UserProfileInquirySet[];
   searchParams: SearchParams;
   loading: boolean;
   error: string | null;
@@ -67,7 +67,7 @@ const fancySlice = createSlice({
     //   state.loading = true;
     //   state.error = null;
     // });
-    // builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserPublicSet[]>) => {
+    // builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserProfileInquirySet[]>) => {
     //   state.users = [...state.users, ...action.payload];
     // });
     // builder.addCase(asyncUpdate.rejected, (state, action) => {

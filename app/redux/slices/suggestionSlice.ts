@@ -1,9 +1,9 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { UserPublicSet } from '../interface';
+import { UserProfileInquirySet } from '../interface';
 import axiosInstance from '../../utils/axios';
 
 interface SuggestionState {
-  users: UserPublicSet[];
+  users: UserProfileInquirySet[];
   loading: boolean;
   error: string | null;
 }
@@ -55,7 +55,7 @@ const suggestionSlice = createSlice({
     });
     builder.addCase(
       getSuggestionUsersFromServer.fulfilled,
-      (state: { users: UserPublicSet[] }, action: PayloadAction<UserPublicSet[]>) => {
+      (state: { users: UserProfileInquirySet[] }, action: PayloadAction<UserProfileInquirySet[]>) => {
         // 6명 한번에 변경
       }
     );
