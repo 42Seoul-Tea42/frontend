@@ -1,19 +1,19 @@
-import { DirectionSVG } from '../../../svg';
+import { SearchSVG } from '../../../svg';
 
-interface SearchParameterDrawerButtonProps {
+interface SearchButtonProps {
   onClick: () => void;
 }
-
-const DrawerOpenButton: React.FC<SearchParameterDrawerButtonProps> = ({ onClick }) => {
+const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
   return (
     <button
-      className="fixed top-14 w-full h-12 flex justify-center items-center text-gray-400 hover:bg-gray-100 font-medium px-5 py-2.5 mb-2"
       type="button"
+      className="flex items-center text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-2"
       onClick={onClick}
     >
-      <DirectionSVG direction="down" size="6" />
+      <SearchSVG />
+      검색하기
     </button>
   );
 };
 
-export default DrawerOpenButton;
+export default SearchButton;

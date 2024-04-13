@@ -7,9 +7,9 @@ import InputMinMaxAge from './components/InputMinMaxAge';
 import InputRangeDistance from './components/InputRangeDistance';
 import SearchResultTable from './components/SearchResultTable';
 import TagSelector from '../../auth/signup/components/TagSelector';
-import { DirectionSVG, SearchSVG } from '../../svg';
-import { Drawer } from 'flowbite';
-import DrawerOpenButton from './components/SearchButton';
+import DrawerOpenButton from './components/DrawerOpenButton';
+import { SearchSVG } from '../../svg';
+import SearchButton from './components/SearchButton';
 
 const Search: React.FC = () => {
   const searchParams = useSelector((state: RootState) => state.searchSlice.searchParams);
@@ -86,14 +86,7 @@ const Search: React.FC = () => {
                 ))}
               </div>
               <div className="flex justify-end m-5">
-                <button
-                  type="button"
-                  className="flex items-center text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-2"
-                  onClick={handleSearchButton}
-                >
-                  <SearchSVG />
-                  검색하기
-                </button>
+                <SearchButton onClick={handleSearchButton} />
               </div>
             </div>
           </>
