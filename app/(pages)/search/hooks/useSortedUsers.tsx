@@ -22,7 +22,7 @@ const useSortedUsers = ({ users, sortBy, sortOrder }: useSortedUsersProps) => {
       });
       setSortedUsers(sorted);
     }
-  }, [users, sortBy, sortOrder]);
+  }, [sortBy, sortOrder]);
 
   return sortedUsers;
 };
