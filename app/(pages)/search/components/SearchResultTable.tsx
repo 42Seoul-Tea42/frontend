@@ -1,16 +1,31 @@
 import React from 'react';
 import SearchResultTableRow from './SearchResultTableRow';
+import useSortedUsers from '../hooks/useSortedUsers';
 const SearchResultTable = () => {
   const users = [
     {
       id: 1,
-      name: 'Jane Cooper',
+      name: '아이디 1 유저',
       age: 24,
-      distance: 3,
+      distance: 2,
+      fame: 5,
+      interests: ['Music', 'Travel', 'Food']
+    },
+    {
+      id: 2,
+      name: '아이디 2 유저',
+      age: 24,
+      distance: 1,
       fame: 5,
       interests: ['Music', 'Travel', 'Food']
     }
   ];
+
+  const sortedUsers = useSortedUsers({
+    users: users,
+    sortBy: 'distance',
+    sortOrder: 'descending'
+  });
 
   return (
     <div className="relative mt-40 shadow overflow-x-scroll sm:rounded-lg">
@@ -35,7 +50,7 @@ const SearchResultTable = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
+          {sortedUsers.map(user => (
             <SearchResultTableRow
               name={user.name}
               age={user.age}
