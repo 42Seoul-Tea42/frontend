@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchResultTableRow from './SearchResultTableRow';
 import useSortedUsers from '../hooks/useSortedUsers';
+import SortButton from './SortButton';
 const SearchResultTable = () => {
   const users = [
     {
@@ -21,37 +22,81 @@ const SearchResultTable = () => {
     }
   ];
 
+  const [sortBy, setSortBy] = useState<string>('name');
+  const [sortOrder, setSortOrder] = useState<'descending' | 'ascending'>('ascending');
+
   const sortedUsers = useSortedUsers({
-    users: users,
-    sortBy: 'distance',
-    sortOrder: 'descending'
+    users,
+    sortBy,
+    sortOrder
   });
 
   return (
     <div className="relative mt-40 shadow overflow-x-scroll sm:rounded-lg">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              이름
+          <tr className="flex justify-between">
+            <th scope="col" className="flex items-center px-6 py-3">
+              <p className="text-lg mr-2">이름</p>
             </th>
-            <th scope="col" className="px-6 py-3">
-              나이
+            <th scope="col" className="flex items-center px-6 py-3">
+              <p className="text-lg mr-2">나이</p>
+              <SortButton
+                upClick={() => {
+                  setSortBy('age');
+                  setSortOrder('ascending');
+                }}
+                downClick={() => {
+                  setSortBy('age');
+                  setSortOrder('descending');
+                }}
+              />
             </th>
-            <th scope="col" className="px-6 py-3">
-              거리
+            <th scope="col" className="flex items-center px-6 py-3">
+              <p className="text-lg mr-2">거리</p>
+              <SortButton
+                upClick={() => {
+                  setSortBy('distance');
+                  setSortOrder('ascending');
+                }}
+                downClick={() => {
+                  setSortBy('distance');
+                  setSortOrder('descending');
+                }}
+              />
             </th>
-            <th scope="col" className="px-6 py-3">
-              등급
+            <th scope="col" className="flex items-center px-6 py-3">
+              <p className="text-lg mr-2">등급</p>
+              <SortButton
+                upClick={() => {
+                  setSortBy('fame');
+                  setSortOrder('ascending');
+                }}
+                downClick={() => {
+                  setSortBy('fame');
+                  setSortOrder('descending');
+                }}
+              />
             </th>
-            <th scope="col" className="px-6 py-3">
-              태그 겹치는 개수
+            <th scope="col" className="flex items-center px-6 py-3">
+              <p className="text-lg mr-2">태그</p>
+              <SortButton
+                upClick={() => {
+                  setSortBy('interests');
+                  setSortOrder('ascending');
+                }}
+                downClick={() => {
+                  setSortBy('interests');
+                  setSortOrder('descending');
+                }}
+              />
             </th>
           </tr>
         </thead>
         <tbody>
-          {sortedUsers.map(user => (
+          {sortedUsers.map((user, index) => (
             <SearchResultTableRow
+              key={index}
               name={user.name}
               age={user.age}
               distance={user.distance}
