@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { HeartSVG } from '../../../svg';
 
 interface FancyButtonProps {
-  targetId: number;
+  targetId: string;
 }
 
 const FancyButton: React.FC<FancyButtonProps> = ({ targetId }) => {
