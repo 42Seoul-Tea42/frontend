@@ -1,15 +1,17 @@
-type AgeInputProps = {
-  age: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { setAccountAge } from '../../../redux/slices/accountSlice';
 
-const AgeInput: React.FC<AgeInputProps> = ({ age, onChange }) => {
+const AgeInput: React.FC = () => {
+  const age = useSelector((state: RootState) => state.accountSlice.user.ageGender.age);
+  const dispatch = useDispatch();
+
   return (
     <div className="relative z-0 w-full group mb-5 mt-5">
       <input
         type="number"
         value={age}
-        onChange={onChange}
+        onChange={e => dispatch(setAccountAge(parseInt(e.target.value)))}
         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         placeholder=""
         required

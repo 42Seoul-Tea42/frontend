@@ -1,5 +1,5 @@
 import { Account, AgeGender, Position, Profile, Another, Photo, Identity } from './submodules/userInterface';
-import { Chatting, RegisterSteps } from './submodules/utilInterface';
+import { Chatting } from './submodules/utilInterface';
 
 /**
  * Interface representing public user set including identity, age, gender, and other details.

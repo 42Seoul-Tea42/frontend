@@ -36,7 +36,6 @@ export interface Interests {
   DRINK: number;
 }
 
-
 /**
  * @type {ageRange: number[]; distance: number; fame: number; interests: Interests[];}
  */
@@ -45,13 +44,4 @@ export type SearchParams = {
   distance: number; // 거리
   fame: number; // 명성
   interests: Interests[]; // 관심사 배열
-};
-
-/**
- * @type {emailCheck: boolean; profileCheck: boolean; emojiCheck: boolean;}
- */
-export type RegisterSteps = {
-  emailCheck: boolean; // 이메일 확인 단계 여부
-  profileCheck: boolean; // 프로필 확인 단계 여부
-  emojiCheck: boolean; // 이모티콘 확인 단계 여부
 };

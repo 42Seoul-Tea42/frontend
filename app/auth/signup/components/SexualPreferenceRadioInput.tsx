@@ -1,8 +1,13 @@
-type SexualPreferenceRadioListProps = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { setAccountSexualPreference } from '../../../redux/slices/accountSlice';
 
-const SexualPreferenceRadioList: React.FC<SexualPreferenceRadioListProps> = ({ onChange }) => {
+const SexualPreferenceRadioInput: React.FC = () => {
+  const sexualPreference = useSelector(
+    (state: RootState) => state.accountSlice.user.profile.sexualPreference
+  );
+  const dispatch = useDispatch();
+
   return (
     <div className="mb-5">
       <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -13,11 +18,14 @@ const SexualPreferenceRadioList: React.FC<SexualPreferenceRadioListProps> = ({ o
               type="radio"
               value="hetero"
               name="sexual-preference"
-              onChange={onChange}
+              onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
-            <label htmlFor="hetero" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <label
+              htmlFor="hetero"
+              className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
               이성애
             </label>
           </div>
@@ -29,11 +37,14 @@ const SexualPreferenceRadioList: React.FC<SexualPreferenceRadioListProps> = ({ o
               type="radio"
               value="homo"
               name="sexual-preference"
-              onChange={onChange}
+              onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
-            <label htmlFor="homo" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <label
+              htmlFor="homo"
+              className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
               동성애
             </label>
           </div>
@@ -45,11 +56,14 @@ const SexualPreferenceRadioList: React.FC<SexualPreferenceRadioListProps> = ({ o
               type="radio"
               value="bisexual"
               name="sexual-preference"
-              onChange={onChange}
+              onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
-            <label htmlFor="bisexual" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <label
+              htmlFor="bisexual"
+              className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
               양성애
             </label>
           </div>
@@ -59,4 +73,4 @@ const SexualPreferenceRadioList: React.FC<SexualPreferenceRadioListProps> = ({ o
   );
 };
 
-export default SexualPreferenceRadioList;
+export default SexualPreferenceRadioInput;

@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { CloudUploadSVG } from '../../../svg';
 
 type ImageUploadFormProps = {
@@ -13,8 +12,6 @@ type ImageUploadFormProps = {
 };
 
 const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height, previewImage, setProfileImage }) => {
-  const dispatch = useDispatch();
-
   const dispatchSignupImage = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {

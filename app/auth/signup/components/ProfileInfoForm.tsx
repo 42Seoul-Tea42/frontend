@@ -1,7 +1,16 @@
+// auth/profile 로 대체
+// auth/profile 로 대체
+// auth/profile 로 대체
+// auth/profile 로 대체
+// auth/profile 로 대체
+// auth/profile 로 대체
+// auth/profile 로 대체
+// auth/profile 로 대체
+
 'use client';
 
-import GenderRadioList from './GenderRadioList';
-import SexualPreferenceRadioList from './SexualPreferenceRadioList';
+import GenderRadioList from './GenderRadioInput';
+import SexualPreferenceRadioList from './SexualPreferenceRadioInput';
 import IntroductionForm from './IntroductionForm';
 import TagSelector from './TagSelector';
 import { useSelector } from 'react-redux';

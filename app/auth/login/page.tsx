@@ -26,10 +26,14 @@ const LoginPage: React.FC = () => {
   const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
-    dispatch<any>(postLoginToServer());
+    // dispatch<any>(postLoginToServer());
+
+    // for testing
+    router.push('/home');
   };
 
   useEffect(() => {
+    if (isLogin === false) return;
     if (authSteps.emailVerification === false) {
       router.push('/auth');
     } else if (authSteps.profileCreation === false) {

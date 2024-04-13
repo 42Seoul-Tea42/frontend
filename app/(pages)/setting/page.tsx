@@ -1,33 +1,16 @@
 'use client';
-import { useState } from 'react';
 
-import GenderRadioList from '../../auth/signup/components/GenderRadioList';
-import SexualPreferenceRadioList from '../../auth/signup/components/SexualPreferenceRadioList';
+import GenderRadioList from '../../auth/signup/components/GenderRadioInput';
+import SexualPreferenceRadioList from '../../auth/signup/components/SexualPreferenceRadioInput';
 import TagSelector from '../../auth/signup/components/TagSelector';
 import EmojiGridList from '../../auth/login/components/EmojiGridList';
-import ImageUploadForm from '../../auth/signup/components/ImageUploadForm';
 import PasswordInput from '../../auth/signup/components/PasswordInput';
-import { RootState } from '../../redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  setAccountAge,
-  setAccountFirstname,
-  setAccountGender,
-  setAccountLastname,
-  setAccountPassword,
-  setAccountReEnterPassword,
-  setAccountSexualPreference
-} from '../../redux/slices/accountSlice';
 import UserNameInput from '../../auth/signup/components/UserNameInput';
 import AccordionItems from './AccordionItems';
 import ImageUploadGrid from './ImageUploadGrid';
 import AgeInput from '../../auth/signup/components/AgeInput';
 
 const Setting: React.FC = () => {
-  const user = useSelector((state: RootState) => state.accountSlice.user);
-  const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
-  const dispatch = useDispatch();
-
   return (
     <div className="flex min-h-screen">
       <div className="mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
@@ -37,47 +20,26 @@ const Setting: React.FC = () => {
             items={[
               {
                 title: '이름변경',
-                content: (
-                  <UserNameInput
-                    firstname={user.identity.firstname}
-                    lastname={user.identity.lastname}
-                    setFirstname={e => dispatch(setAccountFirstname(e.target.value))}
-                    setLastname={e => dispatch(setAccountLastname(e.target.value))}
-                  />
-                )
+                content: <UserNameInput />
               },
               {
                 title: '생년월일 재설정',
-                content: (
-                  <AgeInput
-                    age={user.ageGender.age}
-                    onChange={e => dispatch(setAccountAge(parseInt(e.target.value)))}
-                  />
-                )
+                content: <AgeInput />
               },
               {
                 title: '비밀번호 재설정',
-                content: (
-                  <PasswordInput
-                    password={user.account.password}
-                    reEnterPassword={reEnterPassword}
-                    setPassword={e => dispatch(setAccountPassword(e.target.value))}
-                    setReEnterPassword={e => dispatch(setAccountReEnterPassword(e.target.value))}
-                  />
-                )
+                content: <PasswordInput />
               },
               {
                 title: '나의 성별 선택',
-                content: <GenderRadioList onClick={e => dispatch(setAccountGender(e.target.value))} />
+                content: <GenderRadioList />
               },
               {
                 title: '성적 취향 선택',
-                content: (
-                  <SexualPreferenceRadioList onChange={e => dispatch(setAccountSexualPreference(e.target.value))} />
-                )
+                content: <SexualPreferenceRadioList />
               },
-              { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> },
-              { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
+              { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> }
+              // { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
             ]}
           />
           <div className="flex justify-end">
