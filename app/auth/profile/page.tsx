@@ -3,7 +3,7 @@
 import GenderRadioList from '../signup/components/GenderRadioInput';
 import SexualPreferenceRadioList from '../signup/components/SexualPreferenceRadioInput';
 import IntroductionForm from '../signup/components/IntroductionForm';
-import TagSelector from '../signup/components/TagSelector';
+import TagSelector from '../signup/components/InterestsSelector';
 import { useDispatch } from 'react-redux';
 
 const Profile = () => {

@@ -7,6 +7,7 @@ import { postLoginToServer } from './loginSlice';
 export interface AccountState {
   user: UserAccountSet;
   reEnterPassword: string;
+  emojis: number[];
   loading: boolean;
   error: string | null;
 }
@@ -41,6 +42,7 @@ const initialState: AccountState = {
       mainPhoto: ''
     }
   },
+  emojis: [],
   reEnterPassword: '',
   loading: false,
   error: null
@@ -80,6 +82,7 @@ const accountSlice = createSlice({
       state.user.ageGender.gender = action.payload;
     },
     setAccountAge: (state: AccountState, action: PayloadAction<number>) => {
+      if (action.payload < 0 || action.payload > 100) return;
       state.user.ageGender.age = action.payload;
     },
     setAccountFirstname: (state: AccountState, action: PayloadAction<string>) => {
@@ -98,10 +101,29 @@ const accountSlice = createSlice({
       state.user.profile.sexualPreference = action.payload;
     },
     setAccountSubPhotos: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.profile.subPhotos = [...state.user.profile.subPhotos, action.payload];
+      const { subPhotos } = state.user.profile;
+      const newSubPhotos =
+        subPhotos.length >= 4 ? [...subPhotos.slice(1), action.payload] : [...subPhotos, action.payload];
+      state.user.profile.subPhotos = newSubPhotos;
     },
     setAccountMainPhoto: (state: AccountState, action: PayloadAction<string>) => {
       state.user.photo.mainPhoto = action.payload;
+    },
+    setAccountEmojis: (state: AccountState, action: PayloadAction<number>) => {
+      const { emojis } = state;
+      if (emojis.includes(action.payload)) {
+        state.emojis = emojis.filter(item => item !== action.payload);
+      } else {
+        state.emojis = [...emojis, action.payload];
+      }
+    },
+    setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
+      const { interests } = state.user.profile;
+      if (interests.includes(action.payload)) {
+        state.user.profile.interests = interests.filter(item => item !== action.payload);
+      } else {
+        state.user.profile.interests = [...interests, action.payload];
+      }
     }
   },
   extraReducers: builder => {
@@ -139,7 +161,9 @@ export const {
   setAccountGender,
   setAccountSexualPreference,
   setAccountSubPhotos,
-  setAccountMainPhoto
+  setAccountMainPhoto,
+  setAccountEmojis,
+  setAccountInterests
 } = accountSlice.actions;
 export const extraReducers = accountSlice.reducer;
 

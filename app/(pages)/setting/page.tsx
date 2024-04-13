@@ -2,13 +2,13 @@
 
 import GenderRadioList from '../../auth/signup/components/GenderRadioInput';
 import SexualPreferenceRadioList from '../../auth/signup/components/SexualPreferenceRadioInput';
-import TagSelector from '../../auth/signup/components/TagSelector';
 import EmojiGridList from '../../auth/login/components/EmojiGridList';
 import PasswordInput from '../../auth/signup/components/PasswordInput';
 import UserNameInput from '../../auth/signup/components/UserNameInput';
-import AccordionItems from './AccordionItems';
-import ImageUploadGrid from './ImageUploadGrid';
+import AccordionItems from './components/AccordionItems';
+import ImageUploadGrid from './components/ImageUploadGrid';
 import AgeInput from '../../auth/signup/components/AgeInput';
+import InterestsSelector from '../../auth/signup/components/InterestsSelector';
 
 const Setting: React.FC = () => {
   return (
@@ -23,7 +23,7 @@ const Setting: React.FC = () => {
                 content: <UserNameInput />
               },
               {
-                title: '생년월일 재설정',
+                title: '나이 재설정',
                 content: <AgeInput />
               },
               {
@@ -38,8 +38,8 @@ const Setting: React.FC = () => {
                 title: '성적 취향 선택',
                 content: <SexualPreferenceRadioList />
               },
-              { title: '나의 관심사 태그를 선택해주세요.', content: <TagSelector /> }
-              // { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
+              { title: '나의 관심사 태그를 선택해주세요.', content: <InterestsSelector /> },
+              { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
             ]}
           />
           <div className="flex justify-end">

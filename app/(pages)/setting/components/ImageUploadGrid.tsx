@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import ImageUploadForm from '../../auth/signup/components/ImageUploadForm';
-import { RootState } from '../../redux/store';
-import { setAccountMainPhoto, setAccountSubPhotos } from '../../redux/slices/accountSlice';
+import ImageUploadForm from '../../../auth/signup/components/ImageUploadForm';
+import { RootState } from '../../../redux/store';
+import { setAccountMainPhoto, setAccountSubPhotos } from '../../../redux/slices/accountSlice';
 
 const ImageUploadGrid: React.FC = () => {
   const mainPhoto = useSelector((state: RootState) => state.accountSlice.user.photo.mainPhoto);

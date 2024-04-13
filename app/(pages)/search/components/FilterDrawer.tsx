@@ -4,7 +4,7 @@ import DrawerItem from './DrawerItem';
 import DrawerSubmitButton from './DrawerSubmitButton';
 import InputRangeStarBar from './InputRangeStarBar';
 import InputRangeDistance from './InputRangeDistance';
-import TagSelector from '../../../auth/signup/components/TagSelector';
+import TagSelector from '../../../auth/signup/components/InterestsSelector';
 import InputMinMaxAge from './InputMinMaxAge';
 
 type FilterDrawerProps = {

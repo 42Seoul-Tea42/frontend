@@ -1,13 +1,13 @@
-import TagButton from './TagButton';
+import InterestsButton from './InterestsButton';
 import { Interests } from '../../../redux/interface/submodules/utilInterface';
 import { useDispatch } from 'react-redux';
-import { toggleSearchParamsInterests } from '../../../redux/slices/searchSlice';
+import { setAccountInterests } from '../../../redux/slices/accountSlice';
 
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0) + str.slice(1).toLowerCase();
 };
 
-const TagSelector: React.FC = () => {
+const InterestsSelector: React.FC = () => {
   const dispatch = useDispatch();
 
   const userInterests: Interests = {
@@ -34,10 +34,15 @@ const TagSelector: React.FC = () => {
   return (
     <>
       {items.map((item, index) => (
-        <TagButton onClick={() => dispatch(toggleSearchParamsInterests(item.value))} key={index} text={item.text} />
+        <InterestsButton
+          value={item.value}
+          onClick={() => dispatch(setAccountInterests(item.value))}
+          key={index}
+          text={item.text}
+        />
       ))}
     </>
   );
 };
 
-export default TagSelector;
+export default InterestsSelector;

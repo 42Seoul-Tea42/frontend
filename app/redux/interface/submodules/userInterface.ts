@@ -1,5 +1,3 @@
-import { Interests } from './utilInterface';
-
 /**
  * @type {id: string; firstname: string; lastname: string;}
  */
@@ -34,11 +32,11 @@ export type Authentication = {
 };
 
 /**
- * @type {subPhotos: string[]; interests: Interests[]; rating: number; sexualPreference: string; introduction: string;}
+ * @type {subPhotos: string[]; interests: Interests; rating: number; sexualPreference: string; introduction: string;}
  */
 export type Profile = {
   subPhotos: string[];
-  interests: Interests[];
+  interests: number[];
   rating: number;
   sexualPreference: string;
   introduction: string;

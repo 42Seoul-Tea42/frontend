@@ -1,31 +1,17 @@
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
+import { setAccountEmojis } from '../../../redux/slices/accountSlice';
 import { RootState } from '../../../redux/store';
 
 const EmojiGridList: React.FC = () => {
-  const selectedReaction = useSelector((state: RootState) => state.signup.selectedReactions);
   const dispatch = useDispatch();
-
-  const handleReaction = (id: number) => {
-    dispatch(setReaction({ id }));
-  };
+  const emojis = useSelector((state: RootState) => state.accountSlice.emojis);
 
   const Emojis = Array.from({ length: 16 }, (_, index) => ({
     id: index,
     src: `/emoji/${index + 1}.jpg`, // 이미지 경로
-    alt: 'emoji'
+    alt: `emoji${index + 1}`
   }));
-
-  const selectedStyle = (reaction: Reaction): string => {
-    switch (reaction) {
-      case Reaction.Like:
-        return 'border-8 border-solid border-red-400 rounded-lg';
-      case Reaction.Dislike:
-        return 'border-8 border-solid border-blue-400 rounded-lg';
-      case Reaction.None:
-        return '';
-    }
-  };
 
   return (
     <div className="max-w-96 grid grid-cols-4 gap-4">
@@ -33,8 +19,8 @@ const EmojiGridList: React.FC = () => {
         <div className="shadow" key={Emoji.id}>
           <button
             type="button"
-            className={`cursor-pointer relative ${selectedStyle(selectedReaction[Emoji.id])}`}
-            onClick={() => handleReaction(Emoji.id)}
+            className={`cursor-pointer relative ${emojis.includes(Emoji.id) ? 'brightness-50' : ''}`}
+            onClick={() => dispatch(setAccountEmojis(Emoji.id))}
           >
             <Image
               width={500}
