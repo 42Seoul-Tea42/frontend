@@ -1,13 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { setSexualPreference } from '../../../redux/oldslices/signupSlice';
+type SexualPreferenceRadioListProps = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
-const SexualPreferenceRadioList = () => {
-  const dispatch = useDispatch();
-
-  const dispatchSignupSexualPreference = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSexualPreference(e.target.value));
-  };
-
+const SexualPreferenceRadioList: React.FC<SexualPreferenceRadioListProps> = ({ onChange }) => {
   return (
     <div className="mb-5">
       <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -18,7 +13,7 @@ const SexualPreferenceRadioList = () => {
               type="radio"
               value="hetero"
               name="sexual-preference"
-              onChange={dispatchSignupSexualPreference}
+              onChange={onChange}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
@@ -34,7 +29,7 @@ const SexualPreferenceRadioList = () => {
               type="radio"
               value="homo"
               name="sexual-preference"
-              onChange={dispatchSignupSexualPreference}
+              onChange={onChange}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
@@ -50,7 +45,7 @@ const SexualPreferenceRadioList = () => {
               type="radio"
               value="bisexual"
               name="sexual-preference"
-              onChange={dispatchSignupSexualPreference}
+              onChange={onChange}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />

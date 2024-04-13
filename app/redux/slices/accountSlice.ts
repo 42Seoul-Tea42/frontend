@@ -76,7 +76,12 @@ const accountSlice = createSlice({
     setAccountPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.user.account.password = action.payload;
     },
-
+    setAccountGender: (state: AccountState, action: PayloadAction<string>) => {
+      state.user.ageGender.gender = action.payload;
+    },
+    setAccountAge: (state: AccountState, action: PayloadAction<number>) => {
+      state.user.ageGender.age = action.payload;
+    },
     setAccountFirstname: (state: AccountState, action: PayloadAction<string>) => {
       state.user.identity.firstname = action.payload;
     },
@@ -86,8 +91,17 @@ const accountSlice = createSlice({
     setAccountEmail: (state: AccountState, action: PayloadAction<string>) => {
       state.user.account.email = action.payload;
     },
-    setReEnterPassword: (state: AccountState, action: PayloadAction<string>) => {
+    setAccountReEnterPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.reEnterPassword = action.payload;
+    },
+    setAccountSexualPreference: (state: AccountState, action: PayloadAction<string>) => {
+      state.user.profile.sexualPreference = action.payload;
+    },
+    setAccountSubPhotos: (state: AccountState, action: PayloadAction<string>) => {
+      state.user.profile.subPhotos = [...state.user.profile.subPhotos, action.payload];
+    },
+    setAccountMainPhoto: (state: AccountState, action: PayloadAction<string>) => {
+      state.user.photo.mainPhoto = action.payload;
     }
   },
   extraReducers: builder => {
@@ -106,10 +120,10 @@ const accountSlice = createSlice({
     //   state.error = action.error.message ?? null;
     // });
     builder.addCase(postLoginToServer.fulfilled, (state, action) => {
-      state.user.identity.id = action.payload.id;
-      state.user.identity.firstname = action.payload.name;
-      state.user.identity.lastname = action.payload.last_name;
-      state.user.ageGender.age = action.payload.birthday;
+      // state.user.identity.id = action.payload.id;
+      // state.user.identity.firstname = action.payload.name;
+      // state.user.identity.lastname = action.payload.last_name;
+      // state.user.ageGender.age = action.payload.birthday;
     });
   }
 });
@@ -120,7 +134,12 @@ export const {
   setAccountEmail,
   setAccountFirstname,
   setAccountLastname,
-  setReEnterPassword
+  setAccountReEnterPassword,
+  setAccountAge,
+  setAccountGender,
+  setAccountSexualPreference,
+  setAccountSubPhotos,
+  setAccountMainPhoto
 } = accountSlice.actions;
 export const extraReducers = accountSlice.reducer;
 

@@ -3,18 +3,16 @@
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setProfileImage } from '../../../redux/oldslices/signupSlice';
 import { CloudUploadSVG } from '../../../svg';
 
-interface ImageUploadFormProps {
+type ImageUploadFormProps = {
+  previewImage: string;
+  setProfileImage: (image: string) => void;
   width: number;
   height: number;
-}
+};
 
-const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
-  const previewImage = useSelector((state: RootState) => state.signup.profileImage);
-
+const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height, previewImage, setProfileImage }) => {
   const dispatch = useDispatch();
 
   const dispatchSignupImage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +22,7 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height }) => {
       reader.onloadend = () => {
         const result = reader.result;
         if (result && typeof result === 'string') {
-          dispatch(setProfileImage(result));
+          setProfileImage(result);
         }
       };
       reader.readAsDataURL(file);
