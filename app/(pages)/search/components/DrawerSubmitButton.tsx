@@ -3,7 +3,7 @@ import { SearchSVG } from '../../../svg';
 interface SearchButtonProps {
   onClick: () => void;
 }
-const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
+const DrawerSubmitButton: React.FC<SearchButtonProps> = ({ onClick }) => {
   return (
     <button
       type="button"
@@ -16,4 +16,4 @@ const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
   );
 };
 
-export default SearchButton;
+export default DrawerSubmitButton;

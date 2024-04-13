@@ -1,7 +1,7 @@
 import FancyButton from '../fancy/components';
 import Image from 'next/image';
 
-type SuggestionCardProps = {
+type UserCardProps = {
   imgSrc: string;
   alt: string;
   name: string;
@@ -9,7 +9,7 @@ type SuggestionCardProps = {
   fancyTargetId: string;
 };
 
-const SuggestionCard: React.FC<SuggestionCardProps> = ({ imgSrc, alt, name, distance, fancyTargetId }) => {
+const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, name, distance, fancyTargetId }) => {
   return (
     <div className="shadow-xl p-2 rounded-xl bg-yellow-300 w-[210px]">
       <button type="button" className="relative w-48 h-48 rounded-t-xl">
@@ -34,4 +34,4 @@ const SuggestionCard: React.FC<SuggestionCardProps> = ({ imgSrc, alt, name, dist
   );
 };
 
-export default SuggestionCard;
+export default UserCard;

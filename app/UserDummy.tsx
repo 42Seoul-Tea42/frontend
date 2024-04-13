@@ -33,7 +33,7 @@ export const usersInquirySetDummy = [
     profile: {
       subPhotos: [],
       interests: [],
-      rating: 5,
+      rating: 4,
       sexualPreference: '',
       introduction: ''
     },

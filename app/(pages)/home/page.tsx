@@ -1,18 +1,16 @@
 'use client';
 
-import Image from 'next/image';
 import { Key, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { UserProfileInquirySet, UserPublicSet } from '../../redux/interface';
-import FancyButton from '../fancy/components';
+import { useDispatch } from 'react-redux';
+import { UserProfileInquirySet } from '../../redux/interface';
 import UserDetailsModal from '../components/UserDetailsModal';
-import { RootState } from '../../redux/store';
 import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
-import SuggestionCard from './SuggestionCard';
 import useSortedUsers from '../search/hooks/useSortedUsers';
 import { usersInquirySetDummy } from '../../UserDummy';
 import CardsSkeleton from './Skeleton';
 import SortControlBar from './SortControlBar';
+import FilterDrawer from '../search/components/FilterDrawer';
+import UserCard from './UserCard';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -35,13 +33,14 @@ const Home = () => {
 
   return (
     <div className="flex flex-wrap justify-center min-h-screen h-relative">
+      <FilterDrawer onClick={() => {}} />
       <div className="mx-auto m-20">
         <div className="flex flex-col m-10">
           <SortControlBar
             items={[
               { text: '나이', setSortBy: 'ageGender.age' },
               { text: '거리', setSortBy: 'another.distance' },
-              { text: '등급', setSortBy: 'profile.fame' },
+              { text: '등급', setSortBy: 'profile.rating' },
               { text: '관심사', setSortBy: 'profile.interests' }
             ]}
             setSortBy={setSortBy}
@@ -52,7 +51,7 @@ const Home = () => {
           {sortedUsers.length > 0 ? (
             sortedUsers.map((user: UserProfileInquirySet, index: Key) => (
               <div key={index}>
-                <SuggestionCard
+                <UserCard
                   imgSrc={user.photo.mainPhoto}
                   alt={index.toString()}
                   name={user.identity.firstname}
