@@ -8,6 +8,8 @@ import InputRangeDistance from './components/InputRangeDistance';
 import SearchResultTable from './components/SearchResultTable';
 import TagSelector from '../../auth/signup/components/TagSelector';
 import { DirectionSVG, SearchSVG } from '../../svg';
+import { Drawer } from 'flowbite';
+import DrawerOpenButton from './components/SearchButton';
 
 const Search: React.FC = () => {
   const searchParams = useSelector((state: RootState) => state.searchSlice.searchParams);
@@ -64,14 +66,7 @@ const Search: React.FC = () => {
   return (
     <div className="flex h-screen">
       <div className="w-full">
-        <button
-          className="fixed top-14 w-full h-12 flex justify-center items-center text-gray-400 hover:bg-gray-100 font-medium px-5 py-2.5 mb-2"
-          type="button"
-          onClick={toggleDrawer}
-        >
-          <div className={`${isBounce} && animate-bounce`}></div>
-          <DirectionSVG direction="down" size="6" />
-        </button>
+        <DrawerOpenButton onClick={() => setIsDrawerOpen(true)} />
         {isDrawerOpen && (
           <>
             <div className="fixed z-50 top-0 left-0 w-full h-full bg-black opacity-50" />
