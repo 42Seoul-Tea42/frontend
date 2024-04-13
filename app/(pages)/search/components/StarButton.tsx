@@ -1,8 +1,8 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { setStarCount } from '../../../redux/oldslices/searchParamSlice';
 import StarSVG from '../../../svg/StarSVG';
+import { setSearchParamsFame } from '../../../redux/slices/searchSlice';
 
 interface StarButtonProps {
   star: number;
@@ -13,7 +13,7 @@ const StarButton: React.FC<StarButtonProps> = ({ star, isFilled }) => {
   const dispatch = useDispatch();
 
   const handleStarClick = () => {
-    dispatch(setStarCount(star));
+    dispatch(setSearchParamsFame(star));
   };
 
   return (

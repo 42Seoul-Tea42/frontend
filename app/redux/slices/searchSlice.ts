@@ -3,7 +3,8 @@ import { UserPublicSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 
 interface SearchParams {
-  age: number;
+  minAge: number;
+  maxAge: number;
   distance: number;
   interests: number[];
   fame: number;
@@ -19,7 +20,8 @@ interface SearchState {
 const initialState: SearchState = {
   users: [],
   searchParams: {
-    age: 0,
+    minAge: 0,
+    maxAge: 0,
     distance: 0,
     interests: [],
     fame: 0
@@ -40,11 +42,21 @@ const fancySlice = createSlice({
   name: 'fancySlice',
   initialState,
   reducers: {
-    toggleInterests: (state, action: PayloadAction<number>) => {
+    setSearchParamsMinAge: (state, actions: PayloadAction<number>) => {
+      state.searchParams.minAge = actions.payload;
+    },
+    setSearchParamsMaxAge: (state, actions: PayloadAction<number>) => {
+      state.searchParams.maxAge = actions.payload;
+    },
+    setSearchParamsDistance: (state, actions: PayloadAction<number>) => {
+      state.searchParams.distance = actions.payload;
+    },
+    setSearchParamsFame: (state, actions: PayloadAction<number>) => {
+      state.searchParams.fame = actions.payload;
+    },
+    toggleSearchParamsInterests: (state, action: PayloadAction<number>) => {
       if (state.searchParams.interests.includes(action.payload)) {
-        state.searchParams.interests = state.searchParams.interests.filter(
-          interest => interest !== action.payload
-        );
+        state.searchParams.interests = state.searchParams.interests.filter(interest => interest !== action.payload);
       } else {
         state.searchParams.interests = [...state.searchParams.interests, action.payload];
       }
@@ -65,7 +77,13 @@ const fancySlice = createSlice({
   }
 });
 
-export const { toggleInterests } = fancySlice.actions;
+export const {
+  toggleSearchParamsInterests,
+  setSearchParamsDistance,
+  setSearchParamsMaxAge,
+  setSearchParamsMinAge,
+  setSearchParamsFame
+} = fancySlice.actions;
 export const extraReducers = fancySlice.reducer;
 
 export default fancySlice.reducer;

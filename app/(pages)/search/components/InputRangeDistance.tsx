@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setDistance } from '../../../redux/oldslices/searchParamSlice';
+import { setSearchParamsDistance } from '../../../redux/slices/searchSlice';
 
 const InputRangeDistance: React.FC = () => {
-  const distance = useSelector((state: RootState) => state.searchParam.distance);
+  const distance = useSelector((state: RootState) => state.searchSlice.searchParams.distance);
   const dispatch = useDispatch();
 
   const dispatchSearchParamDistance = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value);
-    dispatch(setDistance(newValue));
+    dispatch(setSearchParamsDistance(newValue));
   };
 
   return (

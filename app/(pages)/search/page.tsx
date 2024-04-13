@@ -10,11 +10,7 @@ import TagSelector from '../../auth/signup/components/TagSelector';
 import { DirectionSVG, SearchSVG } from '../../svg';
 
 const Search: React.FC = () => {
-  const minAge = useSelector((state: RootState) => state.searchParam.minAge);
-  const maxAge = useSelector((state: RootState) => state.searchParam.maxAge);
-  const distance = useSelector((state: RootState) => state.searchParam.distance);
-  const fameRate = useSelector((state: RootState) => state.searchParam.fame);
-  const tags = useSelector((state: RootState) => state.searchParam.tags);
+  const searchParams = useSelector((state: RootState) => state.searchSlice.searchParams);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isBounce, setIsBounce] = useState<boolean>(false);
@@ -48,15 +44,6 @@ const Search: React.FC = () => {
   }, [isDrawerOpen]);
 
   const handleSearchButton = () => {
-    const sendData = {
-      min_age: minAge,
-      max_age: maxAge,
-      distance: distance,
-      fame: fameRate,
-      tags: tags
-    };
-
-    // fetchApi('/user/search', 'POST', JSON.stringify(sendData));
     toggleDrawer();
   };
 
@@ -90,7 +77,7 @@ const Search: React.FC = () => {
             <div className="fixed z-50 top-0 left-0 w-full h-full bg-black opacity-50" />
             <div
               ref={drawerRef}
-              className="fixed z-50 top-0 bg-gray-100 border-t border-gray-200 dark:border-gray-700 dark:bg-gray-800 transition-transform top-0 left-0 right-0 transform translate-y-0"
+              className="fixed z-50 bg-gray-100 border-t border-gray-200 dark:border-gray-700 dark:bg-gray-800 transition-transform top-0 left-0 right-0 transform translate-y-0"
             >
               <div className="mx-auto p-4 border-b border-gray-200 dark:border-gray-700">
                 <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200">검색 옵션</h2>

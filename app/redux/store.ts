@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchPageSlice from './oldslices/searchParamSlice';
 import suggestProfileSlice from './oldslices/suggestProfileSlice';
 import userDataSlice from './oldslices/userDataSlice';
 
@@ -13,12 +12,9 @@ import signupSlice from './slices/signupSlice';
 import loginSlice from './slices/loginSlice';
 import searchSlice from './slices/searchSlice';
 
-type AppActions = any;
-
 const store = configureStore({
   reducer: {
     // legacy
-    searchParam: searchPageSlice,
     suggestProfile: suggestProfileSlice,
     userData: userDataSlice,
     socketEvent: socketEventSlice,

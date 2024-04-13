@@ -1,21 +1,21 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setMaxAge, setMinAge } from '../../../redux/oldslices/searchParamSlice';
+import { setSearchParamsMaxAge, setSearchParamsMinAge } from '../../../redux/slices/searchSlice';
 
 const InputMinMaxAge: React.FC = () => {
   const dispatch = useDispatch();
-  const minAgeState = useSelector((state: RootState) => state.searchParam.minAge);
-  const maxAgeState = useSelector((state: RootState) => state.searchParam.maxAge);
+  const minAgeState = useSelector((state: RootState) => state.searchSlice.searchParams.minAge);
+  const maxAgeState = useSelector((state: RootState) => state.searchSlice.searchParams.maxAge);
 
   const dispatchSearchParamMinAge = (e: React.ChangeEvent<HTMLInputElement>) => {
     const min = parseInt(e.target.value);
-    dispatch(setMinAge(min));
+    dispatch(setSearchParamsMinAge(min));
   };
 
   const dispatchSearchParamMaxAge = (e: React.ChangeEvent<HTMLInputElement>) => {
     const max = parseInt(e.target.value);
-    dispatch(setMaxAge(max));
+    dispatch(setSearchParamsMaxAge(max));
   };
 
   return (
