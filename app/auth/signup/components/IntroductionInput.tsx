@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
-import { setIntrodution } from '../../../redux/oldslices/signupSlice';
+import { setAccountIntroduction } from '../../../redux/slices/accountSlice';
 
-const IntroductionForm: React.FC = () => {
+const IntroductionInput: React.FC = () => {
   const dispatch = useDispatch();
 
   const dispatchSignupIntroduction = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(setIntrodution(e.target.value));
+    dispatch(setAccountIntroduction(e.target.value));
   };
 
   return (
@@ -26,4 +26,4 @@ const IntroductionForm: React.FC = () => {
   );
 };
 
-export default IntroductionForm;
+export default IntroductionInput;

@@ -100,6 +100,9 @@ const accountSlice = createSlice({
     setAccountSexualPreference: (state: AccountState, action: PayloadAction<string>) => {
       state.user.profile.sexualPreference = action.payload;
     },
+    setAccountIntroduction: (state: AccountState, action: PayloadAction<string>) => {
+      state.user.profile.introduction = action.payload;
+    },
     setAccountSubPhotos: (state: AccountState, action: PayloadAction<string>) => {
       const { subPhotos } = state.user.profile;
       const newSubPhotos =
@@ -163,7 +166,8 @@ export const {
   setAccountSubPhotos,
   setAccountMainPhoto,
   setAccountEmojis,
-  setAccountInterests
+  setAccountInterests,
+  setAccountIntroduction
 } = accountSlice.actions;
 export const extraReducers = accountSlice.reducer;
 

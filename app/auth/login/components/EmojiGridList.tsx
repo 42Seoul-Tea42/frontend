@@ -16,21 +16,21 @@ const EmojiGridList: React.FC = () => {
   return (
     <div className="max-w-96 grid grid-cols-4 gap-4">
       {Emojis.map(Emoji => (
-        <div className="shadow" key={Emoji.id}>
-          <button
-            type="button"
-            className={`cursor-pointer relative ${emojis.includes(Emoji.id) ? 'brightness-50' : ''}`}
-            onClick={() => dispatch(setAccountEmojis(Emoji.id))}
-          >
-            <Image
-              width={500}
-              height={500}
-              className="h-auto max-w-full rounded-lg hover:brightness-50 transition-opacity duration-300"
-              src={Emoji.src}
-              alt={Emoji.alt}
-            />
-          </button>
-        </div>
+        <button
+          type="button"
+          className={`cursor-pointer relative ${
+            emojis.includes(Emoji.id) ? 'border-2 border-blue-500 rounded-xl' : ''
+          }`}
+          onClick={() => dispatch(setAccountEmojis(Emoji.id))}
+        >
+          <Image
+            width={500}
+            height={500}
+            className="h-auto max-w-full rounded-lg hover:brightness-50 transition-opacity duration-300"
+            src={Emoji.src}
+            alt={Emoji.alt}
+          />
+        </button>
       ))}
     </div>
   );

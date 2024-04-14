@@ -11,7 +11,7 @@
 
 import GenderRadioList from './GenderRadioInput';
 import SexualPreferenceRadioList from './SexualPreferenceRadioInput';
-import IntroductionForm from './IntroductionForm';
+import IntroductionForm from './IntroductionInput';
 import TagSelector from './InterestsSelector';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
