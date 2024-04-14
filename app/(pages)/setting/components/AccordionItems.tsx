@@ -33,7 +33,7 @@ const AccordionItems: React.FC<AccordionItemsProps> = ({ items }) => {
                   <button
                     type="button"
                     className={`${
-                      isOpen[index] && 'border-2 border-blue-500'
+                      isOpen[index] && 'border-2 border-gray-500'
                     } flex max-h-12 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3`}
                     data-accordion-target={`#accordion-collapse-body-${index}`}
                     aria-expanded={isOpen[index] ? 'true' : 'false'}
@@ -48,7 +48,7 @@ const AccordionItems: React.FC<AccordionItemsProps> = ({ items }) => {
             </h2>
             <div
               id={`accordion-collapse-body-${index}`}
-              className={`${isOpen[index] ? 'border-2 border-blue-500' : 'hidden'}`}
+              className={`${isOpen[index] ? 'border-2 border-gray-500' : 'hidden'}`}
               aria-labelledby={`accordion-collapse-heading-${index}`}
             >
               <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">

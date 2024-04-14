@@ -9,6 +9,7 @@ import AccordionItems from './components/AccordionItems';
 import ImageUploadGrid from './components/ImageUploadGrid';
 import AgeInput from '../../auth/signup/components/AgeInput';
 import InterestsSelector from '../../auth/signup/components/InterestsSelector';
+import SubmitButton from '../../auth/login/components/SubmitButton';
 
 const Setting: React.FC = () => {
   return (
@@ -42,15 +43,7 @@ const Setting: React.FC = () => {
               { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
             ]}
           />
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="mt-10 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              onClick={() => {}}
-            >
-              Save
-            </button>
-          </div>
+          <SubmitButton text="Save" onClick={() => {}} />
         </div>
       </div>
     </div>

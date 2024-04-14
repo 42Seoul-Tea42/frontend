@@ -6,11 +6,26 @@ import GenderRadioInput from '../signup/components/GenderRadioInput';
 import IntroductionInput from '../signup/components/IntroductionInput';
 import { useRouter } from 'next/navigation';
 import SubmitButton from '../login/components/SubmitButton';
+import ImageUploadForm from '../signup/components/ImageUploadForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { setAccountMainPhoto } from '../../redux/slices/accountSlice';
 
 const Profile = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const profileImage = useSelector((state: RootState) => state.accountSlice.user.photo.mainPhoto);
 
-  const submitProfile = () => {
+  const submitProfile = (event: React.FormEvent<HTMLFormElement>) => {
+    /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
+    event.preventDefault();
+
+    // 프로필 사진이 없을 경우 경고창
+    if (!profileImage) {
+      alert('반드시 프로필 사진을 등록해주세요.');
+      return;
+    }
+
     //서버로 보내는 동작 수행
 
     // 성공했을시 useEffect 내에서 라우터로 푸시
@@ -19,8 +34,20 @@ const Profile = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <form className="max-w-md min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-blue-500/50">
+      <form
+        onSubmit={submitProfile}
+        className="max-w-md h-3/5 overflow-hidden hover:overflow-y-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      >
+        <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-lime-500/50">
+          프로필 사진을 설정해주세요.
+        </h5>
+        <ImageUploadForm
+          previewImage={profileImage}
+          setProfileImage={image => dispatch(setAccountMainPhoto(image))}
+          width={380}
+          height={380}
+        />
+        <h5 className="text-lg font-semibold mb-5 mt-10 underline decoration-wavy decoration-blue-500/50">
           원활한 매칭을 위해서 정보를 입력해주세요.
         </h5>
         <label className="block text-sm font-medium text-gray-900 dark:text-white">성별 정보</label>
@@ -32,12 +59,7 @@ const Profile = () => {
           관심있는 분야를 선택해주세요.
         </h5>
         <TagSelector />
-        <SubmitButton
-          text="Submit"
-          onClick={() => {
-            router.push('/auth/emoji');
-          }}
-        />
+        <SubmitButton text="Submit" />
       </form>
     </div>
   );
