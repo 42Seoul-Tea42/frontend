@@ -1,23 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import UserProfileCarousel from './UserProfileCarousel';
 import UserDetailsList from './UserDetailList';
-import { RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
-import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
 import ProfileModalContents from './ProfileModalContents';
 
 interface UserDetailsModalProps {
-  targetId: number;
+  targetId: string;
+  modalRef: React.RefObject<HTMLDivElement>;
+  modalVisible: boolean;
 }
 
-const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ targetId }) => {
+const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ targetId, modalRef, modalVisible }) => {
   const dispatch = useDispatch();
-  const profileModalRef = useRef<HTMLDivElement>(null);
-  const profileModalVisible = useSelector((state: RootState) => state.profileInquirySlice.profileModalVisible);
-  useCloseOnOutsideClick(profileModalRef, profileModalVisible, () => {
-    dispatch(setProfileModalVisible(false));
-  });
 
   const blockUser = async () => {
     //  const response = await axiosInstance.post('/user/block', {
@@ -48,15 +42,15 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ targetId }) => {
 
   return (
     <>
-      {profileModalVisible && (
+      {modalVisible && (
         <div
           id="default-modal"
           tabIndex={-1}
           aria-hidden={false}
-          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50"
+          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-70"
         >
           <ProfileModalContents
-            forwardedRef={profileModalRef}
+            forwardedRef={modalRef}
             content={
               <div className="bg-white w-full max-w-3xl p-5 rounded-lg shadow-lg">
                 <div className="md:grid md:grid-cols-2 items-center gap-4">

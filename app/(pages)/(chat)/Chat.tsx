@@ -14,9 +14,7 @@ import { HamburgerSVG } from '../../svg';
 import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
 
 const Chat: React.FC = () => {
-  const dragRef = useRef<HTMLDivElement>(null);
-  const [isFloatingChatVisible, setFloatingChatVisible] = useState<boolean>(false);
-  useCloseOnOutsideClick(dragRef, isFloatingChatVisible, () => setFloatingChatVisible(false));
+  const [dragRef, isFloatingChatVisible, setIsFloatingChatVisible] = useCloseOnOutsideClick();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -34,7 +32,7 @@ const Chat: React.FC = () => {
 
   const clickChatButton = () => {
     dispatch(setChatNoti(false));
-    setFloatingChatVisible(!isFloatingChatVisible);
+    setIsFloatingChatVisible(!isFloatingChatVisible);
   };
 
   return (

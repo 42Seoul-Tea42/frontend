@@ -10,11 +10,10 @@ import CardsSkeleton from './Skeleton';
 import SortControlBar from './SortControlBar';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import UserCard from './UserCard';
-import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
 import useFilter from '../hooks/useFilter';
 import useSort from '../hooks/useSort';
 import UserCardGrid from './UserCardGrid';
-import { DirectionSVG } from '../../svg';
+import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,6 +22,10 @@ const Home = () => {
   const [filteredUsers, onFilter] = useFilter(users);
   const [sortedUsers, setSortBy, setSortOrder] = useSort(filteredUsers);
   const [renderUsers, setRenderUsers] = useState<UserProfileInquirySet[]>([]);
+  const [profileDetailModalRef, ProfileDetailModalVisible, setProfileDetailModalVisible] = useCloseOnOutsideClick();
+
+  // 모달에 클릭한 유저의 id를 넘겨주기 위함
+  const [selectedUser, setSelectedUser] = useState<string>('');
 
   useEffect(() => {
     dispatch(getSuggestionUsersFromServer() as any);
@@ -64,7 +67,10 @@ const Home = () => {
                 renderUsers.map((user: UserProfileInquirySet, index: Key) => (
                   <div key={index}>
                     <UserCard
-                      onClick={() => dispatch(setProfileModalVisible(true))}
+                      onClick={() => {
+                        setSelectedUser(user.identity.id);
+                        setProfileDetailModalVisible(true);
+                      }}
                       imgSrc={user.photo.mainPhoto}
                       alt={index.toString()}
                       name={user.identity.firstname}
@@ -77,10 +83,14 @@ const Home = () => {
               ) : (
                 <CardsSkeleton style="bg-red-300 opacity-50" />
               )}
+              <UserDetailsModal
+                targetId={selectedUser}
+                modalRef={profileDetailModalRef}
+                modalVisible={ProfileDetailModalVisible}
+              />
             </>
           }
         />
-        <UserDetailsModal targetId={1} />
       </div>
     </div>
   );
