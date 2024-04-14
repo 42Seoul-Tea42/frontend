@@ -14,36 +14,37 @@ import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
 import useFilter from '../hooks/useFilter';
 import useSort from '../hooks/useSort';
 import UserCardGrid from './UserCardGrid';
+import { DirectionSVG } from '../../svg';
 
 const Home = () => {
   const dispatch = useDispatch();
   // const users = useSelector((state: RootState) => state.suggestionSlice.users);
   const users = usersInquirySetDummy;
-  const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
-  const [filteredUsers, onFilter] = useFilter(sortedUsers);
-  const [renderingControl, setRenderingControl] = useState<'filter' | 'sort'>('sort');
+  const [filteredUsers, onFilter] = useFilter(users);
+  const [sortedUsers, setSortBy, setSortOrder] = useSort(filteredUsers);
   const [renderUsers, setRenderUsers] = useState<UserProfileInquirySet[]>([]);
 
   useEffect(() => {
     dispatch(getSuggestionUsersFromServer() as any);
+    // 서버에서 요청하는것 성공하면 fullfiled 에서 onFilter() 호출하는것으로 수정
+    onFilter();
   }, []);
 
   useEffect(() => {
-    if (renderingControl === 'filter') {
-      onFilter(true);
-      setRenderUsers(filteredUsers);
-    }
-    if (renderingControl === 'sort') {
-      setSortBy('identity.firstname');
-      setSortOrder('ascending');
-      setRenderUsers(sortedUsers);
-    }
-  }, [renderingControl]);
+    setRenderUsers(sortedUsers);
+  }, [sortedUsers]);
+
+  useEffect(() => {
+    setRenderUsers(filteredUsers);
+  }, [filteredUsers]);
 
   return (
     <div className="flex flex-wrap justify-center min-h-screen h-relative">
-      <FilterControlDrawer onSubmit={() => onFilter(true)} />
-      <div className="mx-auto m-20">
+      <FilterControlDrawer
+        shape={<p className="text-lg text-gray-500 font-thin">필터링</p>}
+        onSubmit={() => onFilter()}
+      />
+      <div className="mx-auto m-36">
         <div className="flex flex-col m-10">
           <SortControlBar
             items={[

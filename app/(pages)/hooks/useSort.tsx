@@ -4,7 +4,8 @@ import { get } from 'lodash';
 /**
  * @type custom hook
  * @description 정렬기준에 따라서 정렬된 유저, 정렬기준 함수, 정렬방향 함수을 반환하는 훅 | 정렬 기준은 유저객체의 속성에 해당
- * @returns [fileteredUsers, setTrigger] as const
+ * @param users: ProfileInquirySet[]
+ * @return [sortedUsers: ProfileInquirySet[], setSortBy: (lodash.get(string)) => void, setSortOrder: ('ascending' | 'descending') => void] as const
  */
 const useSort = (users: any[]) => {
   const [sortedUsers, setSortedUsers] = useState<any[]>([]);

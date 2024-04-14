@@ -5,22 +5,16 @@ import _ from 'lodash';
 
 /**
  * @type custom hook
- * @description search params의 파라미터에 의해 필터링된 유저, on off 함수를 반환하는 훅
- * @returns [fileteredUsers, setTrigger] as const
+ * @description search params의 파라미터에 의해 필터링된 유저, filter를 호출로 켜는 함수
+ * @param users: ProfileInquirySet[]
+ * @returns [fileteredUsers: ProfileInquirySet[], onFilter: () => void] as const
  */
 const useFilter = (users: any[]): any[] => {
   const [fileteredUsers, setFilteredUsers] = useState<any[]>([]);
-  const [trigger, setTrigger] = useState<boolean>(true);
   const params = useSelector((state: RootState) => state.searchSlice.searchParams);
 
-  useEffect(() => {
+  const onFilter = () => {
     if (!users) return;
-
-    // 트리거로 필터링을 on off하도록 함
-    if (!trigger) {
-      setFilteredUsers(users);
-      return;
-    }
 
     const filetered = [...users].filter(user => {
       // 나이 범위가 필터에 포함되어야함
@@ -37,10 +31,11 @@ const useFilter = (users: any[]): any[] => {
       return isAgeMatch && isDistanceMatch && isRatingMatch && isInterestMatch;
     });
 
+    console.log(filetered);
     setFilteredUsers(filetered);
-  }, [trigger]);
+  };
 
-  return [fileteredUsers, setTrigger] as const;
+  return [fileteredUsers, onFilter] as const;
 };
 
 export default useFilter;

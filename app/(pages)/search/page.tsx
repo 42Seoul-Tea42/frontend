@@ -3,13 +3,15 @@
 import SearchResultTable from './components/SearchResultTable';
 import FilterDrawer from './components/FilterControlDrawer';
 import { usersInquirySetDummy } from '../../UserDummy';
+import FilterControlDrawer from './components/FilterControlDrawer';
+import { DirectionSVG } from '../../svg';
 
 const Search: React.FC = () => {
   const users = usersInquirySetDummy;
   return (
     <div className="flex h-screen">
       <div className="w-full">
-        <FilterDrawer onSubmit={() => {}} />
+        <FilterControlDrawer shape={<DirectionSVG direction="down" size="6" />} onSubmit={() => {}} />
         <SearchResultTable
           users={users}
           schema={[
