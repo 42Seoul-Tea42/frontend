@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import SearchResultTableRow from './SearchResultTableRow';
-import useSortedUsers from '../hooks/useSortedUsers';
 import ThElement from './ThElement';
 import { UserProfileInquirySet } from '../../../redux/interface';
+import useSort from '../../hooks/useSort';
 
 type SearchResultTableProps = {
   users: UserProfileInquirySet[];
@@ -10,14 +9,7 @@ type SearchResultTableProps = {
 };
 
 const SearchResultTable: React.FC<SearchResultTableProps> = ({ users, schema }) => {
-  const [sortBy, setSortBy] = useState<string>('name');
-  const [sortOrder, setSortOrder] = useState<'descending' | 'ascending'>('ascending');
-
-  const sortedUsers = useSortedUsers({
-    users,
-    sortBy,
-    sortOrder
-  });
+  const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
 
   return (
     <div className="relative mt-40 shadow overflow-x-scroll sm:rounded-lg">
@@ -47,7 +39,7 @@ const SearchResultTable: React.FC<SearchResultTableProps> = ({ users, schema }) 
               name={user.identity.firstname}
               age={user.ageGender.age}
               distance={user.another.distance}
-              fame={user.profile.rating}
+              rating={user.profile.rating}
               interestsCount={user.profile.interests.length}
             />
           ))}

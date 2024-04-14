@@ -1,7 +1,7 @@
 'use client';
 
 import SearchResultTable from './components/SearchResultTable';
-import FilterDrawer from './components/FilterDrawer';
+import FilterDrawer from './components/FilterControlDrawer';
 import { usersInquirySetDummy } from '../../UserDummy';
 
 const Search: React.FC = () => {
@@ -9,7 +9,7 @@ const Search: React.FC = () => {
   return (
     <div className="flex h-screen">
       <div className="w-full">
-        <FilterDrawer onClick={() => {}} />
+        <FilterDrawer onSubmit={() => {}} />
         <SearchResultTable
           users={users}
           schema={[

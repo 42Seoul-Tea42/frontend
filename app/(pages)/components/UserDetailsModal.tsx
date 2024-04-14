@@ -88,7 +88,7 @@ export default UserDetailsModal;
 // - 사진 넘겨서 볼 수 있음 (최대 5개)
 // - 성 이름
 // - 거리 (나로부터 nkm 떨어짐)
-// - fame rating (like수 / view수)
+// - rating rating (like수 / view수)
 // - 온라인 여부 혹은 last online time
 // - 성별
 // - 취향

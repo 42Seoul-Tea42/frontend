@@ -18,7 +18,7 @@ export interface ProfileDetailDto {
   login_id: string;
   birthday: string;
   distance: number;
-  fame: number;
+  rating: number;
   tags: number[];
   fancy: number;
 }

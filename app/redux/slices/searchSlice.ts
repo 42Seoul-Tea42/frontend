@@ -7,7 +7,7 @@ interface SearchParams {
   maxAge: number;
   distance: number;
   interests: number[];
-  fame: number;
+  rating: number;
 }
 
 interface SearchState {
@@ -21,10 +21,10 @@ const initialState: SearchState = {
   users: [],
   searchParams: {
     minAge: 0,
-    maxAge: 0,
-    distance: 0,
+    maxAge: 100,
+    distance: 100,
     interests: [],
-    fame: 0
+    rating: 1
   },
   loading: false,
   error: null
@@ -51,8 +51,8 @@ const fancySlice = createSlice({
     setSearchParamsDistance: (state, actions: PayloadAction<number>) => {
       state.searchParams.distance = actions.payload;
     },
-    setSearchParamsFame: (state, actions: PayloadAction<number>) => {
-      state.searchParams.fame = actions.payload;
+    setSearchParamsRating: (state, actions: PayloadAction<number>) => {
+      state.searchParams.rating = actions.payload;
     },
     toggleSearchParamsInterests: (state, action: PayloadAction<number>) => {
       if (state.searchParams.interests.includes(action.payload)) {
@@ -82,7 +82,7 @@ export const {
   setSearchParamsDistance,
   setSearchParamsMaxAge,
   setSearchParamsMinAge,
-  setSearchParamsFame
+  setSearchParamsRating
 } = fancySlice.actions;
 export const extraReducers = fancySlice.reducer;
 

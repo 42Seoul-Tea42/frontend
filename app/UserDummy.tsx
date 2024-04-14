@@ -42,7 +42,7 @@ export const usersInquirySetDummy = [
       distance: 1
     },
     ageGender: {
-      age: 3,
+      age: 100,
       gender: ''
     },
     photo: {
@@ -97,6 +97,31 @@ export const usersInquirySetDummy = [
     },
     photo: {
       mainPhoto: '/emoji/8.jpg'
+    }
+  },
+  {
+    identity: {
+      id: '4',
+      firstname: '현준',
+      lastname: '김'
+    },
+    profile: {
+      subPhotos: [],
+      interests: [],
+      rating: 5,
+      sexualPreference: '',
+      introduction: ''
+    },
+    another: {
+      fancy: false,
+      distance: 24
+    },
+    ageGender: {
+      age: 26,
+      gender: ''
+    },
+    photo: {
+      mainPhoto: '/emoji/6.jpg'
     }
   }
 ];

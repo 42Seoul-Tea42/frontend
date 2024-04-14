@@ -7,7 +7,7 @@ export interface Profile {
   distance: number;
   fancy: number;
   birthday: string;
-  fame: number;
+  rating: number;
   tags: number[];
 }
 

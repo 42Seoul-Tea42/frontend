@@ -8,11 +8,11 @@ import TagSelector from '../../../auth/signup/components/InterestsSelector';
 import InputMinMaxAge from './InputMinMaxAge';
 import useCloseOnOutsideClick from '../../hooks/useCloseOnOutsideClick';
 
-type FilterDrawerProps = {
-  onClick: () => void;
+type FilterControlDrawerProps = {
+  onSubmit: () => void;
 };
 
-const FilterDrawer: React.FC<FilterDrawerProps> = ({ onClick }) => {
+const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   useCloseOnOutsideClick(drawerRef, isDrawerOpen, () => setIsDrawerOpen(false));
@@ -20,6 +20,7 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onClick }) => {
   // 드로어 폼 제출시 동작정의
   const submitDrawer = () => {
     setIsDrawerOpen(false);
+    onSubmit();
   };
 
   return (
@@ -55,4 +56,4 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onClick }) => {
   );
 };
 
-export default FilterDrawer;
+export default FilterControlDrawer;

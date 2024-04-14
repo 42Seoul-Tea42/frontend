@@ -4,7 +4,7 @@ import { RootState } from '../../../redux/store';
 import { useSelector } from 'react-redux';
 
 const StarRatingBar: React.FC = () => {
-  const starValue: number = useSelector((state: RootState) => state.searchSlice.searchParams.fame);
+  const starValue: number = useSelector((state: RootState) => state.searchSlice.searchParams.rating);
 
   return (
     <div className="flex justify-center">

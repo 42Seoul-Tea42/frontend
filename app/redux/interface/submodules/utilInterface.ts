@@ -37,11 +37,11 @@ export interface Interests {
 }
 
 /**
- * @type {ageRange: number[]; distance: number; fame: number; interests: Interests[];}
+ * @type {ageRange: number[]; distance: number; rating: number; interests: Interests[];}
  */
 export type SearchParams = {
   ageRange: number[]; // 나이 범위 배열
   distance: number; // 거리
-  fame: number; // 명성
+  rating: number; // 명성
   interests: Interests[]; // 관심사 배열
 };

@@ -5,35 +5,44 @@ import { useDispatch } from 'react-redux';
 import { UserProfileInquirySet } from '../../redux/interface';
 import UserDetailsModal from '../components/UserDetailsModal';
 import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
-import useSortedUsers from '../search/hooks/useSortedUsers';
 import { usersInquirySetDummy } from '../../UserDummy';
 import CardsSkeleton from './Skeleton';
 import SortControlBar from './SortControlBar';
-import FilterDrawer from '../search/components/FilterDrawer';
+import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import UserCard from './UserCard';
 import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
+import useFilter from '../hooks/useFilter';
+import useSort from '../hooks/useSort';
+import UserCardGrid from './UserCardGrid';
 
 const Home = () => {
+  const dispatch = useDispatch();
   // const users = useSelector((state: RootState) => state.suggestionSlice.users);
   const users = usersInquirySetDummy;
-
-  const dispatch = useDispatch();
+  const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
+  const [filteredUsers, onFilter] = useFilter(sortedUsers);
+  const [renderingControl, setRenderingControl] = useState<'filter' | 'sort'>('sort');
+  const [renderUsers, setRenderUsers] = useState<UserProfileInquirySet[]>([]);
 
   useEffect(() => {
     dispatch(getSuggestionUsersFromServer() as any);
   }, []);
 
-  const [sortBy, setSortBy] = useState<any>('another.distance');
-  const [sortOrder, setSortOrder] = useState<'descending' | 'ascending'>('ascending');
-  const sortedUsers = useSortedUsers({
-    users,
-    sortBy,
-    sortOrder
-  });
+  useEffect(() => {
+    if (renderingControl === 'filter') {
+      onFilter(true);
+      setRenderUsers(filteredUsers);
+    }
+    if (renderingControl === 'sort') {
+      setSortBy('identity.firstname');
+      setSortOrder('ascending');
+      setRenderUsers(sortedUsers);
+    }
+  }, [renderingControl]);
 
   return (
     <div className="flex flex-wrap justify-center min-h-screen h-relative">
-      <FilterDrawer onClick={() => {}} />
+      <FilterControlDrawer onSubmit={() => onFilter(true)} />
       <div className="mx-auto m-20">
         <div className="flex flex-col m-10">
           <SortControlBar
@@ -47,25 +56,29 @@ const Home = () => {
             setSortOrder={setSortOrder}
           />
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
-          {sortedUsers.length > 0 ? (
-            sortedUsers.map((user: UserProfileInquirySet, index: Key) => (
-              <div key={index}>
-                <UserCard
-                  onClick={() => dispatch(setProfileModalVisible(true))}
-                  imgSrc={user.photo.mainPhoto}
-                  alt={index.toString()}
-                  name={user.identity.firstname}
-                  age={user.ageGender.age}
-                  distance={user.another.distance}
-                  fancyTargetId={user.identity.id}
-                />
-              </div>
-            ))
-          ) : (
-            <CardsSkeleton style="bg-red-300 opacity-50" />
-          )}
-        </div>
+        <UserCardGrid
+          items={
+            <>
+              {renderUsers.length > 0 ? (
+                renderUsers.map((user: UserProfileInquirySet, index: Key) => (
+                  <div key={index}>
+                    <UserCard
+                      onClick={() => dispatch(setProfileModalVisible(true))}
+                      imgSrc={user.photo.mainPhoto}
+                      alt={index.toString()}
+                      name={user.identity.firstname}
+                      age={user.ageGender.age}
+                      distance={user.another.distance}
+                      fancyTargetId={user.identity.id}
+                    />
+                  </div>
+                ))
+              ) : (
+                <CardsSkeleton style="bg-red-300 opacity-50" />
+              )}
+            </>
+          }
+        />
         <UserDetailsModal targetId={1} />
       </div>
     </div>

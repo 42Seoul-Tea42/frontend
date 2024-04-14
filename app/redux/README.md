@@ -112,7 +112,7 @@ namespace Util-Interface {
         <<Public>>
         ageRange: number[]
         distance: number
-        fame: number
+        rating: number
         interests: Interests[]
     }
 
