@@ -1,15 +1,15 @@
 'use client';
 
-import GenderRadioList from '../../auth/signup/components/GenderRadioInput';
-import SexualPreferenceRadioList from '../../auth/signup/components/SexualPreferenceRadioInput';
-import EmojiGridList from '../../auth/login/components/EmojiGridList';
-import PasswordInput from '../../auth/signup/components/PasswordInput';
-import UserNameInput from '../../auth/signup/components/UserNameInput';
+import SubmitButton from '../UI/SubmitButton';
+import EmojiGridList from '../auth/upload/emoji/EmojiGridList';
+import AgeInput from '../forms/AgeInput';
+import GenderRadioInput from '../forms/GenderRadioInput';
+import InterestsSelector from '../auth/signup/components/InterestsSelector';
+import PasswordInput from '../forms/PasswordInput';
+import SexualPreferenceRadioInput from '../forms/SexualPreferenceRadioInput';
+import UserNameInput from '../forms/UserNameInput';
 import AccordionItems from './components/AccordionItems';
 import ImageUploadGrid from './components/ImageUploadGrid';
-import AgeInput from '../../auth/signup/components/AgeInput';
-import InterestsSelector from '../../auth/signup/components/InterestsSelector';
-import SubmitButton from '../../auth/login/components/SubmitButton';
 
 const Setting: React.FC = () => {
   const submitAccountSetting = () => {
@@ -36,11 +36,11 @@ const Setting: React.FC = () => {
               },
               {
                 title: '나의 성별 선택',
-                content: <GenderRadioList />
+                content: <GenderRadioInput />
               },
               {
                 title: '성적 취향 선택',
-                content: <SexualPreferenceRadioList />
+                content: <SexualPreferenceRadioInput />
               },
               { title: '나의 관심사 태그를 선택해주세요.', content: <InterestsSelector /> },
               { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }

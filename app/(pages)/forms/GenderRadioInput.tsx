@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setAccountGender } from '../../../redux/slices/accountSlice';
+import { RootState } from '../../redux/store';
+import { setAccountGender } from '../../redux/slices/accountSlice';
 
 const GenderRadioInput: React.FC = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
-interface SearchParameterDrawerButtonProps {
+type SearchParameterDrawerButtonProps = {
   onClick: () => void;
   shape: JSX.Element;
-}
+};
 
 const DrawerOpenButton: React.FC<SearchParameterDrawerButtonProps> = ({ onClick, shape }) => {
   return (

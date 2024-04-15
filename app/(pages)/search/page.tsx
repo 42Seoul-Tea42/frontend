@@ -1,7 +1,6 @@
 'use client';
 
 import SearchResultTable from './components/SearchResultTable';
-import FilterDrawer from './components/FilterControlDrawer';
 import { usersInquirySetDummy } from '../../UserDummy';
 import FilterControlDrawer from './components/FilterControlDrawer';
 import { DirectionSVG } from '../../svg';

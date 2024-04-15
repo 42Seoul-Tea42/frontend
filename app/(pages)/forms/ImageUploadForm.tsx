@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
-import { CloudUploadSVG } from '../../../svg';
+import { CloudUploadSVG } from '../../svg';
 
 type ImageUploadFormProps = {
   previewImage: string;

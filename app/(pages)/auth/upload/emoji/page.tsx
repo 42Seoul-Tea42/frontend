@@ -1,8 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import EmojiGridList from '../login/components/EmojiGridList';
-import SubmitButton from '../login/components/SubmitButton';
+import EmojiGridList from './EmojiGridList';
+import SubmitButton from '../../../UI/SubmitButton';
 
 const Emoji = () => {
   const router = useRouter();

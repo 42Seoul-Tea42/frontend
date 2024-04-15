@@ -3,11 +3,11 @@
 import { useDispatch } from 'react-redux';
 import { postCheckDuplicateEmailToServer, postCheckDuplicateIdToServer } from '../../../redux/slices/signupSlice';
 import DuplicateCheckForm from './DuplicateCheckForm';
-import EmailInput from './EmailInput';
-import UserNameInput from './UserNameInput';
-import IdInput from './IdInput';
-import PasswordInput from './PasswordInput';
-import SubmitButton from '../../login/components/SubmitButton';
+import EmailInput from '../../../forms/EmailInput';
+import UserNameInput from '../../../forms/UserNameInput';
+import IdInput from '../../../forms/IdInput';
+import PasswordInput from '../../../forms/PasswordInput';
+import SubmitButton from '../../../UI/SubmitButton';
 
 interface SignupFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

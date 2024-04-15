@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setAccountIntroduction } from '../../../redux/slices/accountSlice';
+import { setAccountIntroduction } from '../../redux/slices/accountSlice';
 
 const IntroductionInput: React.FC = () => {
   const dispatch = useDispatch();

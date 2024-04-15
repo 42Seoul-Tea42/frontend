@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import DrawerOpenButton from './DrawerOpenButton';
-import DrawerItem from './DrawerItem';
-import DrawerSubmitButton from './DrawerSubmitButton';
+import DrawerOpenButton from '../../UI/DrawerOpenButton';
+import DrawerItem from '../../UI/DrawerItem';
 import InputRangeStarBar from './InputRangeStarBar';
 import InputRangeDistance from './InputRangeDistance';
-import TagSelector from '../../../auth/signup/components/InterestsSelector';
 import InputMinMaxAge from './InputMinMaxAge';
 import useCloseOnOutsideClick from '../../hooks/useCloseOnOutsideClick';
-import { DirectionSVG } from '../../../svg';
+import InterestsSelector from '../../auth/signup/components/InterestsSelector';
+import SubmitButton from '../../UI/SubmitButton';
 
 type FilterControlDrawerProps = {
   onSubmit: () => void;
@@ -40,14 +38,14 @@ const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit, sha
               <DrawerItem
                 items={[
                   { title: '필터링할 나이를 선택해주세요.', content: <InputMinMaxAge /> },
-                  { title: '필터링할 태그를 선택해주세요.', content: <TagSelector /> },
+                  { title: '필터링할 태그를 선택해주세요.', content: <InterestsSelector /> },
                   { title: '필터링할 거리를 선택해주세요.', content: <InputRangeDistance /> },
                   { title: '필터링할 등급을 선택해주세요.', content: <InputRangeStarBar /> }
                 ]}
               />
             </div>
             <div className="flex justify-end m-5">
-              <DrawerSubmitButton onClick={submitDrawer} />
+              <SubmitButton text="검색하기" onClick={submitDrawer} />
             </div>
           </div>
         </>
