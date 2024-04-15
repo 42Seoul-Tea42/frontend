@@ -4,12 +4,10 @@ import IdInput from './IdInput';
 import PasswordInput from './PasswordInput';
 import UserNameInput from './UserNameInput';
 import { useDispatch } from 'react-redux';
-import {
-  postCheckDuplicateEmailToServer,
-  postCheckDuplicateIdToServer
-} from '../../../redux/slices/signupSlice';
+import { postCheckDuplicateEmailToServer, postCheckDuplicateIdToServer } from '../../../redux/slices/signupSlice';
 import DuplicateCheckForm from './DuplicateCheckForm';
-import EmailInput from './emailInput';
+import EmailInput from './EmailInput';
+import SubmitButton from '../../login/components/SubmitButton';
 
 interface SignupFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -26,25 +24,12 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">
         회원가입을 위한 계정정보를 입력해주세요.
       </h5>
-      <DuplicateCheckForm
-        form={<EmailInput />}
-        onClick={() => dispatch<any>(postCheckDuplicateEmailToServer())}
-      />
+      <DuplicateCheckForm form={<EmailInput />} onClick={() => dispatch<any>(postCheckDuplicateEmailToServer())} />
       <UserNameInput />
-      <DuplicateCheckForm
-        form={<IdInput />}
-        onClick={() => dispatch<any>(postCheckDuplicateIdToServer())}
-      />
+      <DuplicateCheckForm form={<IdInput />} onClick={() => dispatch<any>(postCheckDuplicateIdToServer())} />
       <PasswordInput />
 
-      <div className="flex justify-end mt-10">
-        <button
-          type="submit"
-          className="max-w-24 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Sign up
-        </button>
-      </div>
+      <SubmitButton text="회원가입" />
     </form>
   );
 };

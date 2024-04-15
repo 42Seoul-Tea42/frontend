@@ -3,7 +3,7 @@
 import { Key, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { UserProfileInquirySet } from '../../redux/interface';
-import UserDetailsModal from '../components/UserDetailsModal';
+import UserDetailsModal from '../components/ProfileDetailModal';
 import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
 import { usersInquirySetDummy } from '../../UserDummy';
 import CardsSkeleton from './Skeleton';
@@ -14,6 +14,7 @@ import useFilter from '../hooks/useFilter';
 import useSort from '../hooks/useSort';
 import UserCardGrid from './UserCardGrid';
 import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
+import { setSelectedUser } from '../../redux/slices/profileInquirySlice';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,6 @@ const Home = () => {
   const [sortedUsers, setSortBy, setSortOrder] = useSort(filteredUsers);
   const [renderUsers, setRenderUsers] = useState<UserProfileInquirySet[]>([]);
   const [profileDetailModalRef, ProfileDetailModalVisible, setProfileDetailModalVisible] = useCloseOnOutsideClick();
-
-  // 모달에 클릭한 유저의 id를 넘겨주기 위함
-  const [selectedUser, setSelectedUser] = useState<string>('');
 
   useEffect(() => {
     dispatch(getSuggestionUsersFromServer() as any);
@@ -68,7 +66,7 @@ const Home = () => {
                   <div key={index}>
                     <UserCard
                       onClick={() => {
-                        setSelectedUser(user.identity.id);
+                        dispatch(setSelectedUser(parseInt(user.identity.id)));
                         setProfileDetailModalVisible(true);
                       }}
                       imgSrc={user.photo.mainPhoto}
@@ -83,11 +81,7 @@ const Home = () => {
               ) : (
                 <CardsSkeleton style="bg-red-300 opacity-50" />
               )}
-              <UserDetailsModal
-                targetId={selectedUser}
-                modalRef={profileDetailModalRef}
-                modalVisible={ProfileDetailModalVisible}
-              />
+              <UserDetailsModal modalRef={profileDetailModalRef} modalVisible={ProfileDetailModalVisible} />
             </>
           }
         />

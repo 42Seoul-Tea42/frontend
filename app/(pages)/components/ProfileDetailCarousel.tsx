@@ -6,7 +6,7 @@ interface UserProfileCarouselProps {
   images: string[];
 }
 
-const UserProfileCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => {
+const ProfileDetailCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const prevSlide = () => {
@@ -77,4 +77,4 @@ const UserProfileCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => 
   );
 };
 
-export default UserProfileCarousel;
+export default ProfileDetailCarousel;

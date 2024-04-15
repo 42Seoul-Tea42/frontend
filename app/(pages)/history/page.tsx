@@ -2,7 +2,7 @@
 
 import { Key, useEffect, useState } from 'react';
 import { UserPublicSet } from '../../redux/interface';
-import UserDetailsModal from '../components/UserDetailsModal';
+import UserDetailsModal from '../components/ProfileDetailModal';
 import Skeleton from '../home/Skeleton';
 import UserCard from '../home/UserCard';
 import ColorPickerUserCard from '../fancy/components/ColorPickerUserCard';

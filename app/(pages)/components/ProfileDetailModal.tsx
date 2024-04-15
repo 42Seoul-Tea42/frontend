@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import UserProfileCarousel from './UserProfileCarousel';
-import UserDetailsList from './UserDetailList';
+import UserProfileCarousel from './ProfileDetailCarousel';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileModalContents from './ProfileModalContents';
+import { RootState } from '../../redux/store';
 
-interface UserDetailsModalProps {
-  targetId: string;
+interface ProfileDetailModalProps {
   modalRef: React.RefObject<HTMLDivElement>;
   modalVisible: boolean;
 }
 
-const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ targetId, modalRef, modalVisible }) => {
+const ProfileDetailModal: React.FC<ProfileDetailModalProps> = ({ modalRef, modalVisible }) => {
+  const userId = useSelector((state: RootState) => state.profileInquirySlice.user);
   const dispatch = useDispatch();
 
   const blockUser = async () => {
@@ -51,25 +51,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ targetId, modalRef,
         >
           <ProfileModalContents
             forwardedRef={modalRef}
-            content={
-              <div className="bg-white w-full max-w-3xl p-5 rounded-lg shadow-lg">
-                <div className="md:grid md:grid-cols-2 items-center gap-4">
-                  <UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />
-                  <div>
-                    <UserDetailsList />
-                    <div className="flex justify-center text-gray-400 mt-10">
-                      <p onClick={blockUser} className="hover:text-blue-600 hover:underline">
-                        차단
-                      </p>
-                      <p className="ml-2 mr-2"> / </p>
-                      <p onClick={reportUser} className="hover:text-blue-600 hover:underline">
-                        신고
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            }
+            content={<UserProfileCarousel images={['/emoji/1.jpg', '/emoji/16.jpg']} />}
           />
         </div>
       )}
@@ -77,7 +59,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ targetId, modalRef,
   );
 };
 
-export default UserDetailsModal;
+export default ProfileDetailModal;
 
 // - 사진 넘겨서 볼 수 있음 (최대 5개)
 // - 성 이름
