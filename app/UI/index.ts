@@ -13,12 +13,19 @@ import ThElement from './ThElement';
 import HomeNavBarButton from './HomeNavBarButton';
 import CarouselControlButton from './CarouselControlButton';
 import CarouselPaginationButton from './CarouselPaginationButton';
+import ColorPickerUserCard from './ColorPickerUserCard';
+import MainContentsArea from './MainContentsArea';
+import FancyButton from './FancyButton';
+import ProfileDetailModalContents from './ProfileDetailModalContents';
+import ProfileDetailModalControl from './ProfileDetailModalControl';
 
 export {
   AccordionItems,
   AccordionOpenButton,
   CardsSkeleton,
+  ColorPickerUserCard,
   CarouselControlButton,
+  CarouselPaginationButton,
   DrawerItem,
   DrawerOpenButton,
   InputFloatingLabel,
@@ -29,5 +36,8 @@ export {
   UserCardGrid,
   ThElement,
   HomeNavBarButton,
-  CarouselPaginationButton
+  MainContentsArea,
+  FancyButton,
+  ProfileDetailModalContents,
+  ProfileDetailModalControl
 };

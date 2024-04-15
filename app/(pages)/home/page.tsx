@@ -5,13 +5,13 @@ import { usersInquirySetDummy } from '../../UserDummy';
 import { Key, useEffect, useState } from 'react';
 import { UserProfileInquirySet } from '../../redux/interface';
 import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
-import { setSelectedUser } from '../../redux/slices/profileInquirySlice';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import { useCloseOnOutsideClick, useFilter, useSort } from '../hooks';
-import { CardsSkeleton, SortControlBar, UserCard, UserCardGrid } from '../../UI';
+import { CardsSkeleton, FancyButton, MainContentsArea, SortControlBar, UserCard, UserCardGrid } from '../../UI';
+import ProfileDetailModalControl from '../../UI/ProfileDetailModalControl';
 
-const Home = () => {
+function Home() {
   const dispatch = useDispatch();
   // const users = useSelector((state: RootState) => state.suggestionSlice.users);
   const users = usersInquirySetDummy;
@@ -35,24 +35,26 @@ const Home = () => {
   }, [filteredUsers]);
 
   return (
-    <div className="flex flex-wrap justify-center min-h-screen h-relative">
-      <FilterControlDrawer
-        shape={<p className="text-lg text-gray-500 font-thin">필터링</p>}
-        onSubmit={() => onFilter()}
-      />
-      <div className="mx-auto m-36">
-        <div className="flex flex-col m-10">
-          <SortControlBar
-            items={[
-              { text: '나이', setSortBy: 'ageGender.age' },
-              { text: '거리', setSortBy: 'another.distance' },
-              { text: '등급', setSortBy: 'profile.rating' },
-              { text: '관심사', setSortBy: 'profile.interests' }
-            ]}
-            setSortBy={setSortBy}
-            setSortOrder={setSortOrder}
-          />
-        </div>
+    <MainContentsArea
+      filter={
+        <FilterControlDrawer
+          shape={<p className="text-lg text-gray-500 font-thin">필터링</p>}
+          onSubmit={() => onFilter()}
+        />
+      }
+      sort={
+        <SortControlBar
+          items={[
+            { text: '나이', setSortBy: 'ageGender.age' },
+            { text: '거리', setSortBy: 'another.distance' },
+            { text: '등급', setSortBy: 'profile.rating' },
+            { text: '관심사', setSortBy: 'profile.interests' }
+          ]}
+          setSortBy={setSortBy}
+          setSortOrder={setSortOrder}
+        />
+      }
+      contents={
         <UserCardGrid
           items={
             <>
@@ -61,7 +63,6 @@ const Home = () => {
                   <div key={index}>
                     <UserCard
                       onClick={() => {
-                        dispatch(setSelectedUser(parseInt(user.identity.id)));
                         setProfileDetailModalVisible(true);
                       }}
                       imgSrc={user.photo.mainPhoto}
@@ -69,20 +70,25 @@ const Home = () => {
                       name={user.identity.firstname}
                       age={user.ageGender.age}
                       distance={user.another.distance}
-                      fancyTargetId={user.identity.id}
+                      fancyButton={<FancyButton onClick={() => {}} />}
                     />
                   </div>
                 ))
               ) : (
                 <CardsSkeleton style="bg-red-300 opacity-50" />
               )}
-              <ProfileDetailModal modalRef={profileDetailModalRef} modalVisible={ProfileDetailModalVisible} />
+              {/* profile inquiry service */}
+              <ProfileDetailModalControl
+                modalRef={profileDetailModalRef}
+                modalVisible={ProfileDetailModalVisible}
+                props={<ProfileDetailModal />}
+              />
             </>
           }
         />
-      </div>
-    </div>
+      }
+    />
   );
-};
+}
 
 export default Home;

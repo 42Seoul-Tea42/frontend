@@ -6,11 +6,11 @@ type UserCardProps = {
   age: number;
   name: string;
   distance: number;
-  fancyTargetId: string;
   onClick: () => void;
+  fancyButton: JSX.Element;
 };
 
-const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, age, name, distance, fancyTargetId, onClick }) => {
+const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, age, name, distance, onClick, fancyButton }) => {
   return (
     <div className="shadow-xl rounded-xl border-4 border-gray-300 w-[200px]">
       <button type="button" onClick={onClick} className="relative w-48 h-48 rounded-t-xl">
@@ -29,7 +29,7 @@ const UserCard: React.FC<UserCardProps> = ({ imgSrc, alt, age, name, distance, f
           <p className="font-semibold text-2xl text-gray-700">{name}</p>
           <p className="mr-2 font-md text-xl text-gray-500">{age}</p>
           <p className="font-thin text-base text-gray-900">{distance}km</p>
-          <FancyButton targetId={fancyTargetId} />
+          {fancyButton}
         </div>
       </div>
     </div>

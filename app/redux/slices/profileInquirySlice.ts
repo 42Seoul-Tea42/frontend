@@ -4,7 +4,7 @@ import axiosInstance from '../../utils/axios';
 
 interface ProfileInquiryState {
   user: UserProfileInquirySet;
-  selectedUser: number;
+  selectedUserId: string;
   profileModalVisible: boolean;
   loading: boolean;
   error: string | null;
@@ -36,7 +36,7 @@ const initialState: ProfileInquiryState = {
       mainPhoto: ''
     }
   },
-  selectedUser: 0,
+  selectedUserId: '',
   profileModalVisible: false,
   loading: false,
   error: null
@@ -57,8 +57,8 @@ const profileInquirySlice = createSlice({
     setProfileModalVisible: (state, action: PayloadAction<boolean>) => {
       state.profileModalVisible = action.payload;
     },
-    setSelectedUser: (state, action: PayloadAction<number>) => {
-      state.selectedUser = action.payload;
+    setSelectedUserId: (state, action: PayloadAction<string>) => {
+      state.selectedUserId = action.payload;
     }
   },
   extraReducers: builder => {
@@ -76,7 +76,7 @@ const profileInquirySlice = createSlice({
   }
 });
 
-export const { setProfileModalVisible, setSelectedUser } = profileInquirySlice.actions;
+export const { setProfileModalVisible, setSelectedUserId } = profileInquirySlice.actions;
 export const extraReducers = profileInquirySlice.reducer;
 
 export default profileInquirySlice.reducer;
