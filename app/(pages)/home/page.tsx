@@ -8,8 +8,9 @@ import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import { useCloseOnOutsideClick, useFilter, useSort } from '../hooks';
-import { CardsSkeleton, FancyButton, MainContentsArea, SortControlBar, UserCard, UserCardGrid } from '../../UI';
+import { CardsSkeleton, FancyButton, MainContentsArea, UserCard, UserCardGrid } from '../../UI';
 import ProfileDetailModalControl from '../../UI/ProfileDetailModalControl';
+import SortControlBar from '../components/SortControlBar';
 
 function Home() {
   const dispatch = useDispatch();
@@ -45,10 +46,10 @@ function Home() {
       sort={
         <SortControlBar
           items={[
-            { text: '나이', setSortBy: 'ageGender.age' },
-            { text: '거리', setSortBy: 'another.distance' },
-            { text: '등급', setSortBy: 'profile.rating' },
-            { text: '관심사', setSortBy: 'profile.interests' }
+            { text: '나이', sortBy: 'ageGender.age' },
+            { text: '거리', sortBy: 'another.distance' },
+            { text: '등급', sortBy: 'profile.rating' },
+            { text: '관심사', sortBy: 'profile.interests' }
           ]}
           setSortBy={setSortBy}
           setSortOrder={setSortOrder}

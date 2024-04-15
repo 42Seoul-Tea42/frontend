@@ -33,11 +33,12 @@ const Search: React.FC = () => {
                 <TableRow
                   key={index}
                   option={{ image: '/emoji/1.jpg' }}
+                  head={user.identity.firstname}
                   columns={[
-                    user.identity.firstname,
                     `${user.ageGender.age}세`,
                     `${user.another.distance} km`,
-                    user.profile.rating
+                    user.profile.rating,
+                    user.profile.interests.length
                   ]}
                 />
               ))}

@@ -5,7 +5,6 @@ import DrawerItem from './DrawerItem';
 import DrawerOpenButton from './DrawerOpenButton';
 import InputFloatingLabel from './InputFloatingLabel';
 import SubmitButton from './SubmitButton';
-import SortControlBar from './SortControlBar';
 import UserCard from './UserCard';
 import UserCardGrid from './UserCardGrid';
 import SortButton from './SortButton';
@@ -33,7 +32,6 @@ export {
   DrawerOpenButton,
   InputFloatingLabel,
   SubmitButton,
-  SortControlBar,
   SortButton,
   UserCard,
   UserCardGrid,
