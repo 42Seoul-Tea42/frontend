@@ -3,8 +3,8 @@
 import { UserPublicSet } from '../../redux/interface';
 import UserDetailsModal from '../components/ProfileDetailModal';
 import { Key, useEffect } from 'react';
-import Skeleton from '../home/Skeleton';
-import UserCard from '../home/UserCard';
+import Skeleton from '../../UI/CardsSkeleton';
+import UserCard from '../../UI/UserCard';
 import { usersInquirySetDummy } from '../../UserDummy';
 import ColorPickerUserCard from './components/ColorPickerUserCard';
 import { setSelectedUser } from '../../redux/slices/profileInquirySlice';

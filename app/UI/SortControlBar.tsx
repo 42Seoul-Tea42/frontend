@@ -1,4 +1,4 @@
-import ThElement from '../search/components/ThElement';
+import ThElement from './ThElement';
 
 type SortControlBarProps = {
   items: { text: string; setSortBy: string }[];

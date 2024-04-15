@@ -1,20 +1,15 @@
 'use client';
 
-import { Key, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { UserProfileInquirySet } from '../../redux/interface';
-import UserDetailsModal from '../components/ProfileDetailModal';
-import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
 import { usersInquirySetDummy } from '../../UserDummy';
-import CardsSkeleton from './Skeleton';
-import SortControlBar from './SortControlBar';
-import FilterControlDrawer from '../search/components/FilterControlDrawer';
-import UserCard from './UserCard';
-import useFilter from '../hooks/useFilter';
-import useSort from '../hooks/useSort';
-import UserCardGrid from './UserCardGrid';
-import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
+import { Key, useEffect, useState } from 'react';
+import { UserProfileInquirySet } from '../../redux/interface';
+import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
 import { setSelectedUser } from '../../redux/slices/profileInquirySlice';
+import FilterControlDrawer from '../search/components/FilterControlDrawer';
+import ProfileDetailModal from '../components/ProfileDetailModal';
+import { useCloseOnOutsideClick, useFilter, useSort } from '../hooks';
+import { CardsSkeleton, SortControlBar, UserCard, UserCardGrid } from '../../UI';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -81,7 +76,7 @@ const Home = () => {
               ) : (
                 <CardsSkeleton style="bg-red-300 opacity-50" />
               )}
-              <UserDetailsModal modalRef={profileDetailModalRef} modalVisible={ProfileDetailModalVisible} />
+              <ProfileDetailModal modalRef={profileDetailModalRef} modalVisible={ProfileDetailModalVisible} />
             </>
           }
         />

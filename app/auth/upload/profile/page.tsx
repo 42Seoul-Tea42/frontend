@@ -1,15 +1,15 @@
 'use client';
 
 import TagSelector from '../../signup/components/InterestsSelector';
-import SexualPreferenceRadioInput from '../../../forms/SexualPreferenceRadioInput';
-import GenderRadioInput from '../../../forms/GenderRadioInput';
-import IntroductionInput from '../../../forms/IntroductionInput';
+import SexualPreferenceRadioInput from '../../../(pages)/forms/SexualPreferenceRadioInput';
+import GenderRadioInput from '../../../(pages)/forms/GenderRadioInput';
+import IntroductionInput from '../../../(pages)/forms/IntroductionInput';
 import { useRouter } from 'next/navigation';
 import SubmitButton from '../../../UI/SubmitButton';
-import ImageUploadForm from '../../../forms/ImageUploadForm';
+import ImageUploadForm from '../../../(pages)/forms/ImageUploadForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
-import { setAccountMainPhoto } from '../../../../redux/slices/accountSlice';
+import { RootState } from '../../../redux/store';
+import { setAccountMainPhoto } from '../../../redux/slices/accountSlice';
 
 const Profile = () => {
   const router = useRouter();

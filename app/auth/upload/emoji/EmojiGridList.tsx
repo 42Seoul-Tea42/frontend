@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAccountEmojis } from '../../../../redux/slices/accountSlice';
-import { RootState } from '../../../../redux/store';
+import { setAccountEmojis } from '../../../redux/slices/accountSlice';
+import { RootState } from '../../../redux/store';
 
 const EmojiGridList: React.FC = () => {
   const dispatch = useDispatch();

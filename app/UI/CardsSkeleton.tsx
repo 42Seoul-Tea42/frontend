@@ -1,5 +1,5 @@
 import { Key } from 'react';
-import { ImageSkeletonSVG } from '../../svg';
+import { ImageSkeletonSVG } from '../svg';
 
 interface CardsSkeletonProps {
   style: string;

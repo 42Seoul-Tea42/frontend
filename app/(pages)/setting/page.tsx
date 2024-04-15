@@ -1,20 +1,16 @@
 'use client';
 
-import SubmitButton from '../UI/SubmitButton';
-import EmojiGridList from '../auth/upload/emoji/EmojiGridList';
-import AgeInput from '../forms/AgeInput';
-import GenderRadioInput from '../forms/GenderRadioInput';
-import InterestsSelector from '../auth/signup/components/InterestsSelector';
-import PasswordInput from '../forms/PasswordInput';
-import SexualPreferenceRadioInput from '../forms/SexualPreferenceRadioInput';
-import UserNameInput from '../forms/UserNameInput';
-import AccordionItems from './components/AccordionItems';
+import InterestsSelector from '../../auth/signup/components/InterestsSelector';
+import EmojiGridList from '../../auth/upload/emoji/EmojiGridList';
 import ImageUploadGrid from './components/ImageUploadGrid';
+import { AgeInput, GenderRadioInput, PasswordInput, SexualPreferenceRadioInput, UserNameInput } from '../forms';
+import { AccordionItems, SubmitButton } from '../../UI';
 
 const Setting: React.FC = () => {
   const submitAccountSetting = () => {
     console.log('save');
   };
+
   return (
     <div className="flex min-h-screen">
       <div className="mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">

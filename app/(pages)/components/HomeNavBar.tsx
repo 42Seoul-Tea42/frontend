@@ -2,8 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import HomeNavBarButton from './HomeNavBarButton';
-
+import HomeNavBarButton from '../../UI/HomeNavBarButton';
 import getGeoLocation from '../../utils/location';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFancyNoti, setHistoryNoti } from '../../redux/oldslices/socketEventSlice';

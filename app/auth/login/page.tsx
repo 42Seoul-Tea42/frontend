@@ -6,16 +6,17 @@ import EmailLoginButton from './components/EmailLoginButton';
 import CreateAccountButton from './components/CreateAccountButton';
 import EmailLoginForm from './components/EmailLoginForm';
 import { useRouter } from 'next/navigation';
-import { setAccountId, setAccountPassword } from '../../redux/slices/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import AllSignOptionButton from './components/AllSignOptionButton';
 import { RootState } from '../../redux/store';
-import { postLoginToServer } from '../../redux/slices/loginSlice';
+import { setAccountId, setAccountPassword } from '../../redux/slices/accountSlice';
 
 const LoginPage: React.FC = () => {
   const [emailFormView, setEmailFormView] = useState(false);
   const authSteps = useSelector((state: RootState) => state.loginSlice.steps);
-  const isLogin = useSelector((state: RootState) => state.loginSlice.isLogin);
+  type NewType = RootState;
+
+  const isLogin = useSelector((state: NewType) => state.loginSlice.isLogin);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -28,8 +29,7 @@ const LoginPage: React.FC = () => {
     event.preventDefault();
     // dispatch<any>(postLoginToServer());
 
-    // for testing
-    router.push('/home');
+    // for testing router.push('/home');
   };
 
   useEffect(() => {

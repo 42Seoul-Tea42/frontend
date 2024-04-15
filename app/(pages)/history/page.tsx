@@ -1,15 +1,14 @@
 'use client';
 
-import { Key, useEffect, useState } from 'react';
-import { UserPublicSet } from '../../redux/interface';
-import UserDetailsModal from '../components/ProfileDetailModal';
-import Skeleton from '../home/Skeleton';
-import UserCard from '../home/UserCard';
-import ColorPickerUserCard from '../fancy/components/ColorPickerUserCard';
-import { usersInquirySetDummy } from '../../UserDummy';
 import { useDispatch } from 'react-redux';
+import { usersInquirySetDummy } from '../../UserDummy';
+import { useCloseOnOutsideClick } from '../hooks';
+import { Key, useEffect } from 'react';
+import { UserPublicSet } from '../../redux/interface';
+import ColorPickerUserCard from '../fancy/components/ColorPickerUserCard';
+import { CardsSkeleton, UserCard } from '../../UI';
 import { setSelectedUser } from '../../redux/slices/profileInquirySlice';
-import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
+import ProfileDetailModal from '../components/ProfileDetailModal';
 
 const History = () => {
   const dispatch = useDispatch();
@@ -59,10 +58,10 @@ const History = () => {
               </div>
             ))
           ) : (
-            <Skeleton style="bg-blue-300 opacity-50" />
+            <CardsSkeleton style="bg-blue-300 opacity-50" />
           )}
         </div>
-        <UserDetailsModal modalRef={profileDetailModalRef} modalVisible={ProfileDetailModalVisible} />
+        <ProfileDetailModal modalRef={profileDetailModalRef} modalVisible={ProfileDetailModalVisible} />
       </div>
     </div>
   );

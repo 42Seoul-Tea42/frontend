@@ -1,19 +1,18 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import { postCheckDuplicateEmailToServer, postCheckDuplicateIdToServer } from '../../../redux/slices/signupSlice';
 import DuplicateCheckForm from './DuplicateCheckForm';
-import EmailInput from '../../../forms/EmailInput';
-import UserNameInput from '../../../forms/UserNameInput';
-import IdInput from '../../../forms/IdInput';
-import PasswordInput from '../../../forms/PasswordInput';
+import EmailInput from '../../../(pages)/forms/EmailInput';
+import UserNameInput from '../../../(pages)/forms/UserNameInput';
+import IdInput from '../../../(pages)/forms/IdInput';
+import PasswordInput from '../../../(pages)/forms/PasswordInput';
 import SubmitButton from '../../../UI/SubmitButton';
+import { postCheckDuplicateEmailToServer, postCheckDuplicateIdToServer } from '../../../redux/slices/signupSlice';
 
 interface SignupFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-// ui 부분만 분리시켜서 form이 컨트롤하는 데이터만 주입
 const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
   const dispatch = useDispatch();
   return (
@@ -29,7 +28,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       <DuplicateCheckForm form={<IdInput />} onClick={() => dispatch<any>(postCheckDuplicateIdToServer())} />
       <PasswordInput />
 
-      <SubmitButton text="회원가입" />
+      <SubmitButton text="Sign up" />
     </form>
   );
 };

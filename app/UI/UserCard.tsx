@@ -1,4 +1,4 @@
-import FancyButton from '../fancy/components';
+import FancyButton from '../(pages)/fancy/components';
 import Image from 'next/image';
 type UserCardProps = {
   imgSrc: string;

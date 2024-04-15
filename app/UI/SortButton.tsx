@@ -1,4 +1,4 @@
-import { DirectionSVG } from '../../../svg';
+import { DirectionSVG } from '../svg';
 
 type SortButtonProps = {
   upClick: () => void;

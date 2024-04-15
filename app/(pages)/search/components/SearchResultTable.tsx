@@ -1,5 +1,5 @@
 import SearchResultTableRow from './SearchResultTableRow';
-import ThElement from './ThElement';
+import ThElement from '../../../UI/ThElement';
 import { UserProfileInquirySet } from '../../../redux/interface';
 import useSort from '../../hooks/useSort';
 

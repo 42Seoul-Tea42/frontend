@@ -3,8 +3,8 @@
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
-import { RootState } from '../../redux/store';
-import { getRegisterEmailToServer } from '../../redux/slices/loginSlice';
+import { RootState } from '../redux/store';
+import { getRegisterEmailToServer } from '../redux/slices/loginSlice';
 
 const Auth: React.FC = () => {
   return (
