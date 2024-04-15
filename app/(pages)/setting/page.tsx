@@ -12,6 +12,9 @@ import InterestsSelector from '../../auth/signup/components/InterestsSelector';
 import SubmitButton from '../../auth/login/components/SubmitButton';
 
 const Setting: React.FC = () => {
+  const submitAccountSetting = () => {
+    console.log('save');
+  };
   return (
     <div className="flex min-h-screen">
       <div className="mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
@@ -43,7 +46,7 @@ const Setting: React.FC = () => {
               { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
             ]}
           />
-          <SubmitButton text="Save" onClick={() => {}} />
+          <SubmitButton text="Save" onClick={submitAccountSetting} />
         </div>
       </div>
     </div>

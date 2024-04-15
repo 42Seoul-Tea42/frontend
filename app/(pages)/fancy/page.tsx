@@ -7,12 +7,14 @@ import Skeleton from '../home/Skeleton';
 import UserCard from '../home/UserCard';
 import { usersInquirySetDummy } from '../../UserDummy';
 import ColorPickerUserCard from './components/ColorPickerUserCard';
-import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
+import { setSelectedUser } from '../../redux/slices/profileInquirySlice';
 import { useDispatch } from 'react-redux';
+import useCloseOnOutsideClick from '../hooks/useCloseOnOutsideClick';
 
 const Fancy = () => {
   // const users = useSelector((state: RootState) => state.fancySlice.users);
   const users = usersInquirySetDummy;
+  const [profileDetailModalRef, ProfileDetailModalVisible, setProfileDetailModalVisible] = useCloseOnOutsideClick();
 
   useEffect(() => {
     // dispatch(fetchFancyUsers(new Date()) as any);
@@ -40,7 +42,10 @@ const Fancy = () => {
                   style={'p-2 border rounded-xl bg-blue-200'}
                   userCard={
                     <UserCard
-                      onClick={() => dispatch(setProfileModalVisible(true))}
+                      onClick={() => {
+                        dispatch(setSelectedUser(parseInt(user.identity.id)));
+                        setProfileDetailModalVisible(true);
+                      }}
                       imgSrc={user.photo.mainPhoto}
                       alt={index.toString()}
                       name={user.identity.firstname}
@@ -56,7 +61,7 @@ const Fancy = () => {
             <Skeleton style="bg-yellow-300 opacity-50" />
           )}
         </div>
-        <UserDetailsModal targetId={1} />
+        <UserDetailsModal modalRef={profileDetailModalRef} modalVisible={ProfileDetailModalVisible} />
       </div>
     </div>
   );

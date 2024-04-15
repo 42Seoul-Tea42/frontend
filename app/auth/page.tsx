@@ -5,8 +5,17 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { getRegisterEmailToServer } from '../redux/slices/loginSlice';
+import { Suspense } from 'react';
 
 const Auth: React.FC = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthContent />
+    </Suspense>
+  );
+};
+
+const AuthContent: React.FC = () => {
   const param = useSearchParams();
   const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
   const emailVerification = useSelector((state: RootState) => state.loginSlice.steps.emailVerification);
@@ -32,7 +41,6 @@ const Auth: React.FC = () => {
       router.push('/auth/profile');
     }
   }, [emailVerification]);
-
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <form

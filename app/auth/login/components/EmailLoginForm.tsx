@@ -1,8 +1,3 @@
-'use client';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
-
 interface EmailLoginFormProps {
   setId: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,7 +8,7 @@ interface EmailLoginFormProps {
 const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, lostPassword, onSubmit }) => {
   return (
     <form onSubmit={onSubmit} className="space-y-6 mb-1 text-start">
-      <div>
+      <div className="min-w-[250px]">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your ID</label>
         <input
           type="id"
@@ -24,7 +19,7 @@ const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, los
           required
         ></input>
       </div>
-      <div>
+      <div className="w-full">
         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Your password
         </label>
@@ -38,9 +33,9 @@ const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, los
           required
         ></input>
       </div>
-      <button onClick={lostPassword} className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">
+      {/* <button onClick={lostPassword} className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">
         Lost Password?
-      </button>
+      </button> */}
       <button
         type="submit"
         className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

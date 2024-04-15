@@ -12,7 +12,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body>{children}</body>
-      <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_ID || ''} />
+      <GoogleAnalytics gaId="G-871NN7GNSQ" />
     </html>
   );
 };
