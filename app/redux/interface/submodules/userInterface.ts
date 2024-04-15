@@ -2,7 +2,8 @@
  * @type {id: string; firstname: string; lastname: string;}
  */
 export type Identity = {
-  id: string;
+  id: number;
+  loginId: string;
   firstname: string;
   lastname: string;
 };

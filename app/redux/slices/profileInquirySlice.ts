@@ -13,7 +13,8 @@ interface ProfileInquiryState {
 const initialState: ProfileInquiryState = {
   user: {
     identity: {
-      id: '',
+      id: 0,
+      loginId: '',
       firstname: '',
       lastname: ''
     },

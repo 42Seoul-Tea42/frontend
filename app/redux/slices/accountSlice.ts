@@ -15,7 +15,8 @@ export interface AccountState {
 const initialState: AccountState = {
   user: {
     identity: {
-      id: '',
+      id: 0,
+      loginId: '',
       firstname: '',
       lastname: ''
     },
@@ -72,8 +73,11 @@ const accountSlice = createSlice({
   name: 'accountSlice',
   initialState,
   reducers: {
-    setAccountId: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.identity.id = action.payload;
+    // setAccountId: (state: AccountState, action: PayloadAction<number>) => {
+    //   state.user.identity.id = action.payload;
+    // },
+    setAccountLoginId: (state: AccountState, action: PayloadAction<string>) => {
+      state.user.identity.loginId = action.payload;
     },
     setAccountPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.user.account.password = action.payload;
@@ -154,7 +158,8 @@ const accountSlice = createSlice({
 });
 
 export const {
-  setAccountId,
+  // setAccountId,
+  setAccountLoginId,
   setAccountPassword,
   setAccountEmail,
   setAccountFirstname,

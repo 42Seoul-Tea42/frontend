@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import DuplicateCheckForm from './DuplicateCheckForm';
 import EmailInput from '../../../(pages)/forms/EmailInput';
 import UserNameInput from '../../../(pages)/forms/UserNameInput';
-import IdInput from '../../../(pages)/forms/IdInput';
+import IdInput from '../../../(pages)/forms/LoginIdInput';
 import PasswordInput from '../../../(pages)/forms/PasswordInput';
 import SubmitButton from '../../../UI/SubmitButton';
 import { postCheckDuplicateEmailToServer, postCheckDuplicateIdToServer } from '../../../redux/slices/signupSlice';

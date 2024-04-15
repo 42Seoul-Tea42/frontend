@@ -49,7 +49,8 @@ direction LR
 namespace User-Interface {
     class Identity {
         <<Public>>
-        id: string
+        id: number
+        loginId: string
         firstname: string
         lastname: string
     }

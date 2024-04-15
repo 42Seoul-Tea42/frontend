@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import AllSignOptionButton from './components/AllSignOptionButton';
 import { RootState } from '../../redux/store';
-import { setAccountId, setAccountPassword } from '../../redux/slices/accountSlice';
+import { setAccountLoginId, setAccountPassword } from '../../redux/slices/accountSlice';
 
 const LoginPage: React.FC = () => {
   const [emailFormView, setEmailFormView] = useState(false);
@@ -67,7 +67,7 @@ const LoginPage: React.FC = () => {
             <div className="mt-10 mb-10">
               <AllSignOptionButton onClick={toggleLoginView} />
               <EmailLoginForm
-                setId={e => dispatch(setAccountId(e.target.value))}
+                setId={e => dispatch(setAccountLoginId(e.target.value))}
                 setPassword={e => dispatch(setAccountPassword(e.target.value))}
                 lostPassword={() => router.push('/auth')}
                 onSubmit={submitLogin}

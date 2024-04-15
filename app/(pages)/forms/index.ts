@@ -1,7 +1,7 @@
 import AgeInput from './AgeInput';
 import EmailInput from './EmailInput';
 import GenderRadioInput from './GenderRadioInput';
-import IdInput from './IdInput';
+import LoginIdInput from './LoginIdInput';
 import IntroductionInput from './IntroductionInput';
 import PasswordInput from './PasswordInput';
 import SexualPreferenceRadioInput from './SexualPreferenceRadioInput';
@@ -11,7 +11,7 @@ export {
   AgeInput,
   EmailInput,
   GenderRadioInput,
-  IdInput,
+  LoginIdInput,
   IntroductionInput,
   PasswordInput,
   SexualPreferenceRadioInput,
