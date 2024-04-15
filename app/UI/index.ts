@@ -9,7 +9,6 @@ import SortControlBar from './SortControlBar';
 import UserCard from './UserCard';
 import UserCardGrid from './UserCardGrid';
 import SortButton from './SortButton';
-import ThElement from './ThElement';
 import HomeNavBarButton from './HomeNavBarButton';
 import CarouselControlButton from './CarouselControlButton';
 import CarouselPaginationButton from './CarouselPaginationButton';
@@ -18,6 +17,10 @@ import MainContentsArea from './MainContentsArea';
 import FancyButton from './FancyButton';
 import ProfileDetailModalContents from './ProfileDetailModalContents';
 import ProfileDetailModalControl from './ProfileDetailModalControl';
+import HyperBlueLink from './HyperBlueLink';
+import TableRow from './TableRow';
+import TableSchema from './TableSchema';
+import Table from './Table';
 
 export {
   AccordionItems,
@@ -34,10 +37,13 @@ export {
   SortButton,
   UserCard,
   UserCardGrid,
-  ThElement,
+  TableSchema,
   HomeNavBarButton,
   MainContentsArea,
   FancyButton,
   ProfileDetailModalContents,
-  ProfileDetailModalControl
+  ProfileDetailModalControl,
+  HyperBlueLink,
+  TableRow,
+  Table
 };

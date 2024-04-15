@@ -1,51 +1,41 @@
-import SearchResultTableRow from './SearchResultTableRow';
-import ThElement from '../../../UI/ThElement';
-import { UserProfileInquirySet } from '../../../redux/interface';
-import useSort from '../../hooks/useSort';
+import { SortButton, Table, TableSchema } from '../../../UI';
 
 type SearchResultTableProps = {
-  users: UserProfileInquirySet[];
-  schema: { text: string; sortBy: string }[];
+  schema: { text: string; sortBy?: string | undefined }[];
+  body: JSX.Element;
+  setSortBy: (sortBy: string) => void;
+  setSortOrder: (order: 'ascending' | 'descending') => void;
 };
 
-const SearchResultTable: React.FC<SearchResultTableProps> = ({ users, schema }) => {
-  const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
-
+const SearchResultTable: React.FC<SearchResultTableProps> = ({ schema, body, setSortBy, setSortOrder }) => {
   return (
-    <div className="relative mt-40 shadow overflow-x-scroll sm:rounded-lg">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr className="">
-            <th scope="col" className="px-6 py-3">
-              <p className="mr-2">이름</p>
-            </th>
-            {schema.map((item, index) => (
-              <th scope="col" className="px-6 py-3">
-                <ThElement
-                  key={index}
-                  text={item.text}
-                  sortBy={() => setSortBy(item.sortBy)}
-                  up={() => setSortOrder('descending')}
-                  down={() => setSortOrder('ascending')}
-                />
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sortedUsers.map((user, index) => (
-            <SearchResultTableRow
+    <Table
+      thead={
+        <>
+          {schema.map((item, index) => (
+            <TableSchema
               key={index}
-              name={user.identity.firstname}
-              age={user.ageGender.age}
-              distance={user.another.distance}
-              rating={user.profile.rating}
-              interestsCount={user.profile.interests.length}
+              text={item.text}
+              button={
+                item.sortBy && (
+                  <SortButton
+                    upClick={() => {
+                      setSortBy(item.sortBy || '');
+                      setSortOrder('descending');
+                    }}
+                    downClick={() => {
+                      setSortBy(item.sortBy || '');
+                      setSortOrder('ascending');
+                    }}
+                  />
+                )
+              }
             />
           ))}
-        </tbody>
-      </table>
-    </div>
+        </>
+      }
+      tbody={body}
+    />
   );
 };
 

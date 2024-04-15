@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import UserProfileCarousel from './ProfileDetailCarousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { usersInquirySetDummy } from '../../UserDummy';
-import { ProfileDetailModalContents } from '../../UI';
+import { HyperBlueLink, ProfileDetailModalContents } from '../../UI';
 
 const ProfileDetailModal: React.FC = () => {
   const userId = useSelector((state: RootState) => state.profileInquirySlice.selectedUserId);
@@ -44,16 +44,8 @@ const ProfileDetailModal: React.FC = () => {
         { title: '관심사', content: user.profile.interests || 'test' }
       ]}
       introduciotn={{ title: '자기소개', content: user.profile.introduction || 'test' }}
-      block={
-        <p onClick={() => {}} className="hover:text-blue-600 hover:underline">
-          차단
-        </p>
-      }
-      report={
-        <p onClick={() => {}} className="hover:text-blue-600 hover:underline">
-          신고
-        </p>
-      }
+      block={<HyperBlueLink text={'차단'} onClick={blockUser} />}
+      report={<HyperBlueLink text={'신고'} onClick={reportUser} />}
     />
   );
 };

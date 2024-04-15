@@ -1,4 +1,4 @@
-import ThElement from './ThElement';
+import TableSchema from './TableSchema';
 
 type SortControlBarProps = {
   items: { text: string; setSortBy: string }[];
@@ -11,7 +11,7 @@ const SortControlBar: React.FC<SortControlBarProps> = ({ items, setSortBy, setSo
     <div className="flex flex-col m-10">
       <div className="flex justify-center gap-10">
         {items.map((item, index) => (
-          <ThElement
+          <TableSchema
             key={index}
             text={item.text}
             sortBy={() => setSortBy(item.setSortBy)}
