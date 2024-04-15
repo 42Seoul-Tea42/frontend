@@ -1,12 +1,12 @@
 'use client';
 
-import IdInput from './IdInput';
-import PasswordInput from './PasswordInput';
-import UserNameInput from './UserNameInput';
 import { useDispatch } from 'react-redux';
 import { postCheckDuplicateEmailToServer, postCheckDuplicateIdToServer } from '../../../redux/slices/signupSlice';
 import DuplicateCheckForm from './DuplicateCheckForm';
 import EmailInput from './EmailInput';
+import UserNameInput from './UserNameInput';
+import IdInput from './IdInput';
+import PasswordInput from './PasswordInput';
 import SubmitButton from '../../login/components/SubmitButton';
 
 interface SignupFormProps {
