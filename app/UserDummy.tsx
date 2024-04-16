@@ -101,7 +101,7 @@ export const usersInquirySetDummy = [
   },
   {
     identity: {
-      id: '4',
+      id: '5',
       firstname: '현준',
       lastname: '김'
     },
@@ -122,6 +122,31 @@ export const usersInquirySetDummy = [
     },
     photo: {
       mainPhoto: '/emoji/6.jpg'
+    }
+  },
+  {
+    identity: {
+      id: '5',
+      firstname: '순형',
+      lastname: '권'
+    },
+    profile: {
+      subPhotos: [],
+      interests: [],
+      rating: 5,
+      sexualPreference: '',
+      introduction: ''
+    },
+    another: {
+      fancy: false,
+      distance: 60
+    },
+    ageGender: {
+      age: 28,
+      gender: ''
+    },
+    photo: {
+      mainPhoto: '/emoji/9.jpg'
     }
   }
 ];
