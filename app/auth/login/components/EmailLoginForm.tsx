@@ -16,13 +16,14 @@ const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, los
       <div className="min-w-[250px]">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your ID</label>
         <input
-          type="id"
-          name="id"
+          type="text"
+          name="username"
           value={id}
           onChange={setId}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           placeholder=""
           required
+          autoComplete="username"
         ></input>
       </div>
       <div className="w-full">
@@ -38,6 +39,7 @@ const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, los
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required
+          autoComplete="new-password"
         ></input>
       </div>
       {/* <button onClick={lostPassword} className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">
