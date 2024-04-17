@@ -1,13 +1,10 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import DuplicateCheckForm from './DuplicateCheckForm';
-import EmailInput from '../../../(pages)/forms/EmailInput';
-import UserNameInput from '../../../(pages)/forms/UserNameInput';
-import IdInput from '../../../(pages)/forms/LoginIdInput';
-import PasswordInput from '../../../(pages)/forms/PasswordInput';
-import SubmitButton from '../../../UI/SubmitButton';
-import { postCheckDuplicateEmailToServer, postCheckDuplicateIdToServer } from '../../../redux/slices/signupSlice';
+import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../../(pages)/forms';
+import DuplicateCheckForm from '../../../UI/DuplicateCheckForm';
+import { getCheckDuplicateEmail, getCheckDuplicateId } from '../../../redux/slices/signupSlice';
+import { SubmitButton } from '../../../UI';
 
 interface SignupFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -15,6 +12,7 @@ interface SignupFormProps {
 
 const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
   const dispatch = useDispatch();
+
   return (
     <form
       onSubmit={onSubmit}
@@ -23,12 +21,12 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">
         회원가입을 위한 계정정보를 입력해주세요.
       </h5>
-      <DuplicateCheckForm form={<EmailInput />} onClick={() => dispatch<any>(postCheckDuplicateEmailToServer())} />
+      <DuplicateCheckForm form={<EmailInput />} text="check" onClick={() => dispatch<any>(getCheckDuplicateEmail())} />
       <UserNameInput />
-      <DuplicateCheckForm form={<IdInput />} onClick={() => dispatch<any>(postCheckDuplicateIdToServer())} />
+      <DuplicateCheckForm form={<LoginIdInput />} text="check" onClick={() => dispatch<any>(getCheckDuplicateId())} />
       <PasswordInput />
 
-      <SubmitButton text="Sign up" />
+      <SubmitButton text="회원가입" />
     </form>
   );
 };

@@ -1,35 +1,34 @@
 'use client';
 import { useEffect, useState } from 'react';
-import GoogleLoginButton from './components/GoogleLoginButton';
-import KakaoLoginButton from './components/KakaoLoginButton';
-import EmailLoginButton from './components/EmailLoginButton';
-import CreateAccountButton from './components/CreateAccountButton';
 import EmailLoginForm from './components/EmailLoginForm';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import AllSignOptionButton from './components/AllSignOptionButton';
 import { RootState } from '../../redux/store';
 import { setAccountLoginId, setAccountPassword } from '../../redux/slices/accountSlice';
+import { postGoogleLoginToServer, postKakaoLoginToServer, postLoginToServer } from '../../redux/slices/loginSlice';
+import {
+  AllSignOptionButton,
+  CreateAccountButton,
+  EmailFormChangeButton,
+  GoogleLoginButton,
+  KakaoLoginButton
+} from '../../UI';
 
 const LoginPage: React.FC = () => {
   const [emailFormView, setEmailFormView] = useState(false);
   const authSteps = useSelector((state: RootState) => state.loginSlice.steps);
-  type NewType = RootState;
+  const isLogin = useSelector((state: RootState) => state.loginSlice.isLogin);
 
-  const isLogin = useSelector((state: NewType) => state.loginSlice.isLogin);
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const toggleLoginView = () => {
-    setEmailFormView(!emailFormView);
-  };
 
   const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
-    // dispatch<any>(postLoginToServer());
+    dispatch<any>(postLoginToServer());
 
     // for testing router.push('/home');
+    router.push('home');
   };
 
   useEffect(() => {
@@ -55,14 +54,14 @@ const LoginPage: React.FC = () => {
         </div>
         {!emailFormView ? (
           <div className="flex flex-col items-center justify-center min-h-80 gap-2">
-            <GoogleLoginButton />
-            <KakaoLoginButton />
+            <GoogleLoginButton onClick={() => dispatch<any>(postGoogleLoginToServer())} />
+            <KakaoLoginButton onClick={() => dispatch<any>(postKakaoLoginToServer())} />
             <h6 className="text-md mb-2 text-gray-600"> or </h6>
-            <EmailLoginButton onClick={toggleLoginView} />
+            <EmailFormChangeButton onClick={() => setEmailFormView(true)} />
           </div>
         ) : (
           <div className="mt-10 mb-10">
-            <AllSignOptionButton onClick={toggleLoginView} />
+            <AllSignOptionButton onClick={() => setEmailFormView(false)} />
             <EmailLoginForm
               setId={e => dispatch(setAccountLoginId(e.target.value))}
               setPassword={e => dispatch(setAccountPassword(e.target.value))}

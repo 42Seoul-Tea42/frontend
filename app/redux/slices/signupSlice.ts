@@ -27,7 +27,7 @@ const initialState: SignupState = {
 };
 
 // 회원가입 정보 서버로 전송
-export const postSignupToServer = createAsyncThunk('accountSlice/postSignupToServer', async (_, { getState }) => {
+export const postSignup = createAsyncThunk('accountSlice/postSignup', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
   const { user } = state.accountSlice;
 
@@ -44,52 +44,38 @@ export const postSignupToServer = createAsyncThunk('accountSlice/postSignupToSer
 });
 
 // 이메일로 링크보내기 요청
-export const postVerifyEmailToServer = createAsyncThunk(
-  'accountSlice/postVerifyEmailToServer',
-  async (_, { getState }) => {
-    const state = getState() as { accountSlice: AccountState };
-    const { user } = state.accountSlice;
+export const postVerifyEmail = createAsyncThunk('accountSlice/postVerifyEmail', async (_, { getState }) => {
+  const state = getState() as { accountSlice: AccountState };
+  const { user } = state.accountSlice;
 
-    const response = await axiosInstance.post('https://api.example.com/data', {
-      body: {
-        email: user.account.email
-      }
-    });
-    return response.status;
-  }
-);
+  const response = await axiosInstance.post('https://api.example.com/data', {
+    body: {
+      email: user.account.email
+    }
+  });
+  return response.status;
+});
 
 // 재가입 방지 이메일 중복체크
-export const postCheckDuplicateEmailToServer = createAsyncThunk(
-  'accountSlice/postCheckDuplicateEmailToServer',
+export const getCheckDuplicateEmail = createAsyncThunk(
+  'accountSlice/getCheckDuplicateEmail',
   async (_, { getState }) => {
     const state = getState() as { accountSlice: AccountState };
     const { user } = state.accountSlice;
 
-    const response = await axiosInstance.post('https://api.example.com/data', {
-      body: {
-        email: user.account.email
-      }
-    });
+    const response = await axiosInstance.get(`/user/check-email?email=${user.account.email}`);
     return response.status;
   }
 );
 
 // 아이디 중복체크
-export const postCheckDuplicateIdToServer = createAsyncThunk(
-  'accountSlice/postCheckDuplicateIdToServer',
-  async (_, { getState }) => {
-    const state = getState() as { accountSlice: AccountState };
-    const { user } = state.accountSlice;
+export const getCheckDuplicateId = createAsyncThunk('accountSlice/getCheckDuplicateId', async (_, { getState }) => {
+  const state = getState() as { accountSlice: AccountState };
+  const { user } = state.accountSlice;
 
-    const response = await axiosInstance.post('https://api.example.com/data', {
-      body: {
-        id: user.identity.id
-      }
-    });
-    return response.status;
-  }
-);
+  const response = await axiosInstance.get(`/user/check-id?login_id=${user.identity.id}`);
+  return response.status;
+});
 
 const signupSlice = createSlice({
   name: 'signupSlice',
@@ -97,61 +83,61 @@ const signupSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     // 회원가입 정보 서버로 전송
-    builder.addCase(postSignupToServer.pending, state => {
+    builder.addCase(postSignup.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postSignupToServer.fulfilled, (state, action) => {
+    builder.addCase(postSignup.fulfilled, (state, action) => {
       if (action.payload === 200) {
         state.validation.isSignup = true;
       }
     });
-    builder.addCase(postSignupToServer.rejected, (state, action) => {
+    builder.addCase(postSignup.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
 
     // 이메일 인증 요청
-    builder.addCase(postVerifyEmailToServer.pending, state => {
+    builder.addCase(postVerifyEmail.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postVerifyEmailToServer.fulfilled, (state, action) => {
+    builder.addCase(postVerifyEmail.fulfilled, (state, action) => {
       if (action.payload === 200) {
         // state.verify
       }
     });
-    builder.addCase(postVerifyEmailToServer.rejected, (state, action) => {
+    builder.addCase(postVerifyEmail.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
 
     // 이메일 중복체크
-    builder.addCase(postCheckDuplicateEmailToServer.pending, state => {
+    builder.addCase(getCheckDuplicateEmail.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postCheckDuplicateEmailToServer.fulfilled, (state, action) => {
+    builder.addCase(getCheckDuplicateEmail.fulfilled, (state, action) => {
       if (action.payload === 200) {
         state.validation.isEmailVerifyChecked = true;
       }
     });
-    builder.addCase(postCheckDuplicateEmailToServer.rejected, (state, action) => {
+    builder.addCase(getCheckDuplicateEmail.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
 
     // id 중복체크
-    builder.addCase(postCheckDuplicateIdToServer.pending, state => {
+    builder.addCase(getCheckDuplicateId.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postCheckDuplicateIdToServer.fulfilled, (state, action) => {
+    builder.addCase(getCheckDuplicateId.fulfilled, (state, action) => {
       if (action.payload === 200) {
         state.validation.isIdDuplicateChecked = true;
       }
     });
-    builder.addCase(postCheckDuplicateIdToServer.rejected, (state, action) => {
+    builder.addCase(getCheckDuplicateId.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
