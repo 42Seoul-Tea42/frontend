@@ -1,12 +1,20 @@
-'use client';
+import { ButtonType } from '../redux/types';
 
-const GoogleLoginButton: React.FC = () => {
+function GoogleLoginButton({ onClick }: ButtonType) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className="w-full text-white bg-[#222222] hover:bg-[#222222]/90 focus:ring-4 focus:outline-none focus:ring-[#222222]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#222222]/55 me-2 mb-2"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="13" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" id="google">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="13"
+        preserveAspectRatio="xMidYMid"
+        viewBox="0 0 256 262"
+        id="google"
+      >
         <path
           fill="#4285F4"
           d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
@@ -27,6 +35,6 @@ const GoogleLoginButton: React.FC = () => {
       Sign in with Google
     </button>
   );
-};
+}
 
 export default GoogleLoginButton;

@@ -1,10 +1,6 @@
-import Link from 'next/link';
+import { ButtonType } from '../redux/types';
 
-interface CreateAccountButtonProps {
-  onClick: () => void;
-}
-
-const CreateAccountButton: React.FC<CreateAccountButtonProps> = ({ onClick }) => {
+function CreateAccountButton({ onClick }: ButtonType) {
   return (
     <div className="flex text-sm font-medium text-gray-500 dark:text-gray-300 gap-1">
       Not registered?
@@ -13,6 +9,6 @@ const CreateAccountButton: React.FC<CreateAccountButtonProps> = ({ onClick }) =>
       </p>
     </div>
   );
-};
+}
 
 export default CreateAccountButton;

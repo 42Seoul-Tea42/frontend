@@ -1,10 +1,7 @@
-import { DirectionSVG } from '../../../svg';
+import { ButtonType } from '../redux/types';
+import { DirectionSVG } from '../svg';
 
-interface AllSignOptionButtonProps {
-  onClick: () => void;
-}
-
-const AllSignOptionButton: React.FC<AllSignOptionButtonProps> = ({ onClick }) => {
+function AllSignOptionButton({ onClick }: ButtonType) {
   return (
     <button onClick={onClick} className="absolute flex top-1 left-1 w-4 h-4 text-blue-700 hover:underline">
       <div className="flex items-start">
@@ -15,6 +12,6 @@ const AllSignOptionButton: React.FC<AllSignOptionButtonProps> = ({ onClick }) =>
       </div>
     </button>
   );
-};
+}
 
 export default AllSignOptionButton;

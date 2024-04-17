@@ -1,13 +1,17 @@
-'use client';
+import { ButtonType } from '../redux/types';
 
-const KakaoLoginButton: React.FC = () => {
+function KakaoLoginButton({ onClick }: ButtonType) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className="w-full text-[#381F1F] bg-[#FFE812] hover:bg-[#FFE812]/90 focus:ring-4 focus:outline-none focus:ring-[#FFE812]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#FFE812]/55 me-2 mb-2"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 48 48" id="kakaotalk">
-        <path fill="#FFE812" d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"></path>
+        <path
+          fill="#FFE812"
+          d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
+        ></path>
         <path
           fill="#381F1F"
           d="M24 11C15.1634 11 8 16.6482 8 23.6154C8 28.1198 10.9948 32.0723 15.4997 34.3042C15.2546 35.1494 13.9248 39.7417 13.8718 40.1025C13.8718 40.1025 13.84 40.3735 14.0155 40.4769C14.1911 40.5803 14.3975 40.5 14.3975 40.5C14.9009 40.4297 20.2349 36.6829 21.1582 36.0323C22.0805 36.1629 23.0302 36.2308 24 36.2308C32.8366 36.2308 40 30.5828 40 23.6154C40 16.6482 32.8366 11 24 11Z"
@@ -22,6 +26,6 @@ const KakaoLoginButton: React.FC = () => {
       Sign in with Kakao
     </button>
   );
-};
+}
 
 export default KakaoLoginButton;

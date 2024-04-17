@@ -1,7 +1,6 @@
-interface EmailLoginButtonProps {
-  onClick: () => void;
-}
-const EmailLoginButton: React.FC<EmailLoginButtonProps> = ({ onClick }) => {
+import { ButtonType } from '../redux/types';
+
+function EmailFormChangeButton({ onClick }: ButtonType) {
   return (
     <button
       onClick={onClick}
@@ -10,6 +9,6 @@ const EmailLoginButton: React.FC<EmailLoginButtonProps> = ({ onClick }) => {
       Sign with Email
     </button>
   );
-};
+}
 
-export default EmailLoginButton;
+export default EmailFormChangeButton;
