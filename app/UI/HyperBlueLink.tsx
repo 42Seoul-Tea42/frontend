@@ -5,9 +5,9 @@ type HyperBlueLinkProps = {
 
 function HyperBlueLink({ text, onClick }: HyperBlueLinkProps) {
   return (
-    <p onClick={onClick} className="ms-auto text-blue-700 hover:underline text-sm">
+    <div onClick={onClick} className="ms-auto text-blue-700 hover:underline text-sm">
       {text}
-    </p>
+    </div>
   );
 }
 

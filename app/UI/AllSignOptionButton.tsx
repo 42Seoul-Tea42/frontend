@@ -9,9 +9,9 @@ function AllSignOptionButton({ onClick }: ButtonType) {
         <div className="mt-1 mr-1 text-blue-700">
           <DirectionSVG direction="left" size="3" />
         </div>
-        <p className="text-light text-sm whitespace-nowrap size-0">
+        <div className="text-light text-sm whitespace-nowrap size-0">
           <HyperBlueLink onClick={onClick} text="all sign option" />
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ const LoginPage: React.FC = () => {
     dispatch<any>(postLoginToServer());
 
     // for testing router.push('/home');
-    router.push('home');
+    // router.push('/home');
   };
 
   return (
