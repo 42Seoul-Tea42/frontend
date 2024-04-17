@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserAccountSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 import { AxiosResponse } from 'axios';
-import { postGoogleLoginToServer, postKakaoLoginToServer, postLoginToServer } from './loginSlice';
+import { postGoogleLogin, postKakaoLogin, postLogin } from './loginSlice';
 
 export interface AccountState {
   user: UserAccountSet;
@@ -50,8 +50,8 @@ const initialState: AccountState = {
 };
 
 // // 회원가입 정보 서버로 전송
-// export const postSignupToServer = createAsyncThunk(
-//   'accountSlice/postSignupToServer',
+// export const postSignup = createAsyncThunk(
+//   'accountSlice/postSignup',
 //   async (_, { getState }) => {
 //     const state = getState() as { accountSlice: AccountState };
 //     const { user } = state.accountSlice;
@@ -134,33 +134,33 @@ const accountSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    // builder.addCase(postSignupToServer.pending, state => {
+    // builder.addCase(postSignup.pending, state => {
     //   state.loading = true;
     //   state.error = null;
     // });
-    // builder.addCase(postSignupToServer.fulfilled, (state, action) => {
+    // builder.addCase(postSignup.fulfilled, (state, action) => {
     //   if (action.payload === 200) {
     //     state.isSignup = true;
     //   }
     //   state.user = initialState.user;
     // });
-    // builder.addCase(postSignupToServer.rejected, (state, action) => {
+    // builder.addCase(postSignup.rejected, (state, action) => {
     //   state.loading = false;
     //   state.error = action.error.message ?? null;
     // });
-    builder.addCase(postLoginToServer.fulfilled, (state, action) => {
+    builder.addCase(postLogin.fulfilled, (state, action) => {
       state.user.identity.id = action.payload.id;
       state.user.identity.firstname = action.payload.name;
       state.user.identity.lastname = action.payload.last_name;
       state.user.ageGender.age = action.payload.birthday;
     });
-    builder.addCase(postGoogleLoginToServer.fulfilled, (state, action) => {
+    builder.addCase(postGoogleLogin.fulfilled, (state, action) => {
       state.user.identity.id = action.payload.id;
       state.user.identity.firstname = action.payload.name;
       state.user.identity.lastname = action.payload.last_name;
       state.user.ageGender.age = action.payload.birthday;
     });
-    builder.addCase(postKakaoLoginToServer.fulfilled, (state, action) => {
+    builder.addCase(postKakaoLogin.fulfilled, (state, action) => {
       state.user.identity.id = action.payload.id;
       state.user.identity.firstname = action.payload.name;
       state.user.identity.lastname = action.payload.last_name;

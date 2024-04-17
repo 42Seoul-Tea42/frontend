@@ -25,6 +25,7 @@ import LoginFormChangeButton from './LoginFormChagneButton';
 import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
 import DuplicateCheckForm from '../auth/signup/components/DuplicateCheckField';
+import CardForm from '../(pages)/forms/CardForm';
 
 export {
   AllSignOptionButton,
@@ -45,6 +46,7 @@ export {
   SubmitButton,
   SortButton,
   UserCardGrid,
+  CardForm,
   TableSchema,
   HomeNavBarButton,
   MainContentsArea,

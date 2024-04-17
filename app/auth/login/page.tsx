@@ -6,12 +6,7 @@ import { RootState } from '../../redux/store';
 import { setAccountLoginId, setAccountPassword } from '../../redux/slices/accountSlice';
 import { LoginForm } from '../../(pages)/forms';
 import LoginPageDetail from './LoginPageDetail';
-import {
-  postGoogleLoginToServer,
-  postKakaoLoginToServer,
-  postLoginToServer,
-  setIdPasswordLoginFormView
-} from '../../redux/slices/loginSlice';
+import { postGoogleLogin, postKakaoLogin, postLogin, setIdPasswordLoginFormView } from '../../redux/slices/loginSlice';
 import {
   AllSignOptionButton,
   CreateAccountButton,
@@ -20,35 +15,20 @@ import {
   KakaoLoginButton,
   LoginFormChangeButton
 } from '../../UI';
+import useLoginRouting from '../../(pages)/hooks/useLoginRouting';
 
 const LoginPage: React.FC = () => {
-  const authSteps = useSelector((state: RootState) => state.loginSlice.steps);
-  const isLogin = useSelector((state: RootState) => state.loginSlice.isLogin);
-
   const router = useRouter();
   const dispatch = useDispatch();
 
-  //로그인 단계에 따른 유저 이동 흐름
-  useEffect(() => {
-    if (isLogin === false) return;
-    if (authSteps.emailVerification === false) {
-      router.push('/auth');
-    } else if (authSteps.profileCreation === false) {
-      router.push('/auth/profile');
-    } else if (authSteps.emojiSelection === false) {
-      router.push('/auth/emoji');
-    } else {
-      router.push('/home');
-    }
-  }, [isLogin]);
+  // 로그인 상태에 따른 유저 라우팅
+  const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
+  useLoginRouting({ isLogin: isLogin });
 
   const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
-    dispatch<any>(postLoginToServer());
-
-    // for testing router.push('/home');
-    // router.push('/home');
+    dispatch<any>(postLogin());
   };
 
   return (
@@ -56,8 +36,8 @@ const LoginPage: React.FC = () => {
       title={'Welcome to tea for two!'}
       loginMenu={
         <>
-          <GoogleLoginButton onClick={() => dispatch<any>(postGoogleLoginToServer())} />
-          <KakaoLoginButton onClick={() => dispatch<any>(postKakaoLoginToServer())} />
+          <GoogleLoginButton onClick={() => dispatch<any>(postGoogleLogin())} />
+          <KakaoLoginButton onClick={() => dispatch<any>(postKakaoLogin())} />
           <h6 className="text-md mb-2 text-gray-600"> or </h6>
           <LoginFormChangeButton text="Sign with Account" onClick={() => dispatch(setIdPasswordLoginFormView(true))} />
         </>

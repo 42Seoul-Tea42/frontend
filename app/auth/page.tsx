@@ -4,7 +4,10 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
 import { RootState } from '../redux/store';
-import { getRegisterEmailToServer } from '../redux/slices/loginSlice';
+import { getRegisterEmail, getResendEmail } from '../redux/slices/loginSlice';
+import CardForm from '../(pages)/forms/CardForm';
+import { SubmitButton } from '../UI';
+import useLoginRouting from '../(pages)/hooks/useLoginRouting';
 
 function Auth() {
   return (
@@ -15,46 +18,34 @@ function Auth() {
 }
 
 function AuthContent() {
-  const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
-  const emailVerification = useSelector((state: RootState) => state.loginSlice.steps.emailVerification);
+  // const emailVerification = useSelector((state: RootState) => state.loginSlice.steps.emailVerification);
+  const isResendEmail = useSelector((state: RootState) => state.loginSlice.isResendEmail);
   const params = useSearchParams();
-  const router = useRouter();
   const dispatch = useDispatch();
-  const token = params.get('token');
+  const token = params.get('key');
+  useLoginRouting({ isLogin: true });
 
-  // 서치 파라미터가 있는 경우 토큰을 가져와서 로그인 처리
-  // 인증이 완료된경우 로그인 화면으로 이동
-
-  // 토큰이 없는 경우 인증메일 보내기 화면 보여주기
-  // 인증메일 보내기 버튼
-
+  // 컴포넌트 마운트 시에 이메일 자동인증
   useEffect(() => {
     if (token) {
-      dispatch<any>(getRegisterEmailToServer(token));
+      dispatch<any>(getRegisterEmail(token));
     }
   }, []);
 
+  // 이메일 재전송
   useEffect(() => {
-    if (emailVerification) {
-      router.push('/auth/profile');
+    if (isResendEmail) {
+      alert('이메일을 다시 보냈습니다. 확인해주세요.');
     }
-  }, [emailVerification]);
+  }, [isResendEmail]);
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <form
-        onSubmit={() => {}}
-        className="w-96 h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-      >
-        <div className="ml-5">
-          <h5 className="tracking-wide text-3xl mt-5 min-w-80 font-semibold text-gray-900 dark:text-white flex-grow">
-            이메일 인증 단계
-          </h5>
-          <p className="text-md flex justify-start text-lg"> 이메일에 첨부된 링크를 확인해주세요 </p>
-          <p className="text-md flex justify-start text-lg"> {email} </p>
-        </div>
-      </form>
-    </div>
+    <CardForm
+      onSubmit={() => dispatch<any>(getResendEmail())}
+      subject="이메일 인증 단계"
+      inputs={<p> 이메일에 첨부된 링크를 확인해 주세요.</p>}
+      button={<SubmitButton text="이메일 다시 받기" />}
+    />
   );
 }
 
