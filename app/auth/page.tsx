@@ -36,7 +36,6 @@ function AuthContent() {
 
   useEffect(() => {
     if (emailVerification) {
-      // 구현필요
       router.push('/auth/profile');
     }
   }, [emailVerification]);

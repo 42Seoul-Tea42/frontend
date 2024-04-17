@@ -1,7 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserAccountSet } from '../interface';
 import axiosInstance from '../../utils/axios';
-import { AxiosResponse } from 'axios';
 import { AccountState } from './accountSlice';
 
 interface SignupState {
@@ -31,7 +29,7 @@ export const postSignup = createAsyncThunk('accountSlice/postSignup', async (_, 
   const state = getState() as { accountSlice: AccountState };
   const { user } = state.accountSlice;
 
-  const response = await axiosInstance.post('https://api.example.com/data', {
+  const response = await axiosInstance.post('/user/profile', {
     body: {
       login_id: user.identity.id,
       email: user.account.email,

@@ -8,9 +8,15 @@ import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
 import { DuplicateCheckForm } from '../../UI';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
-import { closeSignupError, getCheckDuplicateEmail, getCheckDuplicateId } from '../../redux/slices/signupSlice';
+import {
+  closeSignupError,
+  getCheckDuplicateEmail,
+  getCheckDuplicateId,
+  postSignup
+} from '../../redux/slices/signupSlice';
 
 const Signup: React.FC = () => {
+  const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
   const error = useSelector((state: RootState) => state.signupSlice.error);
   const showAlertsForValidation = useValidationCheck();
 
@@ -25,10 +31,7 @@ const Signup: React.FC = () => {
     if (!showAlertsForValidation()) return;
 
     // 서버로 회원가입 데이터를 전송
-    // dispatch<any>(postSignupToServer());
-
-    alert('회원가입이 완료되었습니다. 로그인 해주세요~');
-    router.push('/auth/login');
+    dispatch<any>(postSignup());
   };
 
   useEffect(() => {
@@ -37,6 +40,13 @@ const Signup: React.FC = () => {
       dispatch(closeSignupError());
     }
   }, [error]);
+
+  useEffect(() => {
+    if (isSignup) {
+      alert('회원가입이 완료되었습니다. 로그인 해주세요~');
+      router.push('/auth/login');
+    }
+  }, [isSignup]);
 
   return (
     <SignupForm
