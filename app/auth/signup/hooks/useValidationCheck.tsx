@@ -17,7 +17,7 @@ export const useValidationCheck = () => {
 
   const checkInputSpace = () => {
     if (
-      checkSpace(user.identity.id) ||
+      checkSpace(user.identity.loginId) ||
       checkSpace(user.identity.firstname) ||
       checkSpace(user.identity.lastname) ||
       checkSpace(user.account.email) ||

@@ -5,6 +5,7 @@ export type ButtonType = {
 };
 
 export type SubmitButtonType = {
+  type?: string;
   text: string;
   onClick?: () => void;
   SVG?: JSX.Element;

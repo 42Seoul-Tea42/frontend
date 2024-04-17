@@ -12,7 +12,6 @@ import {
   FancyButton,
   MainContentsArea,
   ProfileDetailModalControl,
-  UserCard,
   UserCardGrid
 } from '../../UI';
 
@@ -44,7 +43,7 @@ function Fancy() {
             items={
               <>
                 {users.length > 0 ? (
-                  users.map((user: UserPublicSet, index: Key) => (
+                  users.map((user: any, index: Key) => (
                     <div key={index}>
                       <ColorPickerUserCard
                         style={'p-2 border rounded-xl bg-blue-200'}

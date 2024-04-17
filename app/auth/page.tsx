@@ -6,21 +6,21 @@ import { Suspense, useEffect } from 'react';
 import { RootState } from '../redux/store';
 import { getRegisterEmailToServer } from '../redux/slices/loginSlice';
 
-const Auth: React.FC = () => {
+function Auth() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <AuthContent />
     </Suspense>
   );
-};
+}
 
-const AuthContent: React.FC = () => {
-  const param = useSearchParams();
+function AuthContent() {
   const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
   const emailVerification = useSelector((state: RootState) => state.loginSlice.steps.emailVerification);
-  const token = param.get('key');
+  const params = useSearchParams();
   const router = useRouter();
   const dispatch = useDispatch();
+  const token = params.get('token');
 
   // 서치 파라미터가 있는 경우 토큰을 가져와서 로그인 처리
   // 인증이 완료된경우 로그인 화면으로 이동
@@ -40,6 +40,7 @@ const AuthContent: React.FC = () => {
       router.push('/auth/profile');
     }
   }, [emailVerification]);
+
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <form
@@ -56,6 +57,6 @@ const AuthContent: React.FC = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Auth;

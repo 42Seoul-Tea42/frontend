@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import EmailLoginForm from './components/EmailLoginForm';
+import EmailLoginForm from '../../(pages)/forms/EmailLoginForm';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';

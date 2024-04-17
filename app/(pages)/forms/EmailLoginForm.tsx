@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { RootState } from '../../redux/store';
 
 interface EmailLoginFormProps {
   setId: (e: React.ChangeEvent<HTMLInputElement>) => void;

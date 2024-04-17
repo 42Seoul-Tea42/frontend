@@ -24,7 +24,7 @@ import KakaoLoginButton from './KakaoLoginButton';
 import EmailFormChangeButton from './EmailFormChagneButton';
 import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
-import DuplicateCheckForm from './DuplicateCheckForm';
+import DuplicateCheckForm from '../auth/signup/components/DuplicateCheckField';
 
 export {
   AllSignOptionButton,

@@ -1,12 +1,14 @@
 'use client';
 
-import SignupForm from './components/SignupForm';
+import SignupForm from '../../(pages)/forms/SignupForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
-import { postSignupToServer } from '../../redux/slices/signupSlice';
 import { useEffect } from 'react';
+import { DuplicateCheckForm } from '../../UI';
+import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
+import { getCheckDuplicateEmail, getCheckDuplicateId } from '../../redux/slices/signupSlice';
 
 const Signup: React.FC = () => {
   const error = useSelector((state: RootState) => state.signupSlice.error);
@@ -20,7 +22,7 @@ const Signup: React.FC = () => {
     event.preventDefault();
 
     // 예외처리 유효성 검사
-    // if (!showAlertsForValidation()) return;
+    if (!showAlertsForValidation()) return;
 
     // 서버로 회원가입 데이터를 전송
     // dispatch<any>(postSignupToServer());
@@ -36,11 +38,26 @@ const Signup: React.FC = () => {
   }, [error]);
 
   return (
-    <div className="w-full h-screen flex justify-center">
-      <div className="flex flex-col items-center justify-center">
-        <SignupForm onSubmit={submitSignupForm} />
-      </div>
-    </div>
+    <SignupForm
+      onSubmit={submitSignupForm}
+      subject="회원가입을 위한 계정정보를 입력해주세요."
+      inputs={
+        <>
+          <DuplicateCheckForm
+            form={<EmailInput />}
+            text="check"
+            onClick={() => dispatch<any>(getCheckDuplicateEmail())}
+          />
+          <UserNameInput />
+          <DuplicateCheckForm
+            form={<LoginIdInput />}
+            text="check"
+            onClick={() => dispatch<any>(getCheckDuplicateId())}
+          />
+          <PasswordInput />
+        </>
+      }
+    />
   );
 };
 
