@@ -1,3 +1,3 @@
-import { ButtonType } from './commonTypes';
+import { ButtonType, SubmitButtonType } from './commonTypes';
 
-export type { ButtonType };
+export type { ButtonType, SubmitButtonType };

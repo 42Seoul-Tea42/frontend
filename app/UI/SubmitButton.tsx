@@ -1,10 +1,6 @@
-type ButtonProps = {
-  text: string;
-  onClick?: () => void;
-  SVG?: JSX.Element;
-};
+import { SubmitButtonType } from '../redux/types/commonTypes';
 
-const SubmitButton: React.FC<ButtonProps> = ({ text, onClick, SVG }) => {
+function SubmitButton({ text, onClick, SVG }: SubmitButtonType) {
   return (
     <div className="flex justify-end mt-10">
       <button
@@ -17,6 +13,6 @@ const SubmitButton: React.FC<ButtonProps> = ({ text, onClick, SVG }) => {
       </button>
     </div>
   );
-};
+}
 
 export default SubmitButton;

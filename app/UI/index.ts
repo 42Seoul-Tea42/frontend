@@ -24,6 +24,7 @@ import KakaoLoginButton from './KakaoLoginButton';
 import EmailFormChangeButton from './EmailFormChagneButton';
 import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
+import DuplicateCheckForm from './DuplicateCheckForm';
 
 export {
   AllSignOptionButton,
@@ -34,6 +35,7 @@ export {
   ColorPickerUserCard,
   CarouselControlButton,
   CarouselPaginationButton,
+  DuplicateCheckForm,
   DrawerItem,
   DrawerOpenButton,
   EmailFormChangeButton,
