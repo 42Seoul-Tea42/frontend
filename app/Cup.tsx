@@ -53,34 +53,10 @@ const Cup: React.FC = () => {
       };
     };
 
-    const animateFollowScroll = (model: THREE.Object3D) => {
-      let clickedCount = 0;
-
-      const upDown = () => {
-        if (clickedCount % 40 < 20) model.position.y -= 0.04;
-        else model.position.y += 0.04;
-        renderer.render(scene, camera);
-        clickedCount++;
-      };
-
-      document.addEventListener('mousemove', upDown);
-      return () => {
-        document.removeEventListener('mousemove', upDown);
-      };
-    };
-
     loader.load('/cup/scene.gltf', gltf => {
       const cup = addModelToScene(gltf, 0);
       cup.rotation.z -= 0.3;
       animateFollowMouse(cup);
-      renderer.render(scene, camera);
-    });
-
-    loader.load('/bunny/scene.gltf', gltf => {
-      const bunny = addModelToScene(gltf, 0);
-      bunny.position.set(0, 0.3, 0);
-      animateFollowScroll(bunny);
-      animateFollowMouse(bunny);
       renderer.render(scene, camera);
     });
 

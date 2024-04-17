@@ -54,26 +54,22 @@ const LoginPage: React.FC = () => {
           </h5>
         </div>
         {!emailFormView ? (
-          <>
-            <div className="flex flex-col items-center justify-center min-h-80 gap-2">
-              <GoogleLoginButton />
-              <KakaoLoginButton />
-              <h6 className="text-md mb-2 text-gray-600"> or </h6>
-              <EmailLoginButton onClick={toggleLoginView} />
-            </div>
-          </>
+          <div className="flex flex-col items-center justify-center min-h-80 gap-2">
+            <GoogleLoginButton />
+            <KakaoLoginButton />
+            <h6 className="text-md mb-2 text-gray-600"> or </h6>
+            <EmailLoginButton onClick={toggleLoginView} />
+          </div>
         ) : (
-          <>
-            <div className="mt-10 mb-10">
-              <AllSignOptionButton onClick={toggleLoginView} />
-              <EmailLoginForm
-                setId={e => dispatch(setAccountLoginId(e.target.value))}
-                setPassword={e => dispatch(setAccountPassword(e.target.value))}
-                lostPassword={() => router.push('/auth')}
-                onSubmit={submitLogin}
-              />
-            </div>
-          </>
+          <div className="mt-10 mb-10">
+            <AllSignOptionButton onClick={toggleLoginView} />
+            <EmailLoginForm
+              setId={e => dispatch(setAccountLoginId(e.target.value))}
+              setPassword={e => dispatch(setAccountPassword(e.target.value))}
+              lostPassword={() => router.push('/auth')}
+              onSubmit={submitLogin}
+            />
+          </div>
         )}
         <div className="mb-5">
           <CreateAccountButton onClick={() => router.push('/auth/signup')} />

@@ -39,7 +39,7 @@ const Setting: React.FC = () => {
                 content: <SexualPreferenceRadioInput />
               },
               { title: '나의 관심사 태그를 선택해주세요.', content: <InterestsSelector /> },
-              { title: '관심있는 이모티콘을 설정해주세요.', content: <EmojiGridList /> }
+              { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList /> }
             ]}
           />
           <SubmitButton text="Save" onClick={submitAccountSetting} />
