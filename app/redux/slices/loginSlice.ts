@@ -28,20 +28,31 @@ const initialState: LoginState = {
 };
 
 export const postLoginToServer = createAsyncThunk('loginSlice/postLoginToServer', async (_, { getState }) => {
-  // const state = getState() as { accountSlice: AccountState };
-  // const { user } = state.accountSlice;
-  // const response = await axiosInstance.post('https://api.example.com/data', {
-  //   body: {
-  //     login_id: user.identity.id,
-  //     pw: user.account.password
-  //   }
-  // });
-  // return response.data;
-  return {
-    email_check: false,
-    profile_check: false,
-    emoji_check: false
-  };
+  const state = getState() as { accountSlice: AccountState };
+  const { user } = state.accountSlice;
+  const response = await axiosInstance.post('/user/login', {
+    body: {
+      login_id: user.identity.id,
+      pw: user.account.password
+    }
+  });
+  return response.data;
+  // 라우팅 테스트 코드
+  // return {
+  //   email_check: false,
+  //   profile_check: false,
+  //   emoji_check: false
+  // };
+});
+
+export const postKakaoLoginToServer = createAsyncThunk('loginSlice/postKakaoLoginToServer', async () => {
+  const response = await axiosInstance.post('/user/kakao');
+  return response.data;
+});
+
+export const postGoogleLoginToServer = createAsyncThunk('loginSlice/postGoogleLoginToServer', async () => {
+  const response = await axiosInstance.post('/user/google');
+  return response.data;
 });
 
 export const getRegisterEmailToServer = createAsyncThunk(
@@ -63,21 +74,46 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(postLoginToServer.fulfilled, (state, action: PayloadAction<any>) => {
-      if (action.payload.email_check === false) {
-        state.steps.emailVerification = false;
-      }
-      if (action.payload.profile_check === false) {
-        state.steps.profileCreation = false;
-      }
-      if (action.payload.emoji_check === false) {
-        state.steps.emojiSelection = false;
-      }
+      state.steps.emailVerification = action.payload.email_check;
+      state.steps.profileCreation = action.payload.profile_check;
+      state.steps.emojiSelection = action.payload.emoji_check;
       state.isLogin = true;
     });
     builder.addCase(postLoginToServer.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
+
+    builder.addCase(postKakaoLoginToServer.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postKakaoLoginToServer.fulfilled, (state, action: PayloadAction<any>) => {
+      state.steps.emailVerification = action.payload.email_check;
+      state.steps.profileCreation = action.payload.profile_check;
+      state.steps.emojiSelection = action.payload.emoji_check;
+      state.isLogin = true;
+    });
+    builder.addCase(postKakaoLoginToServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    builder.addCase(postGoogleLoginToServer.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postGoogleLoginToServer.fulfilled, (state, action: PayloadAction<any>) => {
+      state.steps.emailVerification = action.payload.email_check;
+      state.steps.profileCreation = action.payload.profile_check;
+      state.steps.emojiSelection = action.payload.emoji_check;
+      state.isLogin = true;
+    });
+    builder.addCase(postGoogleLoginToServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
     builder.addCase(getRegisterEmailToServer.pending, state => {
       state.loading = true;
       state.error = null;

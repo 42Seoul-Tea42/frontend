@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserAccountSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 import { AxiosResponse } from 'axios';
-import { postLoginToServer } from './loginSlice';
+import { postGoogleLoginToServer, postKakaoLoginToServer, postLoginToServer } from './loginSlice';
 
 export interface AccountState {
   user: UserAccountSet;
@@ -149,10 +149,22 @@ const accountSlice = createSlice({
     //   state.error = action.error.message ?? null;
     // });
     builder.addCase(postLoginToServer.fulfilled, (state, action) => {
-      // state.user.identity.id = action.payload.id;
-      // state.user.identity.firstname = action.payload.name;
-      // state.user.identity.lastname = action.payload.last_name;
-      // state.user.ageGender.age = action.payload.birthday;
+      state.user.identity.id = action.payload.id;
+      state.user.identity.firstname = action.payload.name;
+      state.user.identity.lastname = action.payload.last_name;
+      state.user.ageGender.age = action.payload.birthday;
+    });
+    builder.addCase(postGoogleLoginToServer.fulfilled, (state, action) => {
+      state.user.identity.id = action.payload.id;
+      state.user.identity.firstname = action.payload.name;
+      state.user.identity.lastname = action.payload.last_name;
+      state.user.ageGender.age = action.payload.birthday;
+    });
+    builder.addCase(postKakaoLoginToServer.fulfilled, (state, action) => {
+      state.user.identity.id = action.payload.id;
+      state.user.identity.firstname = action.payload.name;
+      state.user.identity.lastname = action.payload.last_name;
+      state.user.ageGender.age = action.payload.birthday;
     });
   }
 });
