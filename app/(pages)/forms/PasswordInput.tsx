@@ -15,9 +15,10 @@ const PasswordInput: React.FC = () => {
         value={password}
         onChange={e => dispatch(setAccountPassword(e.target.value))}
         text="New Password"
+        autoComplete="new-password"
       />
       <InputFloatingLabel
-        type="password"
+        type="re-enter-password"
         value={reEnterPassword}
         onChange={e => dispatch(setAccountReEnterPassword(e.target.value))}
         text="Re-Enter Password"
