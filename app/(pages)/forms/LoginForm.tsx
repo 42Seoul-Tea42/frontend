@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { SubmitButton } from '../../UI';
 
 interface LoginFormProps {
   setId: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,7 +14,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setId, setPassword, lostPassword,
   const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
   return (
     <form onSubmit={onSubmit} className="space-y-6 mb-1 text-start">
-      <div className="min-w-[250px]">
+      <div className="min-w-[300px]">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your ID</label>
         <input
           type="text"
@@ -43,12 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setId, setPassword, lostPassword,
         ></input>
       </div>
       {lostPassword}
-      <button
-        type="submit"
-        className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Login to your account
-      </button>
+      <SubmitButton text="login your Account" />
     </form>
   );
 };

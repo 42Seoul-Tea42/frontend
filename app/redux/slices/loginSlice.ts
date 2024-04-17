@@ -11,6 +11,7 @@ export type Steps = {
 
 interface LoginState {
   isLogin: boolean;
+  idPasswordLoginFormView: boolean;
   steps: Steps;
   loading: boolean;
   error: string | null;
@@ -18,6 +19,7 @@ interface LoginState {
 
 const initialState: LoginState = {
   isLogin: false,
+  idPasswordLoginFormView: false,
   steps: {
     emailVerification: null,
     profileCreation: null,
@@ -70,6 +72,9 @@ const loginSlice = createSlice({
   reducers: {
     closeLoginError: state => {
       state.error = null;
+    },
+    setIdPasswordLoginFormView: (state, action: PayloadAction<boolean>) => {
+      state.idPasswordLoginFormView = action.payload;
     }
   },
   extraReducers: builder => {
@@ -132,7 +137,7 @@ const loginSlice = createSlice({
   }
 });
 
-export const { closeLoginError } = loginSlice.actions;
+export const { setIdPasswordLoginFormView, closeLoginError } = loginSlice.actions;
 
 export const extraReducers = loginSlice.reducer;
 

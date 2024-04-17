@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { AllSignOptionButton, LoginFormChangeButton } from '../../UI';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 type LoginPageDetailProps = {
   title: string;
@@ -8,8 +8,8 @@ type LoginPageDetailProps = {
   createAccount: JSX.Element;
 };
 
-function LoginPageDetail({ title, loginMenu, loginForm, createAccount }: LoginPageProps) {
-  const [idPasswordFormView, setIdPasswordFormView] = useState(false);
+function LoginPageDetail({ title, loginMenu, loginForm, createAccount }: LoginPageDetailProps) {
+  const idPasswordFormView = useSelector((state: RootState) => state.loginSlice.idPasswordLoginFormView);
   return (
     <div className="flex items-center justify-center w-full h-screen">
       <div className="relative min-w-96 min-h-96 flex flex-col text-center items-center justify-center bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -19,15 +19,9 @@ function LoginPageDetail({ title, loginMenu, loginForm, createAccount }: LoginPa
           </h5>
         </div>
         {!idPasswordFormView ? (
-          <div className="flex flex-col items-center justify-center min-h-80 gap-2">
-            {loginMenu}
-            <LoginFormChangeButton onClick={() => setIdPasswordFormView(true)} />
-          </div>
+          <div className="flex flex-col items-center justify-center min-h-80 gap-2">{loginMenu}</div>
         ) : (
-          <div className="mt-10 mb-10">
-            <AllSignOptionButton onClick={() => setIdPasswordFormView(false)} />
-            {loginForm}
-          </div>
+          <div className="mt-10 mb-10">{loginForm}</div>
         )}
         <div className="mb-5">{createAccount}</div>
       </div>
