@@ -8,7 +8,7 @@ import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
 import { DuplicateCheckForm } from '../../UI';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
-import { getCheckDuplicateEmail, getCheckDuplicateId } from '../../redux/slices/signupSlice';
+import { closeSignupError, getCheckDuplicateEmail, getCheckDuplicateId } from '../../redux/slices/signupSlice';
 
 const Signup: React.FC = () => {
   const error = useSelector((state: RootState) => state.signupSlice.error);
@@ -34,6 +34,7 @@ const Signup: React.FC = () => {
   useEffect(() => {
     if (error) {
       alert(error + ': 다시 시도해주세요.');
+      dispatch(closeSignupError());
     }
   }, [error]);
 

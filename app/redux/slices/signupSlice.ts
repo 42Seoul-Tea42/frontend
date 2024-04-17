@@ -80,7 +80,11 @@ export const getCheckDuplicateId = createAsyncThunk('accountSlice/getCheckDuplic
 const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    closeSignupError: state => {
+      state.error = null;
+    }
+  },
   extraReducers: builder => {
     // 회원가입 정보 서버로 전송
     builder.addCase(postSignup.pending, state => {
@@ -144,7 +148,7 @@ const signupSlice = createSlice({
   }
 });
 
-export const {} = signupSlice.actions;
+export const { closeSignupError } = signupSlice.actions;
 
 export const extraReducers = signupSlice.reducer;
 

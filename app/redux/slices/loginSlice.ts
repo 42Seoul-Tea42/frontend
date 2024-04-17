@@ -67,7 +67,11 @@ export const getRegisterEmailToServer = createAsyncThunk(
 const loginSlice = createSlice({
   name: 'loginSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    closeLoginError: state => {
+      state.error = null;
+    }
+  },
   extraReducers: builder => {
     builder.addCase(postLoginToServer.pending, state => {
       state.loading = true;
@@ -128,7 +132,7 @@ const loginSlice = createSlice({
   }
 });
 
-export const {} = loginSlice.actions;
+export const { closeLoginError } = loginSlice.actions;
 
 export const extraReducers = loginSlice.reducer;
 
