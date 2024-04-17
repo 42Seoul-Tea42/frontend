@@ -10,7 +10,9 @@ const DuplicateCheckField: React.FC<DuplicateCheckFieldProps> = ({ onClick, form
   return (
     <div className="flex gap-4 items-start">
       {form}
-      <SubmitButton type="button" text={text} onClick={onClick} />
+      <div>
+        <SubmitButton type="button" text={text} onClick={onClick} />
+      </div>
     </div>
   );
 };
