@@ -15,7 +15,7 @@ const Setting: React.FC = () => {
     <div className="flex min-h-screen">
       <div className="mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
         <ImageUploadGrid />
-        <div className="mx-auto w-96">
+        <div className="mx-auto w-100">
           <AccordionItems
             items={[
               {
