@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
-interface EmailLoginFormProps {
+interface LoginFormProps {
   setId: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  lostPassword: () => void;
+  lostPassword: JSX.Element;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, lostPassword, onSubmit }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ setId, setPassword, lostPassword, onSubmit }) => {
   const id = useSelector((state: RootState) => state.accountSlice.user.identity.loginId);
   const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
   return (
@@ -42,9 +42,7 @@ const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, los
           autoComplete="new-password"
         ></input>
       </div>
-      {/* <button onClick={lostPassword} className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">
-        Lost Password?
-      </button> */}
+      {lostPassword}
       <button
         type="submit"
         className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -55,4 +53,4 @@ const EmailLoginForm: React.FC<EmailLoginFormProps> = ({ setId, setPassword, los
   );
 };
 
-export default EmailLoginForm;
+export default LoginForm;

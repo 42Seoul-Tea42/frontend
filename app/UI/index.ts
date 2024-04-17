@@ -21,7 +21,7 @@ import TableSchema from './TableSchema';
 import Table from './Table';
 import GoogleLoginButton from './GoogleLoginButton';
 import KakaoLoginButton from './KakaoLoginButton';
-import EmailFormChangeButton from './EmailFormChagneButton';
+import LoginFormChangeButton from './LoginFormChagneButton';
 import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
 import DuplicateCheckForm from '../auth/signup/components/DuplicateCheckField';
@@ -38,7 +38,7 @@ export {
   DuplicateCheckForm,
   DrawerItem,
   DrawerOpenButton,
-  EmailFormChangeButton,
+  LoginFormChangeButton,
   GoogleLoginButton,
   KakaoLoginButton,
   InputFloatingLabel,

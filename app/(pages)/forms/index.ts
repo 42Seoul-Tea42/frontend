@@ -6,8 +6,10 @@ import IntroductionInput from './IntroductionInput';
 import PasswordInput from './PasswordInput';
 import SexualPreferenceRadioInput from './SexualPreferenceRadioInput';
 import UserNameInput from './UserNameInput';
+import LoginForm from './LoginForm';
 
 export {
+  LoginForm,
   AgeInput,
   EmailInput,
   GenderRadioInput,

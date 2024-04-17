@@ -1,6 +1,6 @@
 import { ButtonType } from '../redux/types';
 
-function EmailFormChangeButton({ onClick }: ButtonType) {
+function LoginFormChangeButton({ onClick }: ButtonType) {
   return (
     <button
       onClick={onClick}
@@ -11,4 +11,4 @@ function EmailFormChangeButton({ onClick }: ButtonType) {
   );
 }
 
-export default EmailFormChangeButton;
+export default LoginFormChangeButton;
