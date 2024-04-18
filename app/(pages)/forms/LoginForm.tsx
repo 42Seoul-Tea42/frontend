@@ -5,11 +5,18 @@ import { SubmitButton } from '../../UI';
 interface LoginFormProps {
   setId: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  lostPassword: JSX.Element;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  lostPassword: JSX.Element;
+  receiveEmail: JSX.Element;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ setId, setPassword, lostPassword, onSubmit }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  setId,
+  setPassword,
+  lostPassword,
+  onSubmit,
+  receiveEmail
+}: LoginFormProps) => {
   const id = useSelector((state: RootState) => state.accountSlice.user.identity.loginId);
   const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
   return (
@@ -25,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setId, setPassword, lostPassword,
           placeholder=""
           required
           autoComplete="username"
-        ></input>
+        />
       </div>
       <div className="w-full">
         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -41,9 +48,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ setId, setPassword, lostPassword,
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required
           autoComplete="new-password"
-        ></input>
+        />
       </div>
-      {lostPassword}
+      <div className="flex justify-center items-center gap-3">
+        {receiveEmail}
+        <p className="text-gray-700"> or </p>
+        {lostPassword}
+      </div>
       <SubmitButton text="login your Account" />
     </form>
   );

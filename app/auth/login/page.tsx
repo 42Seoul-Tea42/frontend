@@ -14,15 +14,10 @@ import {
   KakaoLoginButton,
   LoginFormChangeButton
 } from '../../UI';
-import useLoginRouting from '../../(pages)/hooks/useLoginRouting';
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  // 로그인 상태에 따른 유저 라우팅
-  const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
-  useLoginRouting({ isLogin: isLogin });
 
   const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
@@ -49,6 +44,7 @@ const LoginPage: React.FC = () => {
             setId={e => dispatch(setAccountLoginId(e.target.value))}
             setPassword={e => dispatch(setAccountPassword(e.target.value))}
             lostPassword={<HyperBlueLink text={'Lost Password?'} onClick={() => {}} />}
+            receiveEmail={<HyperBlueLink text={"Didn't receive the Email?"} onClick={() => {}} />}
           />
         </>
       }

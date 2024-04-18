@@ -7,7 +7,7 @@ import { RootState } from '../../redux/store';
 import { getCheckDuplicateEmail } from '../../redux/slices/signupSlice';
 import { useEffect } from 'react';
 
-function page() {
+function SendEmailForm() {
   const dispatch = useDispatch();
   const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
   const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
@@ -44,4 +44,4 @@ function page() {
   );
 }
 
-export default page;
+export default SendEmailForm;

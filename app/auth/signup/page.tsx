@@ -29,17 +29,17 @@ const Signup: React.FC = () => {
     }
   }, [error]);
 
-  useEffect(() => {
-    if (isSignup) {
-      alert('회원가입이 완료되었습니다.');
-      router.push('/auth/send-email');
-    }
-  }, [isSignup]);
-
   const signup = () => {
     // if (!showAlertsForValidation()) return;
     dispatch<any>(postSignup());
   };
+
+  useEffect(() => {
+    if (isSignup) {
+      alert('회원가입이 완료되었습니다.');
+      router.push('/auth/login');
+    }
+  }, [isSignup]);
 
   return (
     <CardForm

@@ -56,17 +56,25 @@ graph TD
 email(유저 이메일)
 login(로그인 시도)
 signup(회원가입)
-send(/auth/send-email)
+send(/auth/login)
 callback(/auth/callback)
 
 login -- 메일 인증 완료 --> 서비스이용
 login -- 메일 미인증 --> send
 
 email -- 링크 클릭 --> callback
-signup --> send
+signup --> login
 
 callback -- 검증 완료 --> 로그인
 callback <-. 메일 검증 요청 ..-> 서버
 send <-. 메일 전송 요청 ..-> 서버
 
 ```
+
+loginPage에서 보여줄 것
+아이디 찾기 - email
+패스워드 찾기 - id, email
+
+id password 기반
+이메일 다시보내기
+이메일 변경하기
