@@ -5,6 +5,7 @@ import EmojiGridList from '../../auth/upload/emoji/EmojiGridList';
 import ImageUploadGrid from './components/ImageUploadGrid';
 import { AgeInput, GenderRadioInput, PasswordInput, SexualPreferenceRadioInput, UserNameInput } from '../forms';
 import { AccordionItems, SubmitButton } from '../../UI';
+import ReEnterPassword from '../forms/ReEnterPassword';
 
 const Setting: React.FC = () => {
   const submitAccountSetting = () => {
@@ -28,7 +29,12 @@ const Setting: React.FC = () => {
               },
               {
                 title: '비밀번호 재설정',
-                content: <PasswordInput />
+                content: (
+                  <>
+                    <PasswordInput />
+                    <ReEnterPassword />
+                  </>
+                )
               },
               {
                 title: '나의 성별 선택',

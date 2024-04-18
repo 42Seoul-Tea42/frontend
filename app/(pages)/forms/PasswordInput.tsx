@@ -5,7 +5,6 @@ import InputFloatingLabel from '../../UI/InputFloatingLabel';
 
 const PasswordInput: React.FC = () => {
   const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
-  const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
   const dispatch = useDispatch();
 
   return (
@@ -16,12 +15,6 @@ const PasswordInput: React.FC = () => {
         onChange={e => dispatch(setAccountPassword(e.target.value))}
         text="New Password"
         autoComplete="new-password"
-      />
-      <InputFloatingLabel
-        type="re-enter-password"
-        value={reEnterPassword}
-        onChange={e => dispatch(setAccountReEnterPassword(e.target.value))}
-        text="Re-Enter Password"
       />
     </div>
   );

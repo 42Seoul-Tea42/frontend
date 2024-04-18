@@ -16,14 +16,19 @@ function useLoginRouting({ isLogin }: useLoginRoutingProps) {
     // 로그인 상태 아닐경우 라우팅 방지
     if (!isLogin) return;
 
-    if (!loginSteps.emailVerification) {
-      router.push('/auth');
-    } else if (!loginSteps.profileCreation) {
-      router.push('/auth/profile');
-    } else if (!loginSteps.emojiSelection) {
-      router.push('/auth/emoji');
-    } else {
-      router.push('/home');
+    switch (true) {
+      case !loginSteps.emailVerification:
+        router.push('/auth/send-email');
+        break;
+      case !loginSteps.profileCreation:
+        router.push('/auth/profile');
+        break;
+      case !loginSteps.emojiSelection:
+        router.push('/auth/emoji');
+        break;
+      default:
+        router.push('/home');
+        break;
     }
   }, [loginSteps]);
 }

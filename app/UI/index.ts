@@ -26,6 +26,7 @@ import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
 import DuplicateCheckForm from '../auth/signup/components/DuplicateCheckField';
 import CardForm from '../(pages)/forms/CardForm';
+import ReEnterPassword from '../(pages)/forms/ReEnterPassword';
 
 export {
   AllSignOptionButton,
@@ -53,6 +54,7 @@ export {
   FancyButton,
   ProfileDetailModalContents,
   ProfileDetailModalControl,
+  ReEnterPassword,
   HyperBlueLink,
   TableRow,
   Table

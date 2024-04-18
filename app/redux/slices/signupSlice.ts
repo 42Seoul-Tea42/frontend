@@ -97,6 +97,8 @@ const signupSlice = createSlice({
     builder.addCase(postSignup.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
+      //test
+      state.validation.isSignup = true;
     });
 
     // 이메일 인증 요청

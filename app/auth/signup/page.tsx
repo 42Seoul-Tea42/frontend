@@ -5,7 +5,7 @@ import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
-import { CardForm, DuplicateCheckForm, SubmitButton } from '../../UI';
+import { CardForm, DuplicateCheckForm, ReEnterPassword, SubmitButton } from '../../UI';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
 import {
   closeSignupError,
@@ -31,13 +31,13 @@ const Signup: React.FC = () => {
 
   useEffect(() => {
     if (isSignup) {
-      alert('회원가입이 완료되었습니다. 로그인 해주세요~');
-      router.push('/auth/login');
+      alert('회원가입이 완료되었습니다.');
+      router.push('/auth/send-email');
     }
   }, [isSignup]);
 
   const signup = () => {
-    if (!showAlertsForValidation()) return;
+    // if (!showAlertsForValidation()) return;
     dispatch<any>(postSignup());
   };
 
@@ -59,6 +59,7 @@ const Signup: React.FC = () => {
             onClick={() => dispatch<any>(getCheckDuplicateId())}
           />
           <PasswordInput />
+          <ReEnterPassword />
         </>
       }
       button={<SubmitButton text="회원가입" />}
