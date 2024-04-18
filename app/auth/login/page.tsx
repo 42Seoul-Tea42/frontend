@@ -14,6 +14,8 @@ import {
   KakaoLoginButton,
   LoginFormChangeButton
 } from '../../UI';
+import { useEffect } from 'react';
+import { setIsSignup } from '../../redux/slices/signupSlice';
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
@@ -24,6 +26,14 @@ const LoginPage: React.FC = () => {
     event.preventDefault();
     dispatch<any>(postLogin());
   };
+
+  const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
+  useEffect(() => {
+    if (isSignup) {
+      alert('회원가입이 완료되었습니다. 이메일을 인증해주세요.');
+      dispatch(setIsSignup(false));
+    }
+  }, [isSignup]);
 
   return (
     <LoginPageDetail

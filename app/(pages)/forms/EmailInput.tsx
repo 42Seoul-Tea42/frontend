@@ -15,6 +15,7 @@ const EmailInput: React.FC = () => {
       value={email}
       onChange={e => dispatch(setAccountEmail(e.target.value))}
       text="Email"
+      autoComplete="email"
     />
   );
 };

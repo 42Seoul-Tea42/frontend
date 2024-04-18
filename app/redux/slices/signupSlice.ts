@@ -81,6 +81,9 @@ const signupSlice = createSlice({
   reducers: {
     closeSignupError: state => {
       state.error = null;
+    },
+    setIsSignup: (state, action: PayloadAction<boolean>) => {
+      state.validation.isSignup = action.payload;
     }
   },
   extraReducers: builder => {
@@ -149,7 +152,7 @@ const signupSlice = createSlice({
   }
 });
 
-export const { closeSignupError } = signupSlice.actions;
+export const { closeSignupError, setIsSignup } = signupSlice.actions;
 
 export const extraReducers = signupSlice.reducer;
 
