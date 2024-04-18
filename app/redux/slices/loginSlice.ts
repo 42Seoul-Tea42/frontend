@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '../../utils/axios';
+import { AccountState } from './accountSlice';
 
 /** 서버에서 받아오는 유저의 인증단계 */
 export type Steps = {
@@ -31,23 +32,15 @@ const initialState: LoginState = {
 };
 
 export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { getState }) => {
-  // const state = getState() as { accountSlice: AccountState };
-  // const { user } = state.accountSlice;
-  // const response = await axiosInstance.post('/user/login', {
-  //   body: {
-  //     login_id: user.identity.id,
-  //     pw: user.account.password
-  //   }
-  // });
-  // return response.data;
-
-  // 라우팅 테스트 코드
-  return {
-    isLogin: true,
-    email_check: false,
-    profile_check: false,
-    emoji_check: false
-  };
+  const state = getState() as { accountSlice: AccountState };
+  const { user } = state.accountSlice;
+  const response = await axiosInstance.post('/user/login', {
+    body: {
+      login_id: user.identity.id,
+      pw: user.account.password
+    }
+  });
+  return response.data;
 });
 
 // 인증이메일 다시보내기
@@ -102,6 +95,11 @@ const loginSlice = createSlice({
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
+      //test
+      state.steps.emailVerification = false;
+      state.steps.profileCreation = false;
+      state.steps.emojiSelection = false;
+      state.steps.isLogin = true;
     });
 
     //카카오 로그인

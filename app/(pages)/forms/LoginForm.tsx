@@ -17,8 +17,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
   onSubmit,
   receiveEmail
 }: LoginFormProps) => {
-  const id = useSelector((state: RootState) => state.accountSlice.user.identity.loginId);
-  const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
   return (
     <form onSubmit={onSubmit} className="space-y-6 mb-1 text-start">
       <div className="min-w-[300px]">
@@ -26,7 +24,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
         <input
           type="text"
           name="username"
-          value={id}
           onChange={setId}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           placeholder=""
@@ -42,7 +39,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
           type="password"
           name="password"
           id="password"
-          value={password}
           onChange={setPassword}
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"

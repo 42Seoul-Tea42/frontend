@@ -97,7 +97,8 @@ const signupSlice = createSlice({
     builder.addCase(postSignup.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
-      //test
+
+      //test todo
       state.validation.isSignup = true;
     });
 
