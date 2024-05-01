@@ -2,16 +2,15 @@
 
 import { useDispatch } from 'react-redux';
 import { usersInquirySetDummy } from '../../UserDummy';
-import { Key, useEffect, useState } from 'react';
+import { useFilter, useSort } from '../hooks';
+import { useEffect, useState } from 'react';
 import { UserProfileInquirySet } from '../../redux/interface';
 import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
+import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
-import ProfileDetailModal from '../components/ProfileDetailModal';
-import { useFilter, useSort } from '../hooks';
-import { MainContentsArea } from '../../UI';
-import ProfileDetailModalControl from '../../UI/ProfileDetailModalControl';
-import SortBar from '../components/SortBar';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
+import SortBar from '../components/SortBar';
+import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from './UserCards';
 
 function Home() {

@@ -40,7 +40,12 @@ axiosInstance.interceptors.response.use(
   error => {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
-    console.log(error);
+    switch (error.response.status) {
+      case 401:
+        alert('재 로그인 해주세요.');
+        window.location.href = '/auth/login';
+        break;
+    }
     return Promise.reject(error);
   }
 );

@@ -21,7 +21,7 @@ const Emoji = () => {
     // 서버로 제출 하는 로직 필요
     dispatch<any>(
       patchUserProfile({
-        prefer_emoji: emojis
+        prefer_emoji: emojis.map(emoji => 1 << emoji)
       })
     );
   };
@@ -48,6 +48,7 @@ const Emoji = () => {
           </span>
         </h5>
         <EmojiGridList />
+        <div className="mt-10"></div>
         <SubmitButton text="submit" />
       </form>
     </div>

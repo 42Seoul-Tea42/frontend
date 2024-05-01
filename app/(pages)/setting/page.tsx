@@ -6,10 +6,30 @@ import ImageUploadGrid from './components/ImageUploadGrid';
 import { AgeInput, GenderRadioInput, PasswordInput, SexualPreferenceRadioInput, UserNameInput } from '../forms';
 import { AccordionItems, SubmitButton } from '../../UI';
 import ReEnterPassword from '../forms/ReEnterPassword';
+import { useDispatch, useSelector } from 'react-redux';
+import { patchUserProfile } from '../../redux/slices/loginSlice';
+import { RootState } from '../../redux/store';
 
 const Setting: React.FC = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.accountSlice.user);
+  const emojis = useSelector((state: RootState) => state.accountSlice.emojis);
+
   const submitAccountSetting = () => {
-    console.log('save');
+    dispatch<any>(
+      patchUserProfile({
+        email: user.account.email,
+        pw: user.account.password,
+        last_name: user.identity.lastname,
+        name: user.identity.firstname,
+        taste: user.profile.sexualPreference,
+        bio: user.profile.introduction,
+        tags: user.profile.interests,
+        prefer_emoji: emojis.map(emoji => 1 << emoji),
+        age: user.ageGender.age,
+        pictures: [user.photo.mainPhoto, ...user.profile.subPhotos]
+      })
+    );
   };
 
   return (
