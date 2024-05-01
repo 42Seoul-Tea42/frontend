@@ -10,11 +10,15 @@ import ImageUploadForm from '../../../(pages)/forms/ImageUploadForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { setAccountMainPhoto } from '../../../redux/slices/accountSlice';
+import { patchUserProfile } from '../../../redux/slices/loginSlice';
+import { useEffect } from 'react';
 
 const Profile = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const profileImage = useSelector((state: RootState) => state.accountSlice.user.photo.mainPhoto);
+  const profileCreation = useSelector((state: RootState) => state.loginSlice.steps.profileCreation);
+  const user = useSelector((state: RootState) => state.accountSlice.user);
 
   const submitProfile = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
@@ -27,10 +31,22 @@ const Profile = () => {
     }
 
     //서버로 보내는 동작 수행
-
-    // 성공했을시 useEffect 내에서 라우터로 푸시
-    router.push('/auth/emoji');
+    dispatch<any>(
+      patchUserProfile({
+        picture: user.photo.mainPhoto,
+        gender: parseInt(user.ageGender.gender),
+        taste: parseInt(user.profile.sexualPreference),
+        bio: user.profile.introduction,
+        tags: user.profile.interests
+      })
+    );
   };
+
+  useEffect(() => {
+    if (profileCreation) {
+      router.push('/auth/emoji');
+    }
+  }, [profileCreation]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center">

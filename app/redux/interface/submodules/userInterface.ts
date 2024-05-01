@@ -1,3 +1,5 @@
+import { Gender } from '../enum';
+
 /**
  * @type {id: string; firstname: string; lastname: string;}
  */

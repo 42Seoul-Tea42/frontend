@@ -28,7 +28,7 @@ const initialState: AccountState = {
       subPhotos: [],
       interests: [],
       rating: 0,
-      sexualPreference: '',
+      sexualPreference: '0',
       introduction: ''
     },
     position: {
@@ -37,7 +37,7 @@ const initialState: AccountState = {
     },
     ageGender: {
       age: 0,
-      gender: ''
+      gender: '0'
     },
     photo: {
       mainPhoto: ''
@@ -49,25 +49,11 @@ const initialState: AccountState = {
   error: null
 };
 
-// // 회원가입 정보 서버로 전송
-// export const postSignup = createAsyncThunk(
-//   'accountSlice/postSignup',
-//   async (_, { getState }) => {
-//     const state = getState() as { accountSlice: AccountState };
-//     const { user } = state.accountSlice;
-
-//     const response = await axiosInstance.post('https://api.example.com/data', {
-//       body: {
-//         login_id: user.identity.id,
-//         email: user.account.email,
-//         pw: user.account.password,
-//         last_name: user.identity.lastname,
-//         name: user.identity.firstname
-//       }
-//     });
-//     return response.status;
-//   }
-// );
+// // 유저 프로필 정보 서버로 전송
+// export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
+//   const response = await axiosInstance.post('https://api.example.com/data', {});
+//   return response.status;
+// });
 
 const accountSlice = createSlice({
   name: 'accountSlice',
@@ -118,11 +104,15 @@ const accountSlice = createSlice({
     },
     setAccountEmojis: (state: AccountState, action: PayloadAction<number>) => {
       const { emojis } = state;
-      if (emojis.includes(action.payload)) {
-        state.emojis = emojis.filter(item => item !== action.payload);
-      } else {
-        state.emojis = [...emojis, action.payload];
+
+      // 백엔드 요청 : 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
+      if (state.emojis.length >= 4 && !emojis.includes(action.payload)) {
+        return;
       }
+      // 이모티콘 추가 및 삭제
+      emojis.includes(action.payload)
+        ? (state.emojis = emojis.filter(item => item !== action.payload))
+        : (state.emojis = [...emojis, action.payload]);
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
       const { interests } = state.user.profile;
@@ -134,17 +124,17 @@ const accountSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    // builder.addCase(postSignup.pending, state => {
+    // builder.addCase(patchUserProfile.pending, state => {
     //   state.loading = true;
     //   state.error = null;
     // });
-    // builder.addCase(postSignup.fulfilled, (state, action) => {
+    // builder.addCase(patchUserProfile.fulfilled, (state, action) => {
     //   if (action.payload === 200) {
     //     state.isSignup = true;
     //   }
     //   state.user = initialState.user;
     // });
-    // builder.addCase(postSignup.rejected, (state, action) => {
+    // builder.addCase(patchUserProfile.rejected, (state, action) => {
     //   state.loading = false;
     //   state.error = action.error.message ?? null;
     // });

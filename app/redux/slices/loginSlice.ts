@@ -64,6 +64,12 @@ export const getVerifyEmail = createAsyncThunk('loginSlice/getVerifyEmail', asyn
   await axiosInstance.get(`/user/verify-email?key=${token}`);
 });
 
+// 유저 프로필 정보 서버로 전송
+export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (userProfileObject: any) => {
+  const response = await axiosInstance.patch('/user/profile', userProfileObject);
+  return response.status;
+});
+
 const loginSlice = createSlice({
   name: 'loginSlice',
   initialState,
@@ -152,6 +158,19 @@ const loginSlice = createSlice({
       state.isResendEmail = true;
     });
     builder.addCase(getResendEmail.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 유저 프로필 세팅
+    builder.addCase(patchUserProfile.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(patchUserProfile.fulfilled, state => {
+      state.steps.profileCreation = true;
+    });
+    builder.addCase(patchUserProfile.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

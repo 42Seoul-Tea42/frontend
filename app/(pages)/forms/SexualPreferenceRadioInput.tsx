@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setAccountSexualPreference } from '../../redux/slices/accountSlice';
+import { Gender } from '../../redux/interface/enum';
 
 const SexualPreferenceRadioInput: React.FC = () => {
   const sexualPreference = useSelector((state: RootState) => state.accountSlice.user.profile.sexualPreference);
@@ -14,14 +15,14 @@ const SexualPreferenceRadioInput: React.FC = () => {
             <input
               id="hetero"
               type="radio"
-              value="hetero"
+              value={Gender.MALE}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
             <label htmlFor="hetero" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              이성애
+              남성
             </label>
           </div>
         </li>
@@ -30,14 +31,14 @@ const SexualPreferenceRadioInput: React.FC = () => {
             <input
               id="homo"
               type="radio"
-              value="homo"
+              value={Gender.FEMALE}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
             <label htmlFor="homo" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              동성애
+              여성
             </label>
           </div>
         </li>
@@ -46,14 +47,14 @@ const SexualPreferenceRadioInput: React.FC = () => {
             <input
               id="bisexual"
               type="radio"
-              value="bisexual"
+              value={Gender.ALL}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               required
             />
             <label htmlFor="bisexual" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              양성애
+              상관없음
             </label>
           </div>
         </li>

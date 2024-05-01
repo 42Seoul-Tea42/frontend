@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setAccountGender } from '../../redux/slices/accountSlice';
+import { Gender } from '../../redux/interface/enum';
 
 const GenderRadioInput: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const GenderRadioInput: React.FC = () => {
             <input
               id="male"
               type="radio"
-              value="male"
+              value={Gender.MALE}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
@@ -30,7 +31,7 @@ const GenderRadioInput: React.FC = () => {
             <input
               id="female"
               type="radio"
-              value="female"
+              value={Gender.FEMALE}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"

@@ -3,18 +3,34 @@
 import { useRouter } from 'next/navigation';
 import EmojiGridList from './EmojiGridList';
 import SubmitButton from '../../../UI/SubmitButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { useEffect } from 'react';
+import { patchUserProfile } from '../../../redux/slices/loginSlice';
 
 const Emoji = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const emojiSelection = useSelector((state: RootState) => state.loginSlice.steps.emojiSelection);
+  const emojis = useSelector((state: RootState) => state.accountSlice.emojis);
 
   const submitEmojiPreference = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
 
     // 서버로 제출 하는 로직 필요
-    // 성공했을시 useEffect 내에서 라우터로 푸시
-    router.push('/home');
+    dispatch<any>(
+      patchUserProfile({
+        prefer_emoji: emojis
+      })
+    );
   };
+
+  useEffect(() => {
+    if (emojiSelection) {
+      router.push('/home');
+    }
+  }, [emojiSelection]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
