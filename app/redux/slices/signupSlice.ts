@@ -3,6 +3,8 @@ import axiosInstance from '../../utils/axios';
 import { AccountState } from './accountSlice';
 
 interface SignupState {
+  loginId: string;
+  email: string;
   validation: {
     isSignup: boolean;
     isEmailDuplicateChecked: boolean;
@@ -14,6 +16,8 @@ interface SignupState {
 }
 
 const initialState: SignupState = {
+  loginId: '',
+  email: '',
   validation: {
     isSignup: false,
     isEmailDuplicateChecked: false,
@@ -45,7 +49,6 @@ export const postSignup = createAsyncThunk('accountSlice/postSignup', async (_, 
 export const postVerifyEmail = createAsyncThunk('accountSlice/postVerifyEmail', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
   const { user } = state.accountSlice;
-
   const response = await axiosInstance.post('https://api.example.com/data', {
     body: {
       email: user.account.email
@@ -58,27 +61,33 @@ export const postVerifyEmail = createAsyncThunk('accountSlice/postVerifyEmail', 
 export const getCheckDuplicateEmail = createAsyncThunk(
   'accountSlice/getCheckDuplicateEmail',
   async (_, { getState }) => {
-    const state = getState() as { accountSlice: AccountState };
-    const { user } = state.accountSlice;
+    const state = getState() as { signupSlice: SignupState };
+    const { email } = state.signupSlice;
 
-    const response = await axiosInstance.get(`/user/check-email?email=${user.account.email}`);
-    return response.status;
+    const response = await axiosInstance.get(`/user/check-email?email=${email}`);
+    return response;
   }
 );
 
 // 아이디 중복체크
 export const getCheckDuplicateId = createAsyncThunk('accountSlice/getCheckDuplicateId', async (_, { getState }) => {
-  const state = getState() as { accountSlice: AccountState };
-  const { user } = state.accountSlice;
+  const state = getState() as { signupSlice: SignupState };
+  const { loginId } = state.signupSlice;
 
-  const response = await axiosInstance.get(`/user/check-id?login_id=${user.identity.id}`);
-  return response.status;
+  const response = await axiosInstance.get(`/user/check-id?login_id=${loginId}`);
+  return response;
 });
 
 const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
   reducers: {
+    setSingupLoiginId: (state, action: PayloadAction<string>) => {
+      state.loginId = action.payload;
+    },
+    setSignupEmail: (state, action: PayloadAction<string>) => {
+      state.email = action.payload;
+    },
     closeSignupError: state => {
       state.error = null;
     },
@@ -126,7 +135,7 @@ const signupSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getCheckDuplicateEmail.fulfilled, (state, action) => {
-      if (action.payload === 200) {
+      if (action.payload.data.occupied === false) {
         state.validation.isEmailVerifyChecked = true;
       }
     });
@@ -141,7 +150,7 @@ const signupSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getCheckDuplicateId.fulfilled, (state, action) => {
-      if (action.payload === 200) {
+      if (action.payload.data.occupied === false) {
         state.validation.isIdDuplicateChecked = true;
       }
     });
@@ -152,7 +161,7 @@ const signupSlice = createSlice({
   }
 });
 
-export const { closeSignupError, setIsSignup } = signupSlice.actions;
+export const { setSignupEmail, setSingupLoiginId, closeSignupError, setIsSignup } = signupSlice.actions;
 
 export const extraReducers = signupSlice.reducer;
 

@@ -1,21 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import InputFloatingLabel from '../../UI/InputFloatingLabel';
-import { setAccountLoginId } from '../../redux/slices/accountSlice';
 
-const LoginIdInput: React.FC = () => {
-  const loginId = useSelector((state: RootState) => state.accountSlice.user.identity.loginId);
-  const dispatch = useDispatch();
+interface LoginIdInputProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-  return (
-    <InputFloatingLabel
-      type="text"
-      value={loginId}
-      onChange={e => dispatch(setAccountLoginId(e.target.value))}
-      text="Login ID"
-      autoComplete="username"
-    />
-  );
-};
+function LoginIdInput({ value, onChange }: LoginIdInputProps) {
+  return <InputFloatingLabel type="text" value={value} onChange={onChange} text="Login ID" autoComplete="username" />;
+}
 
 export default LoginIdInput;

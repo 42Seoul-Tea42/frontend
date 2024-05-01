@@ -3,7 +3,9 @@ import { SERVER_URL } from '../../global';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: SERVER_URL,
+  // baseURL: SERVER_URL,
+  // testtest
+  baseURL: 'http://localhost:80',
   headers: {
     'Content-Type': 'application/json'
   },

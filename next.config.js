@@ -13,7 +13,7 @@ module.exports = {
     return [
       {
         source: '/:path*',
-        destination: 'http://localhost:5000/:path*' // 모든 요청을 로컬 호스트의 백엔드로 프록시합니다.
+        destination: 'http://localhost:80/:path*'
       }
     ];
   }

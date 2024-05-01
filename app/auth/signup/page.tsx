@@ -11,12 +11,16 @@ import {
   closeSignupError,
   getCheckDuplicateEmail,
   getCheckDuplicateId,
-  postSignup
+  postSignup,
+  setSignupEmail,
+  setSingupLoiginId
 } from '../../redux/slices/signupSlice';
 
 const Signup: React.FC = () => {
   const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
   const error = useSelector((state: RootState) => state.signupSlice.error);
+  const email = useSelector((state: RootState) => state.signupSlice.email);
+  const loginId = useSelector((state: RootState) => state.signupSlice.loginId);
   const showAlertsForValidation = useValidationCheck();
 
   const dispatch = useDispatch();
@@ -47,13 +51,13 @@ const Signup: React.FC = () => {
       inputs={
         <>
           <DuplicateCheckForm
-            form={<EmailInput />}
+            form={<EmailInput value={email} onChange={e => dispatch(setSignupEmail(e.target.value))} />}
             text="check"
             onClick={() => dispatch<any>(getCheckDuplicateEmail())}
           />
           <UserNameInput />
           <DuplicateCheckForm
-            form={<LoginIdInput />}
+            form={<LoginIdInput value={loginId} onChange={e => dispatch(setSingupLoiginId(e.target.value))} />}
             text="check"
             onClick={() => dispatch<any>(getCheckDuplicateId())}
           />
