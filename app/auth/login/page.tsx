@@ -54,7 +54,14 @@ const LoginPage: React.FC = () => {
             setId={e => dispatch(setAccountLoginId(e.target.value))}
             setPassword={e => dispatch(setAccountPassword(e.target.value))}
             lostPassword={<HyperBlueLink text={'Lost Password?'} onClick={() => {}} />}
-            receiveEmail={<HyperBlueLink text={"Didn't receive the Email?"} onClick={() => {}} />}
+            receiveEmail={
+              <HyperBlueLink
+                text={"Didn't receive the Email?"}
+                onClick={() => {
+                  router.push('/auth/send-email');
+                }}
+              />
+            }
           />
         </>
       }

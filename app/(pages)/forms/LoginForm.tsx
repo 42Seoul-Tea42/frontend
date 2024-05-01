@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { SubmitButton } from '../../UI';
 
 interface LoginFormProps {
@@ -51,7 +49,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         <p className="text-gray-700"> or </p>
         {lostPassword}
       </div>
-      <SubmitButton text="login your Account" />
+      <SubmitButton text="Login your Account" />
     </form>
   );
 };

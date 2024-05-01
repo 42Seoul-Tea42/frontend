@@ -60,10 +60,8 @@ export const postGoogleLogin = createAsyncThunk('loginSlice/postGoogleLogin', as
 });
 
 // 토큰으로 이메일 인증받기
-export const getRegisterEmail = createAsyncThunk('loginSlice/getRegisterEmail', async (token: string) => {
-  // const response = await axiosInstance.get(`/user/register-email?token=${token}`);
-  // return response.data;
-  return {};
+export const getVerifyEmail = createAsyncThunk('loginSlice/getVerifyEmail', async (token: string) => {
+  await axiosInstance.get(`/user/verify-email?key=${token}`);
 });
 
 const loginSlice = createSlice({
@@ -133,14 +131,14 @@ const loginSlice = createSlice({
     });
 
     //이메일 인증받기
-    builder.addCase(getRegisterEmail.pending, state => {
+    builder.addCase(getVerifyEmail.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getRegisterEmail.fulfilled, (state, action: PayloadAction<any>) => {
+    builder.addCase(getVerifyEmail.fulfilled, state => {
       state.steps.emailVerification = true;
     });
-    builder.addCase(getRegisterEmail.rejected, (state, action) => {
+    builder.addCase(getVerifyEmail.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

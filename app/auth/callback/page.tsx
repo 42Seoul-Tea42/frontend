@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
 import { RootState } from '../../redux/store';
-import { getRegisterEmail, getResendEmail } from '../../redux/slices/loginSlice';
+import { getResendEmail, getVerifyEmail } from '../../redux/slices/loginSlice';
 import { CardForm, SubmitButton } from '../../UI';
 
 function CallBack() {
@@ -20,26 +20,36 @@ function CallBackAuth() {
   const dispatch = useDispatch();
   const router = useRouter();
   const token = params.get('key');
+  const { emailVerification } = useSelector((state: RootState) => state.loginSlice.steps);
 
   // 컴포넌트 마운트 시에 이메일 자동인증
   useEffect(() => {
     if (token) {
-      dispatch<any>(getRegisterEmail(token));
+      dispatch<any>(getVerifyEmail(token));
     }
   }, []);
 
-  // 이메일 재전송
   useEffect(() => {
-    //todo: 이메일 재전송 검증 완료시 조건문 추가필요
-    alert('검증이 완료되었습니다.');
-  }, []);
+    if (emailVerification) {
+      alert('이메일 인증이 완료되었습니다.');
+      router.push('/auth/login');
+    }
+  }, [emailVerification]);
 
   return (
     <CardForm
       onSubmit={() => dispatch<any>(getResendEmail())}
-      subject="이메일 검증을 진행하는 중입니다."
+      subject="이메일 인증을 진행하는 중입니다."
       inputs={<></>}
-      button={<SubmitButton text="로그인 하러하기" onClick={() => router.push('/auth/login')} />}
+      button={
+        <button
+          name="skeleton"
+          onClick={() => router.push('/auth/login')}
+          className="w-8 h-10 border-4 border-blue-300 rounded-full animate-spin"
+        >
+          로그인 하러가기
+        </button>
+      }
     />
   );
 }
