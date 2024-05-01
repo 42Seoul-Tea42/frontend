@@ -3,8 +3,6 @@ import axiosInstance from '../../utils/axios';
 import { AccountState } from './accountSlice';
 
 interface SignupState {
-  loginId: string;
-  email: string;
   validation: {
     isSignup: boolean;
     isEmailDuplicateChecked: boolean;
@@ -16,8 +14,6 @@ interface SignupState {
 }
 
 const initialState: SignupState = {
-  loginId: '',
-  email: '',
   validation: {
     isSignup: false,
     isEmailDuplicateChecked: false,
@@ -34,13 +30,11 @@ export const postSignup = createAsyncThunk('accountSlice/postSignup', async (_, 
   const { user } = state.accountSlice;
 
   const response = await axiosInstance.post('/user/profile', {
-    body: {
-      login_id: user.identity.id,
-      email: user.account.email,
-      pw: user.account.password,
-      last_name: user.identity.lastname,
-      name: user.identity.firstname
-    }
+    login_id: user.identity.loginId,
+    email: user.account.email,
+    pw: user.account.password,
+    last_name: user.identity.lastname,
+    name: user.identity.firstname
   });
   return response.status;
 });
@@ -61,20 +55,20 @@ export const postVerifyEmail = createAsyncThunk('accountSlice/postVerifyEmail', 
 export const getCheckDuplicateEmail = createAsyncThunk(
   'accountSlice/getCheckDuplicateEmail',
   async (_, { getState }) => {
-    const state = getState() as { signupSlice: SignupState };
-    const { email } = state.signupSlice;
+    const state = getState() as { accountSlice: AccountState };
+    const { user } = state.accountSlice;
 
-    const response = await axiosInstance.get(`/user/check-email?email=${email}`);
+    const response = await axiosInstance.get(`/user/check-email?email=${user.account.email}`);
     return response;
   }
 );
 
 // 아이디 중복체크
 export const getCheckDuplicateId = createAsyncThunk('accountSlice/getCheckDuplicateId', async (_, { getState }) => {
-  const state = getState() as { signupSlice: SignupState };
-  const { loginId } = state.signupSlice;
+  const state = getState() as { accountSlice: AccountState };
+  const { user } = state.accountSlice;
 
-  const response = await axiosInstance.get(`/user/check-id?login_id=${loginId}`);
+  const response = await axiosInstance.get(`/user/check-id?login_id=${user.identity.loginId}`);
   return response;
 });
 
@@ -82,17 +76,17 @@ const signupSlice = createSlice({
   name: 'signupSlice',
   initialState,
   reducers: {
-    setSingupLoiginId: (state, action: PayloadAction<string>) => {
-      state.loginId = action.payload;
-    },
-    setSignupEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
-    },
     closeSignupError: state => {
       state.error = null;
     },
     setIsSignup: (state, action: PayloadAction<boolean>) => {
       state.validation.isSignup = action.payload;
+    },
+    setIsEmailDuplicateChecked: (state, action: PayloadAction<boolean>) => {
+      state.validation.isEmailDuplicateChecked = action.payload;
+    },
+    setIsLoginIdDuplicateChecked: (state, action: PayloadAction<boolean>) => {
+      state.validation.isIdDuplicateChecked = action.payload;
     }
   },
   extraReducers: builder => {
@@ -102,16 +96,11 @@ const signupSlice = createSlice({
       state.error = null;
     });
     builder.addCase(postSignup.fulfilled, (state, action) => {
-      if (action.payload === 200) {
-        state.validation.isSignup = true;
-      }
+      state.validation.isSignup = true;
     });
     builder.addCase(postSignup.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message ?? null;
-
-      //test todo
-      state.validation.isSignup = true;
+      state.error = '회원가입이 실패했습니다.';
     });
 
     // 이메일 인증 요청
@@ -135,13 +124,14 @@ const signupSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getCheckDuplicateEmail.fulfilled, (state, action) => {
-      if (action.payload.data.occupied === false) {
-        state.validation.isEmailVerifyChecked = true;
-      }
+      action.payload.data.occupied === false
+        ? (state.validation.isEmailDuplicateChecked = true)
+        : (state.validation.isEmailDuplicateChecked = false);
     });
     builder.addCase(getCheckDuplicateEmail.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message ?? null;
+      state.error = '이메일이 유효하지 않습니다.';
+      state.validation.isEmailDuplicateChecked = false;
     });
 
     // id 중복체크
@@ -150,18 +140,20 @@ const signupSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getCheckDuplicateId.fulfilled, (state, action) => {
-      if (action.payload.data.occupied === false) {
-        state.validation.isIdDuplicateChecked = true;
-      }
+      action.payload.data.occupied === false
+        ? (state.validation.isIdDuplicateChecked = true)
+        : (state.validation.isIdDuplicateChecked = false);
     });
     builder.addCase(getCheckDuplicateId.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message ?? null;
+      state.error = '아이디가 유효하지 않습니다.';
+      state.validation.isIdDuplicateChecked = false;
     });
   }
 });
 
-export const { setSignupEmail, setSingupLoiginId, closeSignupError, setIsSignup } = signupSlice.actions;
+export const { setIsEmailDuplicateChecked, setIsLoginIdDuplicateChecked, closeSignupError, setIsSignup } =
+  signupSlice.actions;
 
 export const extraReducers = signupSlice.reducer;
 

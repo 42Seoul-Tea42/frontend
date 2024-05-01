@@ -9,7 +9,7 @@ function ReEnterPassword() {
   return (
     <div>
       <InputFloatingLabel
-        type="re-enter-password"
+        type="password"
         value={reEnterPassword}
         onChange={e => dispatch(setAccountReEnterPassword(e.target.value))}
         text="Re-Enter Password"

@@ -7,20 +7,21 @@ import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
 import { CardForm, DuplicateCheckForm, ReEnterPassword, SubmitButton } from '../../UI';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
+import { setAccountEmail, setAccountLoginId } from '../../redux/slices/accountSlice';
 import {
   closeSignupError,
   getCheckDuplicateEmail,
   getCheckDuplicateId,
   postSignup,
-  setSignupEmail,
-  setSingupLoiginId
+  setIsEmailDuplicateChecked,
+  setIsLoginIdDuplicateChecked
 } from '../../redux/slices/signupSlice';
 
 const Signup: React.FC = () => {
   const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
   const error = useSelector((state: RootState) => state.signupSlice.error);
-  const email = useSelector((state: RootState) => state.signupSlice.email);
-  const loginId = useSelector((state: RootState) => state.signupSlice.loginId);
+  const user = useSelector((state: RootState) => state.accountSlice.user);
+  const validation = useSelector((state: RootState) => state.signupSlice.validation);
   const showAlertsForValidation = useValidationCheck();
 
   const dispatch = useDispatch();
@@ -28,21 +29,21 @@ const Signup: React.FC = () => {
 
   useEffect(() => {
     if (error) {
-      alert(error + ': 다시 시도해주세요.');
+      alert(error + '다시 시도해주세요.');
       dispatch(closeSignupError());
     }
   }, [error]);
-
-  const signup = () => {
-    // if (!showAlertsForValidation()) return;
-    dispatch<any>(postSignup());
-  };
 
   useEffect(() => {
     if (isSignup) {
       router.push('/auth/login');
     }
   }, [isSignup]);
+
+  const signup = () => {
+    if (!showAlertsForValidation()) return;
+    dispatch<any>(postSignup());
+  };
 
   return (
     <CardForm
@@ -51,14 +52,34 @@ const Signup: React.FC = () => {
       inputs={
         <>
           <DuplicateCheckForm
-            form={<EmailInput value={email} onChange={e => dispatch(setSignupEmail(e.target.value))} />}
-            text="check"
-            onClick={() => dispatch<any>(getCheckDuplicateEmail())}
+            form={
+              <EmailInput
+                value={user.account.email}
+                onChange={e => {
+                  dispatch(setAccountEmail(e.target.value));
+                  // 이메일 중복체크 후 재입력시 중복체크 여부 초기화
+                  dispatch(setIsEmailDuplicateChecked(false));
+                }}
+              />
+            }
+            text={validation.isEmailDuplicateChecked ? 'V' : 'check'}
+            onClick={() => {
+              dispatch<any>(getCheckDuplicateEmail());
+            }}
           />
           <UserNameInput />
           <DuplicateCheckForm
-            form={<LoginIdInput value={loginId} onChange={e => dispatch(setSingupLoiginId(e.target.value))} />}
-            text="check"
+            form={
+              <LoginIdInput
+                value={user.identity.loginId}
+                onChange={e => {
+                  dispatch(setAccountLoginId(e.target.value));
+                  // 아이디 중복체크 후 재입력시 중복체크 여부 초기화
+                  dispatch(setIsLoginIdDuplicateChecked(false));
+                }}
+              />
+            }
+            text={validation.isIdDuplicateChecked ? 'V' : 'check'}
             onClick={() => dispatch<any>(getCheckDuplicateId())}
           />
           <PasswordInput />

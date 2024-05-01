@@ -35,10 +35,8 @@ export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { ge
   const state = getState() as { accountSlice: AccountState };
   const { user } = state.accountSlice;
   const response = await axiosInstance.post('/user/login', {
-    body: {
-      login_id: user.identity.id,
-      pw: user.account.password
-    }
+    login_id: user.identity.loginId,
+    pw: user.account.password
   });
   return response.data;
 });
