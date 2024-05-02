@@ -41,6 +41,11 @@ export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { ge
   return response.data;
 });
 
+// export const getLogin = createAsyncThunk('loginSlice/getLogin', async () => {
+//   const response = await axiosInstance.get('/user/login');
+//   return response.data;
+// });
+
 // 인증이메일 다시보내기
 export const getResendEmail = createAsyncThunk('loginSlice/getResendEmail', async () => {
   const response = await axiosInstance.get(`/user/send-email`);
@@ -157,7 +162,7 @@ const loginSlice = createSlice({
       state.error = action.error.message ?? null;
     });
 
-    // 유저 프로필 세팅
+    // 유저 프로필 세팅 !steps 설정때문에 account가 아닌 login slice에 위치
     builder.addCase(patchUserProfile.pending, state => {
       state.loading = true;
       state.error = null;

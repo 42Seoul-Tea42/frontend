@@ -16,7 +16,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   config => {
     // 유저 위치정보 추가
-    const userLocation = localStorage.getItem('userLocation');
+    const userLocation = localStorage.getItem('user-location');
     if (userLocation) {
       const { latitude, longitude } = JSON.parse(userLocation);
       config.headers['x-user-location'] = `${latitude},${longitude}`;

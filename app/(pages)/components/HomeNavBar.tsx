@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFancyNoti, setHistoryNoti } from '../../redux/oldslices/socketEventSlice';
 import { RootState } from '../../redux/store';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
+import useLoginSteps from '../hooks/useLoginSteps';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -16,6 +17,7 @@ const HomeNavBar: React.FC = () => {
   const [historyIconStyle, setHistoryIconStyle] = useState<string>('');
   const fancyNoti = useSelector((state: RootState) => state.socketEvent.fancyNoti);
   const historyNoti = useSelector((state: RootState) => state.socketEvent.historyNoti);
+  // useLoginSteps({ trigger: isPageMoved });
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -42,7 +44,7 @@ const HomeNavBar: React.FC = () => {
   const getUserLocation = async () => {
     try {
       const { latitude, longitude } = await getGeoLocation();
-      localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+      localStorage.setItem('user-location', JSON.stringify({ latitude, longitude }));
     } catch (error) {
       console.table(error);
     }

@@ -59,9 +59,9 @@ const accountSlice = createSlice({
   name: 'accountSlice',
   initialState,
   reducers: {
-    // setAccountId: (state: AccountState, action: PayloadAction<number>) => {
-    //   state.user.identity.id = action.payload;
-    // },
+    setAccountId: (state: AccountState, action: PayloadAction<number>) => {
+      state.user.identity.id = action.payload;
+    },
     setAccountLoginId: (state: AccountState, action: PayloadAction<string>) => {
       state.user.identity.loginId = action.payload;
     },
@@ -160,7 +160,7 @@ const accountSlice = createSlice({
 });
 
 export const {
-  // setAccountId,
+  setAccountId,
   setAccountLoginId,
   setAccountPassword,
   setAccountEmail,

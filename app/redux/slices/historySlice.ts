@@ -19,24 +19,9 @@ const initialState: HistoryState = {
 /**
  * @param {Date} time - Infinite scroll element alignment point
  */
-export const fetchHistoryUsers = createAsyncThunk('historySlice/fetchHistoryUsers', async (time: Date) => {
-  const response = await axiosInstance.get(`/history?breakpoint=${time.toISOString()}`);
-  const users = response.data.map((user: any) => ({
-    id: user.identity.id,
-    firstname: user.name,
-    lastname: user.last_name,
-    fancy: user.fancy,
-    distance: user.another.distance,
-    age: user.birthday,
-    gender: user.gender
-  }));
-  users.forEach(async (user: any) => {
-    const photo = await axiosInstance.post('/user/getPicture', {
-      target_id: user.identity.id
-    });
-    users.mainPhoto = photo.data;
-  });
-  return users;
+export const getHistoryUserList = createAsyncThunk('historySlice/getHistoryUserList', async (time: Date) => {
+  const response = await axiosInstance.get(`/history/history-list?time=${time.toISOString()}`);
+  return response.data;
 });
 
 const historySlice = createSlice({
@@ -48,17 +33,16 @@ const historySlice = createSlice({
     }
   },
   extraReducers: (builder: ActionReducerMapBuilder<HistoryState>) => {
-    builder.addCase(fetchHistoryUsers.pending, state => {
+    builder.addCase(getHistoryUserList.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(
-      fetchHistoryUsers.fulfilled,
-      (state: { users: UserPublicSet[] }, action: PayloadAction<UserPublicSet[]>) => {
+    builder.addCase(getHistoryUserList.fulfilled, (state, action: PayloadAction<any[]>) => {
+      if (action.payload.length > 0) {
         state.users = [...state.users, ...action.payload];
       }
-    );
-    builder.addCase(fetchHistoryUsers.rejected, (state, action: PayloadAction<any>) => {
+    });
+    builder.addCase(getHistoryUserList.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
     });

@@ -5,13 +5,13 @@ import { usersInquirySetDummy } from '../../UserDummy';
 import { useFilter, useSort } from '../hooks';
 import { useEffect, useState } from 'react';
 import { UserProfileInquirySet } from '../../redux/interface';
-import { getSuggestionUsersFromServer } from '../../redux/slices/suggestionSlice';
 import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
 import SortBar from '../components/SortBar';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from './UserCards';
+import { getSuggestionUsers } from '../../redux/slices/suggestionSlice';
 
 function Home() {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function Home() {
   const [renderUsers, setRenderUsers] = useState<UserProfileInquirySet[]>([]);
 
   useEffect(() => {
-    dispatch(getSuggestionUsersFromServer() as any);
+    dispatch<any>(getSuggestionUsers());
     // 서버에서 요청하는것 성공하면 fullfiled 에서 onFilter() 호출하는것으로 수정
     onFilter();
   }, []);

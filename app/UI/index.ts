@@ -10,7 +10,6 @@ import SortButton from './SortButton';
 import HomeNavBarButton from './HomeNavBarButton';
 import CarouselControlButton from './CarouselControlButton';
 import CarouselPaginationButton from './CarouselPaginationButton';
-import ColorPickerUserCard from './ColorPickerUserCard';
 import MainContentsArea from './MainContentsArea';
 import FancyButton from './FancyButton';
 import ProfileDetailModalContents from './ProfileDetailModalContents';
@@ -34,7 +33,6 @@ export {
   AccordionOpenButton,
   CreateAccountButton,
   CardsSkeleton,
-  ColorPickerUserCard,
   CarouselControlButton,
   CarouselPaginationButton,
   DuplicateCheckForm,

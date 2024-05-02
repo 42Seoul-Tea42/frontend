@@ -12,6 +12,7 @@ import signupSlice from './slices/signupSlice';
 import loginSlice from './slices/loginSlice';
 import searchSlice from './slices/searchSlice';
 import profileInquirySlice from './slices/profileInquirySlice';
+import chattingSlice from './slices/chattingSlice';
 
 const store = configureStore({
   reducer: {
@@ -28,7 +29,8 @@ const store = configureStore({
     signupSlice: signupSlice,
     loginSlice: loginSlice,
     searchSlice: searchSlice,
-    profileInquirySlice: profileInquirySlice
+    profileInquirySlice: profileInquirySlice,
+    chattingSlice: chattingSlice
   },
   middleware: (
     getDefaultMiddleware: (arg0: {

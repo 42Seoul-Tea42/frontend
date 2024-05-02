@@ -3,7 +3,7 @@ interface Coordinates {
   longitude: number;
 }
 
-const getGeoLocation = (): Promise<Coordinates> => {
+function getGeoLocation(): Promise<Coordinates> {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject(new Error('Geolocation is not supported by this browser.'));
@@ -19,6 +19,6 @@ const getGeoLocation = (): Promise<Coordinates> => {
       }
     );
   });
-};
+}
 
 export default getGeoLocation;

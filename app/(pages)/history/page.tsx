@@ -1,82 +1,32 @@
 'use client';
 
-import { Key, useEffect } from 'react';
-import { usersInquirySetDummy } from '../../UserDummy';
-import { useCloseOnOutsideClick } from '../hooks';
 import { useDispatch } from 'react-redux';
-import { UserPublicSet } from '../../redux/interface';
+import { usersInquirySetDummy } from '../../UserDummy';
+import { useEffect, useState } from 'react';
+import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
 import ProfileDetailModal from '../components/ProfileDetailModal';
-import ColorPickerUserCard from '../../UI/ColorPickerUserCard';
-import {
-  CardsSkeleton,
-  FancyButton,
-  MainContentsArea,
-  ProfileDetailModalControl,
-  UserCard,
-  UserCardGrid
-} from '../../UI';
+import UserCards from '../home/UserCards';
+import { getHistoryUserList } from '../../redux/slices/historySlice';
 
 function History() {
-  // const users = useSelector((state: RootState) => state.HistorySlice.users);
+  const dispatch = useDispatch();
+  // const users = useSelector((state: RootState) => state.suggestionSlice.users);
   const users = usersInquirySetDummy;
-  const [profileDetailModalRef, ProfileDetailModalVisible, setProfileDetailModalVisible] = useCloseOnOutsideClick();
 
   useEffect(() => {
-    // dispatch(fetchHistoryUsers(new Date()) as any);
+    dispatch<any>(getHistoryUserList(new Date()));
   }, []);
 
-  const dispatch = useDispatch();
   return (
     <MainContentsArea
       contents={
-        <div>
-          <div className="flex flex-col mb-10">
-            <div className="flex justify-center items-center gap-4">
-              <p className="font-semibold text-lg text-gray-600">test1</p>
-              <span className="text-red-200 w-10 h-5 border-2 border-white dark:border-gray-800 rounded-full"></span>
-            </div>
-            <div className="flex justify-center items-center gap-4">
-              <p className="font-semibold text-lg text-gray-600">test2</p>
-              <span className="text-red-200 w-10 h-5 border-2 border-white dark:border-gray-800 rounded-full"></span>
-            </div>
-          </div>
-          <UserCardGrid
-            items={
-              <>
-                {users.length > 0 ? (
-                  users.map((user: UserPublicSet, index: Key) => (
-                    <div key={index}>
-                      <ColorPickerUserCard
-                        style={'p-2 border rounded-xl bg-blue-200'}
-                        userCard={
-                          <UserCard
-                            onClick={() => {
-                              setProfileDetailModalVisible(true);
-                            }}
-                            imgSrc={user.photo.mainPhoto}
-                            alt={index.toString()}
-                            name={user.identity.firstname}
-                            age={user.ageGender.age}
-                            distance={user.another.distance}
-                            fancyButton={<FancyButton onClick={() => {}} />}
-                          />
-                        }
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <CardsSkeleton style="bg-yellow-300 opacity-50" />
-                )}
-                {/* profile inquiry service */}
-                <ProfileDetailModalControl
-                  modalRef={profileDetailModalRef}
-                  modalVisible={ProfileDetailModalVisible}
-                  props={<ProfileDetailModal />}
-                />
-              </>
-            }
-          />
-        </div>
+        <>
+          {/* profile inquiry service */}
+          <ProfileDetailModalControl profileDetail={<ProfileDetailModal />} />
+
+          {/* suggestion user service */}
+          <UserCards users={users} />
+        </>
       }
     />
   );

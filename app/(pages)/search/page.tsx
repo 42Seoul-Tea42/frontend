@@ -6,12 +6,17 @@ import FilterControlDrawer from './components/FilterControlDrawer';
 import { DirectionSVG } from '../../svg';
 import { useSort } from '../hooks';
 import { TableRow } from '../../UI';
+import { useDispatch } from 'react-redux';
+import { postSearch } from '../../redux/slices/searchSlice';
 
 const Search: React.FC = () => {
   const users = usersInquirySetDummy;
   const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
+  const dispatch = useDispatch();
 
-  const submitFilterSearch = () => {};
+  const submitFilterSearch = () => {
+    dispatch<any>(postSearch());
+  };
 
   return (
     <div className="flex h-screen">

@@ -22,7 +22,7 @@ const Setting: React.FC = () => {
         pw: user.account.password,
         last_name: user.identity.lastname,
         name: user.identity.firstname,
-        taste: user.profile.sexualPreference,
+        taste: parseInt(user.profile.sexualPreference),
         bio: user.profile.introduction,
         tags: user.profile.interests,
         prefer_emoji: emojis.map(emoji => 1 << emoji),
