@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserAccountSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 import { AxiosResponse } from 'axios';
-import { postGoogleLogin, postKakaoLogin, postLogin } from './loginSlice';
+import { getGoogleLogin, getKaKaoLogin, postLogin } from './loginSlice';
 
 export interface AccountState {
   user: UserAccountSet;
@@ -144,13 +144,13 @@ const accountSlice = createSlice({
       state.user.identity.lastname = action.payload.last_name;
       state.user.ageGender.age = action.payload.birthday;
     });
-    builder.addCase(postGoogleLogin.fulfilled, (state, action) => {
+    builder.addCase(getGoogleLogin.fulfilled, (state, action) => {
       state.user.identity.id = action.payload.id;
       state.user.identity.firstname = action.payload.name;
       state.user.identity.lastname = action.payload.last_name;
       state.user.ageGender.age = action.payload.birthday;
     });
-    builder.addCase(postKakaoLogin.fulfilled, (state, action) => {
+    builder.addCase(getKaKaoLogin.fulfilled, (state, action) => {
       state.user.identity.id = action.payload.id;
       state.user.identity.firstname = action.payload.name;
       state.user.identity.lastname = action.payload.last_name;

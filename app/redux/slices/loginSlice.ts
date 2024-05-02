@@ -49,13 +49,13 @@ export const getResendEmail = createAsyncThunk('loginSlice/getResendEmail', asyn
 
 // 카카오 로그인
 export const postKakaoLogin = createAsyncThunk('loginSlice/postKakaoLogin', async () => {
-  const response = await axiosInstance.post('/user/kakao');
+  const response = await axiosInstance.post('/kakao/login');
   return response.data;
 });
 
 // 구글 로그인
 export const postGoogleLogin = createAsyncThunk('loginSlice/postGoogleLogin', async () => {
-  const response = await axiosInstance.post('/user/google');
+  const response = await axiosInstance.post('/google/login');
   return response.data;
 });
 
