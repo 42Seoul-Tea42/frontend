@@ -48,14 +48,14 @@ export const getResendEmail = createAsyncThunk('loginSlice/getResendEmail', asyn
 });
 
 // 카카오 로그인
-export const postKakaoLogin = createAsyncThunk('loginSlice/postKakaoLogin', async () => {
-  const response = await axiosInstance.post('/kakao/login');
+export const getKaKaoLogin = createAsyncThunk('loginSlice/getKaKaoLogin', async () => {
+  const response = await axiosInstance.get('/kakao/login');
   return response.data;
 });
 
 // 구글 로그인
-export const postGoogleLogin = createAsyncThunk('loginSlice/postGoogleLogin', async () => {
-  const response = await axiosInstance.post('/google/login');
+export const getGoogleLogin = createAsyncThunk('loginSlice/getGoogleLogin', async () => {
+  const response = await axiosInstance.get('/google/login');
   return response.data;
 });
 
@@ -96,42 +96,37 @@ const loginSlice = createSlice({
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message ?? null;
-      //test
-      state.steps.emailVerification = false;
-      state.steps.profileCreation = false;
-      state.steps.emojiSelection = false;
-      state.steps.isLogin = true;
+      state.error = '올바르지 않은 아이디 또는 비밀번호입니다. 다시 시도해주세요.';
     });
 
     //카카오 로그인
-    builder.addCase(postKakaoLogin.pending, state => {
+    builder.addCase(getKaKaoLogin.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postKakaoLogin.fulfilled, (state, action: PayloadAction<any>) => {
+    builder.addCase(getKaKaoLogin.fulfilled, (state, action: PayloadAction<any>) => {
       state.steps.emailVerification = action.payload.email_check;
       state.steps.profileCreation = action.payload.profile_check;
       state.steps.emojiSelection = action.payload.emoji_check;
       state.steps.isLogin = true;
     });
-    builder.addCase(postKakaoLogin.rejected, (state, action) => {
+    builder.addCase(getKaKaoLogin.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
 
     // 구글 로그인
-    builder.addCase(postGoogleLogin.pending, state => {
+    builder.addCase(getGoogleLogin.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postGoogleLogin.fulfilled, (state, action: PayloadAction<any>) => {
+    builder.addCase(getGoogleLogin.fulfilled, (state, action: PayloadAction<any>) => {
       state.steps.emailVerification = action.payload.email_check;
       state.steps.profileCreation = action.payload.profile_check;
       state.steps.emojiSelection = action.payload.emoji_check;
       state.steps.isLogin = true;
     });
-    builder.addCase(postGoogleLogin.rejected, (state, action) => {
+    builder.addCase(getGoogleLogin.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

@@ -5,7 +5,7 @@ import { RootState } from '../../redux/store';
 import { setAccountLoginId, setAccountPassword } from '../../redux/slices/accountSlice';
 import { LoginForm } from '../../(pages)/forms';
 import LoginPageDetail from './LoginPageDetail';
-import { postGoogleLogin, postKakaoLogin, postLogin, setIdPasswordLoginFormView } from '../../redux/slices/loginSlice';
+import { getGoogleLogin, getKaKaoLogin, postLogin, setIdPasswordLoginFormView } from '../../redux/slices/loginSlice';
 import {
   AllSignOptionButton,
   CreateAccountButton,
@@ -35,13 +35,46 @@ const LoginPage: React.FC = () => {
     }
   }, [isSignup]);
 
+  const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
+  const steps = useSelector((state: RootState) => state.loginSlice.steps);
+  useEffect(() => {
+    if (!isLogin) {
+      return;
+    }
+
+    const redirectToNextStep = () => {
+      if (!steps.emailVerification) {
+        alert('이메일 인증을 진행해주세요.');
+        return '/auth/login';
+      }
+      if (!steps.profileCreation) {
+        return '/auth/upload/profile';
+      }
+      if (!steps.emojiSelection) {
+        return '/auth/upload/emoji';
+      }
+      return '/home';
+    };
+
+    const nextStep = redirectToNextStep();
+    router.push(nextStep);
+  }, [isLogin]);
+
+  const error = useSelector((state: RootState) => state.loginSlice.error);
+  useEffect(() => {
+    if (!error) {
+      return;
+    }
+    alert(error);
+  }, [error]);
+
   return (
     <LoginPageDetail
       title={'Welcome to tea for two!'}
       loginMenu={
         <>
-          <GoogleLoginButton onClick={() => dispatch<any>(postGoogleLogin())} />
-          <KakaoLoginButton onClick={() => dispatch<any>(postKakaoLogin())} />
+          <GoogleLoginButton onClick={() => dispatch<any>(getGoogleLogin())} />
+          <KakaoLoginButton onClick={() => dispatch<any>(getKaKaoLogin())} />
           <h6 className="text-md mb-2 text-gray-600"> or </h6>
           <LoginFormChangeButton text="Sign with Account" onClick={() => dispatch(setIdPasswordLoginFormView(true))} />
         </>
