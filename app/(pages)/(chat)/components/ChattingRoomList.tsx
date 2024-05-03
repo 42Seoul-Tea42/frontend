@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import ChattingRoomListItem, { ChattingRoomListItemProps } from './ChattingRoomListItem';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 interface ChattingRoomListProps {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ChattingRoomList: React.FC<ChattingRoomListProps> = ({ isModalOpen, setIsModalOpen }) => {
+function ChattingRoomList({ isModalOpen, setIsModalOpen }: ChattingRoomListProps) {
   const [users, setUsers] = useState<ChattingRoomListItemProps[]>([]);
+  // const users = useSelector((state: RootState) => state.chattingSlice.users);
   const modalRef = React.createRef<HTMLDivElement>();
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -39,12 +42,6 @@ const ChattingRoomList: React.FC<ChattingRoomListProps> = ({ isModalOpen, setIsM
         imageSrc: '/emoji/1.jpg'
       }
     ]);
-
-    // 서버에서 데이터를 가져오는 API 요청 수행
-    // axiosInstance('your_api_endpoint')
-    //   .then(response => {})
-    //   .then(data => setUsers(data))
-    //   .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   useEffect(() => {
@@ -62,12 +59,19 @@ const ChattingRoomList: React.FC<ChattingRoomListProps> = ({ isModalOpen, setIsM
       {isModalOpen && (
         <div
           tabIndex={-1}
-          className="fixed top-0 left-0 w-full h-full flex items-center justify-center rounded-xl bg-gray-800 bg-opacity-50"
+          className="fixed top-0 left-0 w-full h-full flex items-start justify-center rounded-xl bg-gray-800 bg-opacity-50"
         >
-          <div ref={modalRef} className="bg-white w-full rounded-lg">
-            <ul className="overflow-hidden border">
+          <div ref={modalRef} className="bg-white w-full rounded-xl">
+            <ul className="overflow-hidden border rounded-xl">
               {users.map((user, index) => (
-                <ChattingRoomListItem key={index} {...user} />
+                <div onClick={() => {}}>
+                  <ChattingRoomListItem
+                    key={index}
+                    name={user.name}
+                    distance={user.distance}
+                    imageSrc={user.imageSrc}
+                  />
+                </div>
               ))}
             </ul>
           </div>
@@ -75,6 +79,6 @@ const ChattingRoomList: React.FC<ChattingRoomListProps> = ({ isModalOpen, setIsM
       )}
     </>
   );
-};
+}
 
 export default ChattingRoomList;
