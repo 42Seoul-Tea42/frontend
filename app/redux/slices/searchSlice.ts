@@ -71,7 +71,9 @@ const fancySlice = createSlice({
       state.error = null;
     });
     builder.addCase(postSearch.fulfilled, (state, action: PayloadAction<UserProfileInquirySet[]>) => {
-      state.users = [...state.users, ...action.payload];
+      if (action.payload.length > 0) {
+        state.users = [...state.users, ...action.payload];
+      }
     });
     builder.addCase(postSearch.rejected, (state, action) => {
       state.loading = false;
