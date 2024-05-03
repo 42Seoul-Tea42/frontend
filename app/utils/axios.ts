@@ -5,7 +5,7 @@ import { SERVER_URL } from '../../global';
 const axiosInstance = axios.create({
   // baseURL: SERVER_URL,
   // testtest
-  baseURL: 'http://localhost:80',
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
   headers: {
     'Content-Type': 'application/json'
   },
@@ -33,7 +33,6 @@ axiosInstance.interceptors.response.use(
   response => {
     // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 데이터가 있는 작업 수행
-    console.log(response.data);
     return response;
   },
 

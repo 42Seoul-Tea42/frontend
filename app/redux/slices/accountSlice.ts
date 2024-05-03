@@ -54,11 +54,10 @@ const initialState: AccountState = {
   error: null
 };
 
-// // 유저 프로필 정보 서버로 전송
-// export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
-//   const response = await axiosInstance.post('https://api.example.com/data', {});
-//   return response.status;
-// });
+// 내 정보 가져오기
+export const getMyAccount = createAsyncThunk('accountSlice/getMyAccount', async (_, { getState }) => {
+  const response = await axiosInstance.get('/user/profile');
+});
 
 const accountSlice = createSlice({
   name: 'accountSlice',
@@ -129,20 +128,29 @@ const accountSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    // builder.addCase(patchUserProfile.pending, state => {
-    //   state.loading = true;
-    //   state.error = null;
-    // });
-    // builder.addCase(patchUserProfile.fulfilled, (state, action) => {
-    //   if (action.payload === 200) {
-    //     state.isSignup = true;
-    //   }
-    //   state.user = initialState.user;
-    // });
-    // builder.addCase(patchUserProfile.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message ?? null;
-    // });
+    builder.addCase(getMyAccount.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getMyAccount.fulfilled, (state, action) => {
+      // state.user.identity.id = action.payload.id;
+      // state.user.identity.loginId = action.payload.loginId;
+      // state.user.identity.firstname = action.payload.firstname;
+      // state.user.identity.lastname = action.payload.lastname;
+      // state.user.account.password = action.payload.password;
+      // state.user.ageGender.age = action.payload.age;
+      // state.user.photo.mainPhoto = action.payload.mainPhoto;
+      // state.user.profile.subPhotos = action.payload.subPhotos;
+      // state.user.ageGender.age = action.payload.age;
+      // state.user.profile.sexualPreference = action.payload.sexualPreference;
+      // state.user.profile.interests = action.payload.interests;
+      // state.user.profile.introduction = action.payload.introduction;
+      // state.emojis = action.payload.emojis;
+    });
+    builder.addCase(getMyAccount.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
     builder.addCase(postLogin.fulfilled, (state, action) => {
       state.user.identity.id = action.payload.id;
       state.user.identity.firstname = action.payload.name;

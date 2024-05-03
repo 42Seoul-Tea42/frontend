@@ -31,7 +31,6 @@ const useFilter = (users: any[]): any[] => {
       return isAgeMatch && isDistanceMatch && isRatingMatch && isInterestMatch;
     });
 
-    console.log(filetered);
     setFilteredUsers(filetered);
   };
 

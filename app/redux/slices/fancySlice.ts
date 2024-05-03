@@ -27,7 +27,7 @@ export const getFancyUserList = createAsyncThunk('fancySlice/getFancyUserList', 
 
 export const patchFancy = createAsyncThunk('fancySlice/patchFancy', async (targetId: number) => {
   const response = await axiosInstance.patch('/history/fancy', {
-    target_id: targetId
+    target_id: Number(targetId)
   });
   return targetId;
 });
