@@ -3,6 +3,7 @@ import { UserAccountSet } from '../interface';
 import axiosInstance from '../../utils/axios';
 import { AxiosResponse } from 'axios';
 import { getGoogleLogin, getKaKaoLogin, postLogin } from './loginSlice';
+import { Fancy } from '../interface/enum';
 
 export interface AccountState {
   user: UserAccountSet;
@@ -41,6 +42,10 @@ const initialState: AccountState = {
     },
     photo: {
       mainPhoto: ''
+    },
+    another: {
+      distance: 0,
+      fancy: Fancy.NONE
     }
   },
   emojis: [],

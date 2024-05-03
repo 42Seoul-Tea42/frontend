@@ -1,9 +1,9 @@
 import { Key } from 'react';
 import UserCardPhoto from './UserCardPhoto';
-import { UserProfileInquirySet } from '../../redux/interface';
 import { CardsSkeleton, FancyButton, UserCardGrid } from '../../UI';
 import { setProfileModalVisible, setSelectedUserId } from '../../redux/slices/profileInquirySlice';
 import { useDispatch } from 'react-redux';
+import { patchFancy } from '../../redux/slices/fancySlice';
 
 type UserCardsProps = {
   // Add your prop types here
@@ -23,7 +23,7 @@ function UserCards({ users }: UserCardsProps) {
       items={
         <>
           {users.length > 0 ? (
-            users.map((user: UserProfileInquirySet, index: Key) => (
+            users.map((user: any, index: Key) => (
               <div key={index}>
                 <div className="shadow-xl rounded-xl border-4 border-gray-300 w-[200px]">
                   <div className="relative w-48 h-48 rounded-t-xl">
@@ -38,7 +38,10 @@ function UserCards({ users }: UserCardsProps) {
                       <p className="mr-2 font-md text-xl text-gray-500">{user.ageGender.age}</p>
                       <p className="font-thin text-base text-gray-900">{user.another.distance}km</p>
                       {/* {fancyButton} */}
-                      <FancyButton onClick={() => console.log('fancy')} />
+                      <FancyButton
+                        fancyState={user.another.fancy}
+                        onClick={() => dispatch<any>(patchFancy(user.identity.id))}
+                      />
                     </div>
                   </div>
                 </div>

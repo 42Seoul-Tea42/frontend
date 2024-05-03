@@ -1,21 +1,29 @@
-import { useState } from 'react';
 import { HeartSVG } from '../svg';
+import { Fancy } from '../redux/interface/enum';
 
 type FancyButtonProps = {
   onClick: () => void;
+  fancyState: Fancy;
 };
 
-function FancyButton({ onClick }: FancyButtonProps) {
-  const [color, setColor] = useState<string>('white');
-
-  const submitFancyUser = () => {
-    setColor(color === 'white' ? 'pink' : 'white');
-    onClick();
+function FancyButton({ fancyState, onClick }: FancyButtonProps) {
+  const colorPicker = () => {
+    switch (fancyState) {
+      case Fancy.NONE:
+        return 'white';
+      case Fancy.SEND:
+        return 'green';
+      case Fancy.RECV:
+        return 'yellow';
+      case Fancy.CONN:
+        return 'red';
+      default:
+        return 'white';
+    }
   };
-
   return (
-    <button onClick={submitFancyUser} className="hover:animate-ping">
-      <HeartSVG color={color} />
+    <button onClick={onClick} className="hover:animate-ping">
+      <HeartSVG color={colorPicker()} />
     </button>
   );
 }

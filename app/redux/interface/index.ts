@@ -67,4 +67,5 @@ export type UserAccountSet = {
   profile: Profile;
   position: Position;
   photo: Photo;
+  another: Another;
 };

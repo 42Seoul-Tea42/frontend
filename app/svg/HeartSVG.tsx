@@ -5,7 +5,7 @@ interface HeartSVGProps {
 const HeartSVG: React.FC<HeartSVGProps> = ({ color }) => {
   return (
     <svg
-      className="w-8 h-8 text-gray-800 dark:text-white"
+      className="w-8 h-8 text-gray-800 dark:text-white opacity-50"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"

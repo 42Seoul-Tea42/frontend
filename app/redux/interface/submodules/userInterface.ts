@@ -1,4 +1,4 @@
-import { Gender } from '../enum';
+import { Fancy, Gender } from '../enum';
 
 /**
  * @type {id: string; firstname: string; lastname: string;}
@@ -56,7 +56,7 @@ export type Photo = {
  * @type {fancy: boolean; distance: number;}
  */
 export type Another = {
-  fancy: boolean;
+  fancy: Fancy;
   distance: number;
 };
 

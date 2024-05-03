@@ -1,3 +1,5 @@
+import { Fancy } from './redux/interface/enum';
+
 export const usersInquirySetDummy = [
   {
     identity: {
@@ -13,7 +15,7 @@ export const usersInquirySetDummy = [
       introduction: ''
     },
     another: {
-      fancy: false,
+      fancy: Fancy.NONE,
       distance: 10
     },
     ageGender: {
@@ -38,7 +40,7 @@ export const usersInquirySetDummy = [
       introduction: ''
     },
     another: {
-      fancy: false,
+      fancy: Fancy.SEND,
       distance: 1
     },
     ageGender: {
@@ -63,7 +65,7 @@ export const usersInquirySetDummy = [
       introduction: ''
     },
     another: {
-      fancy: false,
+      fancy: Fancy.RECV,
       distance: 20
     },
     ageGender: {
@@ -88,7 +90,7 @@ export const usersInquirySetDummy = [
       introduction: ''
     },
     another: {
-      fancy: false,
+      fancy: Fancy.CONN,
       distance: 12
     },
     ageGender: {
@@ -113,7 +115,7 @@ export const usersInquirySetDummy = [
       introduction: ''
     },
     another: {
-      fancy: false,
+      fancy: Fancy.SEND,
       distance: 24
     },
     ageGender: {
@@ -138,7 +140,7 @@ export const usersInquirySetDummy = [
       introduction: ''
     },
     another: {
-      fancy: false,
+      fancy: Fancy.SEND,
       distance: 60
     },
     ageGender: {

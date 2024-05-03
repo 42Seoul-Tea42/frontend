@@ -1,5 +1,4 @@
 'use client';
-
 import { useDispatch } from 'react-redux';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { useEffect, useState } from 'react';
