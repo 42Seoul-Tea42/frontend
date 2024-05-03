@@ -43,11 +43,8 @@ const initialState: ProfileInquiryState = {
   error: null
 };
 
-export const asyncUpdate = createAsyncThunk('homeSlice/asyncUpdate', async () => {
-  const response = await axiosInstance('https://api.example.com/data', {
-    method: 'POST'
-    // body: JSON.stringify();
-  });
+export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfileDetail', async (userId: string) => {
+  const response = await axiosInstance.get(`/user/profile-detail?id=${userId}`);
   return response.data;
 });
 
@@ -63,14 +60,14 @@ const profileInquirySlice = createSlice({
     }
   },
   extraReducers: builder => {
-    builder.addCase(asyncUpdate.pending, state => {
+    builder.addCase(getProfileDetail.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(asyncUpdate.fulfilled, (state, action: PayloadAction<UserProfileInquirySet>) => {
+    builder.addCase(getProfileDetail.fulfilled, (state, action: PayloadAction<UserProfileInquirySet>) => {
       state.user = action.payload;
     });
-    builder.addCase(asyncUpdate.rejected, (state, action) => {
+    builder.addCase(getProfileDetail.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

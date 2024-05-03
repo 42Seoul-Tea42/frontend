@@ -18,7 +18,7 @@ import { useEffect } from 'react';
 import { setIsSignup } from '../../redux/slices/signupSlice';
 import useLoginSteps from '../../(pages)/hooks/useLoginSteps';
 
-const LoginPage: React.FC = () => {
+function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
   const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
@@ -79,6 +79,6 @@ const LoginPage: React.FC = () => {
       createAccount={<CreateAccountButton onClick={() => router.push('/auth/signup')} />}
     />
   );
-};
+}
 
-export default LoginPage;
+export default Login;

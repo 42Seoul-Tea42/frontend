@@ -30,7 +30,9 @@ const suggestionSlice = createSlice({
     });
     builder.addCase(getSuggestionUsers.fulfilled, (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.users = [...state.users, ...action.payload];
+      if (action.payload.length > 0) {
+        state.users = [...state.users, ...action.payload];
+      }
     });
     builder.addCase(getSuggestionUsers.rejected, state => {
       state.loading = false;

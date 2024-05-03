@@ -15,6 +15,7 @@ const Chat: React.FC = () => {
   const dispatch = useDispatch();
   const chatSocket = useSocket();
 
+  // 채팅목록 가져오기
   useEffect(() => {
     // webSocket.onopen = () => {};
     // webSocket.onmessage = (event) => {};

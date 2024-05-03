@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { HyperBlueLink, ProfileDetailModalContents } from '../../UI';
+import { getProfileDetail } from '../../redux/slices/profileInquirySlice';
 
 const ProfileDetailModal: React.FC = () => {
   const userId = useSelector((state: RootState) => state.profileInquirySlice.selectedUserId);
@@ -21,15 +22,8 @@ const ProfileDetailModal: React.FC = () => {
     alert('신고되었습니다.');
   };
 
-  const getUserProfileDetails = async () => {
-    // const response = await axiosInstance.get('/user/profileDetail', {
-    // target_id: int
-    // });
-    // console.log(response.data);
-  };
-
   useEffect(() => {
-    getUserProfileDetails();
+    dispatch<any>(getProfileDetail('1'));
   }, []);
 
   return (

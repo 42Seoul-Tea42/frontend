@@ -33,7 +33,7 @@ const Profile = () => {
     //서버로 보내는 동작 수행
     dispatch<any>(
       patchUserProfile({
-        picture: [user.photo.mainPhoto], // backend: 배열형태로 보내주세요.
+        pictures: [user.photo.mainPhoto], // backend: 배열형태로 보내주세요.
         gender: parseInt(user.ageGender.gender), // backend: 숫자형태로 보내주세요.
         taste: parseInt(user.profile.sexualPreference), // backend: 숫자형태로 보내주세요.
         bio: user.profile.introduction,
@@ -44,7 +44,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (profileCreation) {
-      router.push('/auth/emoji');
+      // router.push('/auth/upload/emoji');
     }
   }, [profileCreation]);
 
