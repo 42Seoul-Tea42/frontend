@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { SERVER_URL } from '../../global';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
