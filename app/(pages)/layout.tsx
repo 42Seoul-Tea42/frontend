@@ -2,11 +2,11 @@
 
 import { Provider } from 'react-redux';
 import Footer from './components/Footer';
-import Chat from './(chat)/Chat';
 import { SocketProvider } from '../utils/socketContext';
 import store from '../redux/store';
 import HomeNavBar from './components/HomeNavBar';
-import ChatVisibleControl from './(chat)/ChatVisibleControl';
+import ChatVisibleControl from './(chat)/ChattingVisibleControl';
+import Chatting from './(chat)/Chatting';
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,7 +14,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
       <Provider store={store}>
         <SocketProvider>
           <HomeNavBar />
-          <ChatVisibleControl props={<Chat />} />
+          <ChatVisibleControl props={<Chatting />} />
           <main>{children}</main>
           <Footer />
         </SocketProvider>

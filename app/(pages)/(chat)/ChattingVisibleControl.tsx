@@ -7,22 +7,24 @@ type ChatVisibleControlProps = {
   props: JSX.Element;
 };
 
-function ChatVisibleControl({ props }: ChatVisibleControlProps) {
-  const [dragRef, isFloatingChatVisible, setIsFloatingChatVisible] = useCloseOnOutsideClick();
+function ChattingVisibleControl({ props }: ChatVisibleControlProps) {
+  const [dragRef, isFloatingChattingVisible, setIsFloatingChattingVisible] = useCloseOnOutsideClick({
+    initialState: false
+  });
   const dispatch = useDispatch();
 
   const onClick = () => {
     dispatch(setChatNoti(false));
-    setIsFloatingChatVisible(!isFloatingChatVisible);
+    setIsFloatingChattingVisible(!isFloatingChattingVisible);
   };
 
   return (
     <div ref={dragRef} className="fixed right-10 bottom-36 z-50">
-      {/* 채팅 보이게 하기 컨트롤 */}
-      <div className={isFloatingChatVisible ? '' : 'hidden'}>{props}</div>
+      {/* 채팅 보이게 하기 컨트롤*/}
+      <div className={isFloatingChattingVisible ? '' : 'hidden'}>{props}</div>
       <ChatButton onClick={onClick} />
     </div>
   );
 }
 
-export default ChatVisibleControl;
+export default ChattingVisibleControl;

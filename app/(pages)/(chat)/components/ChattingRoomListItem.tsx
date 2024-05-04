@@ -1,18 +1,24 @@
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
+import { getChattingMessages } from '../../../redux/slices/chattingSlice';
 
 export interface ChattingRoomListItemProps {
-  name: string;
-  distance: string;
-  imageSrc: string;
+  user: any;
 }
 
-function ChattingRoomListItem({ name, distance, imageSrc }: ChattingRoomListItemProps) {
+function ChattingRoomListItem({ user }: ChattingRoomListItemProps) {
+  const dispatch = useDispatch();
   return (
-    <li className="flex items-end p-4 gap-2 border-b hover:brightness-50 bg-white">
-      <Image className="w-8 h-8 rounded-full" src={imageSrc} width={100} height={100} alt={`${name} image`} />
+    <li
+      onClick={() => {
+        dispatch<any>(getChattingMessages({ id: user.id, messageId: '0' }));
+      }}
+      className="flex items-end p-4 gap-2 border-b hover:brightness-50 bg-white"
+    >
+      <Image className="w-8 h-8 rounded-full" src={user.picture} width={100} height={100} alt={`${user.name} image`} />
       <div className="flex items-end">
-        <p className="font-medium text-lg text-gray-900 truncate dark:text-white">{name}</p>
-        <p className="items-end ml-2 text-sm text-gray-900 dark:text-white">{distance}</p>
+        <p className="font-medium text-lg text-gray-900 truncate dark:text-white">{user.name}</p>
+        <p className="items-end ml-2 text-sm text-gray-900 dark:text-white">{user.distance}</p>
       </div>
     </li>
   );

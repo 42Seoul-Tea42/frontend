@@ -1,66 +1,53 @@
 import { useState, useEffect } from 'react';
 import ChattingRoomListItem, { ChattingRoomListItemProps } from './ChattingRoomListItem';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
+import { getChattingList } from '../../../redux/slices/chattingSlice';
 interface ChattingRoomListProps {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ChattingRoomList({ isModalOpen, setIsModalOpen }: ChattingRoomListProps) {
-  const [users, setUsers] = useState<ChattingRoomListItemProps[]>([]);
+  const [users, setUsers] = useState<any[]>([]);
   // const users = useSelector((state: RootState) => state.chattingSlice.users);
-  const modalRef = React.createRef<HTMLDivElement>();
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      setIsModalOpen(false);
-    }
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setUsers([
       {
         name: 'Jane Cooper',
         distance: '2.7 km',
-        imageSrc: '/emoji/1.jpg'
+        picture: '/emoji/1.jpg'
       },
       {
         name: 'Jane Cooper',
         distance: '2.7 km',
-        imageSrc: '/emoji/1.jpg'
+        picture: '/emoji/1.jpg'
       },
       {
         name: 'Jane Cooper',
         distance: '2.7 km',
-        imageSrc: '/emoji/1.jpg'
+        picture: '/emoji/1.jpg'
       },
       {
         name: 'Jane Cooper',
         distance: '2.7 km',
-        imageSrc: '/emoji/1.jpg'
+        picture: '/emoji/1.jpg'
       }
     ]);
   }, []);
 
   useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isModalOpen]);
+    dispatch<any>(getChattingList());
+  }, []);
 
   return (
     <>
       <ul className="overflow-hidden border rounded-xl">
         {users.map((user, index) => (
-          <div onClick={() => {}}>
-            <ChattingRoomListItem key={index} name={user.name} distance={user.distance} imageSrc={user.imageSrc} />
-          </div>
+          <ChattingRoomListItem key={index} user={user} />
         ))}
       </ul>
     </>

@@ -5,15 +5,15 @@ import ChattingRoomList from './components/ChattingRoomList';
 import Draggable from 'react-draggable';
 import { useDispatch } from 'react-redux';
 import { useSocket } from '../../utils/socketContext';
-import ChatContent from './ChatContent';
+import ChatContent from './ChattingContent';
 import { useCloseOnOutsideClick } from '../hooks';
 import ChattingMenuBar from './ChattingMenuBar';
 import ViewMessageForm from './components/ViewMessageForm';
 import SendMessageForm from './components/SendMessageForm';
 import ChattingMenuButton from './ChattingMenuButton';
 
-const Chat: React.FC = () => {
-  const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick();
+const Chatting: React.FC = () => {
+  const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });
   const dispatch = useDispatch();
   const chatSocket = useSocket();
 
@@ -33,7 +33,7 @@ const Chat: React.FC = () => {
     <Draggable>
       <div className="items-center max-w-96 bg-white rounded-xl shadow-lg">
         <ChatContent
-          chatMenuBar={
+          MenuBar={
             <ChattingMenuBar
               menuOpen={
                 <ChattingMenuButton
@@ -62,4 +62,4 @@ const Chat: React.FC = () => {
   );
 };
 
-export default Chat;
+export default Chatting;

@@ -1,17 +1,17 @@
 type ChatContentProps = {
-  chatMenuBar: React.ReactNode;
+  MenuBar: React.ReactNode;
   viewMessage: React.ReactNode;
   sendMessage: React.ReactNode;
 };
 
-function ChatContent({ chatMenuBar, viewMessage, sendMessage }: ChatContentProps) {
+function ChattingContent({ MenuBar, viewMessage, sendMessage }: ChatContentProps) {
   return (
     <div>
-      {chatMenuBar}
+      {MenuBar}
       <div className="border-l border-r">{viewMessage}</div>
       {sendMessage}
     </div>
   );
 }
 
-export default ChatContent;
+export default ChattingContent;
