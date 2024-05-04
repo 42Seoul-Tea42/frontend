@@ -3,7 +3,14 @@
 import InterestsSelector from '../../auth/signup/components/InterestsSelector';
 import EmojiGridList from '../../auth/upload/emoji/EmojiGridList';
 import ImageUploadGrid from './components/ImageUploadGrid';
-import { AgeInput, GenderRadioInput, PasswordInput, SexualPreferenceRadioInput, UserNameInput } from '../forms';
+import {
+  AgeInput,
+  GenderRadioInput,
+  IntroductionInput,
+  PasswordInput,
+  SexualPreferenceRadioInput,
+  UserNameInput
+} from '../forms';
 import { AccordionItems, SubmitButton } from '../../UI';
 import ReEnterPassword from '../forms/ReEnterPassword';
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,9 +72,11 @@ const Setting: React.FC = () => {
                 content: <SexualPreferenceRadioInput />
               },
               { title: '나의 관심사 태그를 선택해주세요.', content: <InterestsSelector /> },
-              { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList /> }
+              { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList /> },
+              { title: '자기소개를 작성해주세요.', content: <IntroductionInput /> }
             ]}
           />
+          <div className="mb-5"></div>
           <SubmitButton text="Save" onClick={submitAccountSetting} />
         </div>
       </div>
