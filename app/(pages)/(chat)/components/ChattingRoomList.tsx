@@ -56,27 +56,13 @@ function ChattingRoomList({ isModalOpen, setIsModalOpen }: ChattingRoomListProps
 
   return (
     <>
-      {isModalOpen && (
-        <div
-          tabIndex={-1}
-          className="fixed top-0 left-0 w-full h-full flex items-start justify-center rounded-xl bg-gray-800 bg-opacity-50"
-        >
-          <div ref={modalRef} className="bg-white w-full rounded-xl">
-            <ul className="overflow-hidden border rounded-xl">
-              {users.map((user, index) => (
-                <div onClick={() => {}}>
-                  <ChattingRoomListItem
-                    key={index}
-                    name={user.name}
-                    distance={user.distance}
-                    imageSrc={user.imageSrc}
-                  />
-                </div>
-              ))}
-            </ul>
+      <ul className="overflow-hidden border rounded-xl">
+        {users.map((user, index) => (
+          <div onClick={() => {}}>
+            <ChattingRoomListItem key={index} name={user.name} distance={user.distance} imageSrc={user.imageSrc} />
           </div>
-        </div>
-      )}
+        ))}
+      </ul>
     </>
   );
 }

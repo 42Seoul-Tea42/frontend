@@ -1,18 +1,19 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import SendMessageForm from './components/SendMessageForm';
-import ViewMessageForm from './components/ViewMessageForm';
 import ChattingRoomList from './components/ChattingRoomList';
 import Draggable from 'react-draggable';
-import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { useSocket } from '../../utils/socketContext';
-import { HamburgerSVG } from '../../svg';
 import ChatContent from './ChatContent';
+import { useCloseOnOutsideClick } from '../hooks';
+import ChattingMenuBar from './ChattingMenuBar';
+import ViewMessageForm from './components/ViewMessageForm';
+import SendMessageForm from './components/SendMessageForm';
+import ChattingMenuButton from './ChattingMenuButton';
 
 const Chat: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick();
   const dispatch = useDispatch();
   const chatSocket = useSocket();
 
@@ -28,10 +29,34 @@ const Chat: React.FC = () => {
   }, []);
 
   return (
+    // draggable 안쪽 사용자정의 컴포넌트 인식못함 <div>로 감싸줄 것
     <Draggable>
       <div className="items-center max-w-96 bg-white rounded-xl shadow-lg">
-        <ChatContent setIsModalOpen={setIsModalOpen} />
-        <ChattingRoomList isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <ChatContent
+          chatMenuBar={
+            <ChattingMenuBar
+              menuOpen={
+                <ChattingMenuButton
+                  onClick={() => {
+                    setIsModalOpen(!isModalOpen);
+                  }}
+                />
+              }
+            />
+          }
+          viewMessage={<ViewMessageForm />}
+          sendMessage={<SendMessageForm />}
+        />
+        {isModalOpen && (
+          <div
+            tabIndex={-1}
+            className="fixed top-0 left-0 w-full h-full flex items-start justify-center rounded-xl bg-gray-800 bg-opacity-50"
+          >
+            <div ref={modalRef} className="bg-white w-full rounded-xl">
+              <ChattingRoomList isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            </div>
+          </div>
+        )}
       </div>
     </Draggable>
   );
