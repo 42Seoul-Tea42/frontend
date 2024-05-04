@@ -3,14 +3,14 @@ import axiosInstance from '../../utils/axios';
 
 interface ChattingState {
   users: [];
-  chatting: [];
+  messages: [];
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ChattingState = {
   users: [],
-  chatting: [],
+  messages: [],
   loading: false,
   error: null
 };
@@ -52,7 +52,7 @@ const chattingSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getChattingMessages.fulfilled, (state, action: PayloadAction<[]>) => {
-      state.chatting = action.payload;
+      state.messages = action.payload;
     });
     builder.addCase(getChattingMessages.rejected, (state, action) => {
       state.loading = false;

@@ -2,17 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import MessageItem from './MessageItem';
+import { RootState } from '../../../redux/store';
+import { useSelector } from 'react-redux';
 
 const ViewMessageForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<string[]>([]);
   const [hasMoreMessages, setHasMoreMessages] = useState<boolean>(true);
-
-  useEffect(() => {
-    // 더미 데이터 생성
-    const dummyMessages = Array.from({ length: 10 }, (_, index) => `Message ${index + 1}`);
-    setMessages(dummyMessages);
-  }, []);
+  const messages: any[] = useSelector((state: RootState) => state.chattingSlice.messages);
+  const myId = useSelector((state: RootState) => state.accountSlice.user.identity.id);
 
   const scrollToBottom = () => {
     if (containerRef.current) {
@@ -20,9 +17,7 @@ const ViewMessageForm = () => {
     }
   };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  useEffect(() => {}, []);
 
   // 이전 메시지를 불러오는 함수
   const loadPreviousMessages = () => {
@@ -37,18 +32,16 @@ const ViewMessageForm = () => {
 
   return (
     <div
-      className="max-h-[400px] min-w-96 overflow-hidden hover:overflow-y-scroll"
+      className="max-h-[400px] min-w-96 min-h-96 overflow-hidden hover:overflow-y-scroll"
       ref={containerRef}
       onScroll={loadPreviousMessages}
     >
       {messages.map((message, index) => (
         <div key={index}>
-          <MessageItem message={message} time="1010" me={false} />
+          <MessageItem message={message.message} time={message.msg_time} me={message.sender === myId} />
         </div>
       ))}
-      {!hasMoreMessages && (
-        <div className="text-center text-gray-500 mt-2">더 이상 메시지가 없습니다.</div>
-      )}
+      {!hasMoreMessages && <div className="text-center text-gray-500 mt-2">더 이상 메시지가 없습니다.</div>}
     </div>
   );
 };
