@@ -41,10 +41,10 @@ export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { ge
   return response.data;
 });
 
-// export const getLogin = createAsyncThunk('loginSlice/getLogin', async () => {
-//   const response = await axiosInstance.get('/user/login');
-//   return response.data;
-// });
+export const getLogin = createAsyncThunk('loginSlice/getLogin', async () => {
+  const response = await axiosInstance.get('/user/login');
+  return response.data;
+});
 
 // 인증이메일 다시보내기
 export const getResendEmail = createAsyncThunk('loginSlice/getResendEmail', async () => {
@@ -101,7 +101,25 @@ const loginSlice = createSlice({
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
-      state.error = '올바르지 않은 아이디 또는 비밀번호입니다. 다시 시도해주세요.';
+      state.error = '로그인 실패했습니다. 다시 시도해주세요.';
+      state.steps.isLogin = false;
+    });
+
+    // 로그인 상태 확인하기
+    builder.addCase(getLogin.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getLogin.fulfilled, (state, action: PayloadAction<any>) => {
+      state.steps.isLogin = true;
+      state.steps.emailVerification = action.payload.email_check;
+      state.steps.profileCreation = action.payload.profile_check;
+      state.steps.emojiSelection = action.payload.emoji_check;
+    });
+    builder.addCase(getLogin.rejected, (state, action) => {
+      state.loading = false;
+      state.steps.isLogin = false;
+      state.error = '로그인을 해주세요.';
     });
 
     //카카오 로그인

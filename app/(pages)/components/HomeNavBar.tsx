@@ -9,6 +9,7 @@ import { setFancyNoti, setHistoryNoti } from '../../redux/oldslices/socketEventS
 import { RootState } from '../../redux/store';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
 import useLoginSteps from '../hooks/useLoginSteps';
+import { getLogin } from '../../redux/slices/loginSlice';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -17,7 +18,10 @@ const HomeNavBar: React.FC = () => {
   const [historyIconStyle, setHistoryIconStyle] = useState<string>('');
   const fancyNoti = useSelector((state: RootState) => state.socketEvent.fancyNoti);
   const historyNoti = useSelector((state: RootState) => state.socketEvent.historyNoti);
-  // useLoginSteps({ trigger: isPageMoved });
+
+  // 로그인 유저 체크 훅
+  const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
+  useLoginSteps({ trigger: isLogin });
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -69,6 +73,10 @@ const HomeNavBar: React.FC = () => {
       setHistoryIconStyle('');
     }
   }, [historyNoti]);
+
+  useEffect(() => {
+    dispatch<any>(getLogin());
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-gray-200 dark:bg-gray-900">

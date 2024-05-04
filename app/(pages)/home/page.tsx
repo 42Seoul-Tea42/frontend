@@ -1,6 +1,6 @@
 'use client';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { useFilter, useSort } from '../hooks';
 import { useEffect, useState } from 'react';
@@ -12,6 +12,8 @@ import SortBar from '../components/SortBar';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from './UserCards';
 import { getSuggestionUsers } from '../../redux/slices/suggestionSlice';
+import { getLogin } from '../../redux/slices/loginSlice';
+import { RootState } from '../../redux/store';
 
 function Home() {
   const dispatch = useDispatch();

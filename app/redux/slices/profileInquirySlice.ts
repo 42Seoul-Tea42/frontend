@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
 import axiosInstance from '../../utils/axios';
+import { Fancy } from '../interface/enum';
 
 interface ProfileInquiryState {
   user: UserProfileInquirySet;
@@ -26,7 +27,7 @@ const initialState: ProfileInquiryState = {
       introduction: ''
     },
     another: {
-      fancy: false,
+      fancy: Fancy.NONE,
       distance: 0
     },
     ageGender: {

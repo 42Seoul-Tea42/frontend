@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
+import { getLogin } from '../../redux/slices/loginSlice';
 
 type LoginStepsProps = {
   trigger: any;
@@ -11,9 +12,9 @@ function useLoginSteps({ trigger }: LoginStepsProps) {
   const steps = useSelector((state: RootState) => state.loginSlice.steps);
   const router = useRouter();
   useEffect(() => {
+    // 로그인 단계에 따라 리다이렉트
     const redirectToNextStep = () => {
       if (!steps.isLogin) {
-        alert('로그인이 필요합니다.');
         return '/auth/login';
       }
       if (!steps.emailVerification) {
@@ -32,8 +33,6 @@ function useLoginSteps({ trigger }: LoginStepsProps) {
     const nextStep = redirectToNextStep();
     router.push(nextStep);
   }, [trigger]);
-
-  useEffect(() => {}, []);
 }
 
 export default useLoginSteps;
