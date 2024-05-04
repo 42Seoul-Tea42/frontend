@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import { SocketProvider } from '../utils/socketContext';
 import store from '../redux/store';
 import HomeNavBar from './components/HomeNavBar';
-import ChatVisibleControl from './(chat)/ChattingVisibleControl';
+import ChatVisibleControl from './(chat)/components/ChattingVisibleControl';
 import Chatting from './(chat)/Chatting';
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {

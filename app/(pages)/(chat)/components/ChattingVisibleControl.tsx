@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { useCloseOnOutsideClick } from '../hooks';
-import ChatButton from './components/ChatButton';
-import { setChatNoti } from '../../redux/oldslices/socketEventSlice';
+import { useCloseOnOutsideClick } from '../../hooks';
+import ChatButton from './ChatButton';
+import { setChatNoti } from '../../../redux/oldslices/socketEventSlice';
 
 type ChatVisibleControlProps = {
   props: JSX.Element;
@@ -9,7 +9,7 @@ type ChatVisibleControlProps = {
 
 function ChattingVisibleControl({ props }: ChatVisibleControlProps) {
   const [dragRef, isFloatingChattingVisible, setIsFloatingChattingVisible] = useCloseOnOutsideClick({
-    initialState: false
+    initialState: true
   });
   const dispatch = useDispatch();
 

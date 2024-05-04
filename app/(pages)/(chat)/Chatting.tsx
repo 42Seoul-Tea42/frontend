@@ -5,12 +5,12 @@ import ChattingRoomList from './components/ChattingRoomList';
 import Draggable from 'react-draggable';
 import { useDispatch } from 'react-redux';
 import { useSocket } from '../../utils/socketContext';
-import ChatContent from './ChattingContent';
+import ChatContent from './components/ChattingContent';
 import { useCloseOnOutsideClick } from '../hooks';
-import ChattingMenuBar from './ChattingMenuBar';
+import ChattingMenuBar from './components/ChattingMenuBar';
 import ViewMessageForm from './components/ViewMessageForm';
 import SendMessageForm from './components/SendMessageForm';
-import ChattingMenuButton from './ChattingMenuButton';
+import ChattingMenuButton from './components/ChattingMenuButton';
 
 const Chatting: React.FC = () => {
   const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });

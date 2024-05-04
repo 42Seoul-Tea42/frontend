@@ -1,4 +1,4 @@
-import { HamburgerSVG } from '../../svg';
+import { HamburgerSVG } from '../../../svg';
 
 type ChattingMenuButtonProps = {
   onClick: () => void;

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { HamburgerSVG } from '../../svg';
+import { HamburgerSVG } from '../../../svg';
 type ChattingMenuBarProps = {
   menuOpen: React.ReactNode;
 };
