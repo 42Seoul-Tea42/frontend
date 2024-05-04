@@ -11,7 +11,7 @@ type FilterControlDrawerProps = {
 };
 
 const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit, shape }) => {
-  const [drawerRef, isDrawerOpen, setIsDrawerOpen] = useCloseOnOutsideClick();
+  const [drawerRef, isDrawerOpen, setIsDrawerOpen] = useCloseOnOutsideClick({ initialState: false });
 
   // 드로어 폼 제출시 동작정의
   const submitDrawer = () => {

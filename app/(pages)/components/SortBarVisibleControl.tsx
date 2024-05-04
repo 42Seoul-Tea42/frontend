@@ -6,7 +6,7 @@ type SortBarVisibleControlProps = {
 };
 
 function SortBarVisibleControl({ props }: SortBarVisibleControlProps) {
-  const [hoverRef, isHoverOn, setIsHoverOn] = useCloseOnOutsideClick();
+  const [hoverRef, isHoverOn, setIsHoverOn] = useCloseOnOutsideClick({ initialState: false });
   return (
     <div ref={hoverRef} className="flex flex-col h-10 mb-10 ">
       {isHoverOn ? (
