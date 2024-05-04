@@ -24,7 +24,7 @@ const AccordionItems: React.FC<AccordionItemsProps> = ({ items }) => {
           <div
             id={`accordion-collapse-${index}`}
             data-accordion="collapse"
-            className="border-b border-gray-200 dark:border-gray-700"
+            className="max-w-96 border-b border-gray-200 dark:border-gray-700"
           >
             <h2 id={`accordion-collapse-heading-${index}`} className="max-h-12">
               <AccordionOpenButton
@@ -36,7 +36,7 @@ const AccordionItems: React.FC<AccordionItemsProps> = ({ items }) => {
             </h2>
             <div
               id={`accordion-collapse-body-${index}`}
-              className={`${isOpen[index] ? 'border-2 border-gray-500' : 'hidden'}`}
+              className={`${isOpen[index] ? 'bg-gray-100 border-gray-400' : 'hidden'}`}
               aria-labelledby={`accordion-collapse-heading-${index}`}
             >
               <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
