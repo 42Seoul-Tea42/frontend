@@ -18,7 +18,8 @@ axiosInstance.interceptors.request.use(
     const userLocation = localStorage.getItem('user-location');
     if (userLocation) {
       const { latitude, longitude } = JSON.parse(userLocation);
-      config.headers['x-user-location'] = `${latitude},${longitude}`;
+      config.headers['x-user-longitude'] = `${longitude}`;
+      config.headers['x-user-latitude'] = `${latitude}`;
     }
 
     return config;
