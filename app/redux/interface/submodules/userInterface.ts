@@ -38,7 +38,6 @@ export type Authentication = {
  * @type {subPhotos: string[]; interests: Interests; rating: number; sexualPreference: string; introduction: string;}
  */
 export type Profile = {
-  subPhotos: string[];
   interests: number[];
   rating: number;
   sexualPreference: string;
@@ -46,10 +45,10 @@ export type Profile = {
 };
 
 /**
- * @type {mainPhoto: string;}
+ * @type {photos: string[];}
  */
 export type Photo = {
-  mainPhoto: string; // 주요 사진 경로
+  photos: string[];
 };
 
 /**

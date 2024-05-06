@@ -34,7 +34,7 @@ const Setting: React.FC = () => {
         tags: user.profile.interests,
         prefer_emoji: emojis.map(emoji => 1 << emoji),
         age: user.ageGender.age,
-        pictures: [user.photo.mainPhoto, ...user.profile.subPhotos]
+        pictures: user.photo.photos
       })
     );
   };

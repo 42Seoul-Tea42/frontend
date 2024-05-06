@@ -1,37 +1,23 @@
 'use client';
 
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
 import { CloudUploadSVG } from '../../svg';
 
 type ImageUploadFormProps = {
-  previewImage: string;
-  setProfileImage: (image: string) => void;
+  src: string;
   width: number;
   height: number;
+  onClick?: () => void;
+  mainPhoto?: React.ReactNode;
 };
 
-const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height, previewImage, setProfileImage }) => {
-  const dispatchSignupImage = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result;
-        if (result && typeof result === 'string') {
-          setProfileImage(result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
+const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ mainPhoto, width, height, src, onClick }) => {
   return (
     <>
-      <label className="flex flex-col items-center justify-center border border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-        {previewImage ? (
+      <label className="relative flex flex-col items-center justify-center border border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        {src ? (
           <div style={{ width: `${width}px`, height: `${height}px` }} className="relative rounded-lg overflow-hidden">
-            <Image src={previewImage} alt="Preview" layout="fill" className="rounded-lg object-cover" />
+            <Image src={src} alt="Preview" layout="fill" className="rounded-lg object-cover" />
           </div>
         ) : (
           <div
@@ -40,13 +26,15 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ width, height, previe
           >
             <CloudUploadSVG />
             <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
-              <span className="font-semibold">Click to upload</span>
+              <span className="font-semibold">Image upload</span>
             </p>
-            <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">drag and drop</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG (max 5MB)</p>
           </div>
         )}
-        <input type="file" className="hidden" accept=".jpg, .jpeg, .png" onChange={dispatchSignupImage} />
+        <div className="absolute top-0 left-0 text-yellow-400">{mainPhoto}</div>
+        <button onClick={onClick} className="absolute top-1 right-1 w-5 h-5">
+          X
+        </button>
       </label>
     </>
   );

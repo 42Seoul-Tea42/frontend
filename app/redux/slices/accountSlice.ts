@@ -21,12 +21,14 @@ const initialState: AccountState = {
       firstname: '',
       lastname: ''
     },
+    photo: {
+      photos: []
+    },
     account: {
       email: '',
       password: ''
     },
     profile: {
-      subPhotos: [],
       interests: [],
       rating: 0,
       sexualPreference: '0',
@@ -39,9 +41,6 @@ const initialState: AccountState = {
     ageGender: {
       age: 0,
       gender: '0'
-    },
-    photo: {
-      mainPhoto: ''
     },
     another: {
       distance: 0,
@@ -97,14 +96,13 @@ const accountSlice = createSlice({
     setAccountIntroduction: (state: AccountState, action: PayloadAction<string>) => {
       state.user.profile.introduction = action.payload;
     },
-    setAccountSubPhotos: (state: AccountState, action: PayloadAction<string>) => {
-      const { subPhotos } = state.user.profile;
-      const newSubPhotos =
-        subPhotos.length >= 4 ? [...subPhotos.slice(1), action.payload] : [...subPhotos, action.payload];
-      state.user.profile.subPhotos = newSubPhotos;
+    addAccountPhotos: (state: AccountState, action: PayloadAction<[]>) => {
+      if (state.user.photo.photos.length >= 4) return;
+      const uploads = action.payload.slice(0, 4);
+      state.user.photo.photos = [...state.user.photo.photos, ...uploads];
     },
-    setAccountMainPhoto: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.photo.mainPhoto = action.payload;
+    removeAccountPhotos: (state: AccountState, action: PayloadAction<number>) => {
+      state.user.photo.photos = state.user.photo.photos.filter((_, index) => index !== action.payload);
     },
     setAccountEmojis: (state: AccountState, action: PayloadAction<number>) => {
       const { emojis } = state;
@@ -183,11 +181,11 @@ export const {
   setAccountAge,
   setAccountGender,
   setAccountSexualPreference,
-  setAccountSubPhotos,
-  setAccountMainPhoto,
   setAccountEmojis,
   setAccountInterests,
-  setAccountIntroduction
+  setAccountIntroduction,
+  addAccountPhotos,
+  removeAccountPhotos
 } = accountSlice.actions;
 export const extraReducers = accountSlice.reducer;
 
