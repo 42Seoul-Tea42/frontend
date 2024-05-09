@@ -18,13 +18,12 @@
   "Create React Component Template": {
     "prefix": ">component",
     "body": [
-      "import React from 'react';",
       "",
       "function $TM_FILENAME_BASE() {",
       "  return (",
       "    <>",
-      "</></>",
       "      {/* Your component code here */}",
+      "     <></>",
       "    </>",
       "  );",
       "}",

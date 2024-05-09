@@ -25,7 +25,7 @@ function Home() {
   const [renderUsers, setRenderUsers] = useState<UserProfileInquirySet[]>([]);
 
   useEffect(() => {
-    dispatch<any>(getSuggestionUsers());
+    // dispatch<any>(getSuggestionUsers());
     // 서버에서 요청하는것 성공하면 fullfiled 에서 onFilter() 호출하는것으로 수정
     onFilter();
   }, []);

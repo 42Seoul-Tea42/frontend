@@ -1,6 +1,6 @@
 import { Socket, io } from 'socket.io-client';
 
-export const createSocketOption = (socketURL: string): Socket => {
+export const createSocketWithOption = (socketURL: string): Socket => {
   const socketOptions = {
     withCredentials: false,
     autoConnect: false,
@@ -12,6 +12,11 @@ export const createSocketOption = (socketURL: string): Socket => {
   return io(socketURL, socketOptions);
 };
 
+/**
+ * @property {string} event - 이벤트명
+ * @property {boolean} once - 한번만 실행할 이벤트인지 여부
+ * @property {function} handler - 이벤트 핸들러
+ */
 export interface Events {
   event: string;
   once?: boolean;
@@ -23,12 +28,12 @@ export const registerSocketEvent = (socket: Socket, events: Events[]): void => {
   events.map(({ event, once, handler }) => {
     if (once) {
       socket.once(event, (data: any) => {
-        console.table(`[Socket.ONCE] ${event} data: `, data);
+        console.log(`[Socket.ONCE] ${event} data: `, data);
         handler(data);
       });
     } else {
       socket.on(event, (data: any) => {
-        console.table(`[Socket.ON] ${event} data: `, data);
+        console.log(`[Socket.ON] ${event} data: `, data);
         handler(data);
       });
     }

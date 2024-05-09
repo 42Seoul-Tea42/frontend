@@ -11,6 +11,7 @@ import ViewMessageForm from './components/ViewMessageForm';
 import SendMessageForm from './components/SendMessageForm';
 import ChattingMenuButton from './components/ChattingMenuButton';
 import ChattingRoomListVisibleControl from './components/ChattingRoomListVisibleControl';
+import { useEffect } from 'react';
 
 const Chatting: React.FC = () => {
   const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });
