@@ -4,12 +4,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { getChattingList } from '../../../redux/slices/chattingSlice';
-interface ChattingRoomListProps {
-  isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-function ChattingRoomList({ isModalOpen, setIsModalOpen }: ChattingRoomListProps) {
+function ChattingRoomList() {
   const [users, setUsers] = useState<any[]>([]);
   // const users = useSelector((state: RootState) => state.chattingSlice.users);
   const dispatch = useDispatch();

@@ -11,6 +11,7 @@ import ChattingMenuBar from './components/ChattingMenuBar';
 import ViewMessageForm from './components/ViewMessageForm';
 import SendMessageForm from './components/SendMessageForm';
 import ChattingMenuButton from './components/ChattingMenuButton';
+import ChattingRoomListVisibleControl from './components/ChattingRoomListVisibleControl';
 
 const Chatting: React.FC = () => {
   const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });
@@ -47,16 +48,7 @@ const Chatting: React.FC = () => {
           viewMessage={<ViewMessageForm />}
           sendMessage={<SendMessageForm />}
         />
-        {isModalOpen && (
-          <div
-            tabIndex={-1}
-            className="fixed top-0 left-0 w-full h-full flex items-start justify-center rounded-xl bg-gray-800 bg-opacity-50"
-          >
-            <div ref={modalRef} className="bg-white w-full rounded-xl">
-              <ChattingRoomList isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-            </div>
-          </div>
-        )}
+        <ChattingRoomListVisibleControl props={<ChattingRoomList />} isModalOpen={isModalOpen} modalRef={modalRef} />
       </div>
     </Draggable>
   );
