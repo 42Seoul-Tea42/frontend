@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
-import { getFancyUserList } from '../../redux/slices/fancySlice';
+import { getFancyUserList, setFancyNoti } from '../../redux/slices/fancySlice';
 
 function Fancy() {
   const dispatch = useDispatch();
@@ -15,6 +15,9 @@ function Fancy() {
 
   useEffect(() => {
     dispatch<any>(getFancyUserList(new Date()));
+
+    // 알림 제거용
+    dispatch(setFancyNoti(false));
   }, []);
 
   return (

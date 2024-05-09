@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
-import { getHistoryUserList } from '../../redux/slices/historySlice';
+import { getHistoryUserList, setHistoryNoti } from '../../redux/slices/historySlice';
 
 function History() {
   const dispatch = useDispatch();
@@ -14,6 +14,9 @@ function History() {
 
   useEffect(() => {
     dispatch<any>(getHistoryUserList(new Date()));
+
+    //알림 제거용
+    dispatch(setHistoryNoti(false));
   }, []);
 
   return (
