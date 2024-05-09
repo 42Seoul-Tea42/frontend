@@ -72,9 +72,10 @@ send <-. 메일 전송 요청 ..-> 서버
 ```
 
 loginPage에서 보여줄 것
-아이디 찾기 - email
-패스워드 찾기 - id, email
 
-id password 기반
-이메일 다시보내기
-이메일 변경하기
+- 아이디 찾기 - email
+- 패스워드 찾기 - id, email
+
+- id password 기반
+    - 이메일 다시보내기
+    - 이메일 변경하기
