@@ -37,8 +37,8 @@ const ProfileDetailModalContents: React.FC<ProfileDetailModalContentsProps> = ({
           className="ml-5 rounded-xl min-h-[100px] w-[310px] border-1 border-gray-400 text-gray-700"
           value={introduciotn.title + '\n' + introduciotn.content}
         ></textarea>
-        <div>
-          <div className="flex justify-center text-gray-400 mt-5">
+        <div className="flex justify-end mr-5 mt-10">
+          <div className="flex items-center text-blue-400">
             {block}
             <p className="ml-2 mr-2"> / </p>
             {report}
