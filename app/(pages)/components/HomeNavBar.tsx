@@ -1,13 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import HomeNavBarButton from '../../UI/HomeNavBarButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { useRouter } from 'next/navigation';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
-import { requestUserLocation } from '../../utils/location';
+import HomeNavBarButton from '../../UI/HomeNavBarButton';
 import NavigationNoti from './NavigationNoti';
+import requestUserLocation from '../../utils/location';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
