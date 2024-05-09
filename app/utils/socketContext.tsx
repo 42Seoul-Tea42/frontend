@@ -3,10 +3,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { Events, createSocketOption, registerSocketEvent, unRegisterSocketEvent } from './socket';
-import { SERVER_URL } from '../../global';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { setChatNoti, setFancyNoti, setHistoryNoti } from '../redux/oldslices/socketEventSlice';
+import { setChattingMessage, setChattingNoti } from '../redux/slices/chattingSlice';
+import { setFancyNoti } from '../redux/slices/fancySlice';
+import { setHistoryNoti } from '../redux/slices/historySlice';
 
 // SocketContext 생성
 const SocketContext = createContext<Socket | undefined>(undefined);
@@ -20,17 +21,19 @@ export const useSocket = () => {
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
   const [socket, setSocket] = useState<Socket>();
-  const accessToken = useSelector((state: RootState) => state.userData.accessToken);
-  const serverUrl = SERVER_URL || '';
+  const socketURL = process.env.NEXT_PUBLIC_SERVER_URL || '';
 
   useEffect(() => {
-    const socketInstance = createSocketOption(serverUrl, accessToken);
+    const socketInstance = createSocketOption(socketURL);
 
     socketInstance.on('connect', () => {
-      if (socketInstance.connected) setSocket(socketInstance);
+      if (socketInstance.connected) {
+        setSocket(socketInstance);
+      }
     });
 
     socketInstance.connect();
+    // socketInstance.emit('send_message', 'hello world');
 
     return () => {
       socketInstance.disconnect;
@@ -42,30 +45,33 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     if (!socket) return;
 
     const events: Events[] = [
+      // 알림기능 관련
       {
         event: 'new_match',
-        handler: () => {
-          dispatch(setChatNoti(true));
-        }
+        handler: () => dispatch(setChattingNoti(true))
       },
       {
         event: 'new_fancy',
-        handler: () => {
-          dispatch(setFancyNoti(true));
-        }
+        handler: () => dispatch(setFancyNoti(true))
       },
       {
         event: 'new_history',
-        handler: () => {
-          dispatch(setHistoryNoti(true));
-        }
+        handler: () => dispatch(setHistoryNoti(true))
       },
-      { event: 'send_message', handler: () => {} },
-      { event: 'read_message', handler: () => {} },
-      { event: 'update_distance', handler: () => {} },
-      { event: 'update_status', handler: () => {} },
-      { event: 'unmatch', handler: () => {} },
-      { event: 'unregister', handler: () => {} }
+
+      // 채팅 관련
+      {
+        event: 'send_message',
+        handler: data => dispatch(setChattingMessage(data))
+      }
+
+      // { event: 'read_message', handler: () => {} },
+
+      // 채팅목록 업데이트
+      // { event: 'update_distance', handler: () => {} },
+      // { event: 'update_status', handler: () => {} },
+      // { event: 'unmatch', handler: () => {} },
+      // { event: 'unregister', handler: () => {} }
     ];
 
     registerSocketEvent(socket, events);

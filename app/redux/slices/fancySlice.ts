@@ -5,16 +5,16 @@ import { Fancy } from '../interface/enum';
 
 interface FancyState {
   users: UserPublicSet[];
+  fancyNoti: boolean;
   loading: boolean;
   error: string | null;
-  notification: boolean;
 }
 
 const initialState: FancyState = {
   users: [],
+  fancyNoti: false,
   loading: false,
-  error: null,
-  notification: false
+  error: null
 };
 
 /**
@@ -36,8 +36,8 @@ const fancySlice = createSlice({
   name: 'fancySlice',
   initialState,
   reducers: {
-    setFancyNotification: (state, action: PayloadAction<boolean>) => {
-      state.notification = action.payload;
+    setFancyNoti: (state, action: PayloadAction<boolean>) => {
+      state.fancyNoti = action.payload;
     }
   },
   extraReducers: builder => {
@@ -95,7 +95,7 @@ const fancySlice = createSlice({
   }
 });
 
-export const { setFancyNotification } = fancySlice.actions;
+export const { setFancyNoti } = fancySlice.actions;
 
 export const extraReducers = fancySlice.reducer;
 

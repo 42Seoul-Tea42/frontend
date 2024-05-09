@@ -11,7 +11,7 @@ function ChattingRoomListItem({ user }: ChattingRoomListItemProps) {
   return (
     <li
       onClick={() => {
-        dispatch<any>(getChattingMessages({ id: user.id, messageId: '0' }));
+        dispatch<any>(getChattingMessages({ targetId: user.id, time: new Date().toString() }));
       }}
       className="flex items-end p-4 gap-2 border-b hover:brightness-50 bg-white"
     >

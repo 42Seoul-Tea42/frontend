@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import ChattingRoomList from './components/ChattingRoomList';
 import Draggable from 'react-draggable';
 import { useDispatch } from 'react-redux';
@@ -17,17 +16,6 @@ const Chatting: React.FC = () => {
   const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });
   const dispatch = useDispatch();
   const chatSocket = useSocket();
-
-  // 채팅목록 가져오기
-  useEffect(() => {
-    // webSocket.onopen = () => {};
-    // webSocket.onmessage = (event) => {};
-    // webSocket.onerror = (error) => {};
-    // webSocket.onclose = () => {};
-    // return () => {
-    //   webSocket.close();
-    // };
-  }, []);
 
   return (
     // draggable 안쪽 사용자정의 컴포넌트 인식못함 <div>로 감싸줄 것
@@ -48,7 +36,11 @@ const Chatting: React.FC = () => {
           viewMessage={<ViewMessageForm />}
           sendMessage={<SendMessageForm />}
         />
-        <ChattingRoomListVisibleControl props={<ChattingRoomList />} isModalOpen={isModalOpen} modalRef={modalRef} />
+        <ChattingRoomListVisibleControl
+          props={<ChattingRoomList isModalOpen={isModalOpen} />}
+          isModalOpen={isModalOpen}
+          modalRef={modalRef}
+        />
       </div>
     </Draggable>
   );

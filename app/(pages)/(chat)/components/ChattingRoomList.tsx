@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { getChattingList } from '../../../redux/slices/chattingSlice';
 
-function ChattingRoomList() {
+interface ChattingRoomListProps {
+  isModalOpen: boolean;
+}
+
+function ChattingRoomList({ isModalOpen }: ChattingRoomListProps) {
   const [users, setUsers] = useState<any[]>([]);
   // const users = useSelector((state: RootState) => state.chattingSlice.users);
   const dispatch = useDispatch();
@@ -37,7 +41,7 @@ function ChattingRoomList() {
 
   useEffect(() => {
     dispatch<any>(getChattingList());
-  }, []);
+  }, [isModalOpen]);
 
   return (
     <>

@@ -4,6 +4,7 @@ import axiosInstance from '../../utils/axios';
 interface ChattingState {
   users: [];
   messages: [];
+  chattingNoti: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -11,6 +12,7 @@ interface ChattingState {
 const initialState: ChattingState = {
   users: [],
   messages: [],
+  chattingNoti: false,
   loading: false,
   error: null
 };
@@ -22,8 +24,8 @@ export const getChattingList = createAsyncThunk('chattingSlice/getChattingList',
 
 export const getChattingMessages = createAsyncThunk(
   'chattingSlice/getChattingMessages',
-  async ({ id, messageId }: { id: string; messageId: string }) => {
-    const response = await axiosInstance.get(`/chat/msg?target_id=${id}&msg_id=${messageId}`);
+  async ({ targetId, time }: { targetId: string; time: string }) => {
+    const response = await axiosInstance.get(`/chat/msg?target_id=${targetId}&time=${time}`);
     return response.data;
   }
 );
@@ -31,7 +33,14 @@ export const getChattingMessages = createAsyncThunk(
 const chattingSlice = createSlice({
   name: 'chattingSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    setChattingMessage: (state, action) => {
+      // 보고 있는 유저의 아이디인지 체크해서 메세지를 추가
+    },
+    setChattingNoti: (state, action) => {
+      state.chattingNoti = action.payload;
+    }
+  },
   // 채팅방 목록 가져오기
   extraReducers: builder => {
     builder.addCase(getChattingList.pending, state => {
@@ -61,6 +70,7 @@ const chattingSlice = createSlice({
   }
 });
 
+export const { setChattingMessage, setChattingNoti } = chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 
 export default chattingSlice.reducer;

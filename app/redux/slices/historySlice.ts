@@ -6,14 +6,14 @@ interface HistoryState {
   users: UserPublicSet[];
   loading: boolean;
   error: string | null;
-  notification: boolean;
+  historyNoti: boolean;
 }
 
 const initialState: HistoryState = {
   users: [],
   loading: false,
   error: null,
-  notification: false
+  historyNoti: false
 };
 
 /**
@@ -28,8 +28,8 @@ const historySlice = createSlice({
   name: 'historySlice',
   initialState,
   reducers: {
-    setHistoryNotification: (state: { notification: boolean }, action: { payload: boolean }) => {
-      state.notification = action.payload;
+    setHistoryNoti: (state: { historyNoti: boolean }, action: { payload: boolean }) => {
+      state.historyNoti = action.payload;
     }
   },
   extraReducers: (builder: ActionReducerMapBuilder<HistoryState>) => {
@@ -49,7 +49,7 @@ const historySlice = createSlice({
   }
 });
 
-export const { setHistoryNotification } = historySlice.actions;
+export const { setHistoryNoti } = historySlice.actions;
 export const extraReducers = historySlice.reducer;
 
 export default historySlice.reducer;

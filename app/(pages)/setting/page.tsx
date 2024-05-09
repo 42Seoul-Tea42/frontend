@@ -32,7 +32,7 @@ const Setting: React.FC = () => {
         taste: parseInt(user.profile.sexualPreference),
         bio: user.profile.introduction,
         tags: user.profile.interests,
-        prefer_emoji: emojis.map(emoji => 1 << emoji),
+        prefer_emoji: emojis.map((emoji: number) => 1 << emoji),
         age: user.ageGender.age,
         pictures: user.photo.photos
       })

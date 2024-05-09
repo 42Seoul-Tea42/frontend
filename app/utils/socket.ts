@@ -1,24 +1,21 @@
 import { Socket, io } from 'socket.io-client';
 
-export const createSocketOption = ( serverUrl:string, accessToken:string ): Socket => {
+export const createSocketOption = (socketURL: string): Socket => {
   const socketOptions = {
     withCredentials: false,
     autoConnect: false,
     transports: ['websocket', 'polling'],
     closeOnBeforeunload: true,
-    reconnection: false,
-    query: {
-      token: accessToken
-    }
+    reconnection: false
   };
 
-  return io(serverUrl, socketOptions);
+  return io(socketURL, socketOptions);
 };
 
 export interface Events {
-  event: string,
-  once?: boolean,
-  handler: (data: any) => void
+  event: string;
+  once?: boolean;
+  handler: (data: any) => void;
 }
 
 // 이벤트에 디버깅용 옵저빙 패턴 추가
@@ -42,4 +39,4 @@ export const unRegisterSocketEvent = (socket: Socket, events: Events[]): void =>
   events.map(({ event }): void => {
     socket.off(event);
   });
-}
+};

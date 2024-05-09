@@ -7,7 +7,7 @@ interface ChatButtonProps {
 }
 
 const ChatButton: React.FC<ChatButtonProps> = ({ onClick }) => {
-  const chatNoti = useSelector((state: RootState) => state.socketEvent.chatNoti);
+  const chatNoti = useSelector((state: RootState) => state.chattingSlice.chattingNoti);
 
   return (
     <button

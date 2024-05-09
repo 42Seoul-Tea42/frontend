@@ -5,19 +5,19 @@ import { useEffect, useState } from 'react';
 import HomeNavBarButton from '../../UI/HomeNavBarButton';
 import getGeoLocation from '../../utils/location';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFancyNoti, setHistoryNoti } from '../../redux/oldslices/socketEventSlice';
 import { RootState } from '../../redux/store';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
 import useLoginSteps from '../hooks/useLoginSteps';
-import { getLogin } from '../../redux/slices/loginSlice';
+import { setFancyNoti } from '../../redux/slices/fancySlice';
+import { setHistoryNoti } from '../../redux/slices/historySlice';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isPageMoved, setIsPageMoved] = useState<boolean>(false);
   const [fancyIconStyle, setFancyIconStyle] = useState<string>('');
   const [historyIconStyle, setHistoryIconStyle] = useState<string>('');
-  const fancyNoti = useSelector((state: RootState) => state.socketEvent.fancyNoti);
-  const historyNoti = useSelector((state: RootState) => state.socketEvent.historyNoti);
+  const fancyNoti = useSelector((state: RootState) => state.fancySlice.fancyNoti);
+  const historyNoti = useSelector((state: RootState) => state.historySlice.historyNoti);
 
   // dev test용 주석
   // 로그인 체크
