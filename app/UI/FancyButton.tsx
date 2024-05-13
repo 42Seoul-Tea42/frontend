@@ -21,8 +21,23 @@ function FancyButton({ fancyState, onClick }: FancyButtonProps) {
         return 'white';
     }
   };
+  const textPicker = () => {
+    switch (fancyState) {
+      case Fancy.NONE:
+        return 'NONE';
+      case Fancy.SEND:
+        return 'SEND';
+      case Fancy.RECV:
+        return 'RECV';
+      case Fancy.CONN:
+        return 'CONN';
+      default:
+        return 'white';
+    }
+  };
   return (
-    <button onClick={onClick} className="hover:animate-ping">
+    <button onClick={onClick} className="hover:brightness-50">
+      <p className="absolute font-thin text-sm">{textPicker()}</p>
       <HeartSVG color={colorPicker()} />
     </button>
   );
