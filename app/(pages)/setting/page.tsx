@@ -16,11 +16,18 @@ import ReEnterPassword from '../forms/ReEnterPassword';
 import { useDispatch, useSelector } from 'react-redux';
 import { patchUserProfile } from '../../redux/slices/loginSlice';
 import { RootState } from '../../redux/store';
+import { useEffect } from 'react';
+import { getMyAccount } from '../../redux/slices/accountSlice';
 
 const Setting: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.accountSlice.user);
   const emojis = useSelector((state: RootState) => state.accountSlice.emojis);
+  const hateEmojis = useSelector((state: RootState) => state.accountSlice.hateEmojis);
+
+  useEffect(() => {
+    // dispatch<any>(getMyAccount());
+  }, []);
 
   const submitAccountSetting = () => {
     dispatch<any>(
@@ -33,6 +40,7 @@ const Setting: React.FC = () => {
         bio: user.profile.introduction,
         tags: user.profile.interests,
         prefer_emoji: emojis.map((emoji: number) => 1 << emoji),
+        hate_emoji: hateEmojis.map((emoji: number) => 1 << emoji),
         age: user.ageGender.age,
         pictures: user.photo.photos
       })
@@ -43,7 +51,13 @@ const Setting: React.FC = () => {
     <div className="flex min-h-screen">
       <div className="mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
         <ImageUploadGrid />
-        <div className="mx-auto w-100">
+        <form
+          className="mx-auto w-100"
+          onSubmit={e => {
+            e.preventDefault();
+            submitAccountSetting();
+          }}
+        >
           <AccordionItems
             items={[
               {
@@ -77,8 +91,8 @@ const Setting: React.FC = () => {
             ]}
           />
           <div className="mb-5"></div>
-          <SubmitButton text="Save" onClick={submitAccountSetting} />
-        </div>
+          <SubmitButton text="Save" />
+        </form>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ export interface AccountState {
   user: UserAccountSet;
   reEnterPassword: string;
   emojis: number[];
+  hateEmojis: number[];
   loading: boolean;
   error: string | null;
 }
@@ -48,6 +49,7 @@ const initialState: AccountState = {
     }
   },
   emojis: [],
+  hateEmojis: [],
   reEnterPassword: '',
   loading: false,
   error: null
@@ -112,10 +114,34 @@ const accountSlice = createSlice({
       if (state.emojis.length >= 4 && !emojis.includes(action.payload)) {
         return;
       }
+
+      // 싫어요 이모티콘에 있는 경우 리턴
+      if (state.hateEmojis.includes(action.payload)) {
+        return;
+      }
+
       // 이모티콘 추가 및 삭제
       emojis.includes(action.payload)
         ? (state.emojis = emojis.filter(item => item !== action.payload))
         : (state.emojis = [...emojis, action.payload]);
+    },
+    setAccountHateEmojis: (state: AccountState, action: PayloadAction<number>) => {
+      const { hateEmojis } = state;
+
+      // 백엔드 요청 : 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
+      if (state.hateEmojis.length >= 4 && !hateEmojis.includes(action.payload)) {
+        return;
+      }
+
+      // 좋아요 이모티콘에 있는 경우 리턴
+      if (state.emojis.includes(action.payload)) {
+        return;
+      }
+
+      // 이모티콘 추가 및 삭제
+      hateEmojis.includes(action.payload)
+        ? (state.hateEmojis = hateEmojis.filter(item => item !== action.payload))
+        : (state.hateEmojis = [...hateEmojis, action.payload]);
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
       const { interests } = state.user.profile;
@@ -183,6 +209,7 @@ export const {
   setAccountGender,
   setAccountSexualPreference,
   setAccountEmojis,
+  setAccountHateEmojis,
   setAccountInterests,
   setAccountIntroduction,
   addAccountPhotos,
