@@ -21,6 +21,7 @@ const UserNameInput: React.FC = () => {
         value={lastname}
         onChange={e => dispatch(setAccountLastname(e.target.value))}
         text="Last name"
+        autoComplete="username"
       />
     </div>
   );

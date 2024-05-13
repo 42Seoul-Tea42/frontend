@@ -13,6 +13,7 @@ function ReEnterPassword() {
         value={reEnterPassword}
         onChange={e => dispatch(setAccountReEnterPassword(e.target.value))}
         text="Re-Enter Password"
+        autoComplete="new-password"
       />
     </div>
   );
