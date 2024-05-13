@@ -4,6 +4,7 @@ import axiosInstance from '../../api/axios';
 interface ChattingState {
   users: [];
   messages: [];
+  sendMessage: string;
   chattingNoti: boolean;
   loading: boolean;
   error: string | null;
@@ -12,6 +13,7 @@ interface ChattingState {
 const initialState: ChattingState = {
   users: [],
   messages: [],
+  sendMessage: '',
   chattingNoti: false,
   loading: false,
   error: null
@@ -39,6 +41,9 @@ const chattingSlice = createSlice({
     },
     setChattingNoti: (state, action) => {
       state.chattingNoti = action.payload;
+    },
+    setSendMessage: (state, action) => {
+      state.sendMessage = action.payload;
     }
   },
   // 채팅방 목록 가져오기
@@ -70,7 +75,7 @@ const chattingSlice = createSlice({
   }
 });
 
-export const { setChattingMessage, setChattingNoti } = chattingSlice.actions;
+export const { setChattingMessage, setChattingNoti, setSendMessage } = chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 
 export default chattingSlice.reducer;

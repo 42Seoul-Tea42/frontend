@@ -1,9 +1,20 @@
+import { useSocket } from '../../../socket/socketContext';
 import { DirectionSVG } from '../../../svg';
+import { RootState } from '../../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSendMessage } from '../../../redux/slices/chattingSlice';
+
+enum SendMessage {
+  MAX_LENGTH = 500
+}
 
 const SendMessageForm = () => {
-  enum SendMessage {
-    MAX_LENGTH = 500
-  }
+  const message = useSelector((state: RootState) => state.chattingSlice.sendMessage);
+  const dispatch = useDispatch();
+  const socket = useSocket();
+  const handleClick = () => {
+    socket?.emit('send_message', message);
+  };
 
   return (
     <form>
@@ -13,6 +24,8 @@ const SendMessageForm = () => {
       <div className="flex items-center px-3 py-3 rounded-b-xl border bg-gray-50 dark:bg-gray-700">
         <textarea
           id="chat"
+          value={message}
+          onChange={e => dispatch(setSendMessage(e.target.value))}
           rows={2}
           maxLength={SendMessage.MAX_LENGTH}
           placeholder={`Your message... (.../${SendMessage.MAX_LENGTH})`}
@@ -22,7 +35,7 @@ const SendMessageForm = () => {
         <button
           type="button"
           className="flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-gray-600"
-          // onClick={handleClick}
+          onClick={handleClick}
         >
           <DirectionSVG direction="right" size="4" />
           <span className="sr-only">Send message</span>
