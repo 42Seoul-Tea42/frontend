@@ -40,7 +40,9 @@ const store = configureStore({
     });
 
     // 추가적인 미들웨어를 배열로 연결
-    middlewares.push(logger); // 예시로 Redux Logger 미들웨어를 추가
+    if (process.env.NODE_ENV === 'development') {
+      middlewares.push(logger); // Redux Logger 미들웨어를 추가
+    }
 
     return middlewares;
   }
