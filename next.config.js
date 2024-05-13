@@ -5,6 +5,10 @@ module.exports = {
   async rewrites() {
     return [
       {
+        source: '/favicon.ico',
+        destination: 'http://localhost:3000/'
+      },
+      {
         source: '/:path*',
         destination: `${process.env.NEXT_PUBLIC_SERVER_URL}/:path*`
       }

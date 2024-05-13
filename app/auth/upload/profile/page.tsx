@@ -9,14 +9,14 @@ import SubmitButton from '../../../UI/SubmitButton';
 import ImageUploadForm from '../../../(pages)/forms/ImageUploadForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { setAccountMainPhoto } from '../../../redux/slices/accountSlice';
 import { patchUserProfile } from '../../../redux/slices/loginSlice';
 import { useEffect } from 'react';
+import { addAccountPhotos } from '../../../redux/slices/accountSlice';
 
 const Profile = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const profileImage = useSelector((state: RootState) => state.accountSlice.user.photo.mainPhoto);
+  const profileImage = useSelector((state: RootState) => state.accountSlice.user.photo.photos);
   const profileCreation = useSelector((state: RootState) => state.loginSlice.steps.profileCreation);
   const user = useSelector((state: RootState) => state.accountSlice.user);
 
@@ -33,7 +33,7 @@ const Profile = () => {
     //서버로 보내는 동작 수행
     dispatch<any>(
       patchUserProfile({
-        pictures: [user.photo.mainPhoto], // backend: 배열형태로 보내주세요.
+        pictures: [...user.photo.photos], // backend: 배열형태로 보내주세요.
         gender: parseInt(user.ageGender.gender), // backend: 숫자형태로 보내주세요.
         taste: parseInt(user.profile.sexualPreference), // backend: 숫자형태로 보내주세요.
         bio: user.profile.introduction,
@@ -58,8 +58,8 @@ const Profile = () => {
           프로필 사진을 설정해주세요.
         </h5>
         <ImageUploadForm
-          previewImage={profileImage}
-          setProfileImage={image => dispatch(setAccountMainPhoto(image))}
+          src={profileImage[0]}
+          // onClick={() => dispatch(addAccountPhotos(image[0]))}
           width={380}
           height={380}
         />

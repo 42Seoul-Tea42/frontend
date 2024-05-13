@@ -40,7 +40,7 @@ function ChattingRoomList({ isModalOpen }: ChattingRoomListProps) {
   }, []);
 
   useEffect(() => {
-    dispatch<any>(getChattingList());
+    // dispatch<any>(getChattingList());
   }, [isModalOpen]);
 
   return (

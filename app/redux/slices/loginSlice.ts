@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../api/axios';
 import { AccountState } from './accountSlice';
 
 /** 서버에서 받아오는 유저의 인증단계 */
@@ -72,6 +72,18 @@ export const getVerifyEmail = createAsyncThunk('loginSlice/getVerifyEmail', asyn
 // 유저 프로필 정보 서버로 전송
 export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (userProfileObject: any) => {
   const response = await axiosInstance.patch('/user/profile', userProfileObject);
+  return response.status;
+});
+
+// 로그아웃 처리
+export const getLogout = createAsyncThunk('loginSlice/getLogout', async () => {
+  const response = await axiosInstance.get('/user/logout');
+  return response.status;
+});
+
+// 회원탈퇴 처리
+export const deleteUser = createAsyncThunk('loginSlice/deleteUser', async () => {
+  const response = await axiosInstance.delete('/user/unregister');
   return response.status;
 });
 
@@ -189,6 +201,32 @@ const loginSlice = createSlice({
       state.steps.profileCreation = true;
     });
     builder.addCase(patchUserProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 로그아웃
+    builder.addCase(getLogout.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getLogout.fulfilled, state => {
+      state.steps.isLogin = false;
+    });
+    builder.addCase(getLogout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 회원탈퇴
+    builder.addCase(deleteUser.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(deleteUser.fulfilled, state => {
+      state.steps.isLogin = false;
+    });
+    builder.addCase(deleteUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

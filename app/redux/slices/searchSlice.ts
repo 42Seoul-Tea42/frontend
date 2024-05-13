@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
-import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../api/axios';
 
 interface SearchParams {
   minAge: number;

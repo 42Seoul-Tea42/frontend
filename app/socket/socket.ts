@@ -1,16 +1,4 @@
-import { Socket, io } from 'socket.io-client';
-
-export const createSocketWithOption = (socketURL: string): Socket => {
-  const socketOptions = {
-    withCredentials: false,
-    autoConnect: false,
-    transports: ['websocket', 'polling'],
-    closeOnBeforeunload: true,
-    reconnection: false
-  };
-
-  return io(socketURL, socketOptions);
-};
+import { Socket } from 'socket.io-client';
 
 /**
  * @property {string} event - 이벤트명

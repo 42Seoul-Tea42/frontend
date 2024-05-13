@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { UserPublicSet } from '../interface';
-import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../api/axios';
 import { Fancy } from '../interface/enum';
 
 interface FancyState {
@@ -86,7 +86,7 @@ const fancySlice = createSlice({
 
       state.users = updateUsers;
       state.loading = false;
-      state.notification = true;
+      state.fancyNoti = true;
     });
     builder.addCase(patchFancy.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;

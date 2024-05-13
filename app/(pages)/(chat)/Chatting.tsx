@@ -3,7 +3,7 @@
 import ChattingRoomList from './components/ChattingRoomList';
 import Draggable from 'react-draggable';
 import { useDispatch } from 'react-redux';
-import { useSocket } from '../../utils/socketContext';
+import { useSocket } from '../../socket/socketContext';
 import ChatContent from './components/ChattingContent';
 import { useCloseOnOutsideClick } from '../hooks';
 import ChattingMenuBar from './components/ChattingMenuBar';

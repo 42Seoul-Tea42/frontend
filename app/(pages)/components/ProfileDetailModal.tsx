@@ -7,7 +7,7 @@ import { RootState } from '../../redux/store';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { HyperBlueLink, ProfileDetailModalContents } from '../../UI';
 import { getProfileDetail } from '../../redux/slices/profileInquirySlice';
-import { useSocket } from '../../utils/socketContext';
+import { useSocket } from '../../socket/socketContext';
 
 const ProfileDetailModal: React.FC = () => {
   const userId = useSelector((state: RootState) => state.profileInquirySlice.selectedUserId);

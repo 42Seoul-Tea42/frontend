@@ -2,7 +2,7 @@
 
 import { Provider } from 'react-redux';
 import Footer from './components/Footer';
-import { SocketProvider } from '../utils/socketContext';
+import { SocketProvider } from '../socket/socketContext';
 import store from '../redux/store';
 import HomeNavBar from './components/HomeNavBar';
 import ChatVisibleControl from './(chat)/components/ChattingVisibleControl';

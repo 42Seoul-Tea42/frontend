@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserAccountSet } from '../interface';
-import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../api/axios';
 import { AxiosResponse } from 'axios';
 import { getGoogleLogin, getKaKaoLogin, postLogin } from './loginSlice';
 import { Fancy } from '../interface/enum';
@@ -56,6 +56,7 @@ const initialState: AccountState = {
 // 내 정보 가져오기
 export const getMyAccount = createAsyncThunk('accountSlice/getMyAccount', async (_, { getState }) => {
   const response = await axiosInstance.get('/user/profile');
+  return response.data;
 });
 
 const accountSlice = createSlice({
@@ -131,19 +132,19 @@ const accountSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getMyAccount.fulfilled, (state, action) => {
-      // state.user.identity.id = action.payload.id;
-      // state.user.identity.loginId = action.payload.loginId;
-      // state.user.identity.firstname = action.payload.firstname;
-      // state.user.identity.lastname = action.payload.lastname;
-      // state.user.account.password = action.payload.password;
-      // state.user.ageGender.age = action.payload.age;
-      // state.user.photo.mainPhoto = action.payload.mainPhoto;
-      // state.user.profile.subPhotos = action.payload.subPhotos;
-      // state.user.ageGender.age = action.payload.age;
-      // state.user.profile.sexualPreference = action.payload.sexualPreference;
-      // state.user.profile.interests = action.payload.interests;
-      // state.user.profile.introduction = action.payload.introduction;
-      // state.emojis = action.payload.emojis;
+      // test
+      state.user.identity.id = action.payload.id;
+      state.user.identity.loginId = action.payload.loginId;
+      state.user.identity.firstname = action.payload.firstname;
+      state.user.identity.lastname = action.payload.lastname;
+      state.user.account.password = action.payload.password;
+      state.user.ageGender.age = action.payload.age;
+      state.user.photo.photos = action.payload.pictures;
+      state.user.ageGender.age = action.payload.age;
+      state.user.profile.sexualPreference = action.payload.sexualPreference;
+      state.user.profile.interests = action.payload.interests;
+      state.user.profile.introduction = action.payload.introduction;
+      state.emojis = action.payload.emojis;
     });
     builder.addCase(getMyAccount.rejected, (state, action) => {
       state.loading = false;

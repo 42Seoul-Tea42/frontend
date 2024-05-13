@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
-import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../api/axios';
 import { Fancy } from '../interface/enum';
 
 interface ProfileInquiryState {
@@ -20,7 +20,6 @@ const initialState: ProfileInquiryState = {
       lastname: ''
     },
     profile: {
-      subPhotos: [],
       interests: [],
       rating: 0,
       sexualPreference: '',
@@ -35,7 +34,7 @@ const initialState: ProfileInquiryState = {
       gender: ''
     },
     photo: {
-      mainPhoto: ''
+      photos: []
     }
   },
   selectedUserId: 0,

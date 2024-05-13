@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../api/axios';
 
 interface ChattingState {
   users: [];

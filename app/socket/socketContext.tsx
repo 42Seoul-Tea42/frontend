@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Socket, io } from 'socket.io-client';
-import { Events, createSocketWithOption, registerSocketEvent, unRegisterSocketEvent } from './socket';
 import useSocketEventListen from './useSocketEventListen';
 
 // SocketContext 생성
@@ -14,27 +13,37 @@ export const useSocket = () => {
   return socket;
 };
 
-export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
+export function SocketProvider({ children }: { children: React.ReactNode }) {
   const [socket, setSocket] = useState<Socket>();
-  const socketURL = process.env.NEXT_PUBLIC_SERVER_URL || '';
+  const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || '';
   useSocketEventListen({ socket: socket });
 
+  // handle connect/disconnect
   useEffect(() => {
-    const socketInstance = createSocketWithOption(socketURL);
+    const socketInstance = io(serverURL, {
+      withCredentials: false,
+      autoConnect: false,
+      transports: ['websocket'],
+      closeOnBeforeunload: true,
+      reconnection: false
+    });
 
     socketInstance.on('connect', () => {
-      if (socketInstance.connected) {
-        setSocket(socketInstance);
-        console.log('socket connected');
-      }
+      setSocket(socketInstance);
+      console.log('socket connected');
+    });
+
+    socketInstance.on('disconnect', () => {
+      setSocket(undefined);
+      console.log('socket disconnected');
     });
 
     socketInstance.connect();
 
     return () => {
-      socketInstance.disconnect;
+      socketInstance.disconnect();
     };
   }, []);
 
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
-};
+}
