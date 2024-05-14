@@ -77,7 +77,7 @@ export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile'
 
 // 로그아웃 처리
 export const getLogout = createAsyncThunk('loginSlice/getLogout', async () => {
-  const response = await axiosInstance.get('/user/logout');
+  const response = await axiosInstance.post('/user/logout');
   return response.status;
 });
 
