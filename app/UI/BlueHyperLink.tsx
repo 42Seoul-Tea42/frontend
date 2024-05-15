@@ -1,9 +1,9 @@
-type HyperBlueLinkProps = {
+type BlueHyperLinkProps = {
   text: string;
   onClick: () => void;
 };
 
-function HyperBlueLink({ text, onClick }: HyperBlueLinkProps) {
+function BlueHyperLink({ text, onClick }: BlueHyperLinkProps) {
   return (
     <div onClick={onClick} className="ms-auto text-blue-700 hover:underline text-sm">
       {text}
@@ -11,4 +11,4 @@ function HyperBlueLink({ text, onClick }: HyperBlueLinkProps) {
   );
 }
 
-export default HyperBlueLink;
+export default BlueHyperLink;
