@@ -4,14 +4,15 @@ import { RootState } from '../../redux/store';
 import { setAccountEmail } from '../../redux/slices/accountSlice';
 
 interface EmailInputProps {
-  extended: () => {};
+  extended: () => void;
+  addJSX: JSX.Element;
 }
 
-function EmailInput({ extended }: EmailInputProps) {
+function EmailInput({ extended, addJSX }: EmailInputProps) {
   const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
   const dispatch = useDispatch();
   return (
-    <>
+    <div className="flex">
       <InputFloatingLabel
         type="email"
         value={email}
@@ -22,7 +23,8 @@ function EmailInput({ extended }: EmailInputProps) {
         text="Email"
         autoComplete="email"
       />
-    </>
+      {addJSX}
+    </div>
   );
 }
 

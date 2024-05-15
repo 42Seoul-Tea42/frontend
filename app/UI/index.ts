@@ -22,7 +22,7 @@ import KakaoLoginButton from './KakaoLoginButton';
 import LoginFormChangeButton from './LoginFormChagneButton';
 import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
-import DuplicateCheckForm from '../auth/signup/components/DuplicateCheckField';
+import DuplicateCheckField from '../auth/signup/components/DuplicateCheckField';
 
 export {
   AllSignOptionButton,
@@ -32,7 +32,7 @@ export {
   CardsSkeleton,
   CarouselControlButton,
   CarouselPaginationButton,
-  DuplicateCheckForm,
+  DuplicateCheckField,
   DrawerItem,
   DrawerOpenButton,
   LoginFormChangeButton,
