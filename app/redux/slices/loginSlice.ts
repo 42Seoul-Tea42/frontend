@@ -31,6 +31,7 @@ const initialState: LoginState = {
   error: null
 };
 
+// 로그인 요청
 export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
   const { user } = state.accountSlice;
@@ -41,6 +42,7 @@ export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { ge
   return response.data;
 });
 
+// 로그인 여부 조회
 export const getLogin = createAsyncThunk('loginSlice/getLogin', async () => {
   const response = await axiosInstance.get('/user/login');
   return response.data;
@@ -84,6 +86,12 @@ export const getLogout = createAsyncThunk('loginSlice/getLogout', async () => {
 // 회원탈퇴 처리
 export const deleteUser = createAsyncThunk('loginSlice/deleteUser', async () => {
   const response = await axiosInstance.delete('/user/unregister');
+  return response.status;
+});
+
+// 비밀번호 재설정 이메일 요청
+export const getResetPasswordEmail = createAsyncThunk('loginSlice/getResetPasswordEmail', async (loginId: string) => {
+  const response = await axiosInstance.get(`/user/reset-pw?login_id=${loginId}`);
   return response.status;
 });
 
@@ -227,6 +235,19 @@ const loginSlice = createSlice({
       state.steps.isLogin = false;
     });
     builder.addCase(deleteUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 비밀번호 찾기
+    builder.addCase(getResetPasswordEmail.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getResetPasswordEmail.fulfilled, state => {
+      // none
+    });
+    builder.addCase(getResetPasswordEmail.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

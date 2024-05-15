@@ -13,8 +13,7 @@ import CarouselPaginationButton from './CarouselPaginationButton';
 import MainContentsArea from './MainContentsArea';
 import FancyButton from './FancyButton';
 import ProfileDetailModalContents from './ProfileDetailModalContents';
-import ProfileDetailModalControl from './ProfileDetailModalControl';
-import HyperBlueLink from './HyperBlueLink';
+import BlueHyperLink from './BlueHyperLink';
 import TableRow from './TableRow';
 import TableSchema from './TableSchema';
 import Table from './Table';
@@ -24,8 +23,6 @@ import LoginFormChangeButton from './LoginFormChagneButton';
 import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
 import DuplicateCheckForm from '../auth/signup/components/DuplicateCheckField';
-import CardForm from '../(pages)/forms/CardForm';
-import ReEnterPassword from '../(pages)/forms/ReEnterPassword';
 
 export {
   AllSignOptionButton,
@@ -45,15 +42,12 @@ export {
   SubmitButton,
   SortButton,
   UserCardGrid,
-  CardForm,
   TableSchema,
   HomeNavBarButton,
   MainContentsArea,
   FancyButton,
   ProfileDetailModalContents,
-  ProfileDetailModalControl,
-  ReEnterPassword,
-  HyperBlueLink,
+  BlueHyperLink,
   TableRow,
   Table
 };

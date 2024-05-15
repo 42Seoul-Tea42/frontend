@@ -10,7 +10,7 @@ import {
   AllSignOptionButton,
   CreateAccountButton,
   GoogleLoginButton,
-  HyperBlueLink,
+  BlueHyperLink,
   KakaoLoginButton,
   LoginFormChangeButton
 } from '../../UI';
@@ -64,9 +64,16 @@ function Login() {
             onSubmit={submitLogin}
             setId={e => dispatch(setAccountLoginId(e.target.value))}
             setPassword={e => dispatch(setAccountPassword(e.target.value))}
-            lostPassword={<HyperBlueLink text={'Lost Password?'} onClick={() => {}} />}
+            lostPassword={
+              <BlueHyperLink
+                text={'Lost Password?'}
+                onClick={() => {
+                  router.push('/auth/reset-password');
+                }}
+              />
+            }
             receiveEmail={
-              <HyperBlueLink
+              <BlueHyperLink
                 text={"Didn't receive the Email?"}
                 onClick={() => {
                   router.push('/auth/send-email');

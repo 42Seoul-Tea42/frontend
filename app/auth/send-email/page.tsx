@@ -2,11 +2,12 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { EmailInput, LoginIdInput, PasswordInput } from '../../(pages)/forms';
-import { CardForm, DuplicateCheckForm, SubmitButton } from '../../UI';
+import { DuplicateCheckForm, SubmitButton } from '../../UI';
 import { RootState } from '../../redux/store';
 import { getCheckDuplicateEmail, setIsEmailDuplicateChecked } from '../../redux/slices/signupSlice';
 import { useEffect } from 'react';
 import { setAccountEmail, setAccountLoginId } from '../../redux/slices/accountSlice';
+import CardForm from '../../(pages)/forms/CardForm';
 
 function page() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function page() {
       subject={'이메일 인증을 진행해주세요.'}
       inputs={
         <div className="mb-10">
-          <LoginIdInput value={user.identity.loginId} onChange={e => dispatch(setAccountLoginId(e.target.value))} />
+          <LoginIdInput />
           <PasswordInput />
           <DuplicateCheckForm
             form={

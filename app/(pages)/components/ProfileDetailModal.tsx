@@ -5,9 +5,8 @@ import UserProfileCarousel from './ProfileDetailCarousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { usersInquirySetDummy } from '../../UserDummy';
-import { HyperBlueLink, ProfileDetailModalContents } from '../../UI';
+import { BlueHyperLink, ProfileDetailModalContents } from '../../UI';
 import { getProfileDetail } from '../../redux/slices/profileInquirySlice';
-import { useSocket } from '../../socket/socketContext';
 
 const ProfileDetailModal: React.FC = () => {
   const userId = useSelector((state: RootState) => state.profileInquirySlice.selectedUserId);
@@ -39,8 +38,8 @@ const ProfileDetailModal: React.FC = () => {
         { title: '관심사', content: user.profile.interests || 'test' }
       ]}
       introduciotn={{ title: '자기소개', content: user.profile.introduction || 'test' }}
-      block={<HyperBlueLink text={'차단'} onClick={blockUser} />}
-      report={<HyperBlueLink text={'신고'} onClick={reportUser} />}
+      block={<BlueHyperLink text={'차단'} onClick={blockUser} />}
+      report={<BlueHyperLink text={'신고'} onClick={reportUser} />}
     />
   );
 };

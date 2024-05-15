@@ -1,6 +1,6 @@
 import { ButtonType } from '../redux/types';
 import { DirectionSVG } from '../svg';
-import HyperBlueLink from './HyperBlueLink';
+import BlueHyperLink from './BlueHyperLink';
 
 function AllSignOptionButton({ onClick }: ButtonType) {
   return (
@@ -10,7 +10,7 @@ function AllSignOptionButton({ onClick }: ButtonType) {
           <DirectionSVG direction="left" size="3" />
         </div>
         <div className="text-light text-sm whitespace-nowrap size-0">
-          <HyperBlueLink onClick={onClick} text="all sign option" />
+          <BlueHyperLink onClick={onClick} text="all sign option" />
         </div>
       </div>
     </div>

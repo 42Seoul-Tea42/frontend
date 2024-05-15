@@ -61,6 +61,19 @@ export const getMyAccount = createAsyncThunk('accountSlice/getMyAccount', async 
   return response.data;
 });
 
+// 비밀번호 재설정하기
+export const postResetPassword = createAsyncThunk(
+  'accountSlice/postResetPassword',
+  async (key: string, { getState }) => {
+    const state = getState() as { accountSlice: AccountState };
+    const password = state.accountSlice.user.account.password;
+    const response = await axiosInstance.post(`/user/reset-pw?key=${key}`, {
+      pw: password
+    });
+    return response.status;
+  }
+);
+
 const accountSlice = createSlice({
   name: 'accountSlice',
   initialState,
@@ -153,6 +166,7 @@ const accountSlice = createSlice({
     }
   },
   extraReducers: builder => {
+    // 내정보 가져오기
     builder.addCase(getMyAccount.pending, state => {
       state.loading = true;
       state.error = null;
@@ -176,6 +190,8 @@ const accountSlice = createSlice({
       state.loading = false;
       state.error = action.error.message ?? null;
     });
+
+    // 로그인시 내정보 세팅
     builder.addCase(postLogin.fulfilled, (state, action) => {
       state.user.identity.id = action.payload.id;
       state.user.identity.firstname = action.payload.name;
@@ -193,6 +209,19 @@ const accountSlice = createSlice({
       state.user.identity.firstname = action.payload.name;
       state.user.identity.lastname = action.payload.last_name;
       state.user.ageGender.age = action.payload.birthday;
+    });
+
+    // 비밀번호 재설정하기
+    builder.addCase(postResetPassword.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postResetPassword.fulfilled, state => {
+      state.loading = false;
+    });
+    builder.addCase(postResetPassword.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
     });
   }
 });

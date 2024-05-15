@@ -5,7 +5,7 @@ import { usersInquirySetDummy } from '../../UserDummy';
 import { useFilter, useSort } from '../hooks';
 import { useEffect, useState } from 'react';
 import { UserProfileInquirySet } from '../../redux/interface';
-import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
+import { MainContentsArea } from '../../UI';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
 import SortBar from '../components/SortBar';
@@ -14,6 +14,7 @@ import UserCards from './UserCards';
 import { getSuggestionUsers } from '../../redux/slices/suggestionSlice';
 import { getLogin } from '../../redux/slices/loginSlice';
 import { RootState } from '../../redux/store';
+import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 
 function Home() {
   const dispatch = useDispatch();

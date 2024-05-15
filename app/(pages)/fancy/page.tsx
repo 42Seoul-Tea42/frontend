@@ -3,10 +3,11 @@
 import { useDispatch } from 'react-redux';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { useEffect, useState } from 'react';
-import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
+import { MainContentsArea } from '../../UI';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
 import { getFancyUserList, setFancyNoti } from '../../redux/slices/fancySlice';
+import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 
 function Fancy() {
   const dispatch = useDispatch();

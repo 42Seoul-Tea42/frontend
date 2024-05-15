@@ -5,7 +5,7 @@ import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
-import { CardForm, DuplicateCheckForm, ReEnterPassword, SubmitButton } from '../../UI';
+import { DuplicateCheckForm, SubmitButton } from '../../UI';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
 import { setAccountEmail, setAccountLoginId } from '../../redux/slices/accountSlice';
 import {
@@ -16,6 +16,8 @@ import {
   setIsEmailDuplicateChecked,
   setIsLoginIdDuplicateChecked
 } from '../../redux/slices/signupSlice';
+import CardForm from '../../(pages)/forms/CardForm';
+import ReEnterPassword from '../../(pages)/forms/ReEnterPassword';
 
 const Signup: React.FC = () => {
   const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
@@ -69,18 +71,9 @@ const Signup: React.FC = () => {
           />
           <UserNameInput />
           <DuplicateCheckForm
-            form={
-              <LoginIdInput
-                value={user.identity.loginId}
-                onChange={e => {
-                  dispatch(setAccountLoginId(e.target.value));
-                  // 아이디 중복체크 후 재입력시 중복체크 여부 초기화
-                  dispatch(setIsLoginIdDuplicateChecked(false));
-                }}
-              />
-            }
             text={validation.isIdDuplicateChecked ? 'V' : 'check'}
             onClick={() => dispatch<any>(getCheckDuplicateId())}
+            form={<LoginIdInput extended={() => dispatch<any>(setIsLoginIdDuplicateChecked(false))} />}
           />
           <PasswordInput />
           <ReEnterPassword />

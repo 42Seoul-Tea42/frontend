@@ -2,10 +2,11 @@
 import { useDispatch } from 'react-redux';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { useEffect, useState } from 'react';
-import { MainContentsArea, ProfileDetailModalControl } from '../../UI';
+import { MainContentsArea } from '../../UI';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
 import { getHistoryUserList, setHistoryNoti } from '../../redux/slices/historySlice';
+import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 
 function History() {
   const dispatch = useDispatch();

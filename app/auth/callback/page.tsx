@@ -5,15 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
 import { RootState } from '../../redux/store';
 import { getResendEmail, getVerifyEmail } from '../../redux/slices/loginSlice';
-import { CardForm, SubmitButton } from '../../UI';
-
-function CallBack() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CallBackAuth />
-    </Suspense>
-  );
-}
+import CardForm from '../../(pages)/forms/CardForm';
 
 function CallBackAuth() {
   const params = useSearchParams();
@@ -51,6 +43,14 @@ function CallBackAuth() {
         </button>
       }
     />
+  );
+}
+
+function CallBack() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CallBackAuth />
+    </Suspense>
   );
 }
 

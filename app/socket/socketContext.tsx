@@ -25,7 +25,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
       autoConnect: false,
       transports: ['websocket', 'polling'],
       closeOnBeforeunload: true,
-      reconnection: true
+      reconnection: false
     });
 
     socketInstance.on('connect', () => {
