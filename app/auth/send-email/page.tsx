@@ -27,12 +27,10 @@ function page() {
           <DuplicateCheckForm
             form={
               <EmailInput
-                value={user.account.email}
-                onChange={e => {
-                  dispatch(setAccountEmail(e.target.value));
+                extended={() =>
                   // 이메일 중복체크 후 재입력시 중복체크 여부 초기화
-                  dispatch(setIsEmailDuplicateChecked(false));
-                }}
+                  dispatch(setIsEmailDuplicateChecked(false))
+                }
               />
             }
             text="check"
