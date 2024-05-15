@@ -21,7 +21,7 @@ function LoginPageDetail({ title, loginMenu, loginForm, createAccount }: LoginPa
         {!idPasswordFormView ? (
           <div className="flex flex-col items-center justify-center min-h-80 gap-2">{loginMenu}</div>
         ) : (
-          <div className="mt-10 mb-10">{loginForm}</div>
+          <div className="mt-10 mb-5">{loginForm}</div>
         )}
         <div className="mb-5">{createAccount}</div>
       </div>

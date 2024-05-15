@@ -60,27 +60,7 @@ function Login() {
       loginForm={
         <>
           <AllSignOptionButton onClick={() => dispatch(setIdPasswordLoginFormView(false))} />
-          <LoginForm
-            onSubmit={submitLogin}
-            setId={e => dispatch(setAccountLoginId(e.target.value))}
-            setPassword={e => dispatch(setAccountPassword(e.target.value))}
-            lostPassword={
-              <BlueHyperLink
-                text={'Lost Password?'}
-                onClick={() => {
-                  router.push('/auth/reset-password');
-                }}
-              />
-            }
-            receiveEmail={
-              <BlueHyperLink
-                text={"Didn't receive the Email?"}
-                onClick={() => {
-                  router.push('/auth/send-email');
-                }}
-              />
-            }
-          />
+          <LoginForm onSubmit={submitLogin} />
         </>
       }
       createAccount={<CreateAccountButton onClick={() => router.push('/auth/signup')} />}
