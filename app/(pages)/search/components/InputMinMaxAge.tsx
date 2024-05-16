@@ -1,50 +1,78 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setSearchParamsMaxAge, setSearchParamsMinAge } from '../../../redux/slices/searchSlice';
+import React, { useRef, useState } from 'react';
 
-const InputMinMaxAge: React.FC = () => {
-  const dispatch = useDispatch();
-  const minAgeState = useSelector((state: RootState) => state.searchSlice.searchParams.minAge);
-  const maxAgeState = useSelector((state: RootState) => state.searchSlice.searchParams.maxAge);
+const InputMinMaxAge = () => {
+  const min = 1;
+  const max = 100;
+  const minRef = useRef(null);
+  const maxRef = useRef(null);
+  const [minThumb, setMinThumb] = useState(0);
+  const [maxThumb, setMaxThumb] = useState(0);
+  const [minValue, setMinValue] = useState(min);
+  const [maxValue, setMaxValue] = useState(max);
 
-  const dispatchSearchParamMinAge = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const min = parseInt(e.target.value);
-    dispatch(setSearchParamsMinAge(min));
+  const handleMinChange = () => {
+    if (!minRef.current) return;
+    const value = parseInt(minRef.current.value);
+    const validValue = Math.min(Math.max(value, min), maxValue - 1);
+    setMinThumb(((validValue - min) / (max - min)) * 100);
+    setMinValue(validValue);
+    console.log('minValue', minValue);
   };
 
-  const dispatchSearchParamMaxAge = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const max = parseInt(e.target.value);
-    dispatch(setSearchParamsMaxAge(max));
+  const handleMaxChange = () => {
+    if (!maxRef.current) return;
+    const value = parseInt(maxRef.current.value);
+    const validValue = Math.max(Math.min(value, max), minValue + 1);
+    setMaxThumb(((max - validValue) / (max - min)) * 100);
+    setMaxValue(validValue);
+    console.log('maxValue', maxValue);
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center">
-        <label htmlFor="input-min">최소: {minAgeState || 0}</label>
-        <input
-          id="input-min"
-          type="number"
-          className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          onChange={dispatchSearchParamMinAge}
-          value={minAgeState}
-          min={18}
-          max={maxAgeState}
-        />
+    <div className="h-12 flex justify-center items-center">
+      <div className="relative max-w-sm w-full">
+        <div>
+          <input
+            type="range"
+            ref={maxRef}
+            step="1"
+            onInput={handleMaxChange}
+            value={maxValue}
+            className="absolute pointer-events-visiblePainted appearance-none z-20 h-2 top-4 w-full opacity-0 cursor-pointer"
+          />
+          <input
+            type="range"
+            ref={minRef}
+            step="1"
+            onInput={handleMinChange}
+            value={minValue}
+            className="absolute pointer-events-visiblePainted appearance-none z-20 h-2 w-full opacity-0 cursor-pointer"
+          />
+          <div className="relative z-10 h-2.5">
+            <div className="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
+
+            <div
+              className="absolute z-20 top-0 bottom-0 rounded-md bg-blue-600"
+              style={{ right: `${maxThumb}%`, left: `${minThumb}%` }}
+            ></div>
+
+            <div
+              className="absolute z-30 w-5 h-5 top-0 left-0 bg-blue-600 rounded-full -mt-1 -ml-1"
+              style={{ left: `${minThumb}%` }}
+            >
+              <p className="absolute top-5">{minValue}</p>
+            </div>
+
+            <div
+              className="absolute z-30 w-5 h-5 top-0 right-0 bg-blue-600 rounded-full -mt-1 -mr-2"
+              style={{ right: `${maxThumb}%` }}
+            >
+              <p className="absolute top-5">{maxValue}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col items-center">
-        <label htmlFor="input-max">최대: {maxAgeState || 0}</label>
-        <input
-          id="input-max"
-          type="number"
-          className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          onChange={dispatchSearchParamMaxAge}
-          value={maxAgeState}
-          min={minAgeState}
-          max={100}
-        />
-      </div>
-    </>
+    </div>
   );
 };
 
