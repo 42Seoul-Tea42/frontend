@@ -8,10 +8,15 @@ const EmojiGridList: React.FC = () => {
   const emojis = useSelector((state: RootState) => state.accountSlice.emojis);
   const hateEmojis = useSelector((state: RootState) => state.accountSlice.hateEmojis);
 
+  enum DTO {
+    // 파일이름 1부터시작, 백에서 배열요소의 값을 1부터 받음
+    START_INDEX = 1
+  }
+
   const Emojis = Array.from({ length: 16 }, (_, index) => ({
     id: index,
-    src: `/emoji/${index + 1}.jpg`, // 이미지 경로
-    alt: `emoji${index + 1}`
+    src: `/emoji/${index + DTO.START_INDEX}.jpg`, // 이미지 경로
+    alt: `emoji${index + DTO.START_INDEX}`
   }));
 
   const colorPicker = (id: number) => {
@@ -34,11 +39,11 @@ const EmojiGridList: React.FC = () => {
           <button
             key={index}
             type="button"
-            className={`cursor-pointer relative ${colorPicker(Emoji.id)}`}
-            onClick={() => dispatch(setAccountEmojis(Emoji.id))}
+            className={`cursor-pointer relative ${colorPicker(Emoji.id + DTO.START_INDEX)}`}
+            onClick={() => dispatch(setAccountEmojis(Emoji.id + DTO.START_INDEX))}
             onContextMenu={e => {
               e.preventDefault();
-              dispatch(setAccountHateEmojis(Emoji.id));
+              dispatch(setAccountHateEmojis(Emoji.id + DTO.START_INDEX));
             }}
           >
             <Image
