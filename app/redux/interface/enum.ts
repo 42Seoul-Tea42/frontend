@@ -1,3 +1,5 @@
+// 성별은 124
+// 취향은 247
 export enum Gender {
   OTHER = 1,
   FEMALE = 2,
