@@ -1,7 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserAccountSet } from '../interface';
 import axiosInstance from '../../api/axios';
-import { AxiosResponse } from 'axios';
 import { getGoogleLogin, getKaKaoLogin, postLogin } from './loginSlice';
 import { Fancy } from '../interface/enum';
 

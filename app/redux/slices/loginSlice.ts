@@ -72,8 +72,16 @@ export const getVerifyEmail = createAsyncThunk('loginSlice/getVerifyEmail', asyn
 });
 
 // 유저 프로필 정보 서버로 전송
-export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (userProfileObject: any) => {
-  const response = await axiosInstance.patch('/user/profile', userProfileObject);
+export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
+  const state = getState() as { accountSlice: AccountState };
+  const user = state.accountSlice.user;
+  const response = await axiosInstance.patch('/user/profile', {
+    pictures: user.photo.photos, // backend: 배열형태로 보내주세요.
+    gender: parseInt(user.ageGender.gender), // backend: 숫자형태로 보내주세요.
+    taste: parseInt(user.profile.sexualPreference), // backend: 숫자형태로 보내주세요.
+    bio: user.profile.introduction,
+    tags: user.profile.interests
+  });
   return response.status;
 });
 

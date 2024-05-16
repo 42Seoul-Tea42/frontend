@@ -2,8 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { addAccountPhotos, removeAccountPhotos } from '../../../redux/slices/accountSlice';
 import ImageUploadForm from '../../forms/ImageUploadForm';
-import Draggable from 'react-draggable';
-import { SubmitButton } from '../../../UI';
 import { useState } from 'react';
 import { StarFullSVG } from '../../../svg';
 
