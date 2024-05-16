@@ -12,18 +12,18 @@
     "typedoc-redux": "typedoc --entryPointStrategy expand app/redux/ && gh-pages -d docs"
   },
   "dependencies": {
-    "@next/third-parties": "^14.1.4",
+    "@next/third-parties": "^14.2.3",
     "@opentelemetry/api": "1.4.0",
     "@types/gtag.js": "^0.0.19",
     "esbuild": "0.18.0",
     "flowbite": "^2.3.0",
-    "next": "^14.1.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "next": "^14.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@reduxjs/toolkit": "^2.2.3",
-    "@types/lodash": "^4.17.0",
+    "@reduxjs/toolkit": "^2.2.4",
+    "@types/lodash": "^4.17.1",
     "@types/node": "20.8.10",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
@@ -37,20 +37,20 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "flowbite-react": "^0.7.8",
     "gh-pages": "^6.1.1",
     "lodash": "^4.17.21",
     "postcss": "^8.4.38",
-    "react-devtools": "^5.0.2",
+    "react-devtools": "^5.2.0",
     "react-draggable": "^4.4.6",
-    "react-redux": "^9.1.0",
+    "react-redux": "^9.1.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^3.1.0",
     "socket.io-client": "^4.7.5",
     "tailwindcss": "^3.4.3",
     "three": "^0.160.1",
     "typedoc": "^0.25.13",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.5"
   }
 }

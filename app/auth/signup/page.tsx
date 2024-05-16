@@ -5,9 +5,8 @@ import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
-import { DuplicateCheckField, SubmitButton } from '../../UI';
+import { SubmitButton } from '../../UI';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
-import { setAccountEmail, setAccountLoginId } from '../../redux/slices/accountSlice';
 import {
   closeSignupError,
   getCheckDuplicateEmail,
