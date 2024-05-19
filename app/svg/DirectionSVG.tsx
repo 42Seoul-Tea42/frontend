@@ -32,19 +32,13 @@ const DirectionSVG: React.FC<DirectionSVGProps> = ({ direction, size }) => {
 
   return (
     <svg
-      className={`w-${size} h-${size} text-gray dark:text-gray-800 rtl:rotate-180`}
+      className={`w-${size} h-${size} rtl:rotate-180`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox={viewBox}
     >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d={rotate}
-      />
+      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={rotate} />
     </svg>
   );
 };

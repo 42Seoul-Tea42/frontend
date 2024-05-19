@@ -35,7 +35,9 @@ const LandingPage: React.FC = () => {
                 onClick={pushLoginPage}
               >
                 <p className="mr-2">Get Started</p>
-                <DirectionSVG direction="right" size="4" />
+                <div className="text-white">
+                  <DirectionSVG direction="right" size="4" />
+                </div>
               </button>
               <button
                 type="button"
