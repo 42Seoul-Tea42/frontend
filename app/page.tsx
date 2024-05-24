@@ -31,15 +31,17 @@ const LandingPage: React.FC = () => {
             <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
               <button
                 type="button"
-                className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900"
+                className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800"
                 onClick={pushLoginPage}
               >
                 <p className="mr-2">Get Started</p>
-                <DirectionSVG direction="right" size="4" />
+                <div className="text-white">
+                  <DirectionSVG direction="right" size="4" />
+                </div>
               </button>
               <button
                 type="button"
-                className="py-3 px-5 sm:ms-4 text-sm font-bold text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-70"
+                className="py-3 px-5 sm:ms-4 text-sm font-bold text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
                 onClick={scrollPage}
               >
                 Learn more
