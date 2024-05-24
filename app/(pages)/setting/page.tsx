@@ -35,10 +35,14 @@ const Setting: React.FC = () => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
-        <ImageUploadGrid />
+      <div className="flex-col justify-center mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
+        <div>
+          <ImageUploadGrid />
+          <div className="mb-10"></div>
+        </div>
+
         <form
-          className="mx-auto w-100"
+          className="flex flex-col items-center w-full"
           onSubmit={e => {
             e.preventDefault();
             submitAccountSetting();
