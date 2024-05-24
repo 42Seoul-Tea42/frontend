@@ -2,9 +2,8 @@ import axios from 'axios';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  // baseURL: SERVER_URL,
-  // testtest
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  withCredentials: true, // 자격증명을 포함한 쿠키를 서버로 전달
   headers: {
     'Content-Type': 'application/json'
   },
@@ -42,7 +41,7 @@ axiosInstance.interceptors.response.use(
     switch (error.response.status) {
       case 401:
         alert('인증 오류입니다. 재 로그인 해주세요.');
-        window.location.href = '/auth/login';
+        // window.location.href = '/auth/login';
         break;
     }
     return Promise.reject(error);

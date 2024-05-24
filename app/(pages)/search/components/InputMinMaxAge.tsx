@@ -6,8 +6,8 @@ import { setSearchParamsMaxAge, setSearchParamsMinAge } from '../../../redux/sli
 const InputMinMaxAge = () => {
   const min = 1;
   const max = 100;
-  const minRef = useRef(null);
-  const maxRef = useRef(null);
+  const minRef = useRef<HTMLInputElement>(null); // Update the type of minRef
+  const maxRef = useRef<HTMLInputElement>(null); // Update the type of maxRef
   const [minThumb, setMinThumb] = useState(0);
   const [maxThumb, setMaxThumb] = useState(0);
   const minValue = useSelector((state: RootState) => state.searchSlice.searchParams.minAge);
@@ -17,7 +17,7 @@ const InputMinMaxAge = () => {
 
   const handleMinChange = () => {
     if (!minRef.current) return;
-    const value = parseInt(minRef.current?.value);
+    const value = parseInt(minRef.current.value);
     const validValue = Math.min(Math.max(value, min), maxValue - 1);
     setMinThumb(((validValue - min) / (max - min)) * 100);
     dispatch(setSearchParamsMinAge(validValue));
@@ -25,7 +25,7 @@ const InputMinMaxAge = () => {
 
   const handleMaxChange = () => {
     if (!maxRef.current) return;
-    const value = parseInt(maxRef.current?.value);
+    const value = parseInt(maxRef.current.value); // Update the type of value
     const validValue = Math.max(Math.min(value, max), minValue + 1);
     setMaxThumb(((max - validValue) / (max - min)) * 100);
     dispatch(setSearchParamsMaxAge(validValue));
