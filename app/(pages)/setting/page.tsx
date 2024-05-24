@@ -30,21 +30,7 @@ const Setting: React.FC = () => {
   }, []);
 
   const submitAccountSetting = () => {
-    dispatch<any>(
-      patchUserProfile({
-        email: user.account.email,
-        pw: user.account.password,
-        last_name: user.identity.lastname,
-        name: user.identity.firstname,
-        taste: parseInt(user.profile.sexualPreference),
-        bio: user.profile.introduction,
-        tags: user.profile.interests,
-        prefer_emoji: emojis.map((emoji: number) => emoji),
-        hate_emoji: hateEmojis.map((emoji: number) => emoji),
-        age: user.ageGender.age,
-        pictures: user.photo.photos
-      })
-    );
+    dispatch<any>(patchUserProfile());
   };
 
   return (
