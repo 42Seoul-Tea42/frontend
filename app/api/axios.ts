@@ -41,7 +41,7 @@ axiosInstance.interceptors.response.use(
     // 응답 오류가 있는 작업 수행
     switch (error.response.status) {
       case 401:
-        alert('재 로그인 해주세요.');
+        alert('인증 오류입니다. 재 로그인 해주세요.');
         window.location.href = '/auth/login';
         break;
     }

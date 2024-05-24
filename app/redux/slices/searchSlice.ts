@@ -66,6 +66,9 @@ const fancySlice = createSlice({
       } else {
         state.searchParams.interests = [...state.searchParams.interests, action.payload];
       }
+    },
+    initSearchParams: state => {
+      state.searchParams = initialState.searchParams;
     }
   },
   extraReducers: builder => {
@@ -88,7 +91,8 @@ export const {
   setSearchParamsDistance,
   setSearchParamsMaxAge,
   setSearchParamsMinAge,
-  setSearchParamsRating
+  setSearchParamsRating,
+  initSearchParams
 } = fancySlice.actions;
 export const extraReducers = fancySlice.reducer;
 

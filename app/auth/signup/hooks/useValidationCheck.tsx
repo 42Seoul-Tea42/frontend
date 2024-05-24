@@ -8,8 +8,13 @@ export const useValidationCheck = () => {
 
   // client exception
   const checkPasswordMatching = () => user.account.password === reEnterPassword;
-  const checkPasswordLength = () => user.account.password.length >= 8;
   const checkSpace = (input: string) => input.includes(' ');
+
+  const checkPasswordRegex = () => {
+    // 영문 대, 소문자 숫자 포함 8자 이상
+    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return pattern.test(user.account.password);
+  };
 
   // server state
   const checkEmailDuplicate = () => validation.isEmailDuplicateChecked;
@@ -39,8 +44,8 @@ export const useValidationCheck = () => {
       return false;
     }
 
-    if (!checkPasswordLength()) {
-      alert('비밀번호는 최소 8자 이상이어야 합니다.');
+    if (!checkPasswordRegex()) {
+      alert('비밀번호는 영문 대소문자와 숫자를 포함해야 합니다.');
       return false;
     }
 

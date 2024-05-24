@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
+import { initSearchParams } from '../../redux/slices/searchSlice';
 
 /**
  * @type custom hook
@@ -12,6 +13,7 @@ import _ from 'lodash';
 const useFilter = (users: any[]): any[] => {
   const [fileteredUsers, setFilteredUsers] = useState<any[]>([]);
   const params = useSelector((state: RootState) => state.searchSlice.searchParams);
+  const dispatch = useDispatch();
 
   const onFilter = () => {
     if (!users) return;
@@ -32,6 +34,7 @@ const useFilter = (users: any[]): any[] => {
     });
 
     setFilteredUsers(filetered);
+    dispatch(initSearchParams());
   };
 
   return [fileteredUsers, onFilter] as const;

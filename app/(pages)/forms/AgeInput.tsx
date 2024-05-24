@@ -10,7 +10,7 @@ const AgeInput: React.FC = () => {
   return (
     <InputFloatingLabel
       type="number"
-      value={age.toString()}
+      value={age}
       onChange={e => dispatch(setAccountAge(parseInt(e.target.value)))}
       text="나이"
     />
