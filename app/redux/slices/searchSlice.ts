@@ -20,7 +20,7 @@ interface SearchState {
 const initialState: SearchState = {
   users: [],
   searchParams: {
-    minAge: 0,
+    minAge: 1,
     maxAge: 100,
     distance: 100,
     interests: [],
@@ -30,13 +30,16 @@ const initialState: SearchState = {
   error: null
 };
 
-export const postSearch = createAsyncThunk('homeSlice/postSearch', async () => {
+export const postSearch = createAsyncThunk('homeSlice/postSearch', async (_, { getState }) => {
+  const state = getState() as { accountSlice: SearchState };
+  const { searchParams } = state.accountSlice;
+
   const response = await axiosInstance.post('/user/search', {
-    min_age: 0,
-    max_age: 100,
-    distance: 100,
-    tags: [],
-    fame: 1
+    min_age: searchParams.minAge,
+    max_age: searchParams.maxAge,
+    distance: searchParams.distance,
+    tags: searchParams.interests,
+    fame: searchParams.rating
   });
   return response.data;
 });

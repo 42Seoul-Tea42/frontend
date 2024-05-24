@@ -1,4 +1,7 @@
 import React, { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { setSearchParamsMaxAge, setSearchParamsMinAge } from '../../../redux/slices/searchSlice';
 
 const InputMinMaxAge = () => {
   const min = 1;
@@ -7,25 +10,25 @@ const InputMinMaxAge = () => {
   const maxRef = useRef(null);
   const [minThumb, setMinThumb] = useState(0);
   const [maxThumb, setMaxThumb] = useState(0);
-  const [minValue, setMinValue] = useState(min);
-  const [maxValue, setMaxValue] = useState(max);
+  const minValue = useSelector((state: RootState) => state.searchSlice.searchParams.minAge);
+  const maxValue = useSelector((state: RootState) => state.searchSlice.searchParams.maxAge);
+
+  const dispatch = useDispatch();
 
   const handleMinChange = () => {
     if (!minRef.current) return;
-    const value = parseInt(minRef.current.value);
+    const value = parseInt(minRef.current?.value);
     const validValue = Math.min(Math.max(value, min), maxValue - 1);
     setMinThumb(((validValue - min) / (max - min)) * 100);
-    setMinValue(validValue);
-    console.log('minValue', minValue);
+    dispatch(setSearchParamsMinAge(validValue));
   };
 
   const handleMaxChange = () => {
     if (!maxRef.current) return;
-    const value = parseInt(maxRef.current.value);
+    const value = parseInt(maxRef.current?.value);
     const validValue = Math.max(Math.min(value, max), minValue + 1);
     setMaxThumb(((max - validValue) / (max - min)) * 100);
-    setMaxValue(validValue);
-    console.log('maxValue', maxValue);
+    dispatch(setSearchParamsMaxAge(validValue));
   };
 
   return (
@@ -36,7 +39,7 @@ const InputMinMaxAge = () => {
             type="range"
             ref={maxRef}
             step="1"
-            onInput={handleMaxChange}
+            onChange={handleMaxChange}
             value={maxValue}
             className="absolute pointer-events-visiblePainted appearance-none z-20 h-2 top-4 w-full opacity-0 cursor-pointer"
           />
@@ -44,7 +47,7 @@ const InputMinMaxAge = () => {
             type="range"
             ref={minRef}
             step="1"
-            onInput={handleMinChange}
+            onInput={() => handleMinChange()}
             value={minValue}
             className="absolute pointer-events-visiblePainted appearance-none z-20 h-2 w-full opacity-0 cursor-pointer"
           />
