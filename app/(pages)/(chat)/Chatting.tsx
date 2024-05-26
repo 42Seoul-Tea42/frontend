@@ -8,9 +8,9 @@ import ChatContent from './components/ChattingContent';
 import { useCloseOnOutsideClick } from '../hooks';
 import ChattingMenuBar from './components/ChattingMenuBar';
 import ViewMessageForm from './components/ViewMessageForm';
-import SendMessageForm from './components/SendMessageForm';
 import ChattingMenuButton from './components/ChattingMenuButton';
 import ChattingRoomListVisibleControl from './components/ChattingRoomListVisibleControl';
+import SendMessageField from './components/SendMessageField';
 
 const Chatting: React.FC = () => {
   const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });
@@ -34,7 +34,7 @@ const Chatting: React.FC = () => {
             />
           }
           viewMessage={<ViewMessageForm />}
-          sendMessage={<SendMessageForm />}
+          sendMessage={<SendMessageField />}
         />
         <ChattingRoomListVisibleControl
           props={<ChattingRoomList isModalOpen={isModalOpen} />}

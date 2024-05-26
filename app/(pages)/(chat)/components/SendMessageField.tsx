@@ -8,16 +8,17 @@ enum SendMessage {
   MAX_LENGTH = 500
 }
 
-const SendMessageForm = () => {
+const SendMessageField = () => {
   const message = useSelector((state: RootState) => state.chattingSlice.sendMessage);
   const dispatch = useDispatch();
+
   const socket = useSocket();
   const handleClick = () => {
     socket?.emit('send_message', message);
   };
 
   return (
-    <form>
+    <div>
       <label htmlFor="chat" className="sr-only">
         Your message
       </label>
@@ -41,8 +42,8 @@ const SendMessageForm = () => {
           <span className="sr-only">Send message</span>
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
-export default SendMessageForm;
+export default SendMessageField;
