@@ -2,7 +2,6 @@ import CloudUploadSVG from './CloudUploadSVG';
 import DirectionSVG from './DirectionSVG';
 import HeartSVG from './HeartSVG';
 import ImageSkeletonSVG from './ImageSkeletonSVG';
-import StarSVG from './StarSVG';
 import ThumbsUpSVG from './ThumbsUpSVG';
 
 // navigation items
@@ -14,7 +13,6 @@ export {
   DirectionSVG,
   HeartSVG,
   ImageSkeletonSVG,
-  StarSVG,
   MessageSVG,
   SearchSVG,
   HomeFillSVG,

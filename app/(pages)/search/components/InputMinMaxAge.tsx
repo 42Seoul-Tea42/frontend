@@ -51,23 +51,23 @@ const InputMinMaxAge = () => {
             value={minValue}
             className="absolute pointer-events-visiblePainted appearance-none z-20 h-2 w-full opacity-0 cursor-pointer"
           />
-          <div className="relative z-10 h-2.5">
-            <div className="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
+          <div className="relative z-10 h-2">
+            <div className="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-800"></div>
 
             <div
-              className="absolute z-20 top-0 bottom-0 rounded-md bg-blue-600"
+              className="absolute z-30 top-0 bottom-0 rounded-md bg-green-400"
               style={{ right: `${maxThumb}%`, left: `${minThumb}%` }}
             ></div>
 
             <div
-              className="absolute z-30 w-5 h-5 top-0 left-0 bg-blue-600 rounded-full -mt-1 -ml-1"
+              className="absolute z-30 w-5 h-5 top-0 left-0 bg-green-400 rounded-full -mt-1 -ml-1"
               style={{ left: `${minThumb}%` }}
             >
               <p className="absolute top-5">{minValue}</p>
             </div>
 
             <div
-              className="absolute z-30 w-5 h-5 top-0 right-0 bg-blue-600 rounded-full -mt-1 -mr-2"
+              className="absolute z-30 w-5 h-5 top-0 right-0 bg-green-400 rounded-full -mt-1 -mr-2"
               style={{ right: `${maxThumb}%` }}
             >
               <p className="absolute top-5">{maxValue}</p>

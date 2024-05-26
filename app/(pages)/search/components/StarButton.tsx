@@ -1,8 +1,8 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import StarSVG from '../../../svg/StarSVG';
 import { setSearchParamsRating } from '../../../redux/slices/searchSlice';
+import { StarFullSVG } from '../../../svg';
 
 interface StarButtonProps {
   star: number;
@@ -14,7 +14,7 @@ const StarButton: React.FC<StarButtonProps> = ({ star, isFilled }) => {
 
   return (
     <button onClick={() => dispatch(setSearchParamsRating(star))}>
-      <StarSVG color={isFilled ? 'yellow' : 'gray'} />
+      <StarFullSVG color={isFilled ? 'green' : 'gray'} width="10" height="10" />
     </button>
   );
 };
