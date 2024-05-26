@@ -42,7 +42,7 @@ const Setting: React.FC = () => {
         </div>
 
         <form
-          className="flex flex-col items-center w-full"
+          className="flex flex-col items-center max-w-sm"
           onSubmit={e => {
             e.preventDefault();
             submitAccountSetting();
