@@ -77,7 +77,12 @@ const HomeNavBar: React.FC = () => {
                   iconStyle={getIconColor(item.name)}
                   handleClick={() => pushPathPage(item.name)}
                 />
+                {/* 알림 */}
                 <NavigationNoti name={item.name} />
+                {/* 밑줄 */}
+                <div className={isActive(item.name) ? '' : 'hidden'}>
+                  <span className="animate bg-green-200 absolute w-24 h-2 border-2 border-white  rounded-full"></span>
+                </div>
               </li>
             ))}
           </ul>
