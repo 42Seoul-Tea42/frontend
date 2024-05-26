@@ -1,4 +1,4 @@
-import { HeartSVG } from '../svg';
+import { HeartSVG, ThumbsUpSVG } from '../svg';
 import { Fancy } from '../redux/interface/enum';
 
 type FancyButtonProps = {
@@ -10,11 +10,11 @@ function FancyButton({ fancyState, onClick }: FancyButtonProps) {
   const colorPicker = () => {
     switch (fancyState) {
       case Fancy.NONE:
-        return 'white';
+        return 'gray';
       case Fancy.SEND:
         return 'green';
       case Fancy.RECV:
-        return 'yellow';
+        return 'blue';
       case Fancy.CONN:
         return 'red';
       default:
@@ -24,21 +24,24 @@ function FancyButton({ fancyState, onClick }: FancyButtonProps) {
   const textPicker = () => {
     switch (fancyState) {
       case Fancy.NONE:
-        return 'NONE';
+        return '';
       case Fancy.SEND:
-        return 'SEND';
+        return 'send';
       case Fancy.RECV:
-        return 'RECV';
+        return 'recv';
       case Fancy.CONN:
-        return 'CONN';
+        return 'connect';
       default:
-        return 'white';
+        return '';
     }
   };
+
   return (
-    <button onClick={onClick} className="hover:brightness-50">
-      <p className="absolute font-thin text-sm">{textPicker()}</p>
-      <HeartSVG color={colorPicker()} />
+    <button onClick={onClick} className="relative">
+      <div className="hover:animate-bounce">
+        <ThumbsUpSVG color={colorPicker()} />
+      </div>
+      <p className="absolute top-4 font-thin text-sm">{textPicker()}</p>
     </button>
   );
 }
