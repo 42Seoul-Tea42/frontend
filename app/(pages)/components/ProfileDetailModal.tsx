@@ -6,22 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { BlueHyperLink, ProfileDetailModalContents } from '../../UI';
-import { getProfileDetail } from '../../redux/slices/profileInquirySlice';
+import { getProfileDetail, reportUser } from '../../redux/slices/profileInquirySlice';
 
 const ProfileDetailModal: React.FC = () => {
   const userId = useSelector((state: RootState) => state.profileInquirySlice.selectedUserId);
-  // const user = useSelector((state: RootState) => state.profileInquirySlice.user);
-  const user = usersInquirySetDummy[0];
   const dispatch = useDispatch();
+  // const user = useSelector((state: RootState) => state.profileInquirySlice.user);
 
-  const blockUser = async () => {
-    alert('차단되었습니다.');
-  };
+  // 받아온 유저 데이터로 변경하기
+  const user = usersInquirySetDummy[1];
 
-  const reportUser = async () => {
-    alert('신고되었습니다.');
-  };
-
+  // 서버에서 아이디기반으로 데이터 요청하는 코드로 변경하기
   useEffect(() => {
     dispatch<any>(getProfileDetail('1'));
   }, []);
@@ -38,8 +33,8 @@ const ProfileDetailModal: React.FC = () => {
         { title: '관심사', content: user.profile.interests || 'test' }
       ]}
       introduciotn={{ title: '자기소개', content: user.profile.introduction || 'test' }}
-      block={<BlueHyperLink text={'차단'} onClick={blockUser} />}
-      report={<BlueHyperLink text={'신고'} onClick={reportUser} />}
+      block={<BlueHyperLink text={'차단'} onClick={() => dispatch()} />}
+      report={<BlueHyperLink text={'신고'} onClick={() => dispatch<any>(reportUser(user.identity.id))} />}
     />
   );
 };

@@ -48,6 +48,16 @@ export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfile
   return response.data;
 });
 
+// 유저 신고
+export const reportUser = createAsyncThunk('profileInquirySlice/reportUser', async (userId: string) => {
+  const response = await axiosInstance.post(`/user/report`, {
+    target_id: userId,
+    reason: 0,
+    reason_opt: '그런건 없음'
+  });
+  return response.data;
+});
+
 const profileInquirySlice = createSlice({
   name: 'profileInquirySlice',
   initialState,
@@ -68,6 +78,18 @@ const profileInquirySlice = createSlice({
       state.user = action.payload;
     });
     builder.addCase(getProfileDetail.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    builder.addCase(reportUser.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(reportUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(reportUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
