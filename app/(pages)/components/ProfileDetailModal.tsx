@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { usersInquirySetDummy } from '../../UserDummy';
 import { BlueHyperLink, ProfileDetailModalContents } from '../../UI';
-import { getProfileDetail, reportUser } from '../../redux/slices/profileInquirySlice';
+import { blockUser, getProfileDetail, reportUser } from '../../redux/slices/profileInquirySlice';
 
 const ProfileDetailModal: React.FC = () => {
   const userId = useSelector((state: RootState) => state.profileInquirySlice.selectedUserId);
@@ -33,7 +33,7 @@ const ProfileDetailModal: React.FC = () => {
         { title: '관심사', content: user.profile.interests || 'test' }
       ]}
       introduciotn={{ title: '자기소개', content: user.profile.introduction || 'test' }}
-      block={<BlueHyperLink text={'차단'} onClick={() => dispatch()} />}
+      block={<BlueHyperLink text={'차단'} onClick={() => dispatch<any>(blockUser(user.identity.id))} />}
       report={<BlueHyperLink text={'신고'} onClick={() => dispatch<any>(reportUser(user.identity.id))} />}
     />
   );

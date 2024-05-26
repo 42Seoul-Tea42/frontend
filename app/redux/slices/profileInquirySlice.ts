@@ -43,6 +43,7 @@ const initialState: ProfileInquiryState = {
   error: null
 };
 
+// 유저 프로필 상세 조회
 export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfileDetail', async (userId: string) => {
   const response = await axiosInstance.get(`/user/profile-detail?id=${userId}`);
   return response.data;
@@ -50,10 +51,18 @@ export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfile
 
 // 유저 신고
 export const reportUser = createAsyncThunk('profileInquirySlice/reportUser', async (userId: string) => {
-  const response = await axiosInstance.post(`/user/report`, {
+  const response = await axiosInstance.post('/user/report', {
     target_id: userId,
     reason: 0,
-    reason_opt: '그런건 없음'
+    reason_opt: '몰라~'
+  });
+  return response.data;
+});
+
+// 유저 차단
+export const blockUser = createAsyncThunk('profileInquirySlice/blockUser', async (userId: string) => {
+  const response = await axiosInstance.post('/user/block', {
+    target_id: userId
   });
   return response.data;
 });
@@ -70,6 +79,7 @@ const profileInquirySlice = createSlice({
     }
   },
   extraReducers: builder => {
+    // 유저 프로필 상세 조회
     builder.addCase(getProfileDetail.pending, state => {
       state.loading = true;
       state.error = null;
@@ -82,6 +92,7 @@ const profileInquirySlice = createSlice({
       state.error = action.error.message ?? null;
     });
 
+    // 유저 신고
     builder.addCase(reportUser.pending, state => {
       state.loading = true;
       state.error = null;
@@ -90,6 +101,19 @@ const profileInquirySlice = createSlice({
       state.loading = false;
     });
     builder.addCase(reportUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 유저 차단
+    builder.addCase(blockUser.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(blockUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(blockUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

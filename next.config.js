@@ -12,7 +12,7 @@ module.exports = {
   // },
 
   // nginx 빌드용
-  output: 'export',
+  // output: 'export',
 
   images: {
     unoptimized: true
