@@ -23,7 +23,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, subject, inputs, button }
             /** 폼 컨트롤 */
             onSubmit();
           }}
-          className="max-w-md min-w-96 min-h-24 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          className="max-w-md min-w-96 min-h-24 p-6 bg-white border border-gray-200 rounded-lg shadow"
         >
           <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-pink-500/50">{subject}</h5>
           {inputs}

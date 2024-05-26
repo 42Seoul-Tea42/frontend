@@ -7,7 +7,7 @@ const Footer = () => {
   const router = useRouter();
   return (
     <footer>
-      <ul className="flex flex-col border-t sm:flex-row items-center justify-center px-5 py-5 text-md font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+      <ul className="flex flex-col border-t sm:flex-row items-center justify-center px-5 py-5 text-md font-medium text-gray-500sm:mt-0">
         <li className="mx-5 mb-5 sm:mb-0">
           <Link href="#" className="hover:underline">
             후원하기

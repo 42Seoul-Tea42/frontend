@@ -5,7 +5,7 @@ function GoogleLoginButton({ onClick }: ButtonType) {
     <button
       type="button"
       onClick={onClick}
-      className="w-full text-white bg-[#222222] hover:bg-[#222222]/90 focus:ring-4 focus:outline-none focus:ring-[#222222]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#222222]/55 me-2 mb-2"
+      className="w-full text-white bg-[#222222] hover:bg-[#222222]/90 focus:ring-4 focus:outline-none focus:ring-[#222222]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -17,8 +17,8 @@ function ChattingRoomListItem({ user }: ChattingRoomListItemProps) {
     >
       <Image className="w-8 h-8 rounded-full" src={user.picture} width={100} height={100} alt={`${user.name} image`} />
       <div className="flex items-end">
-        <p className="font-medium text-lg text-gray-900 truncate dark:text-white">{user.name}</p>
-        <p className="items-end ml-2 text-sm text-gray-900 dark:text-white">{user.distance}</p>
+        <p className="font-medium text-lg text-gray-900 truncate ">{user.name}</p>
+        <p className="items-end ml-2 text-sm text-gray-900 ">{user.distance}</p>
       </div>
     </li>
   );

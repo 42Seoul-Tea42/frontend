@@ -17,7 +17,7 @@ function NavigationNoti({ name }: NavigationNotiProps) {
   };
   return (
     <div className={handleNotiStyle(name)}>
-      <span className="animate-pulse bg-red-500 absolute left-0 bottom-0 w-4 h-4 border-2 border-white dark:border-gray-800 rounded-full"></span>
+      <span className="animate-pulse bg-red-500 absolute left-0 bottom-0 w-4 h-4 border-2 border-white rounded-full"></span>
     </div>
   );
 }
