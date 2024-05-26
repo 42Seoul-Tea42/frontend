@@ -17,8 +17,6 @@ import BlueHyperLink from './BlueHyperLink';
 import TableRow from './TableRow';
 import TableSchema from './TableSchema';
 import Table from './Table';
-import GoogleLoginButton from './GoogleLoginButton';
-import KakaoLoginButton from './KakaoLoginButton';
 import LoginFormChangeButton from './LoginFormChagneButton';
 import AllSignOptionButton from './AllSignOptionButton';
 import CreateAccountButton from './CreateAccountButton';
@@ -34,8 +32,6 @@ export {
   DrawerItem,
   DrawerOpenButton,
   LoginFormChangeButton,
-  GoogleLoginButton,
-  KakaoLoginButton,
   InputFloatingLabel,
   SubmitButton,
   SortButton,
