@@ -13,16 +13,19 @@ const InterestsButton: React.FC<InterestsButtonProps> = ({ text, onClick, value 
   return (
     <button
       type="button"
-      className="relative inline-flex border border-gray-700 m-1 items-center justify-center rounded-lg group"
+      className={`relative inline-flex justify-center items-center m-1 rounded-lg ${
+        interests.includes(value) ? 'text-green-400' : ''
+      }`}
       onClick={onClick}
-      style={{
-        border: interests?.includes(value) ? '2px solid transparent' : '',
-        borderImage: interests?.includes(value) ? 'linear-gradient(45deg, #FFD700, #FF8C00) 1' : ''
-      }}
     >
-      <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-        {text}
-      </span>
+      <span className="relative px-5 py-2.5 bg-white rounded-md group-hover:bg-opacity-0">{text}</span>
+      <span
+        className={`${
+          interests.includes(value)
+            ? 'bg-green-500 absolute top-0 w-4 h-2 border-2 border-white  rounded-full'
+            : 'hidden'
+        }`}
+      ></span>
     </button>
   );
 };
