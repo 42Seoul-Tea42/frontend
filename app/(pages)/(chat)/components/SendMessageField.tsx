@@ -30,12 +30,12 @@ const SendMessageField = () => {
           rows={2}
           maxLength={SendMessage.MAX_LENGTH}
           placeholder={`Your message... (.../${SendMessage.MAX_LENGTH})`}
-          className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-400 focus:border-blue-400 "
+          className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-green-400 focus:border-green-400 "
           style={{ resize: 'none' }}
         ></textarea>
         <button
           type="button"
-          className="flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 "
+          className="flex justify-center p-2 text-green-600 rounded-full cursor-pointer hover:bg-green-100 "
           onClick={handleClick}
         >
           <DirectionSVG direction="right" size="4" />

@@ -39,7 +39,7 @@ const HomeNavBar: React.FC = () => {
   }, []);
 
   const NavigationItems = [
-    { name: 'Fancy', icon: <StarFullSVG /> },
+    { name: 'Fancy', icon: <StarFullSVG color="gray-700" /> },
     { name: 'History', icon: <HistorySVG /> },
     { name: 'Home', icon: <HomeFillSVG /> },
     { name: 'Search', icon: <SearchSVG /> },

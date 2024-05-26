@@ -18,7 +18,7 @@ const GenderRadioInput: React.FC = () => {
               value={Gender.MALE}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 "
+              className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 "
               required
             />
             <label htmlFor="male" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">
@@ -34,7 +34,7 @@ const GenderRadioInput: React.FC = () => {
               value={Gender.FEMALE}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 "
+              className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 "
               required
             />
             <label htmlFor="female" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">
@@ -50,7 +50,7 @@ const GenderRadioInput: React.FC = () => {
               value={Gender.OTHER}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 "
+              className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 "
               required
             />
             <label htmlFor="other" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">

@@ -12,7 +12,7 @@ const ImageUploadGrid: React.FC = () => {
     <div className="gird grid-cols-subgrid">
       <div className="grid grid-cols-2 gap-4">
         <ImageUploadForm
-          mainPhoto={<StarFullSVG />}
+          mainPhoto={<StarFullSVG color="green" />}
           src={photos[0] ?? ''}
           width={200}
           height={200}

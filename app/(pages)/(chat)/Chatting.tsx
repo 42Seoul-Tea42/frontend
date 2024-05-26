@@ -15,7 +15,6 @@ import SendMessageField from './components/SendMessageField';
 const Chatting: React.FC = () => {
   const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });
   const dispatch = useDispatch();
-  const chatSocket = useSocket();
 
   return (
     // draggable 안쪽 사용자정의 컴포넌트 인식못함 <div>로 감싸줄 것

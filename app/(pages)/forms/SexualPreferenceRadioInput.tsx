@@ -18,7 +18,7 @@ const SexualPreferenceRadioInput: React.FC = () => {
               value={Gender.MALE}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+              className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 focus:ring-2"
               required
             />
             <label htmlFor="hetero" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">
@@ -34,7 +34,7 @@ const SexualPreferenceRadioInput: React.FC = () => {
               value={Gender.FEMALE}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+              className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 focus:ring-2"
               required
             />
             <label htmlFor="homo" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">
@@ -50,7 +50,7 @@ const SexualPreferenceRadioInput: React.FC = () => {
               value={Gender.ALL}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+              className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 focus:ring-2"
               required
             />
             <label htmlFor="bisexual" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">

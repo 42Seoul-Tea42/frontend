@@ -9,7 +9,7 @@ interface HomeNavBarButtonProps {
 
 const HomeNavBarButton: React.FC<HomeNavBarButtonProps> = ({ buttonName, icon, iconStyle, handleClick }) => {
   return (
-    <div className="text-gray-500 hover:text-red-400">
+    <div className="text-gray-500 hover:text-green-400">
       <button type="button" onClick={handleClick} className="flex gap-2">
         <div className={iconStyle}>{icon}</div>
         <h2>{buttonName}</h2>
