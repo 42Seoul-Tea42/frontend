@@ -23,7 +23,7 @@ const LandingPage: React.FC = () => {
     <>
       {/* Main page - Tea for Two */}
       <div className="w-full h-screen col-3 space-y-10">
-        <h1 className="tracking-wider flex justify-center items-end py-10 text-6xl font-extrabold bg-red-200 h-1/5">
+        <h1 className="tracking-wider flex justify-center items-end py-10 text-6xl font-extrabold bg-green-200 h-1/5">
           Tea for Two
         </h1>
         <div className="flex flex-col justify-center min-w-24 max-h-14 h-1/5">

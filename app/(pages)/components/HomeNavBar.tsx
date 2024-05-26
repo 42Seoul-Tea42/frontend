@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
 import HomeNavBarButton from '../../UI/HomeNavBarButton';
 import NavigationNoti from './NavigationNoti';
@@ -11,7 +11,6 @@ import requestUserLocation from '../../api/location';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
   // dev test용 주석
   // 로그인 체크
   // useEffect(() => {
@@ -24,12 +23,6 @@ const HomeNavBar: React.FC = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const pushPathPage = (itemName: string) => {
-    const path = itemName.toLowerCase();
-    router.push(path);
-    setIsMenuOpen(false);
-  };
 
   useEffect(() => {
     if (!isLogin) {
@@ -46,6 +39,23 @@ const HomeNavBar: React.FC = () => {
     { name: 'Setting', icon: <UserSVG /> }
   ];
 
+  const pushPathPage = (itemName: string) => {
+    const path = itemName.toLowerCase();
+    router.push(path);
+    setIsMenuOpen(false);
+  };
+
+  // 현재 경로와 아이템 이름이 일치하는지 확인하는 함수
+  const pathname = usePathname();
+  const isActive = (itemName: string) => {
+    return pathname === `/${itemName.toLowerCase()}`;
+  };
+
+  // 현재 아이템에 따라 아이콘 색상을 설정하는 함수
+  const getIconColor = (itemName: string) => {
+    return isActive(itemName) ? 'text-green-400' : 'currentColor';
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-gray-200">
       <div className="max-w-screen flex flex-wrap items-center justify-start md:justify-center mx-auto p-4 shadow">
@@ -61,7 +71,12 @@ const HomeNavBar: React.FC = () => {
           <ul className="flex flex-col p-4 gap-5 md:p-0 mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white text-xl">
             {NavigationItems.map((item, idx) => (
               <li key={idx} className="relative">
-                <HomeNavBarButton buttonName={item.name} icon={item.icon} handleClick={() => pushPathPage(item.name)} />
+                <HomeNavBarButton
+                  buttonName={item.name}
+                  icon={item.icon}
+                  iconStyle={getIconColor(item.name)}
+                  handleClick={() => pushPathPage(item.name)}
+                />
                 <NavigationNoti name={item.name} />
               </li>
             ))}

@@ -12,8 +12,6 @@ import SortBar from '../components/SortBar';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from './UserCards';
 import { getSuggestionUsers } from '../../redux/slices/suggestionSlice';
-import { getLogin } from '../../redux/slices/loginSlice';
-import { RootState } from '../../redux/store';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 
 function Home() {
