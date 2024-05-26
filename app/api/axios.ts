@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCookie } from '../cookie';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
@@ -20,6 +21,10 @@ axiosInstance.interceptors.request.use(
       config.headers['x-user-longitude'] = `${longitude}`;
       config.headers['x-user-latitude'] = `${latitude}`;
     }
+
+    // csrf 토큰 추가
+    const csrfToken = getCookie('csrf_access_token');
+    config.headers['X-CSRF-TOKEN'] = csrfToken;
 
     return config;
   },
