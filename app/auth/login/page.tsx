@@ -6,16 +6,13 @@ import { setAccountLoginId, setAccountPassword } from '../../redux/slices/accoun
 import { LoginForm } from '../../(pages)/forms';
 import LoginPageDetail from './LoginPageDetail';
 import { getGoogleLogin, getKaKaoLogin, postLogin, setIdPasswordLoginFormView } from '../../redux/slices/loginSlice';
-import {
-  AllSignOptionButton,
-  CreateAccountButton,
-  GoogleLoginButton,
-  BlueHyperLink,
-  KakaoLoginButton,
-  LoginFormChangeButton
-} from '../../UI';
+import { AllSignOptionButton, CreateAccountButton, BlueHyperLink, LoginFormChangeButton } from '../../UI';
 import { useEffect } from 'react';
 import { setIsSignup } from '../../redux/slices/signupSlice';
+import NaverLoginButton from './NaverLoginButton';
+import AppleLoginButton from './AppleLoginButton';
+import KakaoLoginButton from './KakaoLoginButton';
+import GoogleLoginButton from './GoogleLoginButton';
 // import useLoginRedirect from '../../(pages)/hooks/useLoginRedirect';
 
 function Login() {
@@ -51,9 +48,14 @@ function Login() {
       loginMenu={
         <>
           <GoogleLoginButton onClick={() => dispatch<any>(getGoogleLogin())} />
+          <AppleLoginButton onClick={() => alert('아... 애플유저시구나...')} />
+          <NaverLoginButton onClick={() => alert('그런기능은 없어용 ~')} />
           <KakaoLoginButton onClick={() => dispatch<any>(getKaKaoLogin())} />
           <h6 className="text-md mb-2 text-gray-600"> or </h6>
-          <LoginFormChangeButton text="Sign with Account" onClick={() => dispatch(setIdPasswordLoginFormView(true))} />
+          <LoginFormChangeButton
+            text="Sign in with Account"
+            onClick={() => dispatch(setIdPasswordLoginFormView(true))}
+          />
         </>
       }
       loginForm={
