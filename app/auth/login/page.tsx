@@ -16,13 +16,12 @@ import {
 } from '../../UI';
 import { useEffect } from 'react';
 import { setIsSignup } from '../../redux/slices/signupSlice';
-import useLoginSteps from '../../(pages)/hooks/useLoginSteps';
+// import useLoginRedirect from '../../(pages)/hooks/useLoginRedirect';
 
 function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
-  useLoginSteps({ trigger: isLogin });
+  // useLoginRedirect();
 
   const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */

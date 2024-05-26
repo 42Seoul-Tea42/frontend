@@ -227,7 +227,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getLogout.fulfilled, state => {
-      state.steps.isLogin = false;
+      state = initialState;
     });
     builder.addCase(getLogout.rejected, (state, action) => {
       state.loading = false;

@@ -4,12 +4,13 @@ import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { getLogin } from '../../redux/slices/loginSlice';
 
-type LoginStepsProps = {
-  trigger: any;
-};
+// type LoginStepsProps = {
+// trigger: any;
+// };
 
-function useLoginSteps({ trigger }: LoginStepsProps) {
+function useLoginRedirect() {
   const steps = useSelector((state: RootState) => state.loginSlice.steps);
+  const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
   const router = useRouter();
   useEffect(() => {
     // 로그인 단계에 따라 리다이렉트
@@ -32,7 +33,7 @@ function useLoginSteps({ trigger }: LoginStepsProps) {
 
     const nextStep = redirectToNextStep();
     router.push(nextStep);
-  }, [trigger]);
+  }, [isLogin]);
 }
 
-export default useLoginSteps;
+export default useLoginRedirect;

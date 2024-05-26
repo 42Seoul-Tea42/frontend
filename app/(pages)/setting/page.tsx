@@ -34,7 +34,7 @@ const Setting: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-green-50">
       <div className="flex-col justify-center mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
         <div>
           <ImageUploadGrid />

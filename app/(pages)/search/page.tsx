@@ -19,7 +19,7 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-green-50">
       <div className="w-full">
         <FilterControlDrawer shape={<DirectionSVG direction="down" size="6" />} onSubmit={submitFilterSearch} />
         <SearchResultTable

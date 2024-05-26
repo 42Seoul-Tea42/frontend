@@ -19,7 +19,7 @@ const HomeNavBar: React.FC = () => {
 
   // 로그인 유저 체크 훅
   const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
-  // useLoginSteps({ trigger: isLogin });
+  // useLoginRedirect({ trigger: isLogin });
 
   const dispatch = useDispatch();
   const router = useRouter();

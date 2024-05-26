@@ -14,7 +14,7 @@ interface CardFormProps {
  */
 const CardForm: React.FC<CardFormProps> = ({ onSubmit, subject, inputs, button }) => {
   return (
-    <div className="w-full h-screen flex justify-center">
+    <div className="w-full h-screen flex justify-center bg-green-50">
       <div className="flex flex-col items-center justify-center">
         <form
           onSubmit={event => {
