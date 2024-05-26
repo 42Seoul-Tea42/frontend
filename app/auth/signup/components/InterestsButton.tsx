@@ -20,7 +20,7 @@ const InterestsButton: React.FC<InterestsButtonProps> = ({ text, onClick, value 
         borderImage: interests?.includes(value) ? 'linear-gradient(45deg, #FFD700, #FF8C00) 1' : ''
       }}
     >
-      <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+      <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
         {text}
       </span>
     </button>

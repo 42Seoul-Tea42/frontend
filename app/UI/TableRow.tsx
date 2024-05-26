@@ -5,8 +5,8 @@ type RowProps = {
 };
 
 const TableRow = ({ head, columns, option }: RowProps) => (
-  <tr className="text-lg bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-    <td className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+  <tr className="text-lg bg-white border-b hover:bg-gray-50">
+    <td className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
       <img className="w-10 h-10 rounded-full" src={option?.image} alt={`${head} image`} />
       <div className="ps-3">
         <div className="text-base font-semibold">{head}</div>

@@ -12,12 +12,8 @@ interface StarButtonProps {
 const StarButton: React.FC<StarButtonProps> = ({ star, isFilled }) => {
   const dispatch = useDispatch();
 
-  const handleStarClick = () => {
-    dispatch(setSearchParamsRating(star));
-  };
-
   return (
-    <button onClick={handleStarClick}>
+    <button onClick={() => dispatch(setSearchParamsRating(star))}>
       <StarSVG color={isFilled ? 'yellow' : 'gray'} />
     </button>
   );

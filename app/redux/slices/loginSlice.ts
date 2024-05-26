@@ -253,6 +253,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getResetPasswordEmail.fulfilled, state => {
+      // test
       // none
     });
     builder.addCase(getResetPasswordEmail.rejected, (state, action) => {

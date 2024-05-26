@@ -32,16 +32,12 @@ const Emoji = () => {
     <div className="w-full h-screen flex justify-center items-center">
       <form
         onSubmit={submitEmojiPreference}
-        className="min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        className="min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow"
       >
         <h5 className="text-lg font-semibold mb-10">
           선호하는 이모티콘을 골라주세요.
-          <span className="bg-red-100 text-red-800 ml-3 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-500">
-            좋아요
-          </span>
-          <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-500">
-            싫어요
-          </span>
+          <span className="bg-red-100 text-red-800 ml-3 text-xs font-medium me-2 px-2.5 py-0.5 rounded">좋아요</span>
+          <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">싫어요</span>
         </h5>
         <EmojiGridList />
         <div className="mt-10"></div>

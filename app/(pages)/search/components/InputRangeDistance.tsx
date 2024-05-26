@@ -6,19 +6,14 @@ const InputRangeDistance: React.FC = () => {
   const distance = useSelector((state: RootState) => state.searchSlice.searchParams.distance);
   const dispatch = useDispatch();
 
-  const dispatchSearchParamDistance = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value);
-    dispatch(setSearchParamsDistance(newValue));
-  };
-
   return (
     <div className="relative mt-4 mb-4">
       <input
         id="labels-range-input"
         type="range"
         value={distance}
-        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-        onChange={dispatchSearchParamDistance}
+        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+        onChange={e => dispatch(setSearchParamsDistance(parseInt(e.target.value)))}
         min="1"
         max="100"
         step={1}
@@ -29,8 +24,8 @@ const InputRangeDistance: React.FC = () => {
       >
         {distance}km
       </div>
-      <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">1km</span>
-      <span className="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">100km</span>
+      <span className="text-sm text-gray-500 absolute start-0 -bottom-6">1km</span>
+      <span className="text-sm text-gray-500 absolute end-0 -bottom-6">100km</span>
     </div>
   );
 };

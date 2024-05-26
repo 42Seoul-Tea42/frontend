@@ -27,10 +27,10 @@ const EmojiGridList: React.FC = () => {
   return (
     <div className="max-w-96 relative">
       <div className="flex mb-5 justify-center">
-        <span className="bg-red-100 text-red-800 ml-3 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-500">
+        <span className="bg-red-100 text-red-800 ml-3 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
           좋아요 마우스 왼쪽 클릭
         </span>
-        <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-500">
+        <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
           싫어요 마우스 오른쪽 클릭
         </span>
       </div>

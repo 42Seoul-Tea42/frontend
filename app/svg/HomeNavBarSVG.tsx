@@ -1,7 +1,7 @@
 export const MessageSVG: React.FC = () => {
   return (
     <svg
-      className="w-6 h-6 dark:text-white"
+      className="w-6 h-6"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -24,7 +24,7 @@ export const MessageSVG: React.FC = () => {
 export const SearchSVG: React.FC = () => {
   return (
     <svg
-      className="w-6 h-6 dark:text-white"
+      className="w-6 h-6"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -43,7 +43,7 @@ export const SearchSVG: React.FC = () => {
 export const HomeFillSVG: React.FC = () => {
   return (
     <svg
-      className="w-6 h-6 dark:text-white"
+      className="w-6 h-6"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -61,7 +61,7 @@ export const HomeFillSVG: React.FC = () => {
 export const StarFullSVG: React.FC = () => {
   return (
     <svg
-      className="w-6 h-6 dark:text-white"
+      className="w-6 h-6"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -75,7 +75,7 @@ export const StarFullSVG: React.FC = () => {
 export const HistorySVG: React.FC = () => {
   return (
     <svg
-      className="w-6 h-6 dark:text-white"
+      className="w-6 h-6"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
@@ -89,7 +89,7 @@ export const HistorySVG: React.FC = () => {
 export const UserSVG: React.FC = () => {
   return (
     <svg
-      className="w-6 h-6 dark:text-white"
+      className="w-6 h-6"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

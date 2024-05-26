@@ -13,7 +13,7 @@ function AccordionOpenButton({ title, index, isOpen, onClick }: AccordionOpenBut
       type="button"
       className={`${
         isOpen[index] && 'border-2 border-gray-300'
-      } flex max-h-12 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3`}
+      } flex max-h-12 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl  hover:bg-gray-100  gap-3`}
       data-accordion-target={`#accordion-collapse-body-${index}`}
       aria-expanded={isOpen[index] ? 'true' : 'false'}
       aria-controls={`accordion-collapse-body-${index}`}
