@@ -58,10 +58,14 @@ export const HomeFillSVG: React.FC = () => {
   );
 };
 
-export const StarFullSVG: React.FC<{ color: string; width?: string; height?: string }> = ({ color, width, height }) => {
+export const StarFullSVG: React.FC<{ color?: string; width?: string; height?: string }> = ({
+  color,
+  width,
+  height
+}) => {
   return (
     <svg
-      className={`w-${width} h-${height} text-${color}-400`}
+      className={`w-6 h-6 w-${width} h-${height} text-${color}-400`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

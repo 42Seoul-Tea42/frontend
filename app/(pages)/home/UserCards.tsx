@@ -26,7 +26,7 @@ function UserCards({ users }: UserCardsProps) {
           {users.length > 0 ? (
             users.map((user: any, index: Key) => (
               <div key={index}>
-                <div className="shadow-xl rounded-xl border-4 border-gray-300 w-[200px]">
+                <div className="shadow-xl rounded-xl border-4 border-gray-100 w-[200px]">
                   <div className="relative w-48 h-48 rounded-t-xl">
                     {/* 넘길 유저의 아이디가 필요해서 해당 컴포넌트에서 구현해야함 */}
                     <div onClick={() => clickUserDetail(user.identity.id)}>
