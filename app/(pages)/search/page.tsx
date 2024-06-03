@@ -14,14 +14,13 @@ const Search: React.FC = () => {
   const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
   const dispatch = useDispatch();
 
-  const submitFilterSearch = () => {
-    dispatch<any>(postSearch());
-  };
-
   return (
     <div className="flex h-screen justify-center bg-green-50">
       <div className="w-full mr-10">
-        <FilterControlDrawer shape={<DirectionSVG direction="down" size="6" />} onSubmit={submitFilterSearch} />
+        <FilterControlDrawer
+          shape={<DirectionSVG direction="down" size="6" />}
+          onSubmit={() => dispatch<any>(postSearch())}
+        />
         <div className="ml-10">
           <SearchResultTable
             setSortBy={setSortBy}

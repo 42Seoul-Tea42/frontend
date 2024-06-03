@@ -15,8 +15,8 @@ const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit, sha
 
   // 드로어 폼 제출시 동작정의
   const submitDrawer = () => {
-    setIsDrawerOpen(false);
     onSubmit();
+    setIsDrawerOpen(false);
   };
 
   return (
