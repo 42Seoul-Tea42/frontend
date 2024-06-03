@@ -5,7 +5,6 @@ import { Fancy } from '../interface/enum';
 
 interface ProfileInquiryState {
   user: UserProfileInquirySet;
-  selectedUserId: number;
   profileModalVisible: boolean;
   loading: boolean;
   error: string | null;
@@ -37,7 +36,6 @@ const initialState: ProfileInquiryState = {
       photos: []
     }
   },
-  selectedUserId: 0,
   profileModalVisible: false,
   loading: false,
   error: null
@@ -73,9 +71,6 @@ const profileInquirySlice = createSlice({
   reducers: {
     setProfileModalVisible: (state, action: PayloadAction<boolean>) => {
       state.profileModalVisible = action.payload;
-    },
-    setSelectedUserId: (state, action: PayloadAction<number>) => {
-      state.selectedUserId = action.payload;
     }
   },
   extraReducers: builder => {
@@ -120,7 +115,7 @@ const profileInquirySlice = createSlice({
   }
 });
 
-export const { setProfileModalVisible, setSelectedUserId } = profileInquirySlice.actions;
+export const { setProfileModalVisible } = profileInquirySlice.actions;
 export const extraReducers = profileInquirySlice.reducer;
 
 export default profileInquirySlice.reducer;

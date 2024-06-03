@@ -1,7 +1,7 @@
 import { Key } from 'react';
 import UserCardPhoto from './UserCardPhoto';
 import { CardsSkeleton, FancyButton, UserCardGrid } from '../../UI';
-import { setProfileModalVisible, setSelectedUserId } from '../../redux/slices/profileInquirySlice';
+import { getProfileDetail, setProfileModalVisible, setSelectedUserId } from '../../redux/slices/profileInquirySlice';
 import { useDispatch } from 'react-redux';
 import { patchFancy } from '../../redux/slices/fancySlice';
 
@@ -13,9 +13,10 @@ type UserCardsProps = {
 function UserCards({ users }: UserCardsProps) {
   const dispatch = useDispatch();
 
-  const clickUserDetail = (userId: number) => {
+  // 유저 상세 조회 클릭시 동작
+  const clickUserDetail = (userId: string) => {
     dispatch(setProfileModalVisible(true));
-    dispatch(setSelectedUserId(userId));
+    dispatch<any>(getProfileDetail(userId));
   };
 
   return (

@@ -9,17 +9,11 @@ import { BlueHyperLink, ProfileDetailModalContents } from '../../UI';
 import { blockUser, getProfileDetail, reportUser } from '../../redux/slices/profileInquirySlice';
 
 const ProfileDetailModal: React.FC = () => {
-  const userId = useSelector((state: RootState) => state.profileInquirySlice.selectedUserId);
   const dispatch = useDispatch();
   // const user = useSelector((state: RootState) => state.profileInquirySlice.user);
 
-  // 받아온 유저 데이터로 변경하기
+  // test_받아온 유저 데이터로 변경하기
   const user = usersInquirySetDummy[1];
-
-  // 서버에서 아이디기반으로 데이터 요청하는 코드로 변경하기
-  useEffect(() => {
-    dispatch<any>(getProfileDetail('1'));
-  }, []);
 
   return (
     <ProfileDetailModalContents
