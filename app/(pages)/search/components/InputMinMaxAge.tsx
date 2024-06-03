@@ -52,7 +52,7 @@ const InputMinMaxAge = () => {
             className="absolute pointer-events-visiblePainted appearance-none z-20 h-2 w-full opacity-0 cursor-pointer"
           />
           <div className="relative z-10 h-2">
-            <div className="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-800"></div>
+            <div className="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
 
             <div
               className="absolute z-30 top-0 bottom-0 rounded-md bg-green-400"

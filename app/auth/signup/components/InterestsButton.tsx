@@ -13,7 +13,7 @@ const InterestsButton: React.FC<InterestsButtonProps> = ({ text, onClick, value 
   return (
     <button
       type="button"
-      className={`relative inline-flex justify-center items-center m-1 rounded-lg ${
+      className={`relative inline-flex justify-center items-center m-1 rounded-lg border ${
         interests.includes(value) ? 'text-green-400' : ''
       }`}
       onClick={onClick}

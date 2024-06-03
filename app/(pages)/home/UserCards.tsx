@@ -1,7 +1,7 @@
 import { Key } from 'react';
 import UserCardPhoto from './UserCardPhoto';
 import { CardsSkeleton, FancyButton, UserCardGrid } from '../../UI';
-import { getProfileDetail, setProfileModalVisible, setSelectedUserId } from '../../redux/slices/profileInquirySlice';
+import { getProfileDetail, setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
 import { useDispatch } from 'react-redux';
 import { patchFancy } from '../../redux/slices/fancySlice';
 
