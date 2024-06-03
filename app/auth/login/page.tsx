@@ -13,12 +13,13 @@ import NaverLoginButton from './NaverLoginButton';
 import AppleLoginButton from './AppleLoginButton';
 import KakaoLoginButton from './KakaoLoginButton';
 import GoogleLoginButton from './GoogleLoginButton';
+import useLoginRedirect from '../../(pages)/hooks/useLoginRedirect';
 // import useLoginRedirect from '../../(pages)/hooks/useLoginRedirect';
 
 function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
-  // useLoginRedirect();
+  useLoginRedirect();
 
   const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
