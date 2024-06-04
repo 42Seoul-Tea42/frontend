@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
 import axiosInstance from '@/api/axios';
+import { getLogout } from './loginSlice';
 
 interface SuggestionState {
   users: UserProfileInquirySet[];
@@ -37,6 +38,17 @@ const suggestionSlice = createSlice({
     builder.addCase(getSuggestionUsers.rejected, state => {
       state.loading = false;
       state.error = 'error';
+    });
+
+    // 로그아웃
+    builder.addCase(getLogout.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getLogout.fulfilled, () => initialState);
+    builder.addCase(getLogout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
     });
   }
 });

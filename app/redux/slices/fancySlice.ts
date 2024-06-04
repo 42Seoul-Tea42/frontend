@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder }
 import { UserPublicSet } from '../interface';
 import axiosInstance from '@/api/axios';
 import { Fancy } from '../interface/enum';
+import { getLogout } from './loginSlice';
 
 interface FancyState {
   users: UserPublicSet[];
@@ -68,7 +69,6 @@ const fancySlice = createSlice({
         if (user.identity.id !== targetId) {
           return user;
         }
-
         switch (user.another.fancy) {
           case Fancy.SEND:
           case Fancy.CONN:
@@ -83,7 +83,6 @@ const fancySlice = createSlice({
         }
         return user;
       });
-
       state.users = updateUsers;
       state.loading = false;
       state.fancyNoti = true;
@@ -91,6 +90,17 @@ const fancySlice = createSlice({
     builder.addCase(patchFancy.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
+    });
+
+    // 로그아웃
+    builder.addCase(getLogout.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getLogout.fulfilled, () => initialState);
+    builder.addCase(getLogout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
     });
   }
 });

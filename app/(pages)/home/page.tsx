@@ -42,7 +42,7 @@ function Home() {
     <MainContentsArea
       filter={
         <FilterControlDrawer
-          shape={<p className="text-lg text-gray-500 font-thin">필터링</p>}
+          shape={<p className="text-lg text-gray-500 font-thin">필터</p>}
           onSubmit={() => onFilter()}
         />
       }

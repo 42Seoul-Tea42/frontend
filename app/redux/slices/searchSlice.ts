@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
 import axiosInstance from '@/api/axios';
+import { getLogout } from './loginSlice';
 
 interface SearchParams {
   minAge: number;
@@ -80,6 +81,17 @@ const fancySlice = createSlice({
       state.users = [...state.users, ...action.payload.profiles];
     });
     builder.addCase(postSearch.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 로그아웃
+    builder.addCase(getLogout.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getLogout.fulfilled, () => initialState);
+    builder.addCase(getLogout.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

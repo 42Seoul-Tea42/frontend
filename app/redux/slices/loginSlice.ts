@@ -229,10 +229,7 @@ const loginSlice = createSlice({
     builder.addCase(getLogout.fulfilled, state => {
       state = initialState;
     });
-    builder.addCase(getLogout.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
+    builder.addCase(getLogout.rejected, () => initialState);
 
     // 회원탈퇴
     builder.addCase(deleteUser.pending, state => {

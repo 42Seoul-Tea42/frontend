@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { AccountState } from './accountSlice';
+import { getLogout } from './loginSlice';
 
 interface SignupState {
   validation: {
@@ -148,6 +149,17 @@ const signupSlice = createSlice({
       state.loading = false;
       state.error = '아이디가 유효하지 않습니다.';
       state.validation.isIdDuplicateChecked = false;
+    });
+
+    // 로그아웃
+    builder.addCase(getLogout.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getLogout.fulfilled, () => initialState);
+    builder.addCase(getLogout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
     });
   }
 });
