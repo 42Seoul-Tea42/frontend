@@ -4,7 +4,7 @@ import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PasswordInput: React.FC = () => {
-  const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
+  const password = useSelector((state: RootState) => state.accountSlice.user.password);
   const dispatch = useDispatch();
 
   return (

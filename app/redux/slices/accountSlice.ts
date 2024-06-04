@@ -28,6 +28,20 @@ export const getMyAccount = createAsyncThunk('accountSlice/getMyAccount', async 
   return response.data;
 });
 
+// 유저 프로필 정보 서버로 전송
+export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
+  const state = getState() as { accountSlice: AccountState };
+  const user = state.accountSlice.user;
+  const response = await axiosInstance.patch('/user/profile', {
+    pictures: user.pictures // backend: 배열형태로 보내주세요.
+    // gender: parseInt(user.ageGender.gender), // backend: 숫자형태로 보내주세요.
+    // taste: parseInt(user.profile.sexualPreference), // backend: 숫자형태로 보내주세요.
+    // bio: user.profile.introduction,
+    // tags: user.profile.interests
+  });
+  return response.status;
+});
+
 // 비밀번호 재설정하기
 export const postResetPassword = createAsyncThunk(
   'accountSlice/postResetPassword',
@@ -52,7 +66,7 @@ const accountSlice = createSlice({
       state.user.loginId = action.payload;
     },
     setAccountPassword: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.account.password = action.payload;
+      state.user.password = action.payload;
     },
     setAccountGender: (state: AccountState, action: PayloadAction<string>) => {
       state.user.gender = action.payload;
@@ -80,9 +94,10 @@ const accountSlice = createSlice({
       state.user.introduction = action.payload;
     },
     addAccountPhotos: (state: AccountState, action: PayloadAction<[]>) => {
-      if (state.user.photo.photos.length >= 4) return;
-      const uploads = action.payload.slice(0, 4);
-      state.user.picture = [...state.user.picture, ...uploads];
+      // if (state.user.photo.photos.length >= 4) return;
+      // const uploads = action.payload.slice(0, 4);
+      // state.user.picture = [...state.user.picture, ...uploads];
+      state.user.picture = action.payload;
     },
     removeAccountPhotos: (state: AccountState, action: PayloadAction<number>) => {
       state.user.picture = state.user.photo.photos.filter((_, index) => index !== action.payload);

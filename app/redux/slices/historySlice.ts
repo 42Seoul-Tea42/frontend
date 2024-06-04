@@ -4,7 +4,7 @@ import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
 
 interface HistoryState {
-  users: UserPublicSet[];
+  users: any[];
   loading: boolean;
   error: string | null;
   historyNoti: boolean;

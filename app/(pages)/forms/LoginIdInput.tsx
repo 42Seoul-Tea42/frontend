@@ -9,7 +9,7 @@ interface LoginIdInputProps {
 }
 
 function LoginIdInput({ extended, addJSX }: LoginIdInputProps) {
-  const loginId = useSelector((state: RootState) => state.accountSlice.user.identity.loginId);
+  const loginId = useSelector((state: RootState) => state.accountSlice.user.loginId);
   const dispatch = useDispatch();
   return (
     <div>

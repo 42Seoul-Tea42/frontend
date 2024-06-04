@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
-import { AccountState } from './accountSlice';
+import { AccountState, patchUserProfile } from './accountSlice';
 
 /** 서버에서 받아오는 유저의 인증단계 */
 export type Steps = {
@@ -36,8 +36,8 @@ export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { ge
   const state = getState() as { accountSlice: AccountState };
   const { user } = state.accountSlice;
   const response = await axiosInstance.post('/user/login', {
-    login_id: user.identity.loginId,
-    pw: user.account.password
+    login_id: user.loginId,
+    pw: user.password
   });
   return response.data;
 });
@@ -69,20 +69,6 @@ export const getGoogleLogin = createAsyncThunk('loginSlice/getGoogleLogin', asyn
 // 토큰으로 이메일 인증받기
 export const getVerifyEmail = createAsyncThunk('loginSlice/getVerifyEmail', async (token: string) => {
   await axiosInstance.get(`/user/verify-email?key=${token}`);
-});
-
-// 유저 프로필 정보 서버로 전송
-export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
-  const state = getState() as { accountSlice: AccountState };
-  const user = state.accountSlice.user;
-  const response = await axiosInstance.patch('/user/profile', {
-    pictures: user.photo.photos, // backend: 배열형태로 보내주세요.
-    gender: parseInt(user.ageGender.gender), // backend: 숫자형태로 보내주세요.
-    taste: parseInt(user.profile.sexualPreference), // backend: 숫자형태로 보내주세요.
-    bio: user.profile.introduction,
-    tags: user.profile.interests
-  });
-  return response.status;
 });
 
 // 로그아웃 처리

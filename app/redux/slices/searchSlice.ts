@@ -12,7 +12,7 @@ interface SearchParams {
 }
 
 interface SearchState {
-  users: UserProfileInquirySet[];
+  users: any[];
   searchParams: SearchParams;
   loading: boolean;
   error: string | null;

@@ -5,7 +5,7 @@ import { Fancy } from '../interface/enum';
 import { getLogout } from './loginSlice';
 
 interface FancyState {
-  users: UserPublicSet[];
+  users: any[];
   fancyNoti: boolean;
   loading: boolean;
   error: string | null;
@@ -41,17 +41,17 @@ export const patchUnFancy = createAsyncThunk('fancySlice/patchUnFancy', async (t
 });
 
 const changeFancyState = (user: any, targetId: any) => {
-  if (user.identity.id !== targetId) {
+  if (user.id !== targetId) {
     return user;
   }
-  switch (user.another.fancy) {
+  switch (user.fancy) {
     case Fancy.SEND:
     case Fancy.CONN:
-      user.another.fancy = Fancy.NONE;
+      user.fancy = Fancy.NONE;
       break;
     case Fancy.NONE:
     case Fancy.RECV:
-      user.another.fancy = Fancy.SEND;
+      user.fancy = Fancy.SEND;
       break;
     default:
       break;

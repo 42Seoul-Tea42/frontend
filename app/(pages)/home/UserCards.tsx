@@ -31,7 +31,7 @@ function UserCards({ users }: UserCardsProps) {
                   <div className="relative w-48 h-48 rounded-t-xl">
                     {/* 넘길 유저의 아이디가 필요해서 해당 컴포넌트에서 구현해야함 */}
                     <div onClick={() => clickUserDetail(user.id)}>
-                      <UserCardPhoto src={user.picture} alt={user.name} />
+                      {user.pictures && <UserCardPhoto src={user.pictures} alt={user.name} />}
                     </div>
                   </div>
                   <div className="w-48 h-12 bg-white rounded-b-lg border-t-2 p-1 pl-2">

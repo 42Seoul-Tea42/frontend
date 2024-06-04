@@ -5,38 +5,14 @@ import { Fancy } from '../interface/enum';
 import { getLogout } from './loginSlice';
 
 interface ProfileInquiryState {
-  user: UserProfileInquirySet;
+  user: any;
   profileModalVisible: boolean;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ProfileInquiryState = {
-  user: {
-    identity: {
-      id: 0,
-      loginId: '',
-      firstname: '',
-      lastname: ''
-    },
-    profile: {
-      interests: [],
-      rating: 0,
-      sexualPreference: '',
-      introduction: ''
-    },
-    another: {
-      fancy: Fancy.NONE,
-      distance: 0
-    },
-    ageGender: {
-      age: 0,
-      gender: ''
-    },
-    photo: {
-      photos: []
-    }
-  },
+  user: {},
   profileModalVisible: false,
   loading: false,
   error: null
@@ -53,7 +29,7 @@ export const reportUser = createAsyncThunk('profileInquirySlice/reportUser', asy
   const response = await axiosInstance.post('/user/report', {
     target_id: userId,
     reason: 0,
-    reason_opt: '몰라~'
+    reason_opt: '부정적인 단어 사용'
   });
   return response.data;
 });
