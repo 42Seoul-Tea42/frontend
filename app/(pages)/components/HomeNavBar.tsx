@@ -8,6 +8,7 @@ import { RootState } from '@/redux/store';
 import requestUserLocation from '@/api/location';
 import { HomeNavBarButton } from '@/UI';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
+import useLoginRedirect from '../hooks/useLoginRedirect';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -19,7 +20,7 @@ const HomeNavBar: React.FC = () => {
 
   // 로그인 유저 체크 훅
   const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
-  // useLoginRedirect({ trigger: isLogin });
+  useLoginRedirect();
 
   const dispatch = useDispatch();
   const router = useRouter();

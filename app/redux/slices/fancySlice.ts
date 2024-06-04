@@ -33,6 +33,32 @@ export const patchFancy = createAsyncThunk('fancySlice/patchFancy', async (targe
   return targetId;
 });
 
+export const patchUnFancy = createAsyncThunk('fancySlice/patchUnFancy', async (targetId: number) => {
+  const response = await axiosInstance.patch('/history/unfancy', {
+    target_id: Number(targetId)
+  });
+  return targetId;
+});
+
+const changeFancyState = (user: any, targetId: any) => {
+  if (user.identity.id !== targetId) {
+    return user;
+  }
+  switch (user.another.fancy) {
+    case Fancy.SEND:
+    case Fancy.CONN:
+      user.another.fancy = Fancy.NONE;
+      break;
+    case Fancy.NONE:
+    case Fancy.RECV:
+      user.another.fancy = Fancy.SEND;
+      break;
+    default:
+      break;
+  }
+  return user;
+};
+
 const fancySlice = createSlice({
   name: 'fancySlice',
   initialState,
@@ -65,29 +91,28 @@ const fancySlice = createSlice({
     });
     builder.addCase(patchFancy.fulfilled, (state, action: PayloadAction<any>) => {
       const targetId = action.payload;
-      const updateUsers = state.users.map(user => {
-        if (user.identity.id !== targetId) {
-          return user;
-        }
-        switch (user.another.fancy) {
-          case Fancy.SEND:
-          case Fancy.CONN:
-            user.another.fancy = Fancy.NONE;
-            break;
-          case Fancy.NONE:
-          case Fancy.RECV:
-            user.another.fancy = Fancy.SEND;
-            break;
-          default:
-            break;
-        }
-        return user;
-      });
+      const updateUsers = state.users.map(user => changeFancyState(user, targetId));
       state.users = updateUsers;
       state.loading = false;
       state.fancyNoti = true;
     });
     builder.addCase(patchFancy.rejected, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    // 팬시취소
+    builder.addCase(patchUnFancy.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(patchUnFancy.fulfilled, (state, action: PayloadAction<any>) => {
+      const targetId = action.payload;
+      const updateUsers = state.users.map(user => changeFancyState(user, targetId));
+      state.users = updateUsers;
+      state.loading = false;
+    });
+    builder.addCase(patchUnFancy.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
     });

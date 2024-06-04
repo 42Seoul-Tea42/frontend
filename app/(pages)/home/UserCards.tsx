@@ -3,7 +3,8 @@ import UserCardPhoto from './UserCardPhoto';
 import { useDispatch } from 'react-redux';
 import { getProfileDetail, setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
 import { CardsSkeleton, FancyButton, UserCardGrid } from '@/UI';
-import { patchFancy } from '@/redux/slices/fancySlice';
+import { patchFancy, patchUnFancy } from '@/redux/slices/fancySlice';
+import { Fancy } from '@/redux/interface/enum';
 
 type UserCardsProps = {
   // Add your prop types here
@@ -41,7 +42,11 @@ function UserCards({ users }: UserCardsProps) {
                       {/* {fancyButton} */}
                       <FancyButton
                         fancyState={user.another.fancy}
-                        onClick={() => dispatch<any>(patchFancy(user.identity.id))}
+                        onClick={
+                          user.another.fancy === Fancy.NONE || Fancy.RECV
+                            ? () => dispatch<any>(patchFancy(user.identity.id))
+                            : () => dispatch<any>(patchUnFancy(user.identity.id))
+                        }
                       />
                     </div>
                   </div>

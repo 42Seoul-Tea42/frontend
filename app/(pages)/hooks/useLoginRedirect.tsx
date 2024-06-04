@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/redux/store';
 
+// legacy test
 // type LoginStepsProps = {
 // trigger: any;
 // };
@@ -30,8 +31,7 @@ function useLoginRedirect() {
       return '/home';
     };
 
-    const nextStep = redirectToNextStep();
-    router.push(nextStep);
+    router.push(redirectToNextStep());
   }, [isLogin]);
 }
 
