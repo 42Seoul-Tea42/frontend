@@ -4,7 +4,7 @@ import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
 
 interface SuggestionState {
-  users: UserProfileInquirySet[];
+  users: [];
   loading: boolean;
   error: string | null;
 }
@@ -31,9 +31,7 @@ const suggestionSlice = createSlice({
     });
     builder.addCase(getSuggestionUsers.fulfilled, (state, action: PayloadAction<any>) => {
       state.loading = false;
-      if (action.payload.length > 0) {
-        state.users = [...state.users, ...action.payload];
-      }
+      state.users = action.payload.profiles;
     });
     builder.addCase(getSuggestionUsers.rejected, state => {
       state.loading = false;

@@ -20,15 +20,13 @@ const useFilter = (users: any[]): any[] => {
 
     const filetered = [...users].filter(user => {
       // 나이 범위가 필터에 포함되어야함
-      const isAgeMatch = user.ageGender.age >= params.minAge && user.ageGender.age <= params.maxAge;
+      const isAgeMatch = user.age >= params.minAge && user.age <= params.maxAge;
       // 유저가 필터보다 가까워야함
-      const isDistanceMatch = user.another.distance <= params.distance;
+      const isDistanceMatch = user.distance <= params.distance;
       // 유저의 등급이 필터보다 높아야함
-      const isRatingMatch = user.profile.rating >= params.rating;
+      const isRatingMatch = user.rating >= params.rating;
       // 유저의 관심사가 필터에 포함되어야함
-      const isInterestMatch =
-        user.profile.interests.length === 0 ||
-        _.some(user.profile.interests, interest => _.includes(params.interests, interest));
+      const isInterestMatch = user.tags.length === 0 || _.some(user.tags, tag => _.includes(params.interests, tag));
 
       return isAgeMatch && isDistanceMatch && isRatingMatch && isInterestMatch;
     });

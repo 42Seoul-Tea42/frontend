@@ -9,7 +9,7 @@ const ViewMessageForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasMoreMessages, setHasMoreMessages] = useState<boolean>(true);
   const messages: any[] = useSelector((state: RootState) => state.chattingSlice.messages);
-  const myId = useSelector((state: RootState) => state.accountSlice.user.identity.id);
+  const myId = useSelector((state: RootState) => state.accountSlice.user.id);
 
   const scrollToBottom = () => {
     if (containerRef.current) {
