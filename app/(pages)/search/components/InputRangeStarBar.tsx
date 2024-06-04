@@ -1,7 +1,7 @@
 import React from 'react';
 import StarButton from './StarButton';
-import { RootState } from '../../../redux/store';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 const StarRatingBar: React.FC = () => {
   const starValue: number = useSelector((state: RootState) => state.searchSlice.searchParams.rating);

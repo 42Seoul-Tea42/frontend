@@ -1,7 +1,7 @@
+import { setSearchParamsDistance } from '@/redux/slices/searchSlice';
+import { RootState } from '@/redux/store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setSearchParamsDistance } from '../../../redux/slices/searchSlice';
 
 const InputRangeDistance: React.FC = () => {
   const distance = useSelector((state: RootState) => state.searchSlice.searchParams.distance);

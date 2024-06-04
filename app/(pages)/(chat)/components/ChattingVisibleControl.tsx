@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { useCloseOnOutsideClick } from '../../hooks';
 import ChatButton from './ChatButton';
-import { setChattingNoti } from '../../../redux/slices/chattingSlice';
+import { setChattingNoti } from '@/redux/slices/chattingSlice';
+import { useCloseOnOutsideClick } from '@/(pages)/hooks';
 
 type ChatVisibleControlProps = {
   props: JSX.Element;

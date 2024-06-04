@@ -3,9 +3,9 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
-import { RootState } from '../../redux/store';
-import { getResendEmail, getVerifyEmail } from '../../redux/slices/loginSlice';
-import CardForm from '../../(pages)/forms/CardForm';
+import { RootState } from '@/redux/store';
+import { getResendEmail, getVerifyEmail } from '@/redux/slices/loginSlice';
+import CardForm from '@/(pages)/forms/CardForm';
 
 function CallBackAuth() {
   const params = useSearchParams();

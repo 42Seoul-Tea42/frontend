@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { usePathname, useRouter } from 'next/navigation';
-import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '../../svg';
-import HomeNavBarButton from '../../UI/HomeNavBarButton';
 import NavigationNoti from './NavigationNoti';
-import requestUserLocation from '../../api/location';
+import { RootState } from '@/redux/store';
+import requestUserLocation from '@/api/location';
+import { HomeNavBarButton } from '@/UI';
+import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

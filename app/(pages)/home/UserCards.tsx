@@ -1,9 +1,9 @@
 import { Key } from 'react';
 import UserCardPhoto from './UserCardPhoto';
-import { CardsSkeleton, FancyButton, UserCardGrid } from '../../UI';
-import { getProfileDetail, setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
 import { useDispatch } from 'react-redux';
-import { patchFancy } from '../../redux/slices/fancySlice';
+import { getProfileDetail, setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
+import { CardsSkeleton, FancyButton, UserCardGrid } from '@/UI';
+import { patchFancy } from '@/redux/slices/fancySlice';
 
 type UserCardsProps = {
   // Add your prop types here

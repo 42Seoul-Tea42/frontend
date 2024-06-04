@@ -1,7 +1,7 @@
+import { InputFloatingLabel } from '@/UI';
+import { setAccountEmail } from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import InputFloatingLabel from '../../UI/InputFloatingLabel';
-import { RootState } from '../../redux/store';
-import { setAccountEmail } from '../../redux/slices/accountSlice';
 
 interface EmailInputProps {
   extended: () => void;

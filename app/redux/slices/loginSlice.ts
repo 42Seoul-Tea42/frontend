@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosInstance from '../../api/axios';
+import axiosInstance from '@/api/axios';
 import { AccountState } from './accountSlice';
 
 /** 서버에서 받아오는 유저의 인증단계 */

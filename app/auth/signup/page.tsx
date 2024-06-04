@@ -1,12 +1,9 @@
 'use client';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
-import { SubmitButton } from '../../UI';
-import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '../../(pages)/forms';
 import {
   closeSignupError,
   getCheckDuplicateEmail,
@@ -14,10 +11,13 @@ import {
   postSignup,
   setIsEmailDuplicateChecked,
   setIsLoginIdDuplicateChecked
-} from '../../redux/slices/signupSlice';
-import CardForm from '../../(pages)/forms/CardForm';
-import ReEnterPassword from '../../(pages)/forms/ReEnterPassword';
-import Indicator from '../../(pages)/components/Indicator';
+} from '@/redux/slices/signupSlice';
+import CardForm from '@/(pages)/forms/CardForm';
+import ReEnterPassword from '@/(pages)/forms/ReEnterPassword';
+import Indicator from '@/(pages)/components/Indicator';
+import { RootState } from '@/redux/store';
+import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '@/(pages)/forms';
+import { SubmitButton } from '@/UI';
 
 const Signup: React.FC = () => {
   const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);

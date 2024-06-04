@@ -1,17 +1,14 @@
 'use client';
 
-import TagSelector from '../../signup/components/InterestsSelector';
-import SexualPreferenceRadioInput from '../../../(pages)/forms/SexualPreferenceRadioInput';
-import GenderRadioInput from '../../../(pages)/forms/GenderRadioInput';
-import IntroductionInput from '../../../(pages)/forms/IntroductionInput';
+import { GenderRadioInput, IntroductionInput, SexualPreferenceRadioInput } from '@/(pages)/forms';
+import ImageUploadGrid from '@/(pages)/setting/components/ImageUploadGrid';
+import { SubmitButton } from '@/UI';
+import InterestsSelector from '@/auth/signup/components/InterestsSelector';
+import { patchUserProfile } from '@/redux/slices/loginSlice';
+import { RootState } from '@/redux/store';
 import { useRouter } from 'next/navigation';
-import SubmitButton from '../../../UI/SubmitButton';
-import ImageUploadForm from '../../../(pages)/forms/ImageUploadForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { patchUserProfile } from '../../../redux/slices/loginSlice';
 import { useEffect } from 'react';
-import ImageUploadGrid from '../../../(pages)/setting/components/ImageUploadGrid';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Profile = () => {
   const router = useRouter();
@@ -59,7 +56,7 @@ const Profile = () => {
         <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-yellow-500/50">
           관심있는 분야를 선택해주세요.
         </h5>
-        <TagSelector />
+        <InterestsSelector />
         <div className="mb-5"></div>
         <SubmitButton text="Submit" />
       </form>

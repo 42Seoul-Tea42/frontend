@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
-import axiosInstance from '../../api/axios';
+import axiosInstance from '@/api/axios';
 import { Fancy } from '../interface/enum';
 
 interface ProfileInquiryState {

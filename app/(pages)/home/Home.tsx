@@ -1,5 +1,4 @@
 'use client';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useFilter, useSort } from '../hooks';
 import { useEffect, useState } from 'react';
@@ -14,7 +13,7 @@ import { UserProfileInquirySet } from '@/redux/interface';
 import { getSuggestionUsers } from '@/redux/slices/suggestionSlice';
 import { MainContentsArea } from '@/UI';
 
-function Home() {
+export function Home() {
   const dispatch = useDispatch();
   const users = useSelector((state: RootState) => state.suggestionSlice.users);
   // const users = usersInquirySetDummy;
@@ -74,5 +73,3 @@ function Home() {
     />
   );
 }
-
-export default Home;

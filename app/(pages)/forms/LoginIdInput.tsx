@@ -1,7 +1,7 @@
+import { InputFloatingLabel } from '@/UI';
+import { setAccountLoginId } from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import InputFloatingLabel from '../../UI/InputFloatingLabel';
-import { RootState } from '../../redux/store';
-import { setAccountLoginId } from '../../redux/slices/accountSlice';
 
 interface LoginIdInputProps {
   extended?: () => void;

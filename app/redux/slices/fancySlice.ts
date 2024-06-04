@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { UserPublicSet } from '../interface';
-import axiosInstance from '../../api/axios';
+import axiosInstance from '@/api/axios';
 import { Fancy } from '../interface/enum';
 
 interface FancyState {

@@ -1,7 +1,7 @@
+import { Gender } from '@/redux/interface/enum';
+import { setAccountSexualPreference } from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { setAccountSexualPreference } from '../../redux/slices/accountSlice';
-import { Gender } from '../../redux/interface/enum';
 
 const SexualPreferenceRadioInput: React.FC = () => {
   const sexualPreference = useSelector((state: RootState) => state.accountSlice.user.profile.sexualPreference);

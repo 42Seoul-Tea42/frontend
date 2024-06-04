@@ -1,18 +1,18 @@
 'use client';
 
-import { useDispatch } from 'react-redux';
-import { usersInquirySetDummy } from '../../UserDummy';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { MainContentsArea } from '../../UI';
+import { RootState } from '@/redux/store';
+import { getFancyUserList, setFancyNoti } from '@/redux/slices/fancySlice';
+import { MainContentsArea } from '@/UI';
+import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
-import { getFancyUserList, setFancyNoti } from '../../redux/slices/fancySlice';
-import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 
 function Fancy() {
   const dispatch = useDispatch();
-  // const users = useSelector((state: RootState) => state.suggestionSlice.users);
-  const users = usersInquirySetDummy;
+  const users = useSelector((state: RootState) => state.suggestionSlice.users);
+  // const users = usersInquirySetDummy;
 
   useEffect(() => {
     dispatch<any>(getFancyUserList(new Date()));

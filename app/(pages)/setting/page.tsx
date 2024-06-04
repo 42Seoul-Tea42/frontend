@@ -1,7 +1,13 @@
 'use client';
 
-import InterestsSelector from '../../auth/signup/components/InterestsSelector';
-import EmojiGridList from '../../auth/upload/emoji/EmojiGridList';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { patchUserProfile } from '@/redux/slices/loginSlice';
+import { AccordionItems, SubmitButton } from '@/UI';
+import InterestsSelector from '@/auth/signup/components/InterestsSelector';
+import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
+import ReEnterPassword from '../forms/ReEnterPassword';
 import ImageUploadGrid from './components/ImageUploadGrid';
 import {
   AgeInput,
@@ -11,13 +17,6 @@ import {
   SexualPreferenceRadioInput,
   UserNameInput
 } from '../forms';
-import { AccordionItems, SubmitButton } from '../../UI';
-import ReEnterPassword from '../forms/ReEnterPassword';
-import { useDispatch, useSelector } from 'react-redux';
-import { patchUserProfile } from '../../redux/slices/loginSlice';
-import { RootState } from '../../redux/store';
-import { useEffect } from 'react';
-import { getMyAccount } from '../../redux/slices/accountSlice';
 
 const Setting: React.FC = () => {
   const dispatch = useDispatch();

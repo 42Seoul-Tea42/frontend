@@ -1,7 +1,7 @@
+import { InputFloatingLabel } from '@/UI';
+import { setAccountPassword } from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { setAccountPassword, setAccountReEnterPassword } from '../../redux/slices/accountSlice';
-import InputFloatingLabel from '../../UI/InputFloatingLabel';
 
 const PasswordInput: React.FC = () => {
   const password = useSelector((state: RootState) => state.accountSlice.user.account.password);

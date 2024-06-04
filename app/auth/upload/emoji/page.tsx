@@ -2,11 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import EmojiGridList from './EmojiGridList';
-import SubmitButton from '../../../UI/SubmitButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import { useEffect } from 'react';
-import { patchUserProfile } from '../../../redux/slices/loginSlice';
+import { RootState } from '@/redux/store';
+import { patchUserProfile } from '@/redux/slices/loginSlice';
+import { SubmitButton } from '@/UI';
 
 const Emoji = () => {
   const router = useRouter();

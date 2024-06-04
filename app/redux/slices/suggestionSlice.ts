@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { UserProfileInquirySet } from '../interface';
-import axiosInstance from '../../api/axios';
+import axiosInstance from '@/api/axios';
 
 interface SuggestionState {
   users: UserProfileInquirySet[];

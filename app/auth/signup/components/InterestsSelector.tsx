@@ -1,7 +1,7 @@
-import { Interests } from '../../../redux/interface/submodules/utilInterface';
-import { setAccountInterests } from '../../../redux/slices/accountSlice';
+import { Interests } from '@/redux/interface/submodules/utilInterface';
 import InterestsButton from './InterestsButton';
 import { useDispatch } from 'react-redux';
+import { setAccountInterests } from '@/redux/slices/accountSlice';
 
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0) + str.slice(1).toLowerCase();

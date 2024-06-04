@@ -1,4 +1,4 @@
-import { ButtonType } from '../../redux/types';
+import { ButtonType } from '@/redux/types';
 
 function GoogleLoginButton({ onClick }: ButtonType) {
   return (

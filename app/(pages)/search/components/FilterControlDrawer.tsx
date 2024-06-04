@@ -1,9 +1,9 @@
 import InputRangeStarBar from './InputRangeStarBar';
 import InputRangeDistance from './InputRangeDistance';
 import InputMinMaxAge from './InputMinMaxAge';
-import useCloseOnOutsideClick from '../../hooks/useCloseOnOutsideClick';
-import InterestsSelector from '../../../auth/signup/components/InterestsSelector';
-import { DrawerItem, DrawerOpenButton, SubmitButton } from '../../../UI';
+import { DrawerItem, DrawerOpenButton, SubmitButton } from '@/UI';
+import { useCloseOnOutsideClick } from '@/(pages)/hooks';
+import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 
 type FilterControlDrawerProps = {
   onSubmit: () => void;

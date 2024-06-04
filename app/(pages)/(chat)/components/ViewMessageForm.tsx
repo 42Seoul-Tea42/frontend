@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import MessageItem from './MessageItem';
-import { RootState } from '../../../redux/store';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 const ViewMessageForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);

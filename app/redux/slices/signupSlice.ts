@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosInstance from '../../api/axios';
+import axiosInstance from '@/api/axios';
 import { AccountState } from './accountSlice';
 
 interface SignupState {

@@ -1,20 +1,18 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { setAccountLoginId, setAccountPassword } from '../../redux/slices/accountSlice';
-import { LoginForm } from '../../(pages)/forms';
 import LoginPageDetail from './LoginPageDetail';
-import { getGoogleLogin, getKaKaoLogin, postLogin, setIdPasswordLoginFormView } from '../../redux/slices/loginSlice';
-import { AllSignOptionButton, CreateAccountButton, BlueHyperLink, LoginFormChangeButton } from '../../UI';
+import { AllSignOptionButton, CreateAccountButton, BlueHyperLink, LoginFormChangeButton } from '@/UI';
 import { useEffect } from 'react';
-import { setIsSignup } from '../../redux/slices/signupSlice';
 import NaverLoginButton from './NaverLoginButton';
 import AppleLoginButton from './AppleLoginButton';
 import KakaoLoginButton from './KakaoLoginButton';
 import GoogleLoginButton from './GoogleLoginButton';
-import useLoginRedirect from '../../(pages)/hooks/useLoginRedirect';
-// import useLoginRedirect from '../../(pages)/hooks/useLoginRedirect';
+import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
+import { RootState } from '@/redux/store';
+import { setIsSignup } from '@/redux/slices/signupSlice';
+import { LoginForm } from '@/(pages)/forms';
+import { getGoogleLogin, getKaKaoLogin, postLogin, setIdPasswordLoginFormView } from '@/redux/slices/loginSlice';
 
 function Login() {
   const router = useRouter();

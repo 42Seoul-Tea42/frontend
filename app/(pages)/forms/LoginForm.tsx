@@ -1,8 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { BlueHyperLink, SubmitButton } from '../../UI';
 import LoginIdInput from './LoginIdInput';
+import { BlueHyperLink, SubmitButton } from '@/UI';
 import PasswordInput from './PasswordInput';
 
 interface LoginFormProps {

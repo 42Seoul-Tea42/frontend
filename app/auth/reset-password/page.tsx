@@ -1,15 +1,15 @@
 'use client';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { SubmitButton } from '../../UI';
-import { getResetPasswordEmail } from '../../redux/slices/loginSlice';
-import { RootState } from '../../redux/store';
-import { LoginIdInput, PasswordInput } from '../../(pages)/forms';
-import { postResetPassword, setAccountLoginId } from '../../redux/slices/accountSlice';
-import CardForm from '../../(pages)/forms/CardForm';
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import ReEnterPassword from '../../(pages)/forms/ReEnterPassword';
+import { RootState } from '@/redux/store';
+import CardForm from '@/(pages)/forms/CardForm';
+import { postResetPassword } from '@/redux/slices/accountSlice';
+import { LoginIdInput, PasswordInput } from '@/(pages)/forms';
+import ReEnterPassword from '@/(pages)/forms/ReEnterPassword';
+import { SubmitButton } from '@/UI';
+import { getResetPasswordEmail } from '@/redux/slices/loginSlice';
 
 function ResetPasswordDetail() {
   const dispatch = useDispatch();

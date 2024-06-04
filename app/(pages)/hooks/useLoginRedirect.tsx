@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
-import { getLogin } from '../../redux/slices/loginSlice';
+import { RootState } from '@/redux/store';
 
 // type LoginStepsProps = {
 // trigger: any;

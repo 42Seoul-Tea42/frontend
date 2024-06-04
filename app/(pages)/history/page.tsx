@@ -1,17 +1,17 @@
 'use client';
-import { useDispatch } from 'react-redux';
-import { usersInquirySetDummy } from '../../UserDummy';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { MainContentsArea } from '../../UI';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
-import { getHistoryUserList, setHistoryNoti } from '../../redux/slices/historySlice';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
+import { getHistoryUserList, setHistoryNoti } from '@/redux/slices/historySlice';
+import { RootState } from '@/redux/store';
+import { MainContentsArea } from '@/UI';
 
 function History() {
   const dispatch = useDispatch();
-  // const users = useSelector((state: RootState) => state.suggestionSlice.users);
-  const users = usersInquirySetDummy;
+  const users = useSelector((state: RootState) => state.suggestionSlice.users);
+  // const users = usersInquirySetDummy;
 
   useEffect(() => {
     dispatch<any>(getHistoryUserList(new Date()));

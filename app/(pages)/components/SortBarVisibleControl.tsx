@@ -1,4 +1,4 @@
-import { DirectionSVG } from '../../svg';
+import { DirectionSVG } from '@/svg';
 import { useCloseOnOutsideClick } from '../hooks';
 
 type SortBarVisibleControlProps = {

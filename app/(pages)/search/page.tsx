@@ -1,16 +1,16 @@
 'use client';
 
 import SearchResultTable from './components/SearchResultTable';
-import { usersInquirySetDummy } from '../../UserDummy';
 import FilterControlDrawer from './components/FilterControlDrawer';
-import { DirectionSVG } from '../../svg';
 import { useSort } from '../hooks';
-import { TableRow } from '../../UI';
-import { useDispatch } from 'react-redux';
-import { postSearch } from '../../redux/slices/searchSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { DirectionSVG } from '@/svg';
+import { postSearch } from '@/redux/slices/searchSlice';
+import { TableRow } from '@/UI';
 
 const Search: React.FC = () => {
-  const users = usersInquirySetDummy;
+  const users = useSelector((state: RootState) => state.searchSlice.users);
   const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
   const dispatch = useDispatch();
 

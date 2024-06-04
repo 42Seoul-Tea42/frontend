@@ -1,7 +1,7 @@
+import { InputFloatingLabel } from '@/UI';
+import { setAccountFirstname, setAccountLastname } from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { setAccountFirstname, setAccountLastname } from '../../redux/slices/accountSlice';
-import InputFloatingLabel from '../../UI/InputFloatingLabel';
 
 const UserNameInput: React.FC = () => {
   const firstname = useSelector((state: RootState) => state.accountSlice.user.identity.firstname);

@@ -1,9 +1,9 @@
 'use client';
 
+import { setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
+import { RootState } from '@/redux/store';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { setProfileModalVisible } from '../../redux/slices/profileInquirySlice';
 
 type ProfileDetailModalControlProps = {
   profileDetail: JSX.Element;

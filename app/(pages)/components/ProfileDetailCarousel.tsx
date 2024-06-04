@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { CarouselControlButton, CarouselPaginationButton } from '../../UI';
+import { CarouselControlButton, CarouselPaginationButton } from '@/UI';
 
 interface UserProfileCarouselProps {
   images: string[];

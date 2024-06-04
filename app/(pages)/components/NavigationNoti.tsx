@@ -1,6 +1,6 @@
+import { RootState } from '@/redux/store';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 
 type NavigationNotiProps = {
   name: string;

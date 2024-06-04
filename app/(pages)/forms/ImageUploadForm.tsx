@@ -1,9 +1,9 @@
 'use client';
 
+import { addAccountPhotos } from '@/redux/slices/accountSlice';
+import { CloudUploadSVG } from '@/svg';
 import Image from 'next/image';
-import { CloudUploadSVG } from '../../svg';
 import { useDispatch } from 'react-redux';
-import { addAccountPhotos } from '../../redux/slices/accountSlice';
 
 type ImageUploadFormProps = {
   src: string;

@@ -1,7 +1,7 @@
+import { InputFloatingLabel } from '@/UI';
+import { setAccountAge } from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { setAccountAge } from '../../redux/slices/accountSlice';
-import InputFloatingLabel from '../../UI/InputFloatingLabel';
 
 const AgeInput: React.FC = () => {
   const age = useSelector((state: RootState) => state.accountSlice.user.ageGender.age);

@@ -1,8 +1,8 @@
 'use client';
 
+import { getLogout } from '@/redux/slices/loginSlice';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { getLogout } from '../../redux/slices/loginSlice';
 
 const Footer = () => {
   const router = useRouter();

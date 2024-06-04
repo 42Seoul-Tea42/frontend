@@ -1,8 +1,8 @@
-import { useSocket } from '../../../socket/socketContext';
-import { DirectionSVG } from '../../../svg';
-import { RootState } from '../../../redux/store';
+import { setSendMessage } from '@/redux/slices/chattingSlice';
+import { RootState } from '@/redux/store';
+import { useSocket } from '@/socket/socketContext';
+import { DirectionSVG } from '@/svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSendMessage } from '../../../redux/slices/chattingSlice';
 
 enum SendMessage {
   MAX_LENGTH = 500

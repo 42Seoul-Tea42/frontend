@@ -1,6 +1,6 @@
+import { RootState } from '@/redux/store';
+import { MessageSVG } from '@/svg';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { MessageSVG } from '../../../svg';
 
 interface ChatButtonProps {
   onClick: () => void;

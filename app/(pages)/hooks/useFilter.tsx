@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { initSearchParams } from '../../redux/slices/searchSlice';
+import { RootState } from '@/redux/store';
+import { initSearchParams } from '@/redux/slices/searchSlice';
 
 /**
  * @type custom hook

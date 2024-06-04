@@ -2,41 +2,40 @@ import { useState, useEffect } from 'react';
 import ChattingRoomListItem, { ChattingRoomListItemProps } from './ChattingRoomListItem';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { getChattingList } from '../../../redux/slices/chattingSlice';
+import { RootState } from '@/redux/store';
 
 interface ChattingRoomListProps {
   isModalOpen: boolean;
 }
 
 function ChattingRoomList({ isModalOpen }: ChattingRoomListProps) {
-  const [users, setUsers] = useState<any[]>([]);
-  // const users = useSelector((state: RootState) => state.chattingSlice.users);
+  // const [users, setUsers] = useState<any[]>([]);
+  const users = useSelector((state: RootState) => state.chattingSlice.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setUsers([
-      {
-        name: 'Jane Cooper',
-        distance: '2.7 km',
-        picture: '/emoji/1.jpg'
-      },
-      {
-        name: 'Jane Cooper',
-        distance: '2.7 km',
-        picture: '/emoji/1.jpg'
-      },
-      {
-        name: 'Jane Cooper',
-        distance: '2.7 km',
-        picture: '/emoji/1.jpg'
-      },
-      {
-        name: 'Jane Cooper',
-        distance: '2.7 km',
-        picture: '/emoji/1.jpg'
-      }
-    ]);
+    // setUsers([
+    //   {
+    //     name: 'Jane Cooper',
+    //     distance: '2.7 km',
+    //     picture: '/emoji/1.jpg'
+    //   },
+    //   {
+    //     name: 'Jane Cooper',
+    //     distance: '2.7 km',
+    //     picture: '/emoji/1.jpg'
+    //   },
+    //   {
+    //     name: 'Jane Cooper',
+    //     distance: '2.7 km',
+    //     picture: '/emoji/1.jpg'
+    //   },
+    //   {
+    //     name: 'Jane Cooper',
+    //     distance: '2.7 km',
+    //     picture: '/emoji/1.jpg'
+    //   }
+    // ]);
   }, []);
 
   useEffect(() => {

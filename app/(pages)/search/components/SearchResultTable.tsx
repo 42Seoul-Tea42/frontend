@@ -1,4 +1,4 @@
-import { SortButton, Table, TableSchema } from '../../../UI';
+import { SortButton, Table, TableSchema } from '@/UI';
 
 type SearchResultTableProps = {
   schema: { text: string; sortBy?: string | undefined }[];

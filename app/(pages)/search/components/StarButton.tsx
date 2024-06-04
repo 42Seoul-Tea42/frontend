@@ -1,8 +1,8 @@
 'use client';
 
+import { setSearchParamsRating } from '@/redux/slices/searchSlice';
+import { StarFullSVG } from '@/svg';
 import { useDispatch } from 'react-redux';
-import { setSearchParamsRating } from '../../../redux/slices/searchSlice';
-import { StarFullSVG } from '../../../svg';
 
 interface StarButtonProps {
   star: number;

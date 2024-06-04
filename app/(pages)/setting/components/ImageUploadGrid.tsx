@@ -1,8 +1,8 @@
+import ImageUploadForm from '@/(pages)/forms/ImageUploadForm';
+import { removeAccountPhotos } from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
+import { StarFullSVG } from '@/svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { removeAccountPhotos } from '../../../redux/slices/accountSlice';
-import ImageUploadForm from '../../forms/ImageUploadForm';
-import { StarFullSVG } from '../../../svg';
 
 const ImageUploadGrid: React.FC = () => {
   const photos = useSelector((state: RootState) => state.accountSlice.user.photo.photos);

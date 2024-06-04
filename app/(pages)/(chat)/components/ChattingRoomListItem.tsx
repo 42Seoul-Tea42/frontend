@@ -1,6 +1,6 @@
+import { getChattingMessages } from '@/redux/slices/chattingSlice';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { getChattingMessages } from '../../../redux/slices/chattingSlice';
 
 export interface ChattingRoomListItemProps {
   user: any;
