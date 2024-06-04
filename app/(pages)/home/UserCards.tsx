@@ -49,7 +49,7 @@ function UserCards({ users }: UserCardsProps) {
               </div>
             ))
           ) : (
-            <CardsSkeleton style="bg-red-300 opacity-50" />
+            <CardsSkeleton style="bg-green-300 opacity-50" />
           )}
         </>
       }
