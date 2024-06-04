@@ -5,7 +5,7 @@ import FilterControlDrawer from './components/FilterControlDrawer';
 import { useSort } from '../hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { DirectionSVG } from '@/svg';
+import { DirectionSVG, SearchSVG } from '@/svg';
 import { postSearch } from '@/redux/slices/searchSlice';
 import { TableRow } from '@/UI';
 
@@ -15,12 +15,14 @@ const Search: React.FC = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex h-screen justify-center bg-green-50">
+    <div className="flex relative h-screen justify-center bg-green-50">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className={users.length ? 'hidden' : ''}>
+          <p>검색 결과가 없습니다.</p>
+        </div>
+      </div>
       <div className="w-full mr-10">
-        <FilterControlDrawer
-          shape={<DirectionSVG direction="down" size="6" />}
-          onSubmit={() => dispatch<any>(postSearch())}
-        />
+        <FilterControlDrawer shape={<SearchSVG />} onSubmit={() => dispatch<any>(postSearch())} />
         <div className="ml-10">
           <SearchResultTable
             setSortBy={setSortBy}
