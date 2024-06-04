@@ -1,7 +1,6 @@
 'use client';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { usersInquirySetDummy } from '../../UserDummy';
 import { useFilter, useSort } from '../hooks';
 import { useEffect, useState } from 'react';
 import { UserProfileInquirySet } from '../../redux/interface';
@@ -13,11 +12,12 @@ import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from './UserCards';
 import { getSuggestionUsers } from '../../redux/slices/suggestionSlice';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
+import { RootState } from '../../redux/store';
 
 function Home() {
   const dispatch = useDispatch();
-  // const users = useSelector((state: RootState) => state.suggestionSlice.users);
-  const users = usersInquirySetDummy;
+  const users = useSelector((state: RootState) => state.suggestionSlice.users);
+  // const users = usersInquirySetDummy;
   // 필터먼저 씌우고 그다음 정렬해야함 만약 정렬을 먼저 시키면 정렬이 바뀔때 필터가 해제됨
   const [filteredUsers, onFilter] = useFilter(users);
   const [sortedUsers, setSortBy, setSortOrder] = useSort(filteredUsers);

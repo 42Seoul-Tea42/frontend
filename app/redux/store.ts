@@ -1,6 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import suggestProfileSlice from './oldslices/suggestProfileSlice';
-
 import logger from 'redux-logger';
 import historySlice from './slices/historySlice';
 import fancySlice from './slices/fancySlice';
@@ -14,10 +12,6 @@ import chattingSlice from './slices/chattingSlice';
 
 const store = configureStore({
   reducer: {
-    // legacy
-    suggestProfile: suggestProfileSlice,
-
-    //new
     historySlice: historySlice,
     fancySlice: fancySlice,
     suggestionSlice: suggestionSlice,
