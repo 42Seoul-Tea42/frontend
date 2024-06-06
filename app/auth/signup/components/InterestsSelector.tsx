@@ -1,4 +1,4 @@
-import { Interests } from '@/redux/interface/submodules/utilInterface';
+import { Interests } from '@/redux/interface/utilI';
 import InterestsButton from './InterestsButton';
 import { useDispatch } from 'react-redux';
 import { setAccountInterests } from '@/redux/slices/accountSlice';

@@ -1,10 +1,10 @@
-import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { UserProfileInquirySet } from '../interface';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
+import { UserListDTO } from '../dto/userDto';
 
 interface SuggestionState {
-  users: [];
+  users: UserListDTO[];
   loading: boolean;
   error: string | null;
 }
@@ -17,7 +17,8 @@ const initialState: SuggestionState = {
 
 export const getSuggestionUsers = createAsyncThunk('suggestionSlice/getSuggestionUsers', async () => {
   const response = await axiosInstance.get('/tea');
-  return response.data;
+  const users: UserListDTO[] = response.data.profiles.map((user: UserListDTO) => new UserListDTO(user));
+  return users;
 });
 
 const suggestionSlice = createSlice({
@@ -25,13 +26,14 @@ const suggestionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    // 추천 유저리스트 가져오기
     builder.addCase(getSuggestionUsers.pending, state => {
       state.loading = true;
       state.error = null;
     });
     builder.addCase(getSuggestionUsers.fulfilled, (state, action: PayloadAction<any>) => {
+      state.users = action.payload;
       state.loading = false;
-      state.users = action.payload.profiles;
     });
     builder.addCase(getSuggestionUsers.rejected, state => {
       state.loading = false;

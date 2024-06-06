@@ -1,50 +1,29 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
-import { Fancy } from '../interface/enum';
-import { User } from '../interface';
-import UserDTO from '../dto/UserDto';
+import { Gender } from '../enum';
+import { MyAccountDTO } from '../dto/userDto';
 
 export interface AccountState {
-  user: User;
+  user: MyAccountDTO;
+  password: string;
   reEnterPassword: string;
-  emojis: number[];
-  hateEmojis: number[];
   loading: boolean;
   error: string | null;
 }
 
-const initialState: AccountState = {
-  user: {
-    id: 0,
-    loginId: '',
-    firstname: '',
-    lastname: '',
-    age: 1,
-    gender: '',
-    email: '',
-    password: '',
-    interests: [],
-    rating: 0,
-    sexualPreference: '',
-    introduction: '',
-    pictures: [],
-    fancy: Fancy.NONE,
-    distance: 0
-  },
-  emojis: [],
-  hateEmojis: [],
+const initialState = {
+  user: new MyAccountDTO({}),
+  password: '',
   reEnterPassword: '',
   loading: false,
   error: null
 };
 
 // 내 정보 가져오기
-export const getMyAccount = createAsyncThunk<UserDTO>('accountSlice/getMyAccount', async () => {
+export const getMyAccount = createAsyncThunk<MyAccountDTO>('accountSlice/getMyAccount', async () => {
   const response = await axiosInstance.get('/user/profile');
-  const serverData = response.data;
-
-  const user = new UserDTO(serverData);
+  const user = new MyAccountDTO(response.data.profile);
   return user;
 });
 
@@ -66,10 +45,11 @@ export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile'
 export const postResetPassword = createAsyncThunk(
   'accountSlice/postResetPassword',
   async (key: string, { getState }) => {
-    const state = getState() as { accountSlice: AccountState };
-    const password = state.accountSlice.user.password;
+    // 패스워드 직접 받는 것으로 변경 필요 -- test --
+    // const state = getState() as { accountSlice: AccountState };
+    // const password = state.accountSlice.user.password;
     const response = await axiosInstance.post(`/user/reset-pw?key=${key}`, {
-      pw: password
+      // pw: password
     });
     return response.status;
   }
@@ -79,14 +59,14 @@ const accountSlice = createSlice({
   name: 'accountSlice',
   initialState,
   reducers: {
-    setAccountId: (state: AccountState, action: PayloadAction<number>) => {
-      state.user.id = action.payload;
-    },
+    // setAccountId: (state: AccountState, action: PayloadAction<number>) => {
+    //   state.user.id = action.payload;
+    // },
     setAccountLoginId: (state: AccountState, action: PayloadAction<string>) => {
       state.user.loginId = action.payload;
     },
     setAccountPassword: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.password = action.payload;
+      state.password = action.payload;
     },
     setAccountGender: (state: AccountState, action: PayloadAction<string>) => {
       state.user.gender = action.payload;
@@ -107,7 +87,7 @@ const accountSlice = createSlice({
     setAccountReEnterPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.reEnterPassword = action.payload;
     },
-    setAccountSexualPreference: (state: AccountState, action: PayloadAction<string>) => {
+    setAccountSexualPreference: (state: AccountState, action: PayloadAction<Gender>) => {
       state.user.sexualPreference = action.payload;
     },
     setAccountIntroduction: (state: AccountState, action: PayloadAction<string>) => {
@@ -120,40 +100,38 @@ const accountSlice = createSlice({
       state.user.pictures = state.user.pictures.filter((_, index) => index !== action.payload);
     },
     setAccountEmojis: (state: AccountState, action: PayloadAction<number>) => {
-      const { emojis } = state;
-
       // 백엔드 요청 : 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
-      if (state.emojis.length >= 4 && !emojis.includes(action.payload)) {
+      if (state.user.emoji.length >= 4 && !state.user.emoji.includes(action.payload)) {
         return;
       }
 
       // 싫어요 이모티콘에 있는 경우 리턴
-      if (state.hateEmojis.includes(action.payload)) {
+      if (state.user.hateEmoji.includes(action.payload)) {
         return;
       }
 
       // 이모티콘 추가 및 삭제
-      emojis.includes(action.payload)
-        ? (state.emojis = emojis.filter(item => item !== action.payload))
-        : (state.emojis = [...emojis, action.payload]);
+      if (state.user.emoji.includes(action.payload)) {
+        state.user.emoji = state.user.emoji.filter(item => item !== action.payload);
+      } else {
+        state.user.emoji = [...state.user.emoji, action.payload];
+      }
     },
     setAccountHateEmojis: (state: AccountState, action: PayloadAction<number>) => {
-      const { hateEmojis } = state;
-
       // 백엔드 요청 : 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
-      if (state.hateEmojis.length >= 4 && !hateEmojis.includes(action.payload)) {
+      if (state.user.hateEmoji.length >= 4 && !state.user.hateEmoji.includes(action.payload)) {
         return;
       }
 
       // 좋아요 이모티콘에 있는 경우 리턴
-      if (state.emojis.includes(action.payload)) {
+      if (state.user.emoji.includes(action.payload)) {
         return;
       }
 
       // 이모티콘 추가 및 삭제
-      hateEmojis.includes(action.payload)
-        ? (state.hateEmojis = hateEmojis.filter(item => item !== action.payload))
-        : (state.hateEmojis = [...hateEmojis, action.payload]);
+      state.user.hateEmoji.includes(action.payload)
+        ? (state.user.hateEmoji = state.user.hateEmoji.filter(item => item !== action.payload))
+        : (state.user.hateEmoji = [...state.user.hateEmoji, action.payload]);
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
       const interests = state.user.interests;
@@ -171,7 +149,6 @@ const accountSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getMyAccount.fulfilled, (state, action) => {
-      // test
       state.user = { ...state.user, ...action.payload };
     });
     builder.addCase(getMyAccount.rejected, (state, action) => {
@@ -217,7 +194,7 @@ const accountSlice = createSlice({
 });
 
 export const {
-  setAccountId,
+  // setAccountId,
   setAccountLoginId,
   setAccountPassword,
   setAccountEmail,

@@ -1,11 +1,11 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
-import { Fancy } from '../interface/enum';
 import { getLogout } from './loginSlice';
-import { User } from '../interface';
+import { Fancy } from '../enum';
+import { UserListDTO } from '../dto/userDto';
 
 interface FancyState {
-  users: User[];
+  users: UserListDTO[];
   fancyNoti: boolean;
   loading: boolean;
   error: string | null;
@@ -18,12 +18,10 @@ const initialState: FancyState = {
   error: null
 };
 
-/**
- * @param {Date} time - Infinite scroll element alignment point
- */
-export const getFancyUserList = createAsyncThunk('fancySlice/getFancyUserList', async (time: Date) => {
+export const getFancyUsers = createAsyncThunk('fancySlice/getFancyUsers', async (time: Date) => {
   const response = await axiosInstance.get(`/history/fancy-list?time=${time.toISOString()}`);
-  return response.data;
+  const users = response.data.profiles.map((user: any) => new UserListDTO(user));
+  return users;
 });
 
 export const patchFancy = createAsyncThunk('fancySlice/patchFancy', async (targetId: number) => {
@@ -69,17 +67,15 @@ const fancySlice = createSlice({
   },
   extraReducers: builder => {
     // 팬시받은 유저목록 가져오기
-    builder.addCase(getFancyUserList.pending, state => {
+    builder.addCase(getFancyUsers.pending, state => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getFancyUserList.fulfilled, (state, action: PayloadAction<[]>) => {
+    builder.addCase(getFancyUsers.fulfilled, (state, action: PayloadAction<UserListDTO[]>) => {
+      state.users = action.payload;
       state.loading = false;
-      if (action.payload.length > 0) {
-        state.users = [...state.users, ...action.payload];
-      }
     });
-    builder.addCase(getFancyUserList.rejected, (state, action: PayloadAction<any>) => {
+    builder.addCase(getFancyUsers.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
     });

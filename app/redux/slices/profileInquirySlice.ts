@@ -1,18 +1,17 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserProfileInquirySet } from '../interface';
 import axiosInstance from '@/api/axios';
-import { Fancy } from '../interface/enum';
 import { getLogout } from './loginSlice';
+import { UserDetailDTO } from '../dto/userDto';
 
 interface ProfileInquiryState {
-  user: any;
+  user: UserDetailDTO;
   profileModalVisible: boolean;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ProfileInquiryState = {
-  user: {},
+  user: new UserDetailDTO({}),
   profileModalVisible: false,
   loading: false,
   error: null
@@ -21,7 +20,8 @@ const initialState: ProfileInquiryState = {
 // 유저 프로필 상세 조회
 export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfileDetail', async (userId: string) => {
   const response = await axiosInstance.get(`/user/profile-detail?id=${userId}`);
-  return response.data;
+  const user = new UserDetailDTO(response.data.profile);
+  return user;
 });
 
 // 유저 신고
@@ -56,8 +56,9 @@ const profileInquirySlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getProfileDetail.fulfilled, (state, action: PayloadAction<UserProfileInquirySet>) => {
+    builder.addCase(getProfileDetail.fulfilled, (state, action: PayloadAction<UserDetailDTO>) => {
       state.user = action.payload;
+      state.loading = false;
     });
     builder.addCase(getProfileDetail.rejected, (state, action) => {
       state.loading = false;
