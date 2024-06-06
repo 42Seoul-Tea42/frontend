@@ -1,11 +1,11 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { UserPublicSet } from '../interface';
 import axiosInstance from '@/api/axios';
 import { Fancy } from '../interface/enum';
 import { getLogout } from './loginSlice';
+import { User } from '../interface';
 
 interface FancyState {
-  users: any[];
+  users: User[];
   fancyNoti: boolean;
   loading: boolean;
   error: string | null;
@@ -73,7 +73,7 @@ const fancySlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getFancyUserList.fulfilled, (state, action: PayloadAction<UserPublicSet[]>) => {
+    builder.addCase(getFancyUserList.fulfilled, (state, action: PayloadAction<[]>) => {
       state.loading = false;
       if (action.payload.length > 0) {
         state.users = [...state.users, ...action.payload];

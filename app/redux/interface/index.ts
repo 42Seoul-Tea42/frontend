@@ -1,71 +1,60 @@
-import { Account, AgeGender, Position, Profile, Another, Photo, Identity } from './submodules/userInterface';
-import { Chatting } from './submodules/utilInterface';
+import { Fancy } from './enum';
 
 /**
- * Interface representing public user set including identity, age, gender, and other details.
- * @type
- * @member {Identity}
- * @member {AgeGender}
- * @member {Another}
- * @member {Photo}
+ * @identity {id: string; firstname: string; lastname: string;}
  */
-export type UserPublicSet = {
-  identity: Identity;
-  ageGender: AgeGender;
-  another: Another;
-  photo: Photo;
-};
+export interface User {
+  id: number;
+  loginId: string;
+  firstname: string;
+  lastname: string;
+}
 
 /**
- * Interface representing user chatting set including identity, another detail, age, gender, chatting details, and photo.
- * @type
- * @member {Identity}
- * @member {Another}
- * @member {AgeGender}
- * @member {Chatting}
- * @member {Photo}
+ * @ageGender {age: number; gender: string;}
  */
-export type UserChattingSet = {
-  identity: Identity;
-  another: Another;
-  ageGender: AgeGender;
-  chatting: Chatting;
-  photo: Photo;
-};
+export interface User {
+  age: number;
+  gender: string;
+}
 
 /**
- * Interface representing user profile inquiry set including identity, profile details, another detail, age, gender, and photo.
- * @type
- * @member {Identity}
- * @member {Profile}
- * @member {Another}
- * @member {AgeGender}
- * @member {Photo}
+ * @account {email: string; password: string;}
  */
-export type UserProfileInquirySet = {
-  identity: Identity;
-  profile: Profile;
-  another: Another;
-  ageGender: AgeGender;
-  photo: Photo;
-};
+export interface User {
+  email: string;
+  password: string;
+}
 
 /**
- * Interface representing user account set including identity, account details, age and gender, profile details, position, and photo.
- * @type
- * @member {Identity}
- * @member {Account}
- * @member {AgeGender}
- * @member {Profile}
- * @member {Position}
- * @member {Photo}
+ * @profileDetail {interests: number[]; rating: number; sexualPreference: string; introduction: string; picture: string[];}
  */
-export type UserAccountSet = {
-  identity: Identity;
-  account: Account;
-  ageGender: AgeGender;
-  profile: Profile;
-  position: Position;
-  photo: Photo;
-  another: Another;
-};
+export interface User {
+  interests: number[];
+  rating: number;
+  sexualPreference: string;
+  introduction: string;
+}
+
+/**
+ * @picture {pictures: string[];}
+ */
+export interface User {
+  pictures: string[];
+}
+
+/**
+ * @interface {fancy: Fancy; distance: number;}
+ */
+export interface User {
+  fancy: Fancy;
+  distance: number;
+}
+
+/**
+ * @interface {latitude: number; longitude: number;}
+ */
+export interface Position {
+  latitude: number;
+  longitude: number;
+}

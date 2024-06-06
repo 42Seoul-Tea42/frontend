@@ -47,7 +47,7 @@ const Setting: React.FC = () => {
             submitAccountSetting();
           }}
         >
-          {/* <AccordionItems
+          <AccordionItems
             items={[
               {
                 title: '이름변경',
@@ -78,7 +78,7 @@ const Setting: React.FC = () => {
               { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList /> },
               { title: '자기소개를 작성해주세요.', content: <IntroductionInput /> }
             ]}
-          /> */}
+          />
           <div className="mb-5"></div>
           <SubmitButton text="Save" />
         </form>

@@ -1,11 +1,12 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserAccountSet } from '../interface';
 import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
 import { Fancy } from '../interface/enum';
+import { User } from '../interface';
+import UserDTO from '../dto/UserDto';
 
 export interface AccountState {
-  user: any;
+  user: User;
   reEnterPassword: string;
   emojis: number[];
   hateEmojis: number[];
@@ -14,7 +15,23 @@ export interface AccountState {
 }
 
 const initialState: AccountState = {
-  user: {},
+  user: {
+    id: 0,
+    loginId: '',
+    firstname: '',
+    lastname: '',
+    age: 1,
+    gender: '',
+    email: '',
+    password: '',
+    interests: [],
+    rating: 0,
+    sexualPreference: '',
+    introduction: '',
+    pictures: [],
+    fancy: Fancy.NONE,
+    distance: 0
+  },
   emojis: [],
   hateEmojis: [],
   reEnterPassword: '',
@@ -23,9 +40,12 @@ const initialState: AccountState = {
 };
 
 // 내 정보 가져오기
-export const getMyAccount = createAsyncThunk('accountSlice/getMyAccount', async (_, { getState }) => {
+export const getMyAccount = createAsyncThunk<UserDTO>('accountSlice/getMyAccount', async () => {
   const response = await axiosInstance.get('/user/profile');
-  return response.data;
+  const serverData = response.data;
+
+  const user = new UserDTO(serverData);
+  return user;
 });
 
 // 유저 프로필 정보 서버로 전송
@@ -94,13 +114,10 @@ const accountSlice = createSlice({
       state.user.introduction = action.payload;
     },
     addAccountPhotos: (state: AccountState, action: PayloadAction<[]>) => {
-      // if (state.user.photo.photos.length >= 4) return;
-      // const uploads = action.payload.slice(0, 4);
-      // state.user.picture = [...state.user.picture, ...uploads];
-      state.user.picture = action.payload;
+      state.user.pictures = [...state.user.pictures, ...action.payload];
     },
     removeAccountPhotos: (state: AccountState, action: PayloadAction<number>) => {
-      state.user.picture = state.user.photo.photos.filter((_, index) => index !== action.payload);
+      state.user.pictures = state.user.pictures.filter((_, index) => index !== action.payload);
     },
     setAccountEmojis: (state: AccountState, action: PayloadAction<number>) => {
       const { emojis } = state;
@@ -139,11 +156,11 @@ const accountSlice = createSlice({
         : (state.hateEmojis = [...hateEmojis, action.payload]);
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
-      const { interests } = state.user.profile;
+      const interests = state.user.interests;
       if (interests.includes(action.payload)) {
-        state.user.profile.interests = interests.filter(item => item !== action.payload);
+        state.user.interests = interests.filter(item => item !== action.payload);
       } else {
-        state.user.profile.interests = [...interests, action.payload];
+        state.user.interests = [...interests, action.payload];
       }
     }
   },
@@ -155,7 +172,7 @@ const accountSlice = createSlice({
     });
     builder.addCase(getMyAccount.fulfilled, (state, action) => {
       // test
-      state.user = action.payload;
+      state.user = { ...state.user, ...action.payload };
     });
     builder.addCase(getMyAccount.rejected, (state, action) => {
       state.loading = false;
@@ -164,22 +181,13 @@ const accountSlice = createSlice({
 
     // 로그인시 내정보 세팅
     builder.addCase(postLogin.fulfilled, (state, action) => {
-      state.user.id = action.payload.id;
-      state.user.firstname = action.payload.name;
-      state.user.lastname = action.payload.last_name;
-      state.user.age = action.payload.birthday;
+      state.user = { ...state.user, ...action.payload };
     });
     builder.addCase(getGoogleLogin.fulfilled, (state, action) => {
-      state.user.id = action.payload.id;
-      state.user.firstname = action.payload.name;
-      state.user.lastname = action.payload.last_name;
-      state.user.age = action.payload.birthday;
+      state.user = { ...state.user, ...action.payload };
     });
     builder.addCase(getKaKaoLogin.fulfilled, (state, action) => {
-      state.user.id = action.payload.id;
-      state.user.firstname = action.payload.name;
-      state.user.lastname = action.payload.last_name;
-      state.user.age = action.payload.birthday;
+      state.user = { ...state.user, ...action.payload };
     });
 
     // 비밀번호 재설정하기
