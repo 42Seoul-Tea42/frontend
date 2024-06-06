@@ -16,7 +16,7 @@ const initialState: SuggestionState = {
 };
 
 export const getSuggestionUsers = createAsyncThunk('suggestionSlice/getSuggestionUsers', async () => {
-  const response = await axiosInstance.get('/tea');
+  const response = await axiosInstance.get('/user/tea');
   const users: UserListDTO[] = response.data.profiles.map((user: UserListDTO) => new UserListDTO(user));
   return users;
 });
