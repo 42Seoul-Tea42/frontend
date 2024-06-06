@@ -1,4 +1,5 @@
 import { Fancy, Gender } from '../enum';
+import { AccountState } from '../slices/accountSlice';
 
 /**
  * @property loginId: string
@@ -113,7 +114,7 @@ export class UserListDTO {
   lastname: string;
   distance: number;
   fancy: Fancy;
-  picture: string[];
+  picture: string;
   age: number;
   time: Date;
   constructor(serverData: any) {

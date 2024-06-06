@@ -6,7 +6,7 @@ module.exports = {
     return [
       {
         source: '/favicon.ico',
-        destination: 'http://10.14.7.2:80/'
+        destination: 'http://10.14.7.2:3000/'
       }
     ];
   },

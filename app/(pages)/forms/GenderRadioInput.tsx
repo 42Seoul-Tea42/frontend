@@ -1,11 +1,11 @@
-import { Gender } from '@/redux/interface/enum';
+import { Gender } from '@/redux/enum';
 import { setAccountGender } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 const GenderRadioInput: React.FC = () => {
   const dispatch = useDispatch();
-  const gender = useSelector((state: RootState) => state.accountSlice.user.ageGender.gender);
+  const gender = useSelector((state: RootState) => state.accountSlice.user.gender);
 
   return (
     <div className="mb-5">

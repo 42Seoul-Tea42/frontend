@@ -16,16 +16,16 @@ import {
   SexualPreferenceRadioInput,
   UserNameInput
 } from '../forms';
-import { getMyAccountDTO, patchUserProfile } from '@/redux/slices/accountSlice';
+import { getMyAccount, patchUserProfile } from '@/redux/slices/accountSlice';
 
 const Setting: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.accountSlice.user);
-  const emojis = useSelector((state: RootState) => state.accountSlice.emojis);
-  const hateEmojis = useSelector((state: RootState) => state.accountSlice.hateEmojis);
+  const emojis = useSelector((state: RootState) => state.accountSlice.user.emoji);
+  const hateEmojis = useSelector((state: RootState) => state.accountSlice.user.hateEmoji);
 
   useEffect(() => {
-    dispatch<any>(getMyAccountDTO());
+    dispatch<any>(getMyAccount());
   }, []);
 
   const submitAccountSetting = () => {

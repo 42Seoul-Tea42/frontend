@@ -5,7 +5,7 @@ import { setAccountReEnterPassword } from '@/redux/slices/accountSlice';
 import { InputFloatingLabel } from '@/UI';
 
 function ReEnterPassword() {
-  const password = useSelector((state: RootState) => state.accountSlice.user.account.password);
+  const password = useSelector((state: RootState) => state.accountSlice.password);
   const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
   const dispatch = useDispatch();
 

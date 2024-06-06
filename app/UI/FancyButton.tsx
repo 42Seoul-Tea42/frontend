@@ -1,5 +1,5 @@
+import { Fancy } from '@/redux/enum';
 import { HeartSVG, ThumbsUpSVG } from '../svg';
-import { Fancy } from '../redux/interface/enum';
 
 type FancyButtonProps = {
   onClick: () => void;

@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
 import { UserDetailDTO } from '../dto/userDto';
+import { Gender } from '../enum';
 
 interface ProfileInquiryState {
   user: UserDetailDTO;
@@ -11,7 +12,21 @@ interface ProfileInquiryState {
 }
 
 const initialState: ProfileInquiryState = {
-  user: new UserDetailDTO({}),
+  user: {
+    loginId: '',
+    status: 0,
+    lastOnline: new Date(),
+    rating: 0,
+    gender: Gender.OTHER,
+    sexualPreference: Gender.OTHER,
+    introduction: '',
+    interests: [],
+    hateInterests: [],
+    emoji: [],
+    hateEmoji: [],
+    simillar: false,
+    pictures: []
+  },
   profileModalVisible: false,
   loading: false,
   error: null

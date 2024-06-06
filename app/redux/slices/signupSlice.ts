@@ -28,14 +28,12 @@ const initialState: SignupState = {
 // 회원가입 정보 서버로 전송
 export const postSignup = createAsyncThunk('accountSlice/postSignup', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
-  const { user } = state.accountSlice;
-
   const response = await axiosInstance.post('/user/profile', {
-    login_id: user.identity.loginId,
-    email: user.account.email,
-    pw: user.account.password,
-    last_name: user.identity.lastname,
-    name: user.identity.firstname
+    login_id: state.accountSlice.user.loginId,
+    email: state.accountSlice.user.email,
+    pw: state.accountSlice.password,
+    last_name: state.accountSlice.user.lastname,
+    name: state.accountSlice.user.firstname
   });
   return response.status;
 });

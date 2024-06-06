@@ -1,4 +1,4 @@
-import { Gender } from '@/redux/interface/enum';
+import { Gender } from '@/redux/enum';
 import { setAccountSexualPreference } from '@/redux/slices/accountSlice';
 import { useDispatch } from 'react-redux';
 

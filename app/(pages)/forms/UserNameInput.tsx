@@ -4,8 +4,8 @@ import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UserNameInput: React.FC = () => {
-  const firstname = useSelector((state: RootState) => state.accountSlice.user.identity.firstname);
-  const lastname = useSelector((state: RootState) => state.accountSlice.user.identity.lastname);
+  const firstname = useSelector((state: RootState) => state.accountSlice.user.firstname);
+  const lastname = useSelector((state: RootState) => state.accountSlice.user.lastname);
   const dispatch = useDispatch();
 
   return (

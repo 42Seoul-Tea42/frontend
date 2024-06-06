@@ -5,7 +5,7 @@ import { Gender } from '../enum';
 import { MyAccountDTO } from '../dto/userDto';
 
 export interface AccountState {
-  user: MyAccountDTO;
+  user: any;
   password: string;
   reEnterPassword: string;
   loading: boolean;
@@ -13,7 +13,22 @@ export interface AccountState {
 }
 
 const initialState = {
-  user: new MyAccountDTO({}),
+  user: {
+    loginId: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    age: 1,
+    gender: Gender.ALL,
+    sexualPreference: Gender.ALL,
+    introduction: '',
+    pictures: [],
+    interests: [],
+    hateInterests: [],
+    emoji: [],
+    hateEmoji: [],
+    simillar: true
+  },
   password: '',
   reEnterPassword: '',
   loading: false,
@@ -31,6 +46,7 @@ export const getMyAccount = createAsyncThunk<MyAccountDTO>('accountSlice/getMyAc
 export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
   const user = state.accountSlice.user;
+  // const sendData = new ProfileDTO(state.accountSlice)
   const response = await axiosInstance.patch('/user/profile', {
     pictures: user.pictures // backend: 배열형태로 보내주세요.
     // gender: parseInt(user.ageGender.gender), // backend: 숫자형태로 보내주세요.
@@ -135,7 +151,7 @@ const accountSlice = createSlice({
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
       const interests = state.user.interests;
-      if (interests.includes(action.payload)) {
+      if (interests?.includes(action.payload)) {
         state.user.interests = interests.filter(item => item !== action.payload);
       } else {
         state.user.interests = [...interests, action.payload];
