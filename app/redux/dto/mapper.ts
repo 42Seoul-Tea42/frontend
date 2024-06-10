@@ -1,0 +1,39 @@
+const mappingTable = new Map<string, string>([
+  // ['serverKey', 'clientKey']
+  ['login_id', 'loginId'],
+  ['name', 'firstname'],
+  ['last_name', 'lastname'],
+  ['email', 'email'],
+  ['pw', 'password'],
+  ['age', 'age'],
+  ['fame', 'rating'],
+  ['gender', 'gender'],
+  ['taste', 'sexualPreference'],
+  ['bio', 'introduction'],
+  ['pictures', 'pictures'],
+  ['tags', 'interests'],
+  ['hate_tags', 'hateInterests'],
+  ['emoji', 'emoji'],
+  ['hate_emoji', 'hateEmoji'],
+  ['similar', 'simillar'],
+  ['fancy', 'fancy'],
+  ['email_check', 'emailCheck'],
+  ['profile_check', 'profileCheck'],
+  ['emoji_check', 'emojiCheck'],
+  ['picture', 'picture'],
+  ['time', 'time'],
+  ['distance', 'distance']
+]);
+
+export function serverToClientMapper(serverData: any): any {
+  const frontEndData: Partial<any> = {};
+
+  for (const key in serverData) {
+    const newKey = mappingTable.get(key);
+    if (newKey) {
+      frontEndData[newKey] = serverData[key];
+    }
+  }
+
+  return frontEndData as any;
+}
