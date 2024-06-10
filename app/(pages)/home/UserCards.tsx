@@ -15,7 +15,7 @@ function UserCards({ users }: UserCardsProps) {
   const dispatch = useDispatch();
 
   // 유저 상세 조회 클릭시 동작
-  const clickUserDetailDTO = (userId: string) => {
+  const clickUserDetail = (userId: string) => {
     dispatch(setProfileModalVisible(true));
     dispatch<any>(getProfileDetail(userId));
   };
@@ -30,8 +30,8 @@ function UserCards({ users }: UserCardsProps) {
                 <div className="shadow-xl rounded-xl border-4 border-gray-100 w-[200px]">
                   <div className="relative w-48 h-48 rounded-t-xl">
                     {/* 넘길 유저의 아이디가 필요해서 해당 컴포넌트에서 구현해야함 */}
-                    <div onClick={() => clickUserDetailDTO(user.id)}>
-                      {user.pictures && <UserCardPhoto src={user.pictures} alt={user.firstname} />}
+                    <div onClick={() => clickUserDetail(user.id)}>
+                      <UserCardPhoto src={user.picture} alt={user.firstname} />
                     </div>
                   </div>
                   <div className="w-48 h-12 bg-white rounded-b-lg border-t-2 p-1 pl-2">

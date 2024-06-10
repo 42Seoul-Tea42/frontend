@@ -1,3 +1,5 @@
+import { Gender } from '../enum';
+
 const mappingTable = new Map<string, string>([
   // ['serverKey', 'clientKey']
   ['id', 'id'],
@@ -41,4 +43,19 @@ export function serverToClientMapper(serverData: any): any {
   }
 
   return frontEndData as any;
+}
+
+export function genderToEnum(gender: string) {
+  switch (gender) {
+    case 'other':
+      return Gender.OTHER;
+    case 'male':
+      return Gender.MALE;
+    case 'female':
+      return Gender.FEMALE;
+    case 'all':
+      return Gender.ALL;
+    default:
+      return Gender.ALL;
+  }
 }

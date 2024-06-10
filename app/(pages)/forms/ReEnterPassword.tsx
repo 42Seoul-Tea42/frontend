@@ -15,7 +15,7 @@ function ReEnterPassword() {
         type="password"
         value={reEnterPassword}
         onChange={e => dispatch(setAccountReEnterPassword(e.target.value))}
-        text="Re-Enter Password"
+        text="Re-Enter-Password"
         autoComplete="new-password"
       />
       <Indicator color={password === reEnterPassword ? 'bg-green-500' : 'bg-red-500'} />

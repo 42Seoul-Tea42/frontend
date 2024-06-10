@@ -16,6 +16,7 @@ const GenderRadioInput: React.FC = () => {
               id="male"
               type="radio"
               value={Gender.MALE}
+              checked={gender === Gender.MALE}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
               className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 "
@@ -32,6 +33,7 @@ const GenderRadioInput: React.FC = () => {
               id="female"
               type="radio"
               value={Gender.FEMALE}
+              checked={gender === Gender.FEMALE}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
               className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 "
@@ -48,6 +50,7 @@ const GenderRadioInput: React.FC = () => {
               id="other"
               type="radio"
               value={Gender.OTHER}
+              checked={gender === Gender.OTHER}
               name="gender"
               onChange={e => dispatch(setAccountGender(e.target.value))}
               className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 "

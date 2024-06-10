@@ -4,7 +4,7 @@ import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PasswordInput: React.FC = () => {
-  const password = useSelector((state: RootState) => state.accountSlice.user.password);
+  const password = useSelector((state: RootState) => state.accountSlice.password);
   const dispatch = useDispatch();
 
   return (
@@ -13,7 +13,7 @@ const PasswordInput: React.FC = () => {
         type="password"
         value={password}
         onChange={e => dispatch(setAccountPassword(e.target.value))}
-        text="New Password"
+        text="New-Password"
         autoComplete="new-password"
       />
     </div>

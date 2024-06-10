@@ -41,7 +41,7 @@ const initialState = {
 // 내 정보 가져오기
 export const getMyAccount = createAsyncThunk<any>('accountSlice/getMyAccount', async () => {
   const response = await axiosInstance.get('/user/profile');
-  const user = serverToClientMapper(response.data.profile);
+  const user = serverToClientMapper(response.data);
   return user;
 });
 

@@ -1,9 +1,11 @@
 import { Gender } from '@/redux/enum';
 import { setAccountSexualPreference } from '@/redux/slices/accountSlice';
-import { useDispatch } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SexualPreferenceRadioInput: React.FC = () => {
   const dispatch = useDispatch();
+  const sexual = useSelector((state: RootState) => state.accountSlice.user.sexualPreference);
 
   return (
     <div className="mb-5">
@@ -14,6 +16,7 @@ const SexualPreferenceRadioInput: React.FC = () => {
               id="hetero"
               type="radio"
               value={Gender.MALE}
+              checked={sexual === Gender.MALE}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 focus:ring-2"
@@ -30,6 +33,7 @@ const SexualPreferenceRadioInput: React.FC = () => {
               id="homo"
               type="radio"
               value={Gender.FEMALE}
+              checked={sexual === Gender.FEMALE}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 focus:ring-2"
@@ -46,6 +50,7 @@ const SexualPreferenceRadioInput: React.FC = () => {
               id="bisexual"
               type="radio"
               value={Gender.ALL}
+              checked={sexual === Gender.ALL}
               name="sexual-preference"
               onChange={e => dispatch(setAccountSexualPreference(e.target.value))}
               className="w-4 h-4 text-green-400 bg-gray-100 border-gray-300 focus:ring-green-400 focus:ring-2"
