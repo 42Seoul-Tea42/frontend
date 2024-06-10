@@ -3,6 +3,7 @@ import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
 import { Gender } from '../enum';
 import { serverToClientMapper } from '../dto/mapper';
+import { updateEmojiList } from './emojiUpdate';
 
 export interface AccountState {
   user: any;
@@ -112,46 +113,26 @@ const accountSlice = createSlice({
       state.user.pictures = [...state.user.pictures, ...action.payload];
     },
     removeAccountPhotos: (state: AccountState, action: PayloadAction<number>) => {
-      state.user.pictures = state.user.pictures.filter((_, index) => index !== action.payload);
+      state.user.pictures = state.user.pictures.filter((_: any, index: number) => index !== action.payload);
     },
     setAccountEmojis: (state: AccountState, action: PayloadAction<number>) => {
-      // 백엔드 요청 : 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
-      if (state.user.emoji.length >= 4 && !state.user.emoji.includes(action.payload)) {
-        return;
-      }
-
-      // 싫어요 이모티콘에 있는 경우 리턴
-      if (state.user.hateEmoji.includes(action.payload)) {
-        return;
-      }
-
-      // 이모티콘 추가 및 삭제
-      if (state.user.emoji.includes(action.payload)) {
-        state.user.emoji = state.user.emoji.filter(item => item !== action.payload);
-      } else {
-        state.user.emoji = [...state.user.emoji, action.payload];
-      }
+      updateEmojiList({
+        state: state,
+        action: action,
+        type: 'emoji'
+      });
     },
     setAccountHateEmojis: (state: AccountState, action: PayloadAction<number>) => {
-      // 백엔드 요청 : 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
-      if (state.user.hateEmoji.length >= 4 && !state.user.hateEmoji.includes(action.payload)) {
-        return;
-      }
-
-      // 좋아요 이모티콘에 있는 경우 리턴
-      if (state.user.emoji.includes(action.payload)) {
-        return;
-      }
-
-      // 이모티콘 추가 및 삭제
-      state.user.hateEmoji.includes(action.payload)
-        ? (state.user.hateEmoji = state.user.hateEmoji.filter(item => item !== action.payload))
-        : (state.user.hateEmoji = [...state.user.hateEmoji, action.payload]);
+      updateEmojiList({
+        state: state,
+        action: action,
+        type: 'hateEmoji'
+      });
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
       const interests = state.user.interests;
       if (interests?.includes(action.payload)) {
-        state.user.interests = interests.filter(item => item !== action.payload);
+        state.user.interests = interests.filter((item: number) => item !== action.payload);
       } else {
         state.user.interests = [...interests, action.payload];
       }
