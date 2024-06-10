@@ -24,15 +24,18 @@ const useFilter = (users: any[]): any[] => {
       // 유저가 필터보다 가까워야함
       const isDistanceMatch = user.distance <= params.distance;
       // 유저의 등급이 필터보다 높아야함
-      const isRatingMatch = user.rating >= params.rating;
+      const isRatingMatch = params.rating === 0 || user.rating >= params.rating;
       // 유저의 관심사가 필터에 포함되어야함
-      const isInterestMatch = user.tags.length === 0 || _.some(user.tags, tag => _.includes(params.interests, tag));
+      const isInterestMatch =
+        params.interests.length === 0 || _.some(user.interests, interest => _.includes(params.interests, interest));
 
-      return isAgeMatch && isDistanceMatch && isRatingMatch && isInterestMatch;
+      console.log(user.interests, params.interests);
+      return isAgeMatch && isDistanceMatch && isRatingMatch && isInterestMatch ? user : null;
     });
 
     setFilteredUsers(filetered);
-    dispatch(initSearchParams());
+    console.log('filetered', filetered);
+    // dispatch(initSearchParams());
   };
 
   return [fileteredUsers, onFilter] as const;

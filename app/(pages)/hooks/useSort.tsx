@@ -27,7 +27,6 @@ const useSort = (users: any[]) => {
       return sortOrder === 'descending' ? comparison * -1 : comparison;
     });
     setSortedUsers(sorted);
-    console.log(sorted);
   }, [users, sortBy, sortOrder]);
 
   return [sortedUsers, setSortBy, setSortOrder] as const;

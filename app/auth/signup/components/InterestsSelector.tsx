@@ -1,7 +1,7 @@
-import { Interests } from '@/redux/interface/utilI';
 import InterestsButton from './InterestsButton';
 import { useDispatch } from 'react-redux';
 import { setAccountInterests } from '@/redux/slices/accountSlice';
+import { setSearchParamsInterests } from '@/redux/slices/searchSlice';
 
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0) + str.slice(1).toLowerCase();
@@ -10,7 +10,7 @@ export const capitalizeFirstLetter = (str: string) => {
 const InterestsSelector: React.FC = () => {
   const dispatch = useDispatch();
 
-  const userInterests: Interests = {
+  const userInterests = {
     SPORTS: 1,
     TRAVEL: 2,
     FOOD: 3,
@@ -36,7 +36,10 @@ const InterestsSelector: React.FC = () => {
       {items.map((item, index) => (
         <InterestsButton
           value={item.value}
-          onClick={() => dispatch(setAccountInterests(item.value))}
+          onClick={() => {
+            dispatch(setAccountInterests(item.value));
+            dispatch(setSearchParamsInterests(item.value));
+          }}
           key={index}
           text={item.text}
         />

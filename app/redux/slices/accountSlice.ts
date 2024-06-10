@@ -3,7 +3,8 @@ import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
 import { Gender } from '../enum';
 import { serverToClientMapper } from '../dto/mapper';
-import { updateEmojiList } from './emojiUpdate';
+import { updateEmojiList } from './updateEmoji';
+import _ from 'lodash';
 
 export interface AccountState {
   user: any;
@@ -133,9 +134,9 @@ const accountSlice = createSlice({
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
       const interests = state.user.interests;
       if (interests?.includes(action.payload)) {
-        state.user.interests = interests.filter((item: number) => item !== action.payload);
+        state.user.interests = _.without(interests, action.payload);
       } else {
-        state.user.interests = [...interests, action.payload];
+        state.user.interests = _.concat(interests, action.payload);
       }
     }
   },

@@ -1,5 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AccountState } from './accountSlice';
+import _ from 'lodash';
 
 export type EmojiType = 'emoji' | 'hateEmoji';
 
@@ -27,8 +28,8 @@ export function updateEmojiList({ state, action, type }: UpdateEmojiListProps) {
 
   // 이모티콘 추가 및 삭제
   if (currentList.includes(action.payload)) {
-    state.user[type] = currentList.filter((item: number) => item !== action.payload);
+    state.user[type] = _.without(currentList, action.payload);
   } else {
-    state.user[type] = [...currentList, action.payload];
+    state.user[type] = _.concat(currentList, action.payload);
   }
 }

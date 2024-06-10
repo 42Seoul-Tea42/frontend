@@ -36,7 +36,7 @@ export function serverToClientMapper(serverData: any): any {
     const newKey = mappingTable.get(key);
     if (newKey) {
       frontEndData[newKey] = serverData[key];
-      console.log(`serverToClientMapper: ${key} -> ${newKey}`);
+      // console.log(`serverToClientMapper: ${key} -> ${newKey}`);
     }
   }
 

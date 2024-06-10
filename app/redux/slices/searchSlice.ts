@@ -2,6 +2,8 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
 import { serverToClientMapper } from '../dto/mapper';
+import { add, concat, remove } from 'lodash';
+import _ from 'lodash';
 
 interface SearchParams {
   minAge: number;
@@ -63,11 +65,12 @@ const fancySlice = createSlice({
     setSearchParamsRating: (state, actions: PayloadAction<number>) => {
       state.searchParams.rating = actions.payload;
     },
-    toggleSearchParamsInterests: (state, action: PayloadAction<number>) => {
-      if (state.searchParams.interests.includes(action.payload)) {
-        state.searchParams.interests = state.searchParams.interests.filter(interest => interest !== action.payload);
+    setSearchParamsInterests: (state, action: PayloadAction<number>) => {
+      const interests = state.searchParams.interests;
+      if (interests?.includes(action.payload)) {
+        state.searchParams.interests = _.without(interests, action.payload);
       } else {
-        state.searchParams.interests = [...state.searchParams.interests, action.payload];
+        state.searchParams.interests = _.concat(interests, action.payload);
       }
     },
     initSearchParams: state => {
@@ -101,7 +104,7 @@ const fancySlice = createSlice({
 });
 
 export const {
-  toggleSearchParamsInterests,
+  setSearchParamsInterests,
   setSearchParamsDistance,
   setSearchParamsMaxAge,
   setSearchParamsMinAge,
