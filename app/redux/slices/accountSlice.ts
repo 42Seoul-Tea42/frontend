@@ -15,6 +15,7 @@ export interface AccountState {
 
 const initialState = {
   user: {
+    id: '',
     loginId: '',
     firstname: '',
     lastname: '',

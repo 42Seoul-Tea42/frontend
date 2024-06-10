@@ -1,5 +1,6 @@
 const mappingTable = new Map<string, string>([
   // ['serverKey', 'clientKey']
+  ['id', 'id'],
   ['login_id', 'loginId'],
   ['name', 'firstname'],
   ['last_name', 'lastname'],
@@ -35,6 +36,7 @@ export function serverToClientMapper(serverData: any): any {
     const newKey = mappingTable.get(key);
     if (newKey) {
       frontEndData[newKey] = serverData[key];
+      console.log(`serverToClientMapper: ${key} -> ${newKey}`);
     }
   }
 

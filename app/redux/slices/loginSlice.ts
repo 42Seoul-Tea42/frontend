@@ -35,12 +35,12 @@ const initialState: LoginState = {
 // 로그인 요청
 export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
-  const { user } = state.accountSlice;
+  const { user, password } = state.accountSlice;
   const response = await axiosInstance.post('/user/login', {
     login_id: user.loginId,
-    pw: user.password
+    pw: password
   });
-  return response.data;
+  return serverToClientMapper(response.data);
 });
 
 // 로그인 여부 조회
@@ -110,6 +110,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(postLogin.fulfilled, (state, action: PayloadAction<any>) => {
+      console.log(action.payload);
       state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
     });

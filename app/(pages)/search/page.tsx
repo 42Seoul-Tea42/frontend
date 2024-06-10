@@ -5,9 +5,9 @@ import FilterControlDrawer from './components/FilterControlDrawer';
 import { useSort } from '../hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { DirectionSVG, SearchSVG } from '@/svg';
-import { postSearch } from '@/redux/slices/searchSlice';
+import { SearchSVG } from '@/svg';
 import { TableRow } from '@/UI';
+import { postSearch } from '@/redux/slices/searchSlice';
 
 const Search: React.FC = () => {
   const users = useSelector((state: RootState) => state.searchSlice.users);
@@ -17,7 +17,7 @@ const Search: React.FC = () => {
   return (
     <div className="flex relative h-screen justify-center bg-green-50">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className={users.length ? 'hidden' : ''}>
+        <div className={sortedUsers.length ? 'hidden' : ''}>
           <p>검색 결과가 없습니다.</p>
         </div>
       </div>
@@ -29,10 +29,10 @@ const Search: React.FC = () => {
             setSortOrder={setSortOrder}
             schema={[
               { text: '이름' },
-              { text: '나이', sortBy: 'ageGender.age' },
-              { text: '거리', sortBy: 'another.distance' },
-              { text: '평판', sortBy: 'profile.rating' },
-              { text: '관심사', sortBy: 'profile.interests' }
+              { text: '나이', sortBy: 'age' },
+              { text: '거리', sortBy: 'distance' },
+              { text: '평판', sortBy: 'rating' },
+              { text: '관심사', sortBy: 'interests' }
             ]}
             body={
               <>
@@ -40,13 +40,8 @@ const Search: React.FC = () => {
                   <TableRow
                     key={index}
                     option={{ image: '/emoji/1.jpg' }}
-                    head={user.identity.firstname}
-                    columns={[
-                      `${user.ageGender.age}세`,
-                      `${user.another.distance} km`,
-                      user.profile.rating,
-                      user.profile.interests.length
-                    ]}
+                    head={user.firstname}
+                    columns={[`${user.age}세`, `${Math.round(user.distance)} km`, user.rating, user.interests.length]}
                   />
                 ))}
               </>

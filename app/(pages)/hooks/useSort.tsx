@@ -9,7 +9,7 @@ import { get } from 'lodash';
  */
 const useSort = (users: any[]) => {
   const [sortedUsers, setSortedUsers] = useState<any[]>([]);
-  const [sortBy, setSortBy] = useState<any>('another.distance');
+  const [sortBy, setSortBy] = useState<any>('distance');
   const [sortOrder, setSortOrder] = useState<'descending' | 'ascending'>('ascending');
 
   useEffect(() => {
@@ -27,7 +27,8 @@ const useSort = (users: any[]) => {
       return sortOrder === 'descending' ? comparison * -1 : comparison;
     });
     setSortedUsers(sorted);
-  }, [sortBy, sortOrder]);
+    console.log(sorted);
+  }, [users, sortBy, sortOrder]);
 
   return [sortedUsers, setSortBy, setSortOrder] as const;
 };

@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserProfileInquirySet } from '../interface';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
+import { serverToClientMapper } from '../dto/mapper';
 
 interface SearchParams {
   minAge: number;
@@ -25,15 +25,15 @@ const initialState: SearchState = {
     maxAge: 100,
     distance: 100,
     interests: [],
-    rating: 1
+    rating: 0
   },
   loading: false,
   error: null
 };
 
 export const postSearch = createAsyncThunk('homeSlice/postSearch', async (_, { getState }) => {
-  const state = getState() as { accountSlice: SearchState };
-  const { searchParams } = state.accountSlice;
+  const state = getState() as { searchSlice: SearchState };
+  const { searchParams } = state.searchSlice;
 
   const response = await axiosInstance.post('/user/search', {
     min_age: searchParams.minAge,
@@ -42,7 +42,9 @@ export const postSearch = createAsyncThunk('homeSlice/postSearch', async (_, { g
     tags: searchParams.interests,
     fame: searchParams.rating
   });
-  return response.data;
+
+  const users = response.data.profile_list.map((user: any) => serverToClientMapper(user));
+  return users;
 });
 
 const fancySlice = createSlice({
@@ -78,7 +80,7 @@ const fancySlice = createSlice({
       state.error = null;
     });
     builder.addCase(postSearch.fulfilled, (state, action: PayloadAction<any>) => {
-      state.users = [...state.users, ...action.payload.profiles];
+      state.users = action.payload;
     });
     builder.addCase(postSearch.rejected, (state, action) => {
       state.loading = false;
