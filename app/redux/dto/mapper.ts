@@ -22,7 +22,10 @@ const mappingTable = new Map<string, string>([
   ['emoji_check', 'emojiCheck'],
   ['picture', 'picture'],
   ['time', 'time'],
-  ['distance', 'distance']
+  ['distance', 'distance'],
+  ['oauth', 'oauth'],
+  ['occupied', 'occupied'],
+  ['error', 'error']
 ]);
 
 export function serverToClientMapper(serverData: any): any {

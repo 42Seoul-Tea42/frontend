@@ -1,11 +1,11 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
-import { UserDetailDTO } from '../dto/mapper';
+import { serverToClientMapper } from '../dto/mapper';
 import { Gender } from '../enum';
 
 interface ProfileInquiryState {
-  user: UserDetailDTO;
+  user: any;
   profileModalVisible: boolean;
   loading: boolean;
   error: string | null;
@@ -35,8 +35,7 @@ const initialState: ProfileInquiryState = {
 // 유저 프로필 상세 조회
 export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfileDetail', async (userId: string) => {
   const response = await axiosInstance.get(`/user/profile-detail?id=${userId}`);
-  const user = new UserDetailDTO(response.data.profile);
-  return user;
+  return serverToClientMapper(response.data.profile);
 });
 
 // 유저 신고
@@ -71,7 +70,7 @@ const profileInquirySlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getProfileDetail.fulfilled, (state, action: PayloadAction<UserDetailDTO>) => {
+    builder.addCase(getProfileDetail.fulfilled, (state, action: PayloadAction<any>) => {
       state.user = action.payload;
       state.loading = false;
     });
