@@ -37,6 +37,7 @@ const Footer = () => {
           <button
             onClick={() => {
               dispatch<any>(getLogout());
+              router.push('/auth/login');
             }}
             className="hover:underline"
           >
