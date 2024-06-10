@@ -2,10 +2,10 @@ import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder }
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
 import { Fancy } from '../enum';
-import { UserListDTO } from '../dto/mapper';
+import { serverToClientMapper } from '../dto/mapper';
 
 interface FancyState {
-  users: UserListDTO[];
+  users: any[];
   fancyNoti: boolean;
   loading: boolean;
   error: string | null;
@@ -20,7 +20,7 @@ const initialState: FancyState = {
 
 export const getFancyUsers = createAsyncThunk('fancySlice/getFancyUsers', async (time: Date) => {
   const response = await axiosInstance.get(`/history/fancy-list?time=${time.toISOString()}`);
-  const users = response.data.profiles.map((user: any) => new UserListDTO(user));
+  const users = response.data.profiles.map((user: any) => serverToClientMapper(user));
   return users;
 });
 

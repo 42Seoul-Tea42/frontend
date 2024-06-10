@@ -4,12 +4,12 @@ import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface EmailInputProps {
-  extended: () => void;
-  addJSX: JSX.Element;
+  extended?: () => void;
+  addJSX?: JSX.Element;
 }
 
 function EmailInput({ extended, addJSX }: EmailInputProps) {
-  const email = useSelector((state: RootState) => state.accountSlice.user.account.email);
+  const email = useSelector((state: RootState) => state.accountSlice.user.email);
   const dispatch = useDispatch();
   return (
     <div className="flex">

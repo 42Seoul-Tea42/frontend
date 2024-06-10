@@ -10,6 +10,7 @@ import ReEnterPassword from '../forms/ReEnterPassword';
 import ImageUploadGrid from './components/ImageUploadGrid';
 import {
   AgeInput,
+  EmailInput,
   GenderRadioInput,
   IntroductionInput,
   PasswordInput,
@@ -76,7 +77,8 @@ const Setting: React.FC = () => {
               },
               { title: '나의 관심사 태그를 선택해주세요.', content: <InterestsSelector /> },
               { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList /> },
-              { title: '자기소개를 작성해주세요.', content: <IntroductionInput /> }
+              { title: '자기소개를 작성해주세요.', content: <IntroductionInput /> },
+              { title: '이메일을 변경하세요.', content: <EmailInput /> }
             ]}
           />
           <div className="mb-5"></div>

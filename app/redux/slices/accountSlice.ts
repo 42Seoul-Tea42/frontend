@@ -49,12 +49,20 @@ export const getMyAccount = createAsyncThunk<any>('accountSlice/getMyAccount', a
 export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
   const user = state.accountSlice.user;
+  const password = state.accountSlice.password;
   const response = await axiosInstance.patch('/user/profile', {
     pictures: user.pictures, // backend: 배열형태로 보내주세요.
     gender: parseInt(user.gender), // backend: 숫자형태로 보내주세요.
     taste: parseInt(user.sexualPreference), // backend: 숫자형태로 보내주세요.
     bio: user.introduction,
-    tags: user.interests
+    tags: user.interests,
+    emoji: user.emoji,
+    hate_emoji: user.hateEmoji,
+    name: user.firstname,
+    last_name: user.lastname,
+    age: user.age,
+    pw: password,
+    email: user.email
   });
   return response.status;
 });

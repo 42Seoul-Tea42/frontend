@@ -1,10 +1,12 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
+import { serverToClientMapper } from '../dto/mapper';
 
 interface ChattingState {
   users: [];
   messages: [];
+  selected: number;
   sendMessage: string;
   chattingNoti: boolean;
   loading: boolean;
@@ -14,6 +16,7 @@ interface ChattingState {
 const initialState: ChattingState = {
   users: [],
   messages: [],
+  selected: 0,
   sendMessage: '',
   chattingNoti: false,
   loading: false,
@@ -22,7 +25,7 @@ const initialState: ChattingState = {
 
 export const getChattingList = createAsyncThunk('chattingSlice/getChattingList', async () => {
   const response = await axiosInstance.get('/chat/list');
-  return response.data;
+  return response.data.chat_list.map((chat: any) => serverToClientMapper(chat));
 });
 
 export const getChattingMessages = createAsyncThunk(
@@ -39,12 +42,16 @@ const chattingSlice = createSlice({
   reducers: {
     setChattingMessage: (state, action) => {
       // 보고 있는 유저의 아이디인지 체크해서 메세지를 추가
+      console.log('받은 메세지', action.payload);
     },
     setChattingNoti: (state, action) => {
       state.chattingNoti = action.payload;
     },
     setSendMessage: (state, action) => {
       state.sendMessage = action.payload;
+    },
+    setSelected: (state, action) => {
+      state.selected = action.payload;
     }
   },
   // 채팅방 목록 가져오기
@@ -53,7 +60,7 @@ const chattingSlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getChattingList.fulfilled, (state, action: PayloadAction<[]>) => {
+    builder.addCase(getChattingList.fulfilled, (state, action: PayloadAction<any>) => {
       state.users = action.payload;
     });
     builder.addCase(getChattingList.rejected, (state, action) => {
@@ -87,7 +94,7 @@ const chattingSlice = createSlice({
   }
 });
 
-export const { setChattingMessage, setChattingNoti, setSendMessage } = chattingSlice.actions;
+export const { setSelected, setChattingMessage, setChattingNoti, setSendMessage } = chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 
 export default chattingSlice.reducer;

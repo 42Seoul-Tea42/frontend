@@ -10,11 +10,15 @@ enum SendMessage {
 
 const SendMessageField = () => {
   const message = useSelector((state: RootState) => state.chattingSlice.sendMessage);
+  const selected = useSelector((state: RootState) => state.chattingSlice.selected);
   const dispatch = useDispatch();
 
   const socket = useSocket();
   const handleClick = () => {
-    socket?.emit('send_message', message);
+    socket?.emit('send_message', {
+      recver_id: selected,
+      message: message
+    });
   };
 
   return (

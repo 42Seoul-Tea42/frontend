@@ -28,7 +28,9 @@ const mappingTable = new Map<string, string>([
   ['distance', 'distance'],
   ['oauth', 'oauth'],
   ['occupied', 'occupied'],
-  ['error', 'error']
+  ['error', 'error'],
+  ['new', 'new'],
+  ['status', 'status']
 ]);
 
 export function serverToClientMapper(serverData: any): any {
