@@ -1,17 +1,25 @@
-import { getChattingMessages } from '@/redux/slices/chattingSlice';
+import { getChattingMessages, setSelected } from '@/redux/slices/chattingSlice';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 
 export interface ChattingRoomListItemProps {
   user: any;
+  onClick?: () => void;
 }
 
-function ChattingRoomListItem({ user }: ChattingRoomListItemProps) {
+function ChattingRoomListItem({ user, onClick }: ChattingRoomListItemProps) {
   const dispatch = useDispatch();
   return (
     <li
       onClick={() => {
-        dispatch<any>(getChattingMessages({ targetId: user.id, time: new Date().toString() }));
+        dispatch<any>(
+          getChattingMessages({
+            targetId: user.id,
+            time: new Date().toISOString().replace('T', ' ').replace('Z', '') + '000' + '%2B0000'
+          })
+        );
+        dispatch(setSelected(user.id));
+        onClick && onClick();
       }}
       className="flex items-end p-4 gap-2 border-b hover:brightness-50 bg-white"
     >

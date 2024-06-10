@@ -2,7 +2,7 @@
 
 import ChattingRoomList from './components/ChattingRoomList';
 import Draggable from 'react-draggable';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ChatContent from './components/ChattingContent';
 import ChattingMenuBar from './components/ChattingMenuBar';
 import ViewMessageForm from './components/ViewMessageForm';
@@ -10,9 +10,11 @@ import ChattingMenuButton from './components/ChattingMenuButton';
 import ChattingRoomListVisibleControl from './components/ChattingRoomListVisibleControl';
 import SendMessageField from './components/SendMessageField';
 import { useCloseOnOutsideClick } from '../hooks';
+import { RootState } from '@/redux/store';
 
 const Chatting: React.FC = () => {
   const [modalRef, isModalOpen, setIsModalOpen] = useCloseOnOutsideClick({ initialState: false });
+  const users = useSelector((state: RootState) => state.chattingSlice.users);
   const dispatch = useDispatch();
 
   return (
@@ -20,22 +22,12 @@ const Chatting: React.FC = () => {
     <Draggable>
       <div className="items-center max-w-96 bg-white rounded-xl shadow-lg">
         <ChatContent
-          MenuBar={
-            <ChattingMenuBar
-              menuOpen={
-                <ChattingMenuButton
-                  onClick={() => {
-                    setIsModalOpen(!isModalOpen);
-                  }}
-                />
-              }
-            />
-          }
+          MenuBar={<ChattingMenuBar setIsModalOpen={setIsModalOpen} />}
           viewMessage={<ViewMessageForm />}
           sendMessage={<SendMessageField />}
         />
         <ChattingRoomListVisibleControl
-          props={<ChattingRoomList isModalOpen={isModalOpen} />}
+          props={<ChattingRoomList isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
           isModalOpen={isModalOpen}
           modalRef={modalRef}
         />
