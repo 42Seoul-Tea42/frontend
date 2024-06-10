@@ -50,11 +50,11 @@ export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile'
   const state = getState() as { accountSlice: AccountState };
   const user = state.accountSlice.user;
   const response = await axiosInstance.patch('/user/profile', {
-    pictures: user.pictures // backend: 배열형태로 보내주세요.
-    // gender: parseInt(user.ageGender.gender), // backend: 숫자형태로 보내주세요.
-    // taste: parseInt(user.profile.sexualPreference), // backend: 숫자형태로 보내주세요.
-    // bio: user.profile.introduction,
-    // tags: user.profile.interests
+    pictures: user.pictures, // backend: 배열형태로 보내주세요.
+    gender: parseInt(user.gender), // backend: 숫자형태로 보내주세요.
+    taste: parseInt(user.sexualPreference), // backend: 숫자형태로 보내주세요.
+    bio: user.introduction,
+    tags: user.interests
   });
   return response.status;
 });
@@ -87,7 +87,8 @@ const accountSlice = createSlice({
       state.password = action.payload;
     },
     setAccountGender: (state: AccountState, action: PayloadAction<string>) => {
-      state.user.gender = action.payload;
+      const value = parseInt(action.payload);
+      state.user.gender = value;
     },
     setAccountAge: (state: AccountState, action: PayloadAction<number>) => {
       if (action.payload < 0 || action.payload > 100) return;
@@ -105,8 +106,9 @@ const accountSlice = createSlice({
     setAccountReEnterPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.reEnterPassword = action.payload;
     },
-    setAccountSexualPreference: (state: AccountState, action: PayloadAction<Gender>) => {
-      state.user.sexualPreference = action.payload;
+    setAccountSexualPreference: (state: AccountState, action: PayloadAction<string>) => {
+      const value = parseInt(action.payload);
+      state.user.sexualPreference = value;
     },
     setAccountIntroduction: (state: AccountState, action: PayloadAction<string>) => {
       state.user.introduction = action.payload;
