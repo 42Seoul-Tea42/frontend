@@ -1,10 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
-import { UserListDTO } from '../dto/userDto';
+import { serverToClientMapper } from '../dto/mapper';
 
 interface SuggestionState {
-  users: UserListDTO[];
+  users: [];
   loading: boolean;
   error: string | null;
 }
@@ -17,7 +17,7 @@ const initialState: SuggestionState = {
 
 export const getSuggestionUsers = createAsyncThunk('suggestionSlice/getSuggestionUsers', async () => {
   const response = await axiosInstance.get('/user/tea');
-  const users: UserListDTO[] = response.data.profiles.map((user: UserListDTO) => new UserListDTO(user));
+  const users = response.data.profiles.map((user: any) => serverToClientMapper(user));
   return users;
 });
 

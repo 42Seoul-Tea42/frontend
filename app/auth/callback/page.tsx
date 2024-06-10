@@ -12,7 +12,7 @@ function CallBackAuth() {
   const dispatch = useDispatch();
   const router = useRouter();
   const token = params.get('key');
-  const { emailVerification } = useSelector((state: RootState) => state.loginSlice.steps);
+  const { emailCheck } = useSelector((state: RootState) => state.loginSlice.steps);
 
   // 컴포넌트 마운트 시에 이메일 자동인증
   useEffect(() => {
@@ -22,11 +22,11 @@ function CallBackAuth() {
   }, []);
 
   useEffect(() => {
-    if (emailVerification) {
+    if (emailCheck) {
       alert('이메일 인증이 완료되었습니다.');
       router.push('/auth/login');
     }
-  }, [emailVerification]);
+  }, [emailCheck]);
 
   return (
     <CardForm

@@ -1,13 +1,14 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { AccountState, patchUserProfile } from './accountSlice';
+import { serverToClientMapper } from '../dto/mapper';
 
 /** 서버에서 받아오는 유저의 인증단계 */
 export type Steps = {
   isLogin: boolean;
-  emailVerification: boolean; // 이메일 인증 필요
-  profileCreation: boolean; // 프로필 작성 필요
-  emojiSelection: boolean; // 이모지 선택 필요
+  emailCheck: boolean; // 이메일 인증 필요
+  profileCheck: boolean; // 프로필 작성 필요
+  emojiCheck: boolean; // 이모지 선택 필요
 };
 
 interface LoginState {
@@ -23,9 +24,9 @@ const initialState: LoginState = {
   isResendEmail: false,
   steps: {
     isLogin: false,
-    emailVerification: false,
-    profileCreation: false,
-    emojiSelection: false
+    emailCheck: false,
+    profileCheck: false,
+    emojiCheck: false
   },
   loading: false,
   error: null
@@ -45,7 +46,7 @@ export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { ge
 // 로그인 여부 조회
 export const getLogin = createAsyncThunk('loginSlice/getLogin', async () => {
   const response = await axiosInstance.get('/user/login');
-  return response.data;
+  return serverToClientMapper(response.data);
 });
 
 // 인증이메일 다시보내기
@@ -57,18 +58,19 @@ export const getResendEmail = createAsyncThunk('loginSlice/getResendEmail', asyn
 // 카카오 로그인
 export const getKaKaoLogin = createAsyncThunk('loginSlice/getKaKaoLogin', async () => {
   const response = await axiosInstance.get('/kakao/login');
-  return response.data;
+  return serverToClientMapper(response.data);
 });
 
 // 구글 로그인
 export const getGoogleLogin = createAsyncThunk('loginSlice/getGoogleLogin', async () => {
   const response = await axiosInstance.get('/google/login');
-  return response.data;
+  return serverToClientMapper(response.data);
 });
 
 // 토큰으로 이메일 인증받기
 export const getVerifyEmail = createAsyncThunk('loginSlice/getVerifyEmail', async (token: string) => {
-  await axiosInstance.get(`/user/verify-email?key=${token}`);
+  const response = await axiosInstance.get(`/user/verify-email?key=${token}`);
+  return response.status;
 });
 
 // 로그아웃 처리
@@ -108,9 +110,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(postLogin.fulfilled, (state, action: PayloadAction<any>) => {
-      state.steps.emailVerification = action.payload.email_check;
-      state.steps.profileCreation = action.payload.profile_check;
-      state.steps.emojiSelection = action.payload.emoji_check;
+      state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
     });
     builder.addCase(postLogin.rejected, (state, action) => {
@@ -125,10 +125,8 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getLogin.fulfilled, (state, action: PayloadAction<any>) => {
+      state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
-      state.steps.emailVerification = action.payload.email_check;
-      state.steps.profileCreation = action.payload.profile_check;
-      state.steps.emojiSelection = action.payload.emoji_check;
     });
     builder.addCase(getLogin.rejected, (state, action) => {
       state.loading = false;
@@ -142,9 +140,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getKaKaoLogin.fulfilled, (state, action: PayloadAction<any>) => {
-      state.steps.emailVerification = action.payload.email_check;
-      state.steps.profileCreation = action.payload.profile_check;
-      state.steps.emojiSelection = action.payload.emoji_check;
+      state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
     });
     builder.addCase(getKaKaoLogin.rejected, (state, action) => {
@@ -158,9 +154,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getGoogleLogin.fulfilled, (state, action: PayloadAction<any>) => {
-      state.steps.emailVerification = action.payload.email_check;
-      state.steps.profileCreation = action.payload.profile_check;
-      state.steps.emojiSelection = action.payload.emoji_check;
+      state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
     });
     builder.addCase(getGoogleLogin.rejected, (state, action) => {
@@ -174,7 +168,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getVerifyEmail.fulfilled, state => {
-      state.steps.emailVerification = true;
+      state.steps.emailCheck = true;
     });
     builder.addCase(getVerifyEmail.rejected, (state, action) => {
       state.loading = false;
@@ -200,7 +194,7 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(patchUserProfile.fulfilled, state => {
-      state.steps.profileCreation = true;
+      state.steps.profileCheck = true;
     });
     builder.addCase(patchUserProfile.rejected, (state, action) => {
       state.loading = false;

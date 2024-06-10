@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
-import { UserDetailDTO } from '../dto/userDto';
+import { UserDetailDTO } from '../dto/mapper';
 import { Gender } from '../enum';
 
 interface ProfileInquiryState {

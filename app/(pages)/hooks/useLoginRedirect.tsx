@@ -18,14 +18,14 @@ function useLoginRedirect() {
       if (!steps.isLogin) {
         return '/auth/login';
       }
-      if (!steps.emailVerification) {
+      if (!steps.emailCheck) {
         alert('이메일 인증을 진행해주세요.');
         return '/auth/login';
       }
-      if (!steps.profileCreation) {
+      if (!steps.profileCheck) {
         return '/auth/upload/profile';
       }
-      if (!steps.emojiSelection) {
+      if (!steps.emojiCheck) {
         return '/auth/upload/emoji';
       }
       return '/home';

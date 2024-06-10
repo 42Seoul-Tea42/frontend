@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder }
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
 import { Fancy } from '../enum';
-import { UserListDTO } from '../dto/userDto';
+import { UserListDTO } from '../dto/mapper';
 
 interface FancyState {
   users: UserListDTO[];

@@ -14,7 +14,7 @@ const Profile = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const profileImage = useSelector((state: RootState) => state.accountSlice.user.photo.photos);
-  const profileCreation = useSelector((state: RootState) => state.loginSlice.steps.profileCreation);
+  const profileCheck = useSelector((state: RootState) => state.loginSlice.steps.profileCheck);
 
   const submitProfile = () => {
     // 프로필 사진이 없을 경우 경고창
@@ -27,10 +27,10 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (profileCreation) {
+    if (profileCheck) {
       // router.push('/auth/upload/emoji');
     }
-  }, [profileCreation]);
+  }, [profileCheck]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center">

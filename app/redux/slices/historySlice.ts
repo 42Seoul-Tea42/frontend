@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
-import { UserListDTO } from '../dto/userDto';
+import { UserListDTO } from '../dto/mapper';
 
 interface HistoryState {
   users: UserListDTO[];

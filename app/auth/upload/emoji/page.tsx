@@ -11,7 +11,7 @@ import { SubmitButton } from '@/UI';
 const Emoji = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const emojiSelection = useSelector((state: RootState) => state.loginSlice.steps.emojiSelection);
+  const emojiCheck = useSelector((state: RootState) => state.loginSlice.steps.emojiCheck);
   const emojis = useSelector((state: RootState) => state.accountSlice.emojis);
 
   const submitEmojiPreference = (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,10 +23,10 @@ const Emoji = () => {
   };
 
   useEffect(() => {
-    if (emojiSelection) {
+    if (emojiCheck) {
       router.push('/home');
     }
-  }, [emojiSelection]);
+  }, [emojiCheck]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center">

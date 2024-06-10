@@ -11,7 +11,7 @@ import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { RootState } from '@/redux/store';
 import { getSuggestionUsers } from '@/redux/slices/suggestionSlice';
 import { MainContentsArea } from '@/UI';
-import { UserDTO } from '@/redux/dto/userDto';
+import { UserDTO } from '@/redux/dto/mapper';
 
 export function Home() {
   const dispatch = useDispatch();
