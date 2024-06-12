@@ -14,7 +14,7 @@ function History() {
   // const users = usersInquirySetDummy;
 
   useEffect(() => {
-    dispatch<any>(getHistoryUserList(new Date()));
+    dispatch<any>(getHistoryUserList(new Date().toISOString().replace('T', ' ').replace('Z', '') + '000' + '%2B0000'));
 
     //알림 제거용
     dispatch(setHistoryNoti(false));

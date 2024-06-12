@@ -1,4 +1,4 @@
-import { setSendMessage } from '@/redux/slices/chattingSlice';
+import { setChattingMessage, setScrollDirection, setSendMessage, updateScrollDown } from '@/redux/slices/chattingSlice';
 import { RootState } from '@/redux/store';
 import { useSocket } from '@/socket/socketContext';
 import { DirectionSVG } from '@/svg';
@@ -9,17 +9,55 @@ enum SendMessage {
 }
 
 const SendMessageField = () => {
-  const message = useSelector((state: RootState) => state.chattingSlice.sendMessage);
+  const sendMessage = useSelector((state: RootState) => state.chattingSlice.sendMessage);
   const currentUser = useSelector((state: RootState) => state.chattingSlice.currentUser);
   const dispatch = useDispatch();
+  const myId = Number(localStorage.getItem('id'));
+
+  const isSpace = (inputValue: string) => {
+    if (inputValue.trim() === '') {
+      return true;
+    }
+    return false;
+  };
 
   const socket = useSocket();
   const handleClick = () => {
-    console.log(socket);
+    if (isSpace(sendMessage)) {
+      return;
+    }
+
+    // 상대방에게 메시지 전송
     socket?.emit('send_message', {
       recver_id: currentUser.id,
-      message: message
+      message: sendMessage
     });
+
+    // 내 채팅방 화면 업데이트
+    dispatch(
+      setChattingMessage({
+        sender_id: myId,
+        message: sendMessage
+      })
+    );
+
+    // 메세지 전송 후 스크롤을 아래로 내송
+    dispatch(setScrollDirection('down'));
+
+    // 메세지 전송 후 클리어
+    dispatch(setSendMessage(''));
+  };
+
+  const typingMessage = (e: any) => {
+    dispatch(setSendMessage(e.target.value));
+  };
+
+  const pressEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      // Shift 키가 눌려있는 경우를 제외
+      e.preventDefault(); // 기본 엔터 동작을 막음
+      handleClick(); // 메시지 전송 함수 호출
+    }
   };
 
   return (
@@ -30,8 +68,9 @@ const SendMessageField = () => {
       <div className="flex items-center px-3 py-3 rounded-b-xl border bg-gray-50 ">
         <textarea
           id="chat"
-          value={message}
-          onChange={e => dispatch(setSendMessage(e.target.value))}
+          value={sendMessage}
+          onKeyDown={pressEnter}
+          onChange={typingMessage}
           rows={2}
           maxLength={SendMessage.MAX_LENGTH}
           placeholder={`Your message... (.../${SendMessage.MAX_LENGTH})`}

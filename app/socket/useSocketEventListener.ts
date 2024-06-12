@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 import { Events, registerSocketEvent, unRegisterSocketEvent } from './socket';
 import { Socket } from 'socket.io-client';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setChattingMessage, setChattingNoti } from '../redux/slices/chattingSlice';
 import { setFancyNoti } from '../redux/slices/fancySlice';
 import { setHistoryNoti } from '../redux/slices/historySlice';
+import { RootState } from '@/redux/store';
 
-type useSocketEventListenProps = {
+type useSocketEventListenerProps = {
   socket: Socket | undefined;
 };
 
-function useSocketEventListen({ socket }: useSocketEventListenProps) {
+function useSocketEventListener({ socket }: useSocketEventListenerProps) {
   const dispatch = useDispatch();
+  const myId = useSelector((state: RootState) => state.accountSlice.user.id);
+  const targetId = useSelector((state: RootState) => state.chattingSlice.currentUser.id);
 
   useEffect(() => {
     if (!socket) return;
@@ -35,7 +38,12 @@ function useSocketEventListen({ socket }: useSocketEventListenProps) {
       // 채팅 관련
       {
         event: 'send_message',
-        handler: data => dispatch(setChattingMessage(data))
+        handler: data => {
+          const sender = data.senderId;
+          if (sender === myId || sender === targetId) {
+            dispatch(setChattingMessage(data));
+          }
+        }
       }
 
       // { event: 'read_message', handler: () => {} },
@@ -55,4 +63,4 @@ function useSocketEventListen({ socket }: useSocketEventListenProps) {
   }, [socket]);
 }
 
-export default useSocketEventListen;
+export default useSocketEventListener;

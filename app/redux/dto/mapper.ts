@@ -32,7 +32,7 @@ const mappingTable = new Map<string, string>([
   ['new', 'new'],
   ['status', 'status'],
   ['sender_id', 'senderId'],
-  ['msg', 'message'],
+  ['message', 'message'],
   ['msg_time', 'time']
 ]);
 

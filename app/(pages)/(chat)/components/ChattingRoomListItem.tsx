@@ -1,4 +1,9 @@
-import { getChattingMessages, setChattingListModal, setChattingUser } from '@/redux/slices/chattingSlice';
+import {
+  getChattingMessages,
+  setChattingListModal,
+  setChattingUser,
+  setScrollDirection
+} from '@/redux/slices/chattingSlice';
 import { RootState } from '@/redux/store';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +25,7 @@ function ChattingRoomListItem({ user }: ChattingRoomListItemProps) {
         );
         dispatch(setChattingUser(user));
         dispatch(setChattingListModal(false));
+        dispatch(setScrollDirection('down'));
       }}
       className="flex items-end p-4 gap-2 border-b hover:brightness-50 bg-white"
     >

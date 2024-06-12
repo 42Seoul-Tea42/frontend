@@ -1,14 +1,17 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { serverToClientMapper } from '../dto/mapper';
+import { AccountState } from './accountSlice';
+import _ from 'lodash';
 
 interface ChattingState {
   users: [];
   currentUser: any;
-  messages: [];
+  messages: any[];
   sendMessage: string;
   chattingNoti: boolean;
   chattingListModal: boolean;
+  scrollDirection: 'up' | 'down';
   loading: boolean;
   error: string | null;
 }
@@ -17,6 +20,7 @@ export const initialState: ChattingState = {
   users: [],
   currentUser: {},
   messages: [],
+  scrollDirection: 'down',
   sendMessage: '',
   chattingListModal: true,
   chattingNoti: false,
@@ -33,7 +37,8 @@ export const getChattingMessages = createAsyncThunk(
   'chattingSlice/getChattingMessages',
   async ({ targetId, time }: { targetId: string; time: string }) => {
     const response = await axiosInstance.get(`/chat/msg?target_id=${targetId}&time=${time}`);
-    return response.data.msg_list.map((msg: any) => serverToClientMapper(msg));
+    const messages = response.data.msg_list.map((msg: any) => serverToClientMapper(msg));
+    return messages.reverse();
   }
 );
 
@@ -42,8 +47,8 @@ const chattingSlice = createSlice({
   initialState,
   reducers: {
     setChattingMessage: (state, action) => {
-      // 보고 있는 유저의 아이디인지 체크해서 메세지를 추가
-      console.log('받은 메세지', action.payload);
+      const data = serverToClientMapper(action.payload);
+      state.messages = [...state.messages, data];
     },
     setChattingNoti: (state, action) => {
       state.chattingNoti = action.payload;
@@ -56,6 +61,9 @@ const chattingSlice = createSlice({
     },
     setChattingUser: (state, action) => {
       state.currentUser = action.payload;
+    },
+    setScrollDirection: (state, action) => {
+      state.scrollDirection = action.payload;
     }
   },
 
@@ -79,7 +87,7 @@ const chattingSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getChattingMessages.fulfilled, (state, action: PayloadAction<[]>) => {
-      state.messages = action.payload;
+      state.messages = [...action.payload, ...state.messages];
     });
     builder.addCase(getChattingMessages.rejected, (state, action) => {
       state.loading = false;
@@ -88,8 +96,14 @@ const chattingSlice = createSlice({
   }
 });
 
-export const { setChattingUser, setChattingMessage, setChattingNoti, setSendMessage, setChattingListModal } =
-  chattingSlice.actions;
+export const {
+  setScrollDirection,
+  setChattingUser,
+  setChattingMessage,
+  setChattingNoti,
+  setSendMessage,
+  setChattingListModal
+} = chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 
 export default chattingSlice.reducer;

@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
+import { serverToClientMapper } from '../dto/mapper';
 
 interface HistoryState {
   users: any[];
@@ -15,9 +16,9 @@ export const initialState: HistoryState = {
   historyNoti: false
 };
 
-export const getHistoryUserList = createAsyncThunk('historySlice/getHistoryUserList', async (time: Date) => {
-  const response = await axiosInstance.get(`/history/history-list?time=${time.toISOString()}`);
-  const users = response.data.profiles.map((user: any) => new UserListDTO(user));
+export const getHistoryUserList = createAsyncThunk('historySlice/getHistoryUserList', async (time: string) => {
+  const response = await axiosInstance.get(`/history/history-list?time=${time}`);
+  const users = response.data.profiles.map((user: any) => serverToClientMapper(user));
   return users;
 });
 

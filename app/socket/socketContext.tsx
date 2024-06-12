@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Socket, io } from 'socket.io-client';
-import useSocketEventListen from './useSocketEventListen';
+import useSocketEventListener from './useSocketEventListener';
 
 // SocketContext 생성
 const SocketContext = createContext<Socket | undefined>(undefined);
@@ -16,7 +16,7 @@ export const useSocket = () => {
 export function SocketProvider({ children }: { children: React.ReactNode }) {
   const [socket, setSocket] = useState<Socket>();
   const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || '';
-  useSocketEventListen({ socket: socket });
+  useSocketEventListener({ socket: socket });
 
   // handle connect/disconnect
   useEffect(() => {
