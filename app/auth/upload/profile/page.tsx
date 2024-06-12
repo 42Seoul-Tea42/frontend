@@ -4,7 +4,7 @@ import { GenderRadioInput, IntroductionInput, SexualPreferenceRadioInput } from 
 import ImageUploadGrid from '@/(pages)/setting/components/ImageUploadGrid';
 import { SubmitButton } from '@/UI';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
-import { patchUserProfile } from '@/redux/slices/loginSlice';
+import { patchUserProfile } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Profile = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const profileImage = useSelector((state: RootState) => state.accountSlice.user.photo.photos);
+  const profileImage = useSelector((state: RootState) => state.accountSlice.user.pictures);
   const profileCheck = useSelector((state: RootState) => state.loginSlice.steps.profileCheck);
 
   const submitProfile = () => {

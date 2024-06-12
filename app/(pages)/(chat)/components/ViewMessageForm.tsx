@@ -37,7 +37,7 @@ const ViewMessageForm = () => {
     >
       {messages.map((message, index) => (
         <div key={index}>
-          <MessageItem message={message.message} time={message.msg_time} me={message.sender === myId} />
+          <MessageItem message={message} />
         </div>
       ))}
       {!hasMoreMessages && <div className="text-center text-gray-500 mt-2">더 이상 메시지가 없습니다.</div>}

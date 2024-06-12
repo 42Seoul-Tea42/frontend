@@ -32,7 +32,7 @@ const InterestsSelector: React.FC = () => {
   }));
 
   return (
-    <>
+    <div className="max-w-96">
       {items.map((item, index) => (
         <InterestsButton
           value={item.value}
@@ -44,7 +44,7 @@ const InterestsSelector: React.FC = () => {
           text={item.text}
         />
       ))}
-    </>
+    </div>
   );
 };
 

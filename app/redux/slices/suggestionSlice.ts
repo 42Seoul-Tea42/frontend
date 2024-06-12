@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
-import { getLogout } from './loginSlice';
 import { serverToClientMapper } from '../dto/mapper';
 
 interface SuggestionState {

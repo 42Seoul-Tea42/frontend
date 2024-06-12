@@ -25,6 +25,7 @@ const appReducer = combineReducers({
 const rootReducer = (state: any, action: any) => {
   // 모든 리듀서 강제 초기화 || 로그아웃 성공시 초기화
   if (action.type === 'RESET' || action.type === getLogout.fulfilled.type) {
+    localStorage.clear();
     state = {
       chattingSlice: chattingInit,
       historySlice: historyInit,
@@ -37,6 +38,7 @@ const rootReducer = (state: any, action: any) => {
       profileInquirySlice: profileInquiryInit
     };
   }
+
   return appReducer(state, action);
 };
 

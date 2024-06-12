@@ -1,10 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
-import { getLogout } from './loginSlice';
 import { serverToClientMapper } from '../dto/mapper';
 
 interface ChattingState {
   users: [];
+  currentUser: any;
   messages: [];
   sendMessage: string;
   chattingNoti: boolean;
@@ -15,6 +15,7 @@ interface ChattingState {
 
 export const initialState: ChattingState = {
   users: [],
+  currentUser: {},
   messages: [],
   sendMessage: '',
   chattingListModal: true,
@@ -32,7 +33,7 @@ export const getChattingMessages = createAsyncThunk(
   'chattingSlice/getChattingMessages',
   async ({ targetId, time }: { targetId: string; time: string }) => {
     const response = await axiosInstance.get(`/chat/msg?target_id=${targetId}&time=${time}`);
-    return response.data;
+    return response.data.msg_list.map((msg: any) => serverToClientMapper(msg));
   }
 );
 
@@ -52,6 +53,9 @@ const chattingSlice = createSlice({
     },
     setChattingListModal: (state, action) => {
       state.chattingListModal = action.payload;
+    },
+    setChattingUser: (state, action) => {
+      state.currentUser = action.payload;
     }
   },
 
@@ -84,7 +88,8 @@ const chattingSlice = createSlice({
   }
 });
 
-export const { setChattingMessage, setChattingNoti, setSendMessage, setChattingListModal } = chattingSlice.actions;
+export const { setChattingUser, setChattingMessage, setChattingNoti, setSendMessage, setChattingListModal } =
+  chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 
 export default chattingSlice.reducer;

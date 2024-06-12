@@ -30,7 +30,10 @@ const mappingTable = new Map<string, string>([
   ['occupied', 'occupied'],
   ['error', 'error'],
   ['new', 'new'],
-  ['status', 'status']
+  ['status', 'status'],
+  ['sender_id', 'senderId'],
+  ['msg', 'message'],
+  ['msg_time', 'time']
 ]);
 
 export function serverToClientMapper(serverData: any): any {

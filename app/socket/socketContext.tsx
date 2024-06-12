@@ -20,12 +20,17 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
 
   // handle connect/disconnect
   useEffect(() => {
+    const id = localStorage.getItem('id');
+
     const socketInstance = io(serverURL, {
       withCredentials: false,
       autoConnect: false,
       transports: ['websocket', 'polling'],
       closeOnBeforeunload: true,
-      reconnection: false
+      reconnection: false,
+      auth: {
+        id: id
+      }
     });
 
     socketInstance.on('connect', () => {
@@ -39,6 +44,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
     });
 
     socketInstance.connect();
+    console.log('socket: ', socketInstance);
 
     return () => {
       socketInstance.disconnect();

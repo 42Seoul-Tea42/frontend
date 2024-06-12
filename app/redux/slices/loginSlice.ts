@@ -110,14 +110,15 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(postLogin.fulfilled, (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
       state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
+      localStorage.setItem('login', 'true');
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
       state.error = '로그인 실패했습니다. 다시 시도해주세요.';
       state.steps.isLogin = false;
+      localStorage.setItem('login', 'false');
     });
 
     // 로그인 상태 확인하기

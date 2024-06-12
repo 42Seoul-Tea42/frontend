@@ -29,7 +29,6 @@ const useFilter = (users: any[]): any[] => {
       const isInterestMatch =
         params.interests.length === 0 || _.some(user.interests, interest => _.includes(params.interests, interest));
 
-      console.log(user.interests, params.interests);
       return isAgeMatch && isDistanceMatch && isRatingMatch && isInterestMatch ? user : null;
     });
 

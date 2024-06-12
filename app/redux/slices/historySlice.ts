@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
-import { getLogout } from './loginSlice';
 
 interface HistoryState {
   users: any[];
@@ -18,7 +17,7 @@ export const initialState: HistoryState = {
 
 export const getHistoryUserList = createAsyncThunk('historySlice/getHistoryUserList', async (time: Date) => {
   const response = await axiosInstance.get(`/history/history-list?time=${time.toISOString()}`);
-  const users = response.data.profiles.map((user: UserListDTO) => new UserListDTO(user));
+  const users = response.data.profiles.map((user: any) => new UserListDTO(user));
   return users;
 });
 
@@ -35,7 +34,7 @@ const historySlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getHistoryUserList.fulfilled, (state, action: PayloadAction<UserListDTO[]>) => {
+    builder.addCase(getHistoryUserList.fulfilled, (state, action: PayloadAction<any[]>) => {
       state.users = action.payload;
       state.loading = false;
     });

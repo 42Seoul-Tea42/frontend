@@ -68,6 +68,10 @@ export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile'
   return response.status;
 });
 
+export const saveIdToLocalStorage = (id: string) => {
+  localStorage.setItem('id', id);
+};
+
 // 비밀번호 재설정하기
 export const postResetPassword = createAsyncThunk(
   'accountSlice/postResetPassword',
@@ -165,15 +169,20 @@ const accountSlice = createSlice({
       state.error = action.error.message ?? null;
     });
 
-    // 로그인시 내정보 세팅
+    // 이메일 로그인
     builder.addCase(postLogin.fulfilled, (state, action) => {
       state.user = { ...state.user, ...action.payload };
+      saveIdToLocalStorage(action.payload.id);
     });
+    // 구글 로그인
     builder.addCase(getGoogleLogin.fulfilled, (state, action) => {
       state.user = { ...state.user, ...action.payload };
+      saveIdToLocalStorage(action.payload.id);
     });
+    // 카카오 로그인
     builder.addCase(getKaKaoLogin.fulfilled, (state, action) => {
       state.user = { ...state.user, ...action.payload };
+      saveIdToLocalStorage(action.payload.id);
     });
 
     // 비밀번호 재설정하기

@@ -12,15 +12,10 @@ import useLoginRedirect from '../hooks/useLoginRedirect';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  // dev test용 주석
-  // 로그인 체크
-  // useEffect(() => {
-  //   dispatch<any>(getLogin());
-  // }, []);
 
   // 로그인 유저 체크 훅
   const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
-  // useLoginRedirect();
+  useLoginRedirect();
 
   const dispatch = useDispatch();
   const router = useRouter();
