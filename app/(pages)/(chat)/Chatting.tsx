@@ -6,10 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ChatContent from './components/ChattingContent';
 import ChattingMenuBar from './components/ChattingMenuBar';
 import ViewMessageForm from './components/ViewMessageForm';
-import ChattingMenuButton from './components/ChattingMenuButton';
-import ChattingRoomListVisibleControl from './components/ChattingRoomListVisibleControl';
 import SendMessageField from './components/SendMessageField';
-import { useCloseOnOutsideClick } from '../hooks';
 import { RootState } from '@/redux/store';
 
 const Chatting: React.FC = () => {

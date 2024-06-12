@@ -13,6 +13,7 @@ export const usersInquirySetDummy = [
     distance: 10,
     age: 25,
     gender: '',
-    pictures: ['/emoji/1.png']
+    picture: '/emoji/3.jpg',
+    pictures: ['/emoji/3.jpg']
   }
 ];

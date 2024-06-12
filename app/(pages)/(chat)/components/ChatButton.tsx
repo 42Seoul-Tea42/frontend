@@ -3,10 +3,11 @@ import { MessageSVG } from '@/svg';
 import { useSelector } from 'react-redux';
 
 interface ChatButtonProps {
+  isOpen: boolean;
   onClick: () => void;
 }
 
-const ChatButton: React.FC<ChatButtonProps> = ({ onClick }) => {
+const ChatButton: React.FC<ChatButtonProps> = ({ isOpen, onClick }) => {
   const chatNoti = useSelector((state: RootState) => state.chattingSlice.chattingNoti);
 
   return (
@@ -17,7 +18,7 @@ const ChatButton: React.FC<ChatButtonProps> = ({ onClick }) => {
       <div className={chatNoti ? 'animate-pulse' : 'hidden'}>
         <span className="bg-green-500 absolute top-0 right-0 w-5 h-5 border-2 border-white rounded-full"></span>
       </div>
-      <MessageSVG />
+      {isOpen ? 'X' : <MessageSVG />}
       <p className="font-bold">Chat</p>
     </button>
   );

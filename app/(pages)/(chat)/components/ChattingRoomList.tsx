@@ -19,11 +19,9 @@ function ChattingRoomList() {
   return (
     <div className={visible ? '' : 'hidden'}>
       <ul className="absolute w-96 h-full overflow-hidden border rounded-xl bg-green-50">
-        {Array.isArray(users) ? (
-          users.map((user, index) => <ChattingRoomListItem key={index} user={user} />)
-        ) : (
-          <p>No users available</p>
-        )}
+        {users.map((user, index) => (
+          <ChattingRoomListItem key={index} user={user} />
+        ))}
       </ul>
     </div>
   );
