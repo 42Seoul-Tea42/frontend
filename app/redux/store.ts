@@ -1,27 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import historySlice from './slices/historySlice';
-import fancySlice from './slices/fancySlice';
-import suggestionSlice from './slices/suggestionSlice';
-import accountSlice from './slices/accountSlice';
-import signupSlice from './slices/signupSlice';
-import loginSlice from './slices/loginSlice';
-import searchSlice from './slices/searchSlice';
-import profileInquirySlice from './slices/profileInquirySlice';
-import chattingSlice from './slices/chattingSlice';
+import rootReducer from './rootReducer';
 
 const store = configureStore({
-  reducer: {
-    historySlice: historySlice,
-    fancySlice: fancySlice,
-    suggestionSlice: suggestionSlice,
-    accountSlice: accountSlice,
-    signupSlice: signupSlice,
-    loginSlice: loginSlice,
-    searchSlice: searchSlice,
-    profileInquirySlice: profileInquirySlice,
-    chattingSlice: chattingSlice
-  },
+  reducer: rootReducer,
   middleware: (
     getDefaultMiddleware: (arg0: {
       serializableCheck: boolean; // dev: false, prod: true

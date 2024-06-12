@@ -11,7 +11,7 @@ interface FancyState {
   error: string | null;
 }
 
-const initialState: FancyState = {
+export const initialState: FancyState = {
   users: [],
   fancyNoti: false,
   loading: false,
@@ -111,17 +111,6 @@ const fancySlice = createSlice({
     builder.addCase(patchUnFancy.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
-    });
-
-    // 로그아웃
-    builder.addCase(getLogout.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getLogout.fulfilled, () => initialState);
-    builder.addCase(getLogout.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
     });
   }
 });

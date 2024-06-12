@@ -11,7 +11,7 @@ interface ProfileInquiryState {
   error: string | null;
 }
 
-const initialState: ProfileInquiryState = {
+export const initialState: ProfileInquiryState = {
   user: {
     loginId: '',
     status: 0,
@@ -101,17 +101,6 @@ const profileInquirySlice = createSlice({
       state.loading = false;
     });
     builder.addCase(blockUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
-
-    // 로그아웃
-    builder.addCase(getLogout.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getLogout.fulfilled, () => initialState);
-    builder.addCase(getLogout.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

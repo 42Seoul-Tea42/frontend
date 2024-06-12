@@ -9,7 +9,6 @@ const ViewMessageForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasMoreMessages, setHasMoreMessages] = useState<boolean>(true);
   const messages = useSelector((state: RootState) => state.chattingSlice.messages);
-  const myId = useSelector((state: RootState) => state.accountSlice.user.id);
 
   const scrollToBottom = () => {
     if (containerRef.current) {
@@ -36,11 +35,11 @@ const ViewMessageForm = () => {
       ref={containerRef}
       onScroll={loadPreviousMessages}
     >
-      {/* {messages.map((message, index) => (
+      {messages.map((message, index) => (
         <div key={index}>
           <MessageItem message={message.message} time={message.msg_time} me={message.sender === myId} />
         </div>
-      ))} */}
+      ))}
       {!hasMoreMessages && <div className="text-center text-gray-500 mt-2">더 이상 메시지가 없습니다.</div>}
     </div>
   );

@@ -5,6 +5,7 @@ import { Gender } from '../enum';
 import { serverToClientMapper } from '../dto/mapper';
 import { updateEmojiList } from './updateEmoji';
 import _ from 'lodash';
+import { RootState } from '../store';
 
 export interface AccountState {
   user: any;
@@ -14,7 +15,7 @@ export interface AccountState {
   error: string | null;
 }
 
-const initialState = {
+export const initialState = {
   user: {
     id: '',
     loginId: '',
@@ -184,17 +185,6 @@ const accountSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(postResetPassword.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
-
-    // 로그아웃
-    builder.addCase(getLogout.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getLogout.fulfilled, () => initialState);
-    builder.addCase(getLogout.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

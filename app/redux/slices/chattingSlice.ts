@@ -13,7 +13,7 @@ interface ChattingState {
   error: string | null;
 }
 
-const initialState: ChattingState = {
+export const initialState: ChattingState = {
   users: [],
   messages: [],
   sendMessage: '',
@@ -54,6 +54,7 @@ const chattingSlice = createSlice({
       state.chattingListModal = action.payload;
     }
   },
+
   // 채팅방 목록 가져오기
   extraReducers: builder => {
     builder.addCase(getChattingList.pending, state => {
@@ -77,17 +78,6 @@ const chattingSlice = createSlice({
       state.messages = action.payload;
     });
     builder.addCase(getChattingMessages.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
-
-    // 로그아웃
-    builder.addCase(getLogout.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getLogout.fulfilled, () => initialState);
-    builder.addCase(getLogout.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });

@@ -1,16 +1,15 @@
 import { PayloadAction, createAsyncThunk, createSlice, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getLogout } from './loginSlice';
-import { UserListDTO } from '../dto/mapper';
 
 interface HistoryState {
-  users: UserListDTO[];
+  users: any[];
   loading: boolean;
   error: string | null;
   historyNoti: boolean;
 }
 
-const initialState: HistoryState = {
+export const initialState: HistoryState = {
   users: [],
   loading: false,
   error: null,
@@ -43,17 +42,6 @@ const historySlice = createSlice({
     builder.addCase(getHistoryUserList.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
-    });
-
-    // 로그아웃
-    builder.addCase(getLogout.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getLogout.fulfilled, () => initialState);
-    builder.addCase(getLogout.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
     });
   }
 });

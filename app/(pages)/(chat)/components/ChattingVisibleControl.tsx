@@ -8,10 +8,10 @@ type ChatVisibleControlProps = {
 };
 
 function ChattingVisibleControl({ props }: ChatVisibleControlProps) {
+  const dispatch = useDispatch();
   const [dragRef, isFloatingChattingVisible, setIsFloatingChattingVisible] = useCloseOnOutsideClick({
     initialState: true
   });
-  const dispatch = useDispatch();
 
   const onClick = () => {
     dispatch(setChattingNoti(false));

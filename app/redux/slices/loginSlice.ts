@@ -19,7 +19,7 @@ interface LoginState {
   error: string | null;
 }
 
-const initialState: LoginState = {
+export const initialState: LoginState = {
   idPasswordLoginFormView: false,
   isResendEmail: false,
   steps: {

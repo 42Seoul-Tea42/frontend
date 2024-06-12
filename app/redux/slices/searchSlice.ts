@@ -20,7 +20,7 @@ interface SearchState {
   error: string | null;
 }
 
-const initialState: SearchState = {
+export const initialState: SearchState = {
   users: [],
   searchParams: {
     minAge: 1,
@@ -86,17 +86,6 @@ const fancySlice = createSlice({
       state.users = action.payload;
     });
     builder.addCase(postSearch.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
-
-    // 로그아웃
-    builder.addCase(getLogout.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getLogout.fulfilled, () => initialState);
-    builder.addCase(getLogout.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
