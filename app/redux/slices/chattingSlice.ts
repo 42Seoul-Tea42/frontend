@@ -6,9 +6,9 @@ import { serverToClientMapper } from '../dto/mapper';
 interface ChattingState {
   users: [];
   messages: [];
-  selected: number;
   sendMessage: string;
   chattingNoti: boolean;
+  chattingListModal: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -16,8 +16,8 @@ interface ChattingState {
 const initialState: ChattingState = {
   users: [],
   messages: [],
-  selected: 0,
   sendMessage: '',
+  chattingListModal: true,
   chattingNoti: false,
   loading: false,
   error: null
@@ -50,8 +50,8 @@ const chattingSlice = createSlice({
     setSendMessage: (state, action) => {
       state.sendMessage = action.payload;
     },
-    setSelected: (state, action) => {
-      state.selected = action.payload;
+    setChattingListModal: (state, action) => {
+      state.chattingListModal = action.payload;
     }
   },
   // 채팅방 목록 가져오기
@@ -94,7 +94,7 @@ const chattingSlice = createSlice({
   }
 });
 
-export const { setSelected, setChattingMessage, setChattingNoti, setSendMessage } = chattingSlice.actions;
+export const { setChattingMessage, setChattingNoti, setSendMessage, setChattingListModal } = chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 
 export default chattingSlice.reducer;

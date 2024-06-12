@@ -1,14 +1,11 @@
+import { setChattingListModal } from '@/redux/slices/chattingSlice';
 import { RootState } from '@/redux/store';
 import { HamburgerSVG } from '@/svg';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
-type ChattingMenuBarProps = {
-  setIsModalOpen: any;
-};
-
-function ChattingMenuBar({ setIsModalOpen }: ChattingMenuBarProps) {
+import { useDispatch, useSelector } from 'react-redux';
+function ChattingMenuBar() {
   const users = useSelector((state: RootState) => state.chattingSlice.users);
-  const selected = useSelector((state: RootState) => state.chattingSlice.selected);
+  const dispatch = useDispatch();
   return (
     <div className="flex items-center p-4 border rounded-t-xl">
       <div className="relative">
@@ -17,7 +14,7 @@ function ChattingMenuBar({ setIsModalOpen }: ChattingMenuBarProps) {
       </div>
       <p className="grow text-xl ml-5 font-semibold text-gray-800 ">{'name'}</p>
       <button
-        onClick={() => setIsModalOpen(true)}
+        onClick={() => dispatch(setChattingListModal(true))}
         className="border-2 p-1 rounded-lg flex justify-center items-center hover:bg-gray-200"
       >
         <HamburgerSVG />

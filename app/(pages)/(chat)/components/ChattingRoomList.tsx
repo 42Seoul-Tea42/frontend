@@ -4,14 +4,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { getChattingList } from '@/redux/slices/chattingSlice';
+import { usersInquirySetDummy } from '@/UserDummy';
 
-interface ChattingRoomListProps {
-  isModalOpen: boolean;
-  setIsModalOpen: any;
-}
-
-function ChattingRoomList({ isModalOpen, setIsModalOpen }: ChattingRoomListProps) {
-  const users = useSelector((state: RootState) => state.chattingSlice.users);
+function ChattingRoomList() {
+  // const users = useSelector((state: RootState) => state.chattingSlice.users);
+  const visible = useSelector((state: RootState) => state.chattingSlice.chattingListModal);
+  const users = usersInquirySetDummy;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,17 +17,15 @@ function ChattingRoomList({ isModalOpen, setIsModalOpen }: ChattingRoomListProps
   }, []);
 
   return (
-    <>
-      <ul className="overflow-hidden border rounded-xl">
+    <div className={visible ? '' : 'hidden'}>
+      <ul className="absolute w-96 h-full overflow-hidden border rounded-xl bg-green-50">
         {Array.isArray(users) ? (
-          users.map((user, index) => (
-            <ChattingRoomListItem key={index} user={user} onClick={() => setIsModalOpen(false)} />
-          ))
+          users.map((user, index) => <ChattingRoomListItem key={index} user={user} />)
         ) : (
           <p>No users available</p>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 

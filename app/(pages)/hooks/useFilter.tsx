@@ -34,8 +34,9 @@ const useFilter = (users: any[]): any[] => {
     });
 
     setFilteredUsers(filetered);
-    console.log('filetered', filetered);
-    // dispatch(initSearchParams());
+
+    //range bar 초기화 안되는 경우 최댓값이 이전 값으로 유지되는 현상 방지
+    dispatch(initSearchParams());
   };
 
   return [fileteredUsers, onFilter] as const;
