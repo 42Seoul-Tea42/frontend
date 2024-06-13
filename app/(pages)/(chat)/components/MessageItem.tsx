@@ -17,7 +17,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
           <span className="text-sm font-normal text-gray-500">{message.time ? formatTime(message.time) : ''}</span>
         </div>
-        <p className="text-sm font-normal py-2.5 text-gray-900">{message.message}</p>
+        <p className="whitespace-pre text-sm font-normal py-2.5 text-gray-900">{message.message}</p>
       </div>
     </div>
   );
