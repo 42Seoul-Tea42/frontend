@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import NavigationNoti from './NavigationNoti';
 import { RootState } from '@/redux/store';
 import requestUserLocation from '@/api/location';
-import { HomeNavBarButton } from '@/UI';
+import { HomeNavBarButton } from '@/ui';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
 import useLoginRedirect from '../hooks/useLoginRedirect';
 

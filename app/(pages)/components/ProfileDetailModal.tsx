@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import UserProfileCarousel from './ProfileDetailCarousel';
 import { useDispatch, useSelector } from 'react-redux';
-import { BlueHyperLink, ProfileDetailModalContents } from '@/UI';
+import { BlueHyperLink, ProfileDetailModalContents } from '@/ui';
 import { blockUser, reportUser } from '@/redux/slices/profileInquirySlice';
 import { usersInquirySetDummy } from '@/UserDummy';
 import { RootState } from '@/redux/store';

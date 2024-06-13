@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { RootState } from '@/redux/store';
 import { patchUserProfile } from '@/redux/slices/loginSlice';
-import { SubmitButton } from '@/UI';
+import { SubmitButton } from '@/ui';
 
 const Emoji = () => {
   const router = useRouter();

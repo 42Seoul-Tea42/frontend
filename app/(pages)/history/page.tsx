@@ -6,7 +6,7 @@ import UserCards from '../home/UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { getHistoryUserList, setHistoryNoti } from '@/redux/slices/historySlice';
 import { RootState } from '@/redux/store';
-import { MainContentsArea } from '@/UI';
+import { MainContentsArea } from '@/ui';
 
 function History() {
   const dispatch = useDispatch();

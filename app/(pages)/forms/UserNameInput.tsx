@@ -1,4 +1,4 @@
-import { InputFloatingLabel } from '@/UI';
+import { InputFloatingLabel } from '@/ui';
 import { setAccountFirstname, setAccountLastname } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';

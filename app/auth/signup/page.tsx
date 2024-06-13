@@ -17,7 +17,7 @@ import ReEnterPassword from '@/(pages)/forms/ReEnterPassword';
 import Indicator from '@/(pages)/components/Indicator';
 import { RootState } from '@/redux/store';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '@/(pages)/forms';
-import { SubmitButton } from '@/UI';
+import { SubmitButton } from '@/ui';
 
 const Signup: React.FC = () => {
   const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);

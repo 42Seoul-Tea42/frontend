@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { AccordionItems, SubmitButton } from '@/UI';
+import { AccordionItems, SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
 import ReEnterPassword from '../forms/ReEnterPassword';
@@ -28,6 +28,8 @@ const Setting: React.FC = () => {
   useEffect(() => {
     dispatch<any>(getMyAccount());
   }, []);
+
+  useEffect(() => {});
 
   const submitAccountSetting = () => {
     dispatch<any>(patchUserProfile());

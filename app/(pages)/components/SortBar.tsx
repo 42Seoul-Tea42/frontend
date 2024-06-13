@@ -1,4 +1,4 @@
-import { SortButton } from '@/UI';
+import { SortButton } from '@/ui';
 
 type SortBarProps = {
   items: { text: string; sortBy: string }[];

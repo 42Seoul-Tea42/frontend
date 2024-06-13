@@ -2,7 +2,7 @@
 import Indicator from '@/(pages)/components/Indicator';
 import { EmailInput, LoginIdInput, PasswordInput } from '@/(pages)/forms';
 import CardForm from '@/(pages)/forms/CardForm';
-import { SubmitButton } from '@/UI';
+import { SubmitButton } from '@/ui';
 import { getResendEmail } from '@/redux/slices/loginSlice';
 import { getCheckDuplicateEmail, setIsEmailDuplicateChecked } from '@/redux/slices/signupSlice';
 import { RootState } from '@/redux/store';

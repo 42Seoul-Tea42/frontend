@@ -1,7 +1,7 @@
 import InputRangeStarBar from './InputRangeStarBar';
 import InputRangeDistance from './InputRangeDistance';
 import InputMinMaxAge from './InputMinMaxAge';
-import { DrawerItem, DrawerOpenButton, SubmitButton } from '@/UI';
+import { DrawerItem, DrawerOpenButton, SubmitButton } from '@/ui';
 import { useCloseOnOutsideClick } from '@/(pages)/hooks';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 

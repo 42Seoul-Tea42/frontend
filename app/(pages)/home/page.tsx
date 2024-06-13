@@ -11,7 +11,7 @@ import UserCards from './UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { RootState } from '@/redux/store';
 import { getSuggestionUsers } from '@/redux/slices/suggestionSlice';
-import { MainContentsArea } from '@/UI';
+import { MainContentsArea } from '@/ui';
 
 function Home() {
   const dispatch = useDispatch();

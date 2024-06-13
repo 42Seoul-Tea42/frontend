@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginPageDetail from './LoginPageDetail';
-import { AllSignOptionButton, CreateAccountButton, BlueHyperLink, LoginFormChangeButton } from '@/UI';
+import { AllSignOptionButton, CreateAccountButton, BlueHyperLink, LoginFormChangeButton } from '@/ui';
 import { useEffect } from 'react';
 import NaverLoginButton from './NaverLoginButton';
 import AppleLoginButton from './AppleLoginButton';

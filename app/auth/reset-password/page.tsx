@@ -8,7 +8,7 @@ import CardForm from '@/(pages)/forms/CardForm';
 import { postResetPassword } from '@/redux/slices/accountSlice';
 import { LoginIdInput, PasswordInput } from '@/(pages)/forms';
 import ReEnterPassword from '@/(pages)/forms/ReEnterPassword';
-import { SubmitButton } from '@/UI';
+import { SubmitButton } from '@/ui';
 import { getResetPasswordEmail } from '@/redux/slices/loginSlice';
 
 function ResetPasswordDetail() {

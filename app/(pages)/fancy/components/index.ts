@@ -1,3 +1,3 @@
-import { FancyButton } from '@/UI';
+import { FancyButton } from '@/ui';
 
 export default FancyButton;

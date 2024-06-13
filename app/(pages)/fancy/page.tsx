@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { RootState } from '@/redux/store';
 import { getFancyUsers, setFancyNoti } from '@/redux/slices/fancySlice';
-import { MainContentsArea } from '@/UI';
+import { MainContentsArea } from '@/ui';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';

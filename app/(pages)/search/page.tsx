@@ -6,7 +6,7 @@ import { useSort } from '../hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { SearchSVG } from '@/svg';
-import { TableRow } from '@/UI';
+import { TableRow } from '@/ui';
 import { postSearch } from '@/redux/slices/searchSlice';
 
 const Search: React.FC = () => {

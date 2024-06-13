@@ -2,7 +2,7 @@
 
 import { GenderRadioInput, IntroductionInput, SexualPreferenceRadioInput } from '@/(pages)/forms';
 import ImageUploadGrid from '@/(pages)/setting/components/ImageUploadGrid';
-import { SubmitButton } from '@/UI';
+import { SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import { patchUserProfile } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';

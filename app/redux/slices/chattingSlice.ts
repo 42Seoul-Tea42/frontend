@@ -1,7 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { serverToClientMapper } from '../dto/mapper';
-import { AccountState } from './accountSlice';
 import _ from 'lodash';
 
 interface ChattingState {
