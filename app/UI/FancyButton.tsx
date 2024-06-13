@@ -26,11 +26,11 @@ function FancyButton({ fancyState, onClick }: FancyButtonProps) {
       case Fancy.NONE:
         return '';
       case Fancy.SEND:
-        return 'send';
+        return 'sen';
       case Fancy.RECV:
-        return 'recv';
+        return 'rec';
       case Fancy.CONN:
-        return 'connect';
+        return 'con';
       default:
         return '';
     }
@@ -38,10 +38,10 @@ function FancyButton({ fancyState, onClick }: FancyButtonProps) {
 
   return (
     <button onClick={onClick} className="relative">
-      <div className="hover:animate-bounce">
+      <div className="hover:animate-bounce flex items-center">
         <ThumbsUpSVG color={colorPicker()} />
+        <p className="w-4 font-thin text-sm">{textPicker()}</p>
       </div>
-      <p className="absolute top-4 font-thin text-sm">{textPicker()}</p>
     </button>
   );
 }
