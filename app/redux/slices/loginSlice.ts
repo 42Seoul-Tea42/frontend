@@ -197,6 +197,7 @@ const loginSlice = createSlice({
     });
     builder.addCase(patchUserProfile.fulfilled, state => {
       state.steps.profileCheck = true;
+      alert('프로필이 설정되었습니다.');
     });
     builder.addCase(patchUserProfile.rejected, (state, action) => {
       state.loading = false;

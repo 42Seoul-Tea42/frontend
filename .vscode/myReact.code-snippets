@@ -1,0 +1,19 @@
+{
+  "Create React Component Template": {
+    "scope": "*", // 스코프 추가
+    "prefix": ">component",
+    "body": [
+      "function $TM_FILENAME_BASE() {",
+      "  return (",
+      "    <>",
+      "      {/* Your component code here */}",
+      "     <></>",
+      "    </>",
+      "  );",
+      "}",
+      "",
+      "export default $TM_FILENAME_BASE;"
+    ],
+    "description": "Generate React component template based on filename base"
+  }
+}

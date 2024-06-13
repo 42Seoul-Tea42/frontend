@@ -33,7 +33,8 @@ const mappingTable = new Map<string, string>([
   ['status', 'status'],
   ['sender_id', 'senderId'],
   ['message', 'message'],
-  ['msg_time', 'time']
+  ['msg_time', 'time'],
+  ['last_online', 'lastOnline']
 ]);
 
 export function serverToClientMapper(serverData: any): any {

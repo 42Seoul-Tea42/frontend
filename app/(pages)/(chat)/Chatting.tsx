@@ -9,7 +9,7 @@ const Chatting: React.FC = () => {
   return (
     // draggable 안쪽 사용자정의 컴포넌트 인식못함 <div>로 감싸줄 것
     <Draggable>
-      <div className="items-center max-w-96 bg-white rounded-xl shadow-lg">
+      <div className="items-center max-w-96 bg-white rounded-xl border-2 border-green-300">
         <ChattingRoomList />
         <ChatContent
           MenuBar={<ChattingMenuBar />}

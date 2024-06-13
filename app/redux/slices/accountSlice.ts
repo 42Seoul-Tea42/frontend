@@ -163,6 +163,7 @@ const accountSlice = createSlice({
     });
     builder.addCase(getMyAccount.fulfilled, (state, action) => {
       state.user = { ...state.user, ...action.payload };
+      state.loading = false;
     });
     builder.addCase(getMyAccount.rejected, (state, action) => {
       state.loading = false;

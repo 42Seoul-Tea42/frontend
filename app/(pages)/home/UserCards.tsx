@@ -1,10 +1,11 @@
 import { Key } from 'react';
 import UserCardPhoto from './UserCardPhoto';
 import { useDispatch } from 'react-redux';
-import { getProfileDetail, setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
+import { getProfileDetail, setProfileInquiryUser, setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
 import { CardsSkeleton, FancyButton, UserCardGrid } from '@/ui';
 import { patchFancy, patchUnFancy } from '@/redux/slices/fancySlice';
 import { Fancy } from '@/redux/enum';
+import _ from 'lodash';
 
 type UserCardsProps = {
   // Add your prop types here
@@ -16,12 +17,24 @@ function UserCards({ users }: UserCardsProps) {
 
   // 유저 상세 조회 클릭시 동작
   const clickUserDetail = (userId: string) => {
+    // 유저 상세 정보 - serverState
     dispatch(setProfileModalVisible(true));
     dispatch<any>(getProfileDetail(userId));
+    // 유저 기본 정보 - localState
+    const selectUser = _.find(users, { id: userId });
+    dispatch(setProfileInquiryUser(selectUser));
   };
 
   const formatName = (name: string) => {
     return name.substring(0, 4);
+  };
+
+  const toggleFancy = (user: any) => {
+    if (user.fancy === Fancy.NONE || user.fancy === Fancy.RECV) {
+      dispatch<any>(patchFancy(user.id));
+    } else {
+      dispatch<any>(patchUnFancy(user.id));
+    }
   };
 
   return (
@@ -44,14 +57,7 @@ function UserCards({ users }: UserCardsProps) {
                       <p className="mr-1 pl-1 pr-1 border rounded-full text-xl text-gray-500">{user.age}</p>
                       <p className="font-thin text-base text-gray-900">{Math.round(user.distance)}km</p>
                       {/* {fancyButton} */}
-                      <FancyButton
-                        fancyState={user.fancy}
-                        onClick={
-                          user.fancy === Fancy.NONE || Fancy.RECV
-                            ? () => dispatch<any>(patchFancy(user.id))
-                            : () => dispatch<any>(patchUnFancy(user.id))
-                        }
-                      />
+                      <FancyButton fancyState={user.fancy} onClick={() => toggleFancy(user)} />
                     </div>
                   </div>
                 </div>

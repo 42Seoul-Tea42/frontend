@@ -1,7 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { serverToClientMapper } from '../dto/mapper';
-import { Gender } from '../enum';
 
 interface ProfileInquiryState {
   user: any;
@@ -11,21 +10,7 @@ interface ProfileInquiryState {
 }
 
 export const initialState: ProfileInquiryState = {
-  user: {
-    loginId: '',
-    status: 0,
-    lastOnline: new Date(),
-    rating: 0,
-    gender: Gender.OTHER,
-    sexualPreference: Gender.OTHER,
-    introduction: '',
-    interests: [],
-    hateInterests: [],
-    emoji: [],
-    hateEmoji: [],
-    simillar: false,
-    pictures: []
-  },
+  user: {},
   profileModalVisible: false,
   loading: false,
   error: null
@@ -34,7 +19,7 @@ export const initialState: ProfileInquiryState = {
 // 유저 프로필 상세 조회
 export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfileDetail', async (userId: string) => {
   const response = await axiosInstance.get(`/user/profile-detail?id=${userId}`);
-  return serverToClientMapper(response.data.profile);
+  return serverToClientMapper(response.data);
 });
 
 // 유저 신고
@@ -61,6 +46,9 @@ const profileInquirySlice = createSlice({
   reducers: {
     setProfileModalVisible: (state, action: PayloadAction<boolean>) => {
       state.profileModalVisible = action.payload;
+    },
+    setProfileInquiryUser: (state, action: PayloadAction<any>) => {
+      state.user = { ...state.user, ...action.payload };
     }
   },
   extraReducers: builder => {
@@ -70,7 +58,7 @@ const profileInquirySlice = createSlice({
       state.error = null;
     });
     builder.addCase(getProfileDetail.fulfilled, (state, action: PayloadAction<any>) => {
-      state.user = action.payload;
+      state.user = { ...state.user, ...action.payload };
       state.loading = false;
     });
     builder.addCase(getProfileDetail.rejected, (state, action) => {
@@ -106,7 +94,7 @@ const profileInquirySlice = createSlice({
   }
 });
 
-export const { setProfileModalVisible } = profileInquirySlice.actions;
+export const { setProfileInquiryUser, setProfileModalVisible } = profileInquirySlice.actions;
 export const extraReducers = profileInquirySlice.reducer;
 
 export default profileInquirySlice.reducer;

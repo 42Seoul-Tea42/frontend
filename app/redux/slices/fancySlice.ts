@@ -71,7 +71,7 @@ const fancySlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getFancyUsers.fulfilled, (state, action: PayloadAction<UserListDTO[]>) => {
+    builder.addCase(getFancyUsers.fulfilled, (state, action: PayloadAction<any[]>) => {
       state.users = action.payload;
       state.loading = false;
     });

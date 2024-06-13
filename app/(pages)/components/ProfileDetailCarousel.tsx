@@ -3,11 +3,15 @@ import Image from 'next/image';
 import { CarouselControlButton, CarouselPaginationButton } from '@/ui';
 
 interface UserProfileCarouselProps {
-  images: string[];
+  images: any[];
 }
 
 const ProfileDetailCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!images) {
+    images = [];
+  }
 
   const prevSlide = () => {
     setActiveIndex(prevIndex => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));

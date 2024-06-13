@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { AccordionItems, SubmitButton } from '@/ui';
@@ -21,15 +21,11 @@ import { getMyAccount, patchUserProfile } from '@/redux/slices/accountSlice';
 
 const Setting: React.FC = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.accountSlice.user);
-  const emojis = useSelector((state: RootState) => state.accountSlice.user.emoji);
-  const hateEmojis = useSelector((state: RootState) => state.accountSlice.user.hateEmoji);
 
+  // 내정보 가져와서 표시
   useEffect(() => {
     dispatch<any>(getMyAccount());
   }, []);
-
-  useEffect(() => {});
 
   const submitAccountSetting = () => {
     dispatch<any>(patchUserProfile());

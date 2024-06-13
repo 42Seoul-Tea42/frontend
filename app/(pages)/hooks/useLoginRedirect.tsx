@@ -30,7 +30,7 @@ function useLoginRedirect() {
           return '/auth/upload/emoji';
         }
       }
-      return '/home';
+      return '';
     };
 
     router.push(redirectToNextStep());
