@@ -2,7 +2,7 @@ import { Key } from 'react';
 import UserCardPhoto from './UserCardPhoto';
 import { useDispatch } from 'react-redux';
 import { getProfileDetail, setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
-import { CardsSkeleton, FancyButton, UserCardGrid } from '@/UI';
+import { CardsSkeleton, FancyButton, UserCardGrid } from '@/ui';
 import { patchFancy, patchUnFancy } from '@/redux/slices/fancySlice';
 import { Fancy } from '@/redux/enum';
 
@@ -20,6 +20,10 @@ function UserCards({ users }: UserCardsProps) {
     dispatch<any>(getProfileDetail(userId));
   };
 
+  const formatName = (name: string) => {
+    return name.substring(0, 4);
+  };
+
   return (
     <UserCardGrid
       items={
@@ -34,10 +38,10 @@ function UserCards({ users }: UserCardsProps) {
                       <UserCardPhoto src={user.picture} alt={user.firstname} />
                     </div>
                   </div>
-                  <div className="w-48 h-12 bg-white rounded-b-lg border-t-2 p-1 pl-2">
-                    <div className="flex items-end gap-2">
-                      <p className="font-semibold text-2xl text-gray-700">{user.firstname}</p>
-                      <p className="mr-2 font-md text-xl text-gray-500">{user.age}</p>
+                  <div className="w-48 h-8 bg-white rounded-b-lg border-t-1 pl-2">
+                    <div className="flex items-end gap-1">
+                      <p className="w-12 font-semibold text-xl text-gray-700">{formatName(user.firstname)}</p>
+                      <p className="mr-1 pl-1 pr-1 border rounded-full text-xl text-gray-500">{user.age}</p>
                       <p className="font-thin text-base text-gray-900">{Math.round(user.distance)}km</p>
                       {/* {fancyButton} */}
                       <FancyButton
