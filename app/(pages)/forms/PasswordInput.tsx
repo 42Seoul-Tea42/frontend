@@ -2,6 +2,7 @@ import { InputFloatingLabel } from '@/ui';
 import { setAccountPassword } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { InputLimitLength } from '@/redux/enum';
 
 const PasswordInput: React.FC = () => {
   const password = useSelector((state: RootState) => state.accountSlice.password);
@@ -15,6 +16,7 @@ const PasswordInput: React.FC = () => {
         onChange={e => dispatch(setAccountPassword(e.target.value))}
         text="New-Password"
         autoComplete="new-password"
+        maxLength={InputLimitLength.PASSWORD}
       />
     </div>
   );

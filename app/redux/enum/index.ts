@@ -13,3 +13,10 @@ export enum Fancy {
   RECV = 2, // 좋아요 받음
   CONN = 3 //서로 좋아요 누름
 }
+
+export enum InputLimitLength {
+  EMAIL = 30,
+  PASSWORD = 16,
+  ID = 20,
+  NAME = 10
+}

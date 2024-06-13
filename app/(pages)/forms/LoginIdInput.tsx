@@ -2,6 +2,7 @@ import { InputFloatingLabel } from '@/ui';
 import { setAccountLoginId } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { InputLimitLength } from '@/redux/enum';
 
 interface LoginIdInputProps {
   extended?: () => void;
@@ -22,6 +23,7 @@ function LoginIdInput({ extended, addJSX }: LoginIdInputProps) {
           extended && extended();
         }}
         text="Login ID"
+        maxLength={InputLimitLength.ID}
         autoComplete="username"
       />
       {addJSX}

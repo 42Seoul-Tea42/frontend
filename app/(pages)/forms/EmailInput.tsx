@@ -2,6 +2,7 @@ import { InputFloatingLabel } from '@/ui';
 import { setAccountEmail } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { InputLimitLength } from '@/redux/enum';
 
 interface EmailInputProps {
   extended?: () => void;
@@ -21,6 +22,7 @@ function EmailInput({ extended, addJSX }: EmailInputProps) {
           extended && extended();
         }}
         text="Email"
+        maxLength={InputLimitLength.EMAIL}
         autoComplete="email"
       />
       {addJSX}
