@@ -1,5 +1,6 @@
 import { Fancy } from '@/redux/enum';
 import { HeartSVG, ThumbsUpSVG } from '../svg';
+import { useEffect, useState } from 'react';
 
 type FancyButtonProps = {
   onClick: () => void;
@@ -7,40 +8,24 @@ type FancyButtonProps = {
 };
 
 function FancyButton({ fancyState, onClick }: FancyButtonProps) {
-  const colorPicker = () => {
-    switch (fancyState) {
-      case Fancy.NONE:
-        return 'gray';
-      case Fancy.SEND:
-        return 'green';
-      case Fancy.RECV:
-        return 'blue';
-      case Fancy.CONN:
-        return 'red';
-      default:
-        return 'white';
+  const [color, setColor] = useState('gray');
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    if (fancyState === Fancy.CONN || fancyState === Fancy.SEND) {
+      setColor('pink');
+      setText('like');
+    } else {
+      setColor('gray');
+      setText('');
     }
-  };
-  const textPicker = () => {
-    switch (fancyState) {
-      case Fancy.NONE:
-        return '';
-      case Fancy.SEND:
-        return 'sen';
-      case Fancy.RECV:
-        return 'rec';
-      case Fancy.CONN:
-        return 'con';
-      default:
-        return '';
-    }
-  };
+  }, [fancyState]);
 
   return (
     <button onClick={onClick} className="relative">
-      <div className="hover:animate-bounce flex items-center">
-        <ThumbsUpSVG color={colorPicker()} />
-        <p className="w-4 font-thin text-sm">{textPicker()}</p>
+      <div className="hover:brightness-75 flex items-center">
+        <ThumbsUpSVG color={color} />
+        <p className="w-4 font-thin text-sm">{text}</p>
       </div>
     </button>
   );
