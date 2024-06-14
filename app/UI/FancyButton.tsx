@@ -1,4 +1,4 @@
-import { Fancy } from '@/redux/enum';
+import { Fancy, FancyColor } from '@/redux/enum';
 import { HeartSVG, ThumbsUpSVG } from '../svg';
 import { useEffect, useState } from 'react';
 
@@ -12,11 +12,14 @@ function FancyButton({ fancyState, onClick }: FancyButtonProps) {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    if (fancyState === Fancy.CONN || fancyState === Fancy.SEND) {
-      setColor('pink');
+    if (fancyState === Fancy.CONN) {
+      setColor(FancyColor.connect);
+      setText('like');
+    } else if (fancyState === Fancy.SEND) {
+      setColor(FancyColor.send);
       setText('like');
     } else {
-      setColor('gray');
+      setColor(FancyColor.none);
       setText('');
     }
   }, [fancyState]);

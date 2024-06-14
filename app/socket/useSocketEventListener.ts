@@ -30,7 +30,6 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
       {
         event: 'unmatch',
         handler: data => {
-          dispatch(setUnFancy(data.target_id));
           dispatch(setChattingNoti(true));
           dispatch(clearMessages());
         }

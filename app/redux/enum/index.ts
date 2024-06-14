@@ -20,3 +20,10 @@ export enum InputLimitLength {
   ID = 20,
   NAME = 10
 }
+
+export const FancyColor = {
+  send: 'green',
+  recv: 'pink',
+  connect: 'pink',
+  none: 'gray'
+};

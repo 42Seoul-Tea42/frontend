@@ -46,10 +46,10 @@ function UserCards({ users }: UserCardsProps) {
             users.map((user: any, index: Key) => (
               <div key={index}>
                 <UserCardBorder
-                  userId={user.id}
-                  fancy={user.fancy}
+                  user={user}
                   props={
                     <div className="max-w-[200px]">
+                      {user.fancy}
                       <div className="relative rounded-t-xl">
                         {/* 넘길 유저의 아이디가 필요해서 해당 컴포넌트에서 구현해야함 */}
                         <div onClick={() => clickUserDetail(user.id)}>
