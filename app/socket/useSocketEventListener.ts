@@ -2,7 +2,13 @@ import { useEffect } from 'react';
 import { Events, registerSocketEvent, unRegisterSocketEvent } from './socket';
 import { Socket } from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearMessages, setChattingMessage, setChattingNoti } from '../redux/slices/chattingSlice';
+import {
+  clearMessages,
+  exitUser,
+  setChattingMessage,
+  setChattingNoti,
+  setExitUser
+} from '../redux/slices/chattingSlice';
 import { setNewFancy, setUnFancy, setFancyNoti } from '../redux/slices/suggestionSlice';
 import { setHistoryNoti } from '../redux/slices/suggestionSlice';
 import { RootState } from '@/redux/store';
@@ -31,7 +37,7 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
         event: 'unmatch',
         handler: data => {
           dispatch(setChattingNoti(true));
-          dispatch(clearMessages());
+          dispatch(setExitUser(true));
         }
       },
       {

@@ -2,8 +2,10 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import ChatButton from './ChatButton';
-import { getChattingList, setChattingListModal, setChattingNoti } from '@/redux/slices/chattingSlice';
+import { getChattingList, setChattingListModal, setChattingNoti, setExitUser } from '@/redux/slices/chattingSlice';
 import { useCloseOnOutsideClick } from '@/(pages)/hooks';
+import { RootState } from '@/redux/store';
+import { useEffect } from 'react';
 
 type ChatVisibleControlProps = {
   props: JSX.Element;
@@ -25,6 +27,15 @@ function ChattingVisibleControl({ props }: ChatVisibleControlProps) {
     // 채팅 리스트 가져오기
     dispatch<any>(getChattingList());
   };
+
+  const exitUser = useSelector((state: RootState) => state.chattingSlice.exitUser);
+  useEffect(() => {
+    if (exitUser) {
+      setIsFloatingChattingVisible(false);
+      dispatch(setChattingListModal(false));
+      dispatch(setExitUser(false));
+    }
+  }, [exitUser]);
 
   return (
     <div ref={dragRef} className="fixed right-10 bottom-36 z-50">

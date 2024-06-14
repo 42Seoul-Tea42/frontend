@@ -11,6 +11,7 @@ interface ChattingState {
   chattingNoti: boolean;
   chattingListModal: boolean;
   scrollDirection: 'up' | 'down';
+  exitUser: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -23,6 +24,7 @@ export const initialState: ChattingState = {
   sendMessage: '',
   chattingListModal: true,
   chattingNoti: false,
+  exitUser: false,
   loading: false,
   error: null
 };
@@ -66,6 +68,9 @@ const chattingSlice = createSlice({
     },
     clearMessages: state => {
       state.messages = [];
+    },
+    setExitUser: (state, action) => {
+      state.exitUser = action.payload;
     }
   },
 
@@ -105,7 +110,8 @@ export const {
   setChattingNoti,
   setSendMessage,
   setChattingListModal,
-  clearMessages
+  clearMessages,
+  setExitUser
 } = chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 
