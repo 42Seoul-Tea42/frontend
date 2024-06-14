@@ -3,18 +3,26 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 interface InterestsButtonProps {
+  who: 'me' | 'other';
   value: number;
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
+  interests: number[];
 }
 
-const InterestsButton: React.FC<InterestsButtonProps> = ({ text, onClick, value }) => {
-  const interests = useSelector((state: RootState) => state.accountSlice.user.interests);
+const InterestsButton: React.FC<InterestsButtonProps> = ({ who, text, onClick, value, interests }) => {
+  const otherHidden = () => {
+    if (who === 'other') {
+      return 'hidden';
+    }
+    return '';
+  };
+
   return (
     <button
       type="button"
       className={`relative inline-flex justify-center items-center m-1 rounded-lg border ${
-        interests?.includes(value) ? 'text-green-400' : ''
+        interests?.includes(value) ? 'text-green-400' : otherHidden()
       }`}
       onClick={onClick}
     >

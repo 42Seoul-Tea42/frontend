@@ -6,7 +6,7 @@ import UserCards from '../home/UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { getHistoryUserList, setHistoryNoti } from '@/redux/slices/suggestionSlice';
 import { RootState } from '@/redux/store';
-import { MainContentsArea } from '@/ui';
+import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
 import { timeConverter } from '@/utils/timeConverter';
 
 function History() {
@@ -26,8 +26,7 @@ function History() {
       contents={
         <>
           {/* profile inquiry service */}
-          <ProfileDetailModalControl profileDetail={<ProfileDetailModal />} />
-
+          <ProfileDetailModalControl profileDetail={<ProfileDetailModalContents />} />
           {/* suggestion user service */}
           <UserCards users={users} />
         </>

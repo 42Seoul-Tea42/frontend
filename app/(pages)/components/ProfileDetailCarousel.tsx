@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { CarouselControlButton, CarouselPaginationButton } from '@/ui';
 
-interface UserProfileCarouselProps {
+interface ProfileDetailCarouselProps {
   images: any[];
 }
 
-const ProfileDetailCarousel: React.FC<UserProfileCarouselProps> = ({ images }) => {
+const ProfileDetailCarousel: React.FC<ProfileDetailCarouselProps> = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!images) {

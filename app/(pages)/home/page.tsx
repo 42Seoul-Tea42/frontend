@@ -11,7 +11,7 @@ import UserCards from './UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { RootState } from '@/redux/store';
 import { getSuggestionUsers } from '@/redux/slices/suggestionSlice';
-import { MainContentsArea } from '@/ui';
+import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
 
 function Home() {
   const dispatch = useDispatch();
@@ -62,8 +62,7 @@ function Home() {
       contents={
         <>
           {/* profile inquiry service */}
-          <ProfileDetailModalControl profileDetail={<ProfileDetailModal />} />
-
+          <ProfileDetailModalControl profileDetail={<ProfileDetailModalContents />} />
           {/* suggestion user service */}
           <UserCards users={renderUsers} />
         </>

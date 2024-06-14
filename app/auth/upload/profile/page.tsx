@@ -56,7 +56,7 @@ const Profile = () => {
         <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-yellow-500/50">
           관심있는 분야를 선택해주세요.
         </h5>
-        <InterestsSelector />
+        <InterestsSelector who={'me'} />
         <div className="mb-5"></div>
         <SubmitButton text="Submit" />
       </form>

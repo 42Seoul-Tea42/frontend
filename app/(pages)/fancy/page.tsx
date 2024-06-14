@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { RootState } from '@/redux/store';
 import { getFancyUsers, setFancyNoti } from '@/redux/slices/suggestionSlice';
-import { MainContentsArea } from '@/ui';
+import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
-import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
 import { timeConverter } from '@/utils/timeConverter';
 
@@ -26,8 +25,7 @@ function Fancy() {
       contents={
         <>
           {/* profile inquiry service */}
-          <ProfileDetailModalControl profileDetail={<ProfileDetailModal />} />
-
+          <ProfileDetailModalControl profileDetail={<ProfileDetailModalContents />} />
           {/* suggestion user service */}
           <UserCards users={users} />
         </>

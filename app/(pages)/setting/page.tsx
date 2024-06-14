@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useLayoutEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { AccordionItems, SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
@@ -73,8 +72,11 @@ const Setting: React.FC = () => {
                 title: '성적 취향 선택',
                 content: <SexualPreferenceRadioInput />
               },
-              { title: '나의 관심사 태그를 선택해주세요.', content: <InterestsSelector /> },
-              { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList /> },
+              {
+                title: '나의 관심사 태그를 선택해주세요.',
+                content: <InterestsSelector who={'me'} />
+              },
+              { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList who={'me'} /> },
               { title: '자기소개를 작성해주세요.', content: <IntroductionInput /> },
               { title: '이메일을 변경하세요.', content: <EmailInput /> }
             ]}

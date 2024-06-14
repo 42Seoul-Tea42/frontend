@@ -1,13 +1,18 @@
 import InterestsButton from './InterestsButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAccountInterests } from '@/redux/slices/accountSlice';
 import { setSearchParamsInterests } from '@/redux/slices/searchSlice';
+import { RootState } from '@/redux/store';
 
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0) + str.slice(1).toLowerCase();
 };
 
-const InterestsSelector: React.FC = () => {
+interface InterestsSelectorProps {
+  who: 'me' | 'other';
+}
+
+const InterestsSelector: React.FC<InterestsSelectorProps> = ({ who }) => {
   const dispatch = useDispatch();
 
   const userInterests = {
@@ -31,14 +36,28 @@ const InterestsSelector: React.FC = () => {
     value: value as number // 해당 관심사의 넘버 값을 가져옵니다.
   }));
 
+  const selectUserInterests = (who: 'me' | 'other') => {
+    if (who === 'me') {
+      return useSelector((state: RootState) => state.accountSlice.user.interests);
+    }
+    if (who === 'other') {
+      return useSelector((state: RootState) => state.profileInquirySlice.user.interests);
+    }
+  };
+
+  // const interests = useSelector((state: RootState) => state.accountSlice.user.interests);
   return (
     <div className="max-w-96">
       {items.map((item, index) => (
         <InterestsButton
+          who={who}
+          interests={selectUserInterests(who)}
           value={item.value}
           onClick={() => {
-            dispatch(setAccountInterests(item.value));
-            dispatch(setSearchParamsInterests(item.value));
+            if (who === 'me') {
+              dispatch(setAccountInterests(item.value));
+              dispatch(setSearchParamsInterests(item.value));
+            }
           }}
           key={index}
           text={item.text}
