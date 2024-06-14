@@ -8,12 +8,11 @@ function UserCardPhoto({ src, alt }: UserCardPhotoProps) {
   return (
     <Image
       priority
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       width={200}
       height={200}
       src={src}
       alt={`Preview ${alt}`}
-      className="z-0 rounded-t-lg object-cover hover:brightness-75"
+      className="h-[200px] relative z-0 rounded-t-lg object-cover hover:brightness-75"
       draggable="false"
     />
   );

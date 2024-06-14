@@ -25,6 +25,7 @@ const ViewMessageForm = () => {
   }, [messages]);
 
   const loadPreviousMessages = () => {
+    if (messages.length === 0) return;
     if (containerRef.current?.scrollTop === 0) {
       const standardTime = messages[0].time;
       console.log('standardTime', standardTime);
@@ -45,7 +46,7 @@ const ViewMessageForm = () => {
       onScroll={loadPreviousMessages}
     >
       {messages.map((message, index) => (
-        <div key={index}>
+        <div key={index} className={message.message.length ? '' : 'hidden'}>
           <MessageItem message={message} />
         </div>
       ))}

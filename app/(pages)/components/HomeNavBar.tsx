@@ -27,14 +27,6 @@ const HomeNavBar: React.FC = () => {
     requestUserLocation();
   }, []);
 
-  const NavigationItems = [
-    { name: 'Fancy', icon: <StarFullSVG /> },
-    { name: 'History', icon: <HistorySVG /> },
-    { name: 'Home', icon: <HomeFillSVG /> },
-    { name: 'Search', icon: <SearchSVG /> },
-    { name: 'Setting', icon: <UserSVG /> }
-  ];
-
   const pushPathPage = (itemName: string) => {
     const path = itemName.toLowerCase();
     router.push(path);
@@ -51,6 +43,14 @@ const HomeNavBar: React.FC = () => {
   const getIconColor = (itemName: string) => {
     return isActive(itemName) ? 'text-green-400' : 'currentColor';
   };
+
+  const NavigationItems = [
+    { name: 'Fancy', icon: <StarFullSVG />, noti: 'on' },
+    { name: 'History', icon: <HistorySVG />, noti: 'on' },
+    { name: 'Home', icon: <HomeFillSVG />, noti: 'off' },
+    { name: 'Search', icon: <SearchSVG />, noti: 'off' },
+    { name: 'Setting', icon: <UserSVG />, notio: 'off' }
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-gray-200">
@@ -74,7 +74,7 @@ const HomeNavBar: React.FC = () => {
                   handleClick={() => pushPathPage(item.name)}
                 />
                 {/* 알림 */}
-                <NavigationNoti name={item.name} />
+                <NavigationNoti item={item} />
                 {/* 밑줄 */}
                 <div className={isActive(item.name) ? '' : 'hidden'}>
                   <span className="animate bg-green-200 absolute w-24 h-2 border-2 border-white  rounded-full"></span>

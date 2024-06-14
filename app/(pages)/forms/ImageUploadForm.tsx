@@ -22,14 +22,14 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ mainPhoto, width, hei
       const images: string[] = [];
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const base64 = await readFileAsBase64(file); // 파일을 base64 문자열로 변환
-        images.push(base64);
+        const base64 = await readFileAsBase64(file);
+        const resizedBase64 = await resizeImage(base64, 800, 800); // 원하는 비율로 이미지 크기 조정
+        images.push(resizedBase64);
       }
-      dispatch(addAccountPhotos(images as [])); // 리덕스 액션 디스패치
+      dispatch(addAccountPhotos(images as []));
     }
   };
 
-  // 파일을 base64 문자열로 변환하는 함수
   const readFileAsBase64 = (file: File): Promise<string> => {
     return new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
@@ -44,6 +44,43 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ mainPhoto, width, hei
         reject(new Error('Failed to read file.'));
       };
       reader.readAsDataURL(file);
+    });
+  };
+
+  const resizeImage = (base64: string, maxWidth: number, maxHeight: number): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
+      const img: HTMLImageElement = document.createElement('img');
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg'));
+        } else {
+          reject(new Error('Failed to get canvas context.'));
+        }
+      };
+      img.onerror = () => {
+        reject(new Error('Failed to load image.'));
+      };
+      img.src = base64;
     });
   };
 

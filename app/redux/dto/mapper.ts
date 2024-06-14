@@ -34,7 +34,8 @@ const mappingTable = new Map<string, string>([
   ['sender_id', 'senderId'],
   ['message', 'message'],
   ['msg_time', 'time'],
-  ['last_online', 'lastOnline']
+  ['last_online', 'lastOnline'],
+  ['target_id', 'targetId']
 ]);
 
 export function serverToClientMapper(serverData: any): any {
@@ -43,6 +44,11 @@ export function serverToClientMapper(serverData: any): any {
   for (const key in serverData) {
     const newKey = mappingTable.get(key);
     if (newKey) {
+      // 거리 변환 저장
+      if (newKey === 'distance') {
+        serverData[key] = Math.round(serverData[key]);
+      }
+
       frontEndData[newKey] = serverData[key];
       // console.log(`serverToClientMapper: ${key} -> ${newKey}`);
     }

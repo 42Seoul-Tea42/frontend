@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { Events, registerSocketEvent, unRegisterSocketEvent } from './socket';
 import { Socket } from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
-import { setChattingMessage, setChattingNoti } from '../redux/slices/chattingSlice';
-import { setFancyNoti } from '../redux/slices/fancySlice';
-import { setHistoryNoti } from '../redux/slices/historySlice';
+import { clearMessages, setChattingMessage, setChattingNoti } from '../redux/slices/chattingSlice';
+import { setNewFancy, setUnFancy, setFancyNoti } from '../redux/slices/suggestionSlice';
+import { setHistoryNoti } from '../redux/slices/suggestionSlice';
 import { RootState } from '@/redux/store';
 
 type useSocketEventListenerProps = {
@@ -21,21 +21,37 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
 
     // 소켓 이벤트 등록
     const events: Events[] = [
-      // 알림기능 관련
       {
         event: 'new_match',
-        handler: () => dispatch(setChattingNoti(true))
+        handler: () => {
+          dispatch(setChattingNoti(true));
+        }
+      },
+      {
+        event: 'unmatch',
+        handler: data => {
+          dispatch(setUnFancy(data.target_id));
+          dispatch(setChattingNoti(true));
+          dispatch(clearMessages());
+        }
       },
       {
         event: 'new_fancy',
-        handler: () => dispatch(setFancyNoti(true))
+        handler: data => {
+          dispatch(setFancyNoti(true));
+          dispatch(setNewFancy(data.target_id));
+        }
+      },
+      {
+        event: 'unfancy',
+        handler: data => {
+          dispatch(setUnFancy(data.target_id));
+        }
       },
       {
         event: 'new_history',
         handler: () => dispatch(setHistoryNoti(true))
       },
-
-      // 채팅 관련
       {
         event: 'send_message',
         handler: data => {
@@ -51,7 +67,6 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
       // 채팅목록, 연결 상태 업데이트
       // { event: 'update_distance', handler: () => {} },
       // { event: 'update_status', handler: () => {} },
-      // { event: 'unmatch', handler: () => {} },
       // { event: 'unregister', handler: () => {} }
     ];
 

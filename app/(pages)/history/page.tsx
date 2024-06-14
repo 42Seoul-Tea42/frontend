@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from '../home/UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
-import { getHistoryUserList, setHistoryNoti } from '@/redux/slices/historySlice';
+import { getHistoryUserList, setHistoryNoti } from '@/redux/slices/suggestionSlice';
 import { RootState } from '@/redux/store';
 import { MainContentsArea } from '@/ui';
+import { timeConverter } from '@/utils/timeConverter';
 
 function History() {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function History() {
   // const users = usersInquirySetDummy;
 
   useEffect(() => {
-    dispatch<any>(getHistoryUserList(new Date().toISOString().replace('T', ' ').replace('Z', '') + '000' + '%2B0000'));
+    dispatch<any>(getHistoryUserList(timeConverter({ time: 'now' })));
 
     //알림 제거용
     dispatch(setHistoryNoti(false));

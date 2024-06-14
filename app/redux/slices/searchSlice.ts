@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
-import { getLogout } from './loginSlice';
 import { serverToClientMapper } from '../dto/mapper';
 import _ from 'lodash';
 
@@ -48,8 +47,8 @@ export const postSearch = createAsyncThunk('homeSlice/postSearch', async (_, { g
   return users;
 });
 
-const fancySlice = createSlice({
-  name: 'fancySlice',
+const searchSlice = createSlice({
+  name: 'searchSlice',
   initialState,
   reducers: {
     setSearchParamsMinAge: (state, actions: PayloadAction<number>) => {
@@ -98,7 +97,7 @@ export const {
   setSearchParamsMinAge,
   setSearchParamsRating,
   initSearchParams
-} = fancySlice.actions;
-export const extraReducers = fancySlice.reducer;
+} = searchSlice.actions;
+export const extraReducers = searchSlice.reducer;
 
-export default fancySlice.reducer;
+export default searchSlice.reducer;

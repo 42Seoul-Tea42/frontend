@@ -1,6 +1,8 @@
-import { useDispatch } from 'react-redux';
+'use client';
+
+import { useDispatch, useSelector } from 'react-redux';
 import ChatButton from './ChatButton';
-import { setChattingListModal, setChattingNoti } from '@/redux/slices/chattingSlice';
+import { getChattingList, setChattingListModal, setChattingNoti } from '@/redux/slices/chattingSlice';
 import { useCloseOnOutsideClick } from '@/(pages)/hooks';
 
 type ChatVisibleControlProps = {
@@ -17,9 +19,11 @@ function ChattingVisibleControl({ props }: ChatVisibleControlProps) {
     // 알림 확인
     dispatch(setChattingNoti(false));
     // 항상 채팅 리스트 보여주기
-    // dispatch(setChattingListModal(true));
+    dispatch(setChattingListModal(true));
     // 모달 보이기 / 숨기기
     setIsFloatingChattingVisible(!isFloatingChattingVisible);
+    // 채팅 리스트 가져오기
+    dispatch<any>(getChattingList());
   };
 
   return (

@@ -63,6 +63,9 @@ const chattingSlice = createSlice({
     },
     setScrollDirection: (state, action) => {
       state.scrollDirection = action.payload;
+    },
+    clearMessages: state => {
+      state.messages = [];
     }
   },
 
@@ -101,7 +104,8 @@ export const {
   setChattingMessage,
   setChattingNoti,
   setSendMessage,
-  setChattingListModal
+  setChattingListModal,
+  clearMessages
 } = chattingSlice.actions;
 export const extraReducers = chattingSlice.reducer;
 

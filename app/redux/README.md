@@ -176,7 +176,7 @@ namespace Interface-Set {
     }
 }
 
-UserPublicSet ..|> historySlice : History Service
+UserPublicSet ..|> suggestionSlice : History Service
 UserPublicSet ..|> fancySlice : Fancy Service
 UserChattingSet ..|> chattingSlice : Chatting Service
 UserAccountSet ..|> accountSlice : Account Service
@@ -196,7 +196,7 @@ namespace Reducer {
         users: PublicSet[]
     }
 
-    class historySlice {
+    class suggestionSlice {
         users: PublicSet[]
     }
 

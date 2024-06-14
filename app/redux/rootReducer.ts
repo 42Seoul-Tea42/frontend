@@ -1,8 +1,8 @@
 // rootReducer.js
 import { combineReducers } from '@reduxjs/toolkit';
 import chattingSlice, { initialState as chattingInit } from './slices/chattingSlice';
-import historySlice, { initialState as historyInit } from './slices/historySlice';
-import fancySlice, { initialState as fancyInit } from './slices/fancySlice';
+// import historySlice, { initialState as historyInit } from './slices/historySlice';
+// import fancySlice, { initialState as fancyInit } from './slices/fancySlice';
 import suggestionSlice, { initialState as suggestionInit } from './slices/suggestionSlice';
 import accountSlice, { initialState as accountInit } from './slices/accountSlice';
 import signupSlice, { initialState as signupInit } from './slices/signupSlice';
@@ -12,8 +12,8 @@ import profileInquirySlice, { initialState as profileInquiryInit } from './slice
 
 const appReducer = combineReducers({
   chattingSlice: chattingSlice,
-  historySlice: historySlice,
-  fancySlice: fancySlice,
+  // historySlice: historySlice,
+  // fancySlice: fancySlice,
   suggestionSlice: suggestionSlice,
   accountSlice: accountSlice,
   signupSlice: signupSlice,
@@ -28,8 +28,8 @@ const rootReducer = (state: any, action: any) => {
     localStorage.clear();
     state = {
       chattingSlice: chattingInit,
-      historySlice: historyInit,
-      fancySlice: fancyInit,
+      // historySlice: historyInit,
+      // fancySlice: fancyInit,
       suggestionSlice: suggestionInit,
       accountSlice: accountInit,
       signupSlice: signupInit,

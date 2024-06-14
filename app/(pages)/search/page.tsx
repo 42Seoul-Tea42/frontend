@@ -41,7 +41,7 @@ const Search: React.FC = () => {
                     key={index}
                     option={{ image: '/emoji/1.jpg' }}
                     head={user.firstname}
-                    columns={[`${user.age}세`, `${Math.round(user.distance)} km`, user.rating, user.interests.length]}
+                    columns={[`${user.age}세`, `${user.distance} km`, user.rating, user.interests.length]}
                   />
                 ))}
               </>
