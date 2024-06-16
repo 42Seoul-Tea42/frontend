@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AccordionItems, SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
@@ -16,9 +16,18 @@ import {
   SexualPreferenceRadioInput,
   UserNameInput
 } from '../forms';
-import { getMyAccount, patchUserProfile } from '@/redux/slices/accountSlice';
+import {
+  getMyAccount,
+  patchUserProfile,
+  setAccountEmoji,
+  setAccountHateEmoji,
+  setAccountHateInterests,
+  setAccountInterests
+} from '@/redux/slices/accountSlice';
+import { RootState } from '@/redux/store';
 
 const Setting: React.FC = () => {
+  const user = useSelector((state: RootState) => state.accountSlice.user);
   const dispatch = useDispatch();
 
   // 내정보 가져와서 표시
@@ -74,9 +83,34 @@ const Setting: React.FC = () => {
               },
               {
                 title: '나의 관심사 태그를 선택해주세요.',
-                content: <InterestsSelector who={'me'} />
+                content: (
+                  <InterestsSelector
+                    who={'me'}
+                    interests={user.interests}
+                    onClick={e => dispatch(setAccountInterests(e))}
+                  />
+                )
               },
-              { title: '관심있는 이모티콘을 설정해주세요. (최대 4개)', content: <EmojiGridList who={'me'} /> },
+              {
+                title: '싫어하는 관심사 태그를 선택해주세요.',
+                content: (
+                  <InterestsSelector
+                    who={'me'}
+                    interests={user.hateInterests}
+                    onClick={e => dispatch(setAccountHateInterests(e))}
+                  />
+                )
+              },
+              {
+                title: '선호하는 이모티콘을 설정해주세요. (최대 4개)',
+                content: <EmojiGridList who={'me'} emoji={user.emoji} onClick={e => dispatch(setAccountEmoji(e))} />
+              },
+              {
+                title: '싫어하는 이모티콘을 설정해주세요. (최대 4개)',
+                content: (
+                  <EmojiGridList who={'me'} emoji={user.hateEmoji} onClick={e => dispatch(setAccountHateEmoji(e))} />
+                )
+              },
               { title: '자기소개를 작성해주세요.', content: <IntroductionInput /> },
               { title: '이메일을 변경하세요.', content: <EmailInput /> }
             ]}

@@ -46,8 +46,8 @@ axiosInstance.interceptors.response.use(
     switch (error.response.status) {
       case 401:
         alert('토큰이 만료되었습니다. 재 로그인 해주세요.');
-        localStorage.removeItem('login');
-        window.location.href = '/auth/login';
+        // localStorage.removeItem('login');
+        // window.location.href = '/auth/login';
         break;
     }
     return Promise.reject(error);

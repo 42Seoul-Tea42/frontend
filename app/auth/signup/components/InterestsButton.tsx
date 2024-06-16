@@ -1,6 +1,4 @@
-import { RootState } from '@/redux/store';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 interface InterestsButtonProps {
   who: 'me' | 'other';

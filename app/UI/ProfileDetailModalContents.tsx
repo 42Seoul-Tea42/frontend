@@ -8,7 +8,7 @@ import { blockUser, reportUser } from '@/redux/slices/profileInquirySlice';
 import { Gender } from '@/redux/enum';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
-import StarRatingBar from '@/(pages)/search/components/InputRangeStarBar';
+import InputStarRatingBar from '@/(pages)/search/components/InputRangeStarBar';
 
 const ProfileDetailModalContents: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,38 +26,64 @@ const ProfileDetailModalContents: React.FC = () => {
   };
 
   return (
-    <div className="md:grid md:grid-cols-2 items-center gap-20">
+    <div className="md:grid md:grid-cols-2 items-center gap-20 h-relative">
       <ProfileDetailCarousel images={user.pictures} />
-      {/* user detail content */}
-      <div className="w-full h-[400px] border-2 overflow-hidden hover:overflow-auto space-y-10">
-        <h5 className="text-xl text-gray-800 font-semibold">
-          인기 점수
-          <StarRatingBar />
-        </h5>
-        <h5 className="flex text-xl text-gray-800 font-semibold">
-          <p className="border rounded-xl pl-1 pr-1 text-blue-500">
-            {sexualPreferenceToStringConverter(user.sexualPreference)}
-          </p>
-          <p className="ml-2">만나고 싶어요.</p>
-        </h5>
-        <h5 className="text-xl text-gray-800 font-semibold">
-          전 이런걸 좋아해요.
-          <InterestsSelector who={'other'} />
-          <EmojiGridList who={'other'} />
-        </h5>
-        <h5 className="text-xl text-gray-800 font-semibold">
-          저는 이런 사람이에요.
-          <textarea
-            readOnly
-            className="rounded-xl min-h-[100px] max-h-[200px] w-full border-1 border-gray-400 text-gray-700"
-            value={user.introduction}
-          ></textarea>
-        </h5>
-        <div className="flex justify-end mt-10">
-          <div className="flex items-center text-blue-400">
-            <BlueHyperLink text={'차단'} onClick={() => dispatch<any>(blockUser(user.id.toString()))} />
-            <p className="ml-2 mr-2"> / </p>
-            <BlueHyperLink text={'신고'} onClick={() => dispatch<any>(reportUser(user.id.toString()))} />
+      <div className="w-full flex justify-center">
+        <div className="w-96 h-96">
+          {/* user name & status */}
+          <div className="flex border-2 p-1 rounded-lg">
+            <span className="bg-red-500 w-4 h-4 mr-2 border-2 border-white rounded-full"></span>
+            <div className="w-full">
+              <h5 className="text-xl text-gray-800 font-semibold">{user.lastname.toUpperCase()}</h5>
+              <h5 className="text-xl text-gray-800 font-semibold">{user.firstname.toLowerCase()}</h5>
+              <h5 className="text-sm text-gray-800 font-light">최근 접속시간 : {}</h5>
+            </div>
+          </div>
+          {/* user detail content */}
+          <div className="w-full h-[290px] p-2 bg-gray-100 text-gray-800 text-lg font-semibold overflow-hidden hover:overflow-auto space-y-10">
+            <h5>
+              인기 점수
+              <InputStarRatingBar who={'other'} star={user.rating} />
+            </h5>
+            <h5 className="flex">
+              <p className="rounded-xl pl-1 pr-1 text-blue-500">
+                {sexualPreferenceToStringConverter(user.sexualPreference)}
+              </p>
+              <p className="ml-2">만나고 싶어요.</p>
+            </h5>
+            <h5>
+              전 이런걸 좋아해요.
+              <div className="mt-2">
+                <InterestsSelector who={'other'} interests={user.interests} />
+              </div>
+              <div className="mt-2 p-2">
+                <EmojiGridList who={'other'} emoji={user.emoji} />
+              </div>
+            </h5>
+            <h5>
+              전 이런걸 싫어해요.
+              <div className="mt-2">
+                <InterestsSelector who={'other'} interests={user.hateInterests} />
+              </div>
+              <div className="mt-2 p-2">
+                <EmojiGridList who={'other'} emoji={user.hateEmoji} />
+              </div>
+            </h5>
+            <h5>
+              저는 이런 사람이에요.
+              <textarea
+                readOnly
+                className="rounded-xl min-h-[100px] max-h-[200px] w-full border border-gray-400 text-gray-800"
+                value={user.introduction}
+              ></textarea>
+            </h5>
+          </div>
+          <div className="flex justify-end items-end text-blue-400">
+            <div className="flex items-center">
+              <BlueHyperLink text={'차단'} onClick={() => dispatch<any>(blockUser(user.id.toString()))} />
+              <p className="ml-2 mr-2"> / </p>
+              <BlueHyperLink text={'신고'} onClick={() => dispatch<any>(reportUser(user.id.toString()))} />
+            </div>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
 import { Gender } from '../enum';
 import { serverToClientMapper } from '../dto/mapper';
-import { updateEmojiList } from './updateEmoji';
+import { updateLikeList } from './updateLikeList';
 import _ from 'lodash';
 import { RootState } from '../store';
 
@@ -132,27 +132,37 @@ const accountSlice = createSlice({
     removeAccountPhotos: (state: AccountState, action: PayloadAction<number>) => {
       state.user.pictures = state.user.pictures.filter((_: any, index: number) => index !== action.payload);
     },
-    setAccountEmojis: (state: AccountState, action: PayloadAction<number>) => {
-      updateEmojiList({
+    setAccountEmoji: (state: AccountState, action: PayloadAction<number>) => {
+      updateLikeList({
         state: state,
         action: action,
-        type: 'emoji'
+        property: 'emoji',
+        oppositeType: 'hateEmoji'
       });
     },
-    setAccountHateEmojis: (state: AccountState, action: PayloadAction<number>) => {
-      updateEmojiList({
+    setAccountHateEmoji: (state: AccountState, action: PayloadAction<number>) => {
+      updateLikeList({
         state: state,
         action: action,
-        type: 'hateEmoji'
+        property: 'hateEmoji',
+        oppositeType: 'emoji'
       });
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
-      const interests = state.user.interests;
-      if (interests?.includes(action.payload)) {
-        state.user.interests = _.without(interests, action.payload);
-      } else {
-        state.user.interests = _.concat(interests, action.payload);
-      }
+      updateLikeList({
+        state: state,
+        action: action,
+        property: 'interests',
+        oppositeType: 'hateInterests'
+      });
+    },
+    setAccountHateInterests: (state: AccountState, action: PayloadAction<number>) => {
+      updateLikeList({
+        state: state,
+        action: action,
+        property: 'hateInterests',
+        oppositeType: 'interests'
+      });
     }
   },
   extraReducers: builder => {
@@ -212,9 +222,10 @@ export const {
   setAccountAge,
   setAccountGender,
   setAccountSexualPreference,
-  setAccountEmojis,
-  setAccountHateEmojis,
+  setAccountEmoji,
+  setAccountHateEmoji,
   setAccountInterests,
+  setAccountHateInterests,
   setAccountIntroduction,
   addAccountPhotos,
   removeAccountPhotos

@@ -2,18 +2,16 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { AccountState } from './accountSlice';
 import _ from 'lodash';
 
-export type EmojiType = 'emoji' | 'hateEmoji';
-
-interface UpdateEmojiListProps {
+interface UpdateLikeListProps {
   state: AccountState;
   action: PayloadAction<number>;
-  type: EmojiType;
+  property: string;
+  oppositeType: string;
 }
 
-export function updateEmojiList({ state, action, type }: UpdateEmojiListProps) {
-  const currentList = state.user[type];
+export function updateLikeList({ state, action, property, oppositeType }: UpdateLikeListProps) {
+  const currentList = state.user[property];
 
-  const oppositeType = type === 'emoji' ? 'hateEmoji' : 'emoji';
   const oppositeList = state.user[oppositeType];
 
   // 백엔드 요청: 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
@@ -28,8 +26,8 @@ export function updateEmojiList({ state, action, type }: UpdateEmojiListProps) {
 
   // 이모티콘 추가 및 삭제
   if (currentList.includes(action.payload)) {
-    state.user[type] = _.without(currentList, action.payload);
+    state.user[property] = _.without(currentList, action.payload);
   } else {
-    state.user[type] = _.concat(currentList, action.payload);
+    state.user[property] = _.concat(currentList, action.payload);
   }
 }

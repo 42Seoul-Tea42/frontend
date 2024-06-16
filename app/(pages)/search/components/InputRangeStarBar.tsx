@@ -1,18 +1,19 @@
 import React from 'react';
 import StarButton from './StarButton';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
 
-const StarRatingBar: React.FC = () => {
-  const starValue: number = useSelector((state: RootState) => state.searchSlice.searchParams.rating);
+interface InputStarRatingBarProps {
+  who: 'me' | 'other';
+  star: number;
+}
 
+function InputStarRatingBar({ who, star }: InputStarRatingBarProps) {
   return (
     <div className="flex justify-start gap-2">
       {[1, 2, 3, 4, 5].map(el => (
-        <StarButton key={el} star={el} isFilled={el <= starValue} />
+        <StarButton key={el} star={el} isFilled={el <= star} who={who} />
       ))}
     </div>
   );
-};
+}
 
-export default StarRatingBar;
+export default InputStarRatingBar;

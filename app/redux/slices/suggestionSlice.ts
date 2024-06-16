@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { serverToClientMapper } from '../dto/mapper';
-import { Fancy } from '../enum';
+import { Fancy, Gender } from '../enum';
 import _ from 'lodash';
 import { recvFancy, recvUnFancy, sendFancy, sendUnFancy } from './fancyConverter';
 
@@ -14,7 +14,26 @@ interface SuggestionState {
 }
 
 export const initialState: SuggestionState = {
-  users: [],
+  users: [
+    {
+      id: '1',
+      firstname: '재준',
+      lastname: '김',
+      interests: [1, 2, 3],
+      hateInterests: [4, 5],
+      rating: 3,
+      sexualPreference: Gender.MALE,
+      introduction: '',
+      fancy: Fancy.NONE,
+      distance: 10,
+      age: 25,
+      gender: '',
+      picture: '/emoji/3.jpg',
+      pictures: ['/emoji/3.jpg'],
+      emoji: [1, 2, 3],
+      hateEmoji: [4, 5, 6]
+    }
+  ],
   historyNoti: false,
   fancyNoti: false,
   loading: false,
