@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import ProfileDetailCarousel from '@/(pages)/components/ProfileDetailCarousel';
 import BlueHyperLink from './BlueHyperLink';
 import { blockUser, reportUser } from '@/redux/slices/profileInquirySlice';
-import { Gender } from '@/redux/enum';
+import { Gender, Status } from '@/redux/enum';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
 import InputStarRatingBar from '@/(pages)/search/components/InputRangeStarBar';
@@ -32,11 +32,15 @@ const ProfileDetailModalContents: React.FC = () => {
         <div className="w-96 h-96">
           {/* user name & status */}
           <div className="flex border-2 p-1 rounded-lg">
-            <span className="bg-red-500 w-4 h-4 mr-2 border-2 border-white rounded-full"></span>
+            <span
+              className={`${
+                user.status === Status.ONLINE ? 'bg-green-500' : 'bg-red-500'
+              } w-4 h-4 mr-2 border-2 border-white rounded-full`}
+            ></span>
             <div className="w-full">
               <h5 className="text-xl text-gray-800 font-semibold">{user.lastname.toUpperCase()}</h5>
               <h5 className="text-xl text-gray-800 font-semibold">{user.firstname.toLowerCase()}</h5>
-              <h5 className="text-sm text-gray-800 font-light">최근 접속시간 : {}</h5>
+              <h5 className="text-sm text-gray-800 font-light">최근 접속시간 : {user.lastOnline}</h5>
             </div>
           </div>
           {/* user detail content */}
@@ -70,7 +74,7 @@ const ProfileDetailModalContents: React.FC = () => {
               </div>
             </h5>
             <h5>
-              저는 이런 사람이에요.
+              <p className="mb-2">저는 이런 사람이에요.</p>
               <textarea
                 readOnly
                 className="rounded-xl min-h-[100px] max-h-[200px] w-full border border-gray-400 text-gray-800"

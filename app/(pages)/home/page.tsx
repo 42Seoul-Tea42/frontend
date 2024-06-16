@@ -1,12 +1,10 @@
 'use client';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useFilter, useSort } from '../hooks';
 import { useEffect, useState } from 'react';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
 import SortBar from '../components/SortBar';
-import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from './UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { RootState } from '@/redux/store';

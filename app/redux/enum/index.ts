@@ -27,3 +27,8 @@ export const FancyColor = {
   connect: 'pink',
   none: 'gray'
 };
+
+export enum Status {
+  OFFLINE,
+  ONLINE
+}
