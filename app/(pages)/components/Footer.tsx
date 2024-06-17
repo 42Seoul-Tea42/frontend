@@ -1,6 +1,7 @@
 'use client';
 
 import { getLogout } from '@/redux/slices/loginSlice';
+import { useSocket } from '@/socket/socketContext';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
@@ -9,6 +10,11 @@ const Footer = () => {
   const dispatch = useDispatch();
   //test
   // useLoginRedirect({ trigger: isLogin });
+
+  const handleLogout = () => {
+    dispatch<any>(getLogout());
+    router.push('/auth/login');
+  };
 
   return (
     <footer>
@@ -34,13 +40,7 @@ const Footer = () => {
           </button>
         </li>
         <li className="mx-5 sm:mb-0">
-          <button
-            onClick={() => {
-              dispatch<any>(getLogout());
-              router.push('/auth/login');
-            }}
-            className="hover:underline"
-          >
+          <button onClick={handleLogout} className="hover:underline">
             로그아웃
           </button>
         </li>

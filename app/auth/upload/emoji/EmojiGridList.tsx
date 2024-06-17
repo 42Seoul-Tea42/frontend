@@ -19,7 +19,7 @@ const EmojiGridList = ({ who, onClick, emoji }: EmojiGridListProps) => {
 
   const colorPicker = (id: number) => {
     if (emoji?.includes(id)) {
-      return 'border-2 border-red-500 rounded-xl';
+      return 'border-2 border-green-500 rounded-xl';
     } else if (who === 'other') {
       return 'hidden';
     }

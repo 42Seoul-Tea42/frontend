@@ -22,13 +22,22 @@ export enum InputLimitLength {
 }
 
 export const FancyColor = {
-  send: 'green',
-  recv: 'pink',
-  connect: 'pink',
-  none: 'gray'
+  send: 'border-gray-100',
+  recv: 'border-green-400',
+  connect: 'border-pink-400',
+  none: 'border-gray-100',
+  thumbConn: 'pink',
+  thumbSend: 'green',
+  thumbNone: 'gray'
 };
 
 export enum Status {
   OFFLINE,
   ONLINE
+}
+
+export enum Oauth {
+  NONE,
+  KAKAO,
+  GOOGLE
 }

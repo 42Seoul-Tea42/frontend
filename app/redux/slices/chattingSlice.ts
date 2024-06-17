@@ -71,6 +71,14 @@ const chattingSlice = createSlice({
     },
     setExitUser: (state, action) => {
       state.exitUser = action.payload;
+    },
+    setUserStatus: (state, action) => {
+      if (action.payload.targetId === state.currentUser.id) {
+        console.log('success update');
+        state.currentUser.status = action.payload.status;
+      } else {
+        console.log('failed update');
+      }
     }
   },
 
@@ -104,6 +112,7 @@ const chattingSlice = createSlice({
 });
 
 export const {
+  setUserStatus,
   setScrollDirection,
   setChattingUser,
   setChattingMessage,

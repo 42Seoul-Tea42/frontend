@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { AccountState, patchUserProfile } from './accountSlice';
 import { serverToClientMapper } from '../dto/mapper';
+import { Oauth } from '../enum';
 
 /** 서버에서 받아오는 유저의 인증단계 */
 export type Steps = {
@@ -9,6 +10,7 @@ export type Steps = {
   emailCheck: boolean; // 이메일 인증 필요
   profileCheck: boolean; // 프로필 작성 필요
   emojiCheck: boolean; // 이모지 선택 필요
+  oauth: Oauth;
 };
 
 interface LoginState {
@@ -17,6 +19,7 @@ interface LoginState {
   steps: Steps;
   loading: boolean;
   error: string | null;
+  link: string;
 }
 
 export const initialState: LoginState = {
@@ -26,8 +29,10 @@ export const initialState: LoginState = {
     isLogin: false,
     emailCheck: false,
     profileCheck: false,
-    emojiCheck: false
+    emojiCheck: false,
+    oauth: Oauth.GOOGLE
   },
+  link: '',
   loading: false,
   error: null
 };
@@ -58,7 +63,8 @@ export const getResendEmail = createAsyncThunk('loginSlice/getResendEmail', asyn
 // 카카오 로그인
 export const getKaKaoLogin = createAsyncThunk('loginSlice/getKaKaoLogin', async () => {
   const response = await axiosInstance.get('/kakao/login');
-  return serverToClientMapper(response.data);
+  // return serverToClientMapper(response.data);
+  return response;
 });
 
 // 구글 로그인
@@ -112,13 +118,11 @@ const loginSlice = createSlice({
     builder.addCase(postLogin.fulfilled, (state, action: PayloadAction<any>) => {
       state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
-      localStorage.setItem('login', 'true');
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
       state.error = '로그인 실패했습니다. 다시 시도해주세요.';
       state.steps.isLogin = false;
-      localStorage.setItem('login', 'false');
     });
 
     // 로그인 상태 확인하기
@@ -142,8 +146,9 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getKaKaoLogin.fulfilled, (state, action: PayloadAction<any>) => {
-      state.steps = { ...state.steps, ...action.payload };
+      // state.steps = { ...state.steps, ...action.payload };
       state.steps.isLogin = true;
+      state.link = action.payload.data.link;
     });
     builder.addCase(getKaKaoLogin.rejected, (state, action) => {
       state.loading = false;

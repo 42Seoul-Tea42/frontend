@@ -15,7 +15,7 @@ function ResetPasswordDetail() {
   const dispatch = useDispatch();
   const params = useSearchParams();
   const key = params.get('key');
-  const loginId = useSelector((state: RootState) => state.accountSlice.user.identity.loginId);
+  const loginId = useSelector((state: RootState) => state.accountSlice.user.loginId);
 
   return (
     <>

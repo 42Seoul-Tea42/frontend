@@ -4,6 +4,7 @@ import { setChattingMessage, setScrollDirection, setSendMessage } from '@/redux/
 import { RootState } from '@/redux/store';
 import { useSocket } from '@/socket/socketContext';
 import { DirectionSVG } from '@/svg';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 enum SendMessage {
@@ -16,6 +17,7 @@ const SendMessageField = () => {
   const myId = localStorage.getItem('id');
   const dispatch = useDispatch();
   const socket = useSocket();
+  const textRef = useRef(null);
 
   const isSpace = (value: string) => (value.trim() === '' ? true : false);
 
@@ -66,6 +68,7 @@ const SendMessageField = () => {
           placeholder={`Your message... (.../${SendMessage.MAX_LENGTH})`}
           className="whitespace-pre block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-green-400 focus:border-green-400 "
           style={{ resize: 'none' }}
+          ref={textRef}
         ></textarea>
         <button
           type="button"

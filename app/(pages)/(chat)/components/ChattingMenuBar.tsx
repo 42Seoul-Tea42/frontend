@@ -1,3 +1,4 @@
+import { Status } from '@/redux/enum';
 import { clearMessages, setChattingListModal, setChattingMessage } from '@/redux/slices/chattingSlice';
 import { RootState } from '@/redux/store';
 import { HamburgerSVG } from '@/svg';
@@ -9,7 +10,11 @@ function ChattingMenuBar() {
   return (
     <div className="flex items-end p-4 border rounded-t-xl shadow-sm">
       <Image className="w-10 h-10 rounded-xl" src={currentUser.picture} width={500} height={700} alt="User image" />{' '}
-      <span className="animate bg-green-500 w-4 h-4 border-2 border-white rounded-full"></span>
+      <span
+        className={`${
+          currentUser.status === Status.ONLINE ? 'bg-green-500' : 'bg-red-500'
+        } w-4 h-4 border-2 border-white rounded-full`}
+      ></span>
       <p className="grow text-xl ml-2 font-semibold text-gray-800 ">{currentUser.firstname}</p>
       <button
         onClick={() => {

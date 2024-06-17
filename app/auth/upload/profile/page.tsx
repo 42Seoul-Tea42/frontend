@@ -4,7 +4,7 @@ import { GenderRadioInput, IntroductionInput, SexualPreferenceRadioInput } from 
 import ImageUploadGrid from '@/(pages)/setting/components/ImageUploadGrid';
 import { SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
-import { patchUserProfile } from '@/redux/slices/accountSlice';
+import { patchUserProfile, setAccountInterests } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -15,6 +15,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const profileImage = useSelector((state: RootState) => state.accountSlice.user.pictures);
   const profileCheck = useSelector((state: RootState) => state.loginSlice.steps.profileCheck);
+  const user = useSelector((state: RootState) => state.accountSlice.user);
 
   const submitProfile = () => {
     // 프로필 사진이 없을 경우 경고창
@@ -28,12 +29,13 @@ const Profile = () => {
 
   useEffect(() => {
     if (profileCheck) {
-      // router.push('/auth/upload/emoji');
+      router.push('/auth/upload/emoji');
     }
   }, [profileCheck]);
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen relative flex justify-center items-center">
+      <h2 className="absolute top-40 text-3xl text-gray-700 font-bold"> 최초 1회 설정이 필요합니다. </h2>
       <form
         onSubmit={event => {
           event.preventDefault();
@@ -56,7 +58,7 @@ const Profile = () => {
         <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-yellow-500/50">
           관심있는 분야를 선택해주세요.
         </h5>
-        <InterestsSelector who={'me'} />
+        <InterestsSelector who={'me'} onClick={e => dispatch(setAccountInterests(e))} interests={user.interests} />
         <div className="mb-5"></div>
         <SubmitButton text="Submit" />
       </form>

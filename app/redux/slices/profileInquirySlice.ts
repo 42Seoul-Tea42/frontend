@@ -48,9 +48,6 @@ const profileInquirySlice = createSlice({
     },
     setProfileInquiryUser: (state, action: PayloadAction<any>) => {
       state.user = { ...state.user, ...action.payload };
-    },
-    setUserStatus: (state, action: PayloadAction<any>) => {
-      state.user.status = action.payload;
     }
   },
   extraReducers: builder => {
@@ -96,7 +93,7 @@ const profileInquirySlice = createSlice({
   }
 });
 
-export const { setUserStatus, setProfileInquiryUser, setProfileModalVisible } = profileInquirySlice.actions;
+export const { setProfileInquiryUser, setProfileModalVisible } = profileInquirySlice.actions;
 export const extraReducers = profileInquirySlice.reducer;
 
 export default profileInquirySlice.reducer;

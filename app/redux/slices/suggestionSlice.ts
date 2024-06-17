@@ -86,13 +86,13 @@ const suggestionSlice = createSlice({
       const targetId = action.payload;
       const user = _.find(state.users, { id: targetId });
       user.fancy = recvFancy(user.fancy);
+
       state.loading = false;
     },
     setUnFancy: (state, action: PayloadAction<number>) => {
       const targetId = action.payload;
       const user = _.find(state.users, { id: targetId });
       user.fancy = recvUnFancy(user.fancy);
-      state.loading = false;
     }
   },
   extraReducers: builder => {

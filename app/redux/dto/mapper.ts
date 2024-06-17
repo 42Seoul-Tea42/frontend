@@ -36,7 +36,8 @@ const mappingTable = new Map<string, string>([
   ['msg_time', 'time'],
   ['last_online', 'lastOnline'],
   ['target_id', 'targetId'],
-  ['status', 'status']
+  ['status', 'status'],
+  ['oauth', 'oauth']
 ]);
 
 export function serverToClientMapper(serverData: any): any {
@@ -52,6 +53,8 @@ export function serverToClientMapper(serverData: any): any {
 
       frontEndData[newKey] = serverData[key];
       // console.log(`serverToClientMapper: ${key} -> ${newKey}`);
+    } else {
+      frontEndData[key] = serverData[key];
     }
   }
 

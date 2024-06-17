@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { Events, registerSocketEvent, unRegisterSocketEvent } from './socket';
 import { Socket } from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearMessages, setChattingMessage, setChattingNoti, setExitUser } from '../redux/slices/chattingSlice';
+import { setChattingMessage, setChattingNoti, setExitUser, setUserStatus } from '../redux/slices/chattingSlice';
 import { setNewFancy, setUnFancy, setFancyNoti } from '../redux/slices/suggestionSlice';
 import { setHistoryNoti } from '../redux/slices/suggestionSlice';
 import { RootState } from '@/redux/store';
-import { setUserStatus } from '@/redux/slices/profileInquirySlice';
 
 type useSocketEventListenerProps = {
   socket: Socket | undefined;
@@ -16,7 +15,6 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
   const dispatch = useDispatch();
   const myId = useSelector((state: RootState) => state.accountSlice.user.id);
   const chattingId = useSelector((state: RootState) => state.chattingSlice.currentUser.id);
-  const inquiryId = useSelector((state: RootState) => state.profileInquirySlice.user.id);
 
   useEffect(() => {
     if (!socket) return;
@@ -65,12 +63,12 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
       {
         event: 'update_status',
         handler: data => {
-          if (data.target_id === inquiryId) {
-            dispatch(setUserStatus(data.status));
-          }
-          if (data.target_id === chattingId) {
-            //
-          }
+          dispatch(
+            setUserStatus({
+              status: data.status,
+              targetId: data.target_id
+            })
+          );
         }
       }
 
@@ -78,7 +76,6 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
 
       // 채팅목록, 연결 상태 업데이트
       // { event: 'update_distance', handler: () => {} },
-      // { event: 'update_status', handler: () => {} },
       // { event: 'unregister', handler: () => {} }
     ];
 

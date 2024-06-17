@@ -25,30 +25,23 @@ function Login() {
     dispatch<any>(postLogin());
   };
 
-  const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
+  // oauth redirect
+  const link = useSelector((state: RootState) => state.loginSlice.link);
   useEffect(() => {
-    if (isSignup) {
-      alert('회원가입이 완료되었습니다. 이메일을 인증해주세요.');
-      dispatch(setIsSignup(false));
-    }
-  }, [isSignup]);
-
-  const error = useSelector((state: RootState) => state.loginSlice.error);
-  useEffect(() => {
-    if (!error) {
+    if (!link) {
       return;
     }
-    alert(error);
-  }, [error]);
+    window.href = link;
+  }, [link]);
 
   return (
     <LoginPageDetail
       title={'Welcome to tea for two!'}
       loginMenu={
         <>
-          <GoogleLoginButton onClick={() => dispatch<any>(getGoogleLogin())} />
+          {/* <GoogleLoginButton onClick={() => dispatch<any>(getGoogleLogin())} />
           <AppleLoginButton onClick={() => alert('아... 애플유저시구나...')} />
-          <NaverLoginButton onClick={() => alert('그런기능은 없어용 ~')} />
+          <NaverLoginButton onClick={() => alert('그런기능은 없어용 ~')} /> */}
           <KakaoLoginButton onClick={() => dispatch<any>(getKaKaoLogin())} />
           <h6 className="text-md mb-2 text-gray-600"> or </h6>
           <LoginFormChangeButton

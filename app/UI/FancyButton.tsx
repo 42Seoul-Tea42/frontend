@@ -9,18 +9,14 @@ type FancyButtonProps = {
 
 function FancyButton({ fancyState, onClick }: FancyButtonProps) {
   const [color, setColor] = useState('gray');
-  const [text, setText] = useState('');
 
   useEffect(() => {
     if (fancyState === Fancy.CONN) {
-      setColor(FancyColor.connect);
-      setText('like');
+      setColor(FancyColor.thumbConn);
     } else if (fancyState === Fancy.SEND) {
-      setColor(FancyColor.send);
-      setText('like');
+      setColor(FancyColor.thumbSend);
     } else {
-      setColor(FancyColor.none);
-      setText('');
+      setColor(FancyColor.thumbNone);
     }
   }, [fancyState]);
 
@@ -28,7 +24,6 @@ function FancyButton({ fancyState, onClick }: FancyButtonProps) {
     <button onClick={onClick} className="relative">
       <div className="hover:brightness-75 flex items-center">
         <ThumbsUpSVG color={color} />
-        <p className="w-4 font-thin text-sm">{text}</p>
       </div>
     </button>
   );

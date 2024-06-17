@@ -47,19 +47,19 @@ function UserCards({ users }: UserCardsProps) {
               <div key={index}>
                 <UserCardBorder
                   user={user}
+                  fancyState={user.fancy}
                   props={
                     <div className="max-w-[200px]">
-                      {user.fancy}
                       <div className="relative rounded-t-xl">
                         {/* 넘길 유저의 아이디가 필요해서 해당 컴포넌트에서 구현해야함 */}
                         <div onClick={() => clickUserDetail(user.id)}>
                           <UserCardPhoto src={user.picture} alt={user.firstname} />
                         </div>
                       </div>
-                      <div className="flex items-center w-full h-12 bg-white rounded-b-lg border-t-1 pl-2 gap-1">
+                      <div className="flex items-center justify-center w-full h-12 bg-white rounded-b-lg border-t-1 gap-1">
                         <p className="w-12 mr-3 font-semibold text-xl text-gray-700">{formatName(user.firstname)}</p>
                         <p className="mr-1 pl-1 pr-1 border rounded-full text-xl text-gray-500">{user.age}</p>
-                        <p className="font-thin text-base text-gray-900">{user.distance}km</p>
+                        <p className="font-thin mr-1 text-base text-gray-900">{user.distance}km</p>
                         {/* {fancyButton} */}
                         <FancyButton fancyState={user.fancy} onClick={() => toggleFancy(user)} />
                       </div>

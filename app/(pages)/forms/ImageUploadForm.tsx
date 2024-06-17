@@ -87,7 +87,13 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({ mainPhoto, width, hei
   return (
     <>
       <label className="relative flex flex-col items-center justify-center border border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:brightness-75">
-        <input className="hidden" type="file" multiple={true} onChange={handleImageChange} />
+        <input
+          className="hidden"
+          type="file"
+          multiple={true}
+          onChange={handleImageChange}
+          accept="image/jpeg, image/jpg, image/png"
+        />
         {src ? (
           <div style={{ width: `${width}px`, height: `${height}px` }} className="relative rounded-lg overflow-hidden">
             <Image src={src} alt="Preview" layout="fill" className="rounded-lg object-cover" />

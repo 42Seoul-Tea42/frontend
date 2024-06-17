@@ -3,7 +3,7 @@ import { SVGStyle } from '../redux/types/commonTypes';
 function ThumbsUpSVG({ color }: SVGStyle) {
   return (
     <svg
-      className={`w-6 h-6`}
+      className={`w-8 h-8`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
