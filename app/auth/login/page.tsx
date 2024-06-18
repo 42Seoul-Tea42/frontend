@@ -3,16 +3,11 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginPageDetail from './LoginPageDetail';
 import { AllSignOptionButton, CreateAccountButton, BlueHyperLink, LoginFormChangeButton } from '@/ui';
-import { useEffect } from 'react';
-import NaverLoginButton from './NaverLoginButton';
-import AppleLoginButton from './AppleLoginButton';
 import KakaoLoginButton from './KakaoLoginButton';
-import GoogleLoginButton from './GoogleLoginButton';
-import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
-import { RootState } from '@/redux/store';
-import { setIsSignup } from '@/redux/slices/signupSlice';
 import { LoginForm } from '@/(pages)/forms';
-import { getGoogleLogin, getKaKaoLogin, postLogin, setIdPasswordLoginFormView } from '@/redux/slices/loginSlice';
+import { postLogin, setIdPasswordLoginFormView, setLoginLink } from '@/redux/slices/loginSlice';
+import { v4 as uuidv4 } from 'uuid';
+import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 
 function Login() {
   const router = useRouter();
@@ -25,14 +20,21 @@ function Login() {
     dispatch<any>(postLogin());
   };
 
-  // oauth redirect
-  const link = useSelector((state: RootState) => state.loginSlice.link);
-  useEffect(() => {
-    if (!link) {
-      return;
-    }
-    window.href = link;
-  }, [link]);
+  const generateToken = () => {
+    return uuidv4();
+  };
+
+  const redirectKaKaoAuth = () => {
+    dispatch(
+      setLoginLink(
+        `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
+          process.env.NEXT_PUBLIC_KAKAO_API_KEY
+        }&redirect_uri=${
+          process.env.NEXT_PUBLIC_DOMAIN + process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI
+        }&state=${generateToken()}`
+      )
+    );
+  };
 
   return (
     <LoginPageDetail
@@ -42,7 +44,8 @@ function Login() {
           {/* <GoogleLoginButton onClick={() => dispatch<any>(getGoogleLogin())} />
           <AppleLoginButton onClick={() => alert('아... 애플유저시구나...')} />
           <NaverLoginButton onClick={() => alert('그런기능은 없어용 ~')} /> */}
-          <KakaoLoginButton onClick={() => dispatch<any>(getKaKaoLogin())} />
+          {/* <KakaoLoginButton onClick={() => dispatch<any>(getKaKaoLogin())} /> */}
+          <KakaoLoginButton onClick={redirectKaKaoAuth} />
           <h6 className="text-md mb-2 text-gray-600"> or </h6>
           <LoginFormChangeButton
             text="Sign in with Account"

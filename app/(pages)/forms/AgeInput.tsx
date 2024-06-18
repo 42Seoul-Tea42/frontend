@@ -13,6 +13,7 @@ const AgeInput: React.FC = () => {
       value={age ? age.toString() : ''}
       onChange={e => dispatch(setAccountAge(parseInt(e.target.value)))}
       text="나이"
+      required
     />
   );
 };

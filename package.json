@@ -52,6 +52,7 @@
     "tailwindcss": "^3.4.3",
     "three": "^0.160.1",
     "typedoc": "^0.25.13",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "uuid": "^10.0.0"
   }
 }

@@ -6,7 +6,6 @@ import { Oauth } from '../enum';
 
 /** 서버에서 받아오는 유저의 인증단계 */
 export type Steps = {
-  isLogin: boolean;
   emailCheck: boolean; // 이메일 인증 필요
   profileCheck: boolean; // 프로필 작성 필요
   emojiCheck: boolean; // 이모지 선택 필요
@@ -26,11 +25,10 @@ export const initialState: LoginState = {
   idPasswordLoginFormView: false,
   isResendEmail: false,
   steps: {
-    isLogin: false,
     emailCheck: false,
     profileCheck: false,
     emojiCheck: false,
-    oauth: Oauth.GOOGLE
+    oauth: Oauth.NONE
   },
   link: '',
   loading: false,
@@ -61,11 +59,13 @@ export const getResendEmail = createAsyncThunk('loginSlice/getResendEmail', asyn
 });
 
 // 카카오 로그인
-export const getKaKaoLogin = createAsyncThunk('loginSlice/getKaKaoLogin', async () => {
-  const response = await axiosInstance.get('/kakao/login');
-  // return serverToClientMapper(response.data);
-  return response;
-});
+export const getKaKaoLogin = createAsyncThunk(
+  'loginSlice/getKaKaoLogin',
+  async ({ code, state }: { code: string; state: string }) => {
+    const response = await axiosInstance.get(`/kakao/login?code=${code}&state=${state}`);
+    return serverToClientMapper(response.data);
+  }
+);
 
 // 구글 로그인
 export const getGoogleLogin = createAsyncThunk('loginSlice/getGoogleLogin', async () => {
@@ -93,9 +93,21 @@ export const deleteUser = createAsyncThunk('loginSlice/deleteUser', async () => 
 
 // 비밀번호 재설정 이메일 요청
 export const getResetPasswordEmail = createAsyncThunk('loginSlice/getResetPasswordEmail', async (loginId: string) => {
-  const response = await axiosInstance.get(`/user/reset-pw?login_id=${loginId}`);
+  const response = await axiosInstance.get(`/usr/reset-pw?login_id=${loginId}`);
   return response.status;
 });
+
+const redirectToNextStep = (steps: any) => {
+  console.log(steps);
+  if (!steps.emailCheck && steps.oauth === Oauth.NONE) {
+    alert('이메일 인증을 진행해주세요.');
+    return '/auth/login';
+  } else if (!steps.profileCheck) {
+    return '/auth/upload/profile';
+  } else if (!steps.emojiCheck) {
+    return '/auth/upload/emoji';
+  } else return '/home';
+};
 
 const loginSlice = createSlice({
   name: 'loginSlice',
@@ -106,6 +118,9 @@ const loginSlice = createSlice({
     },
     setIdPasswordLoginFormView: (state, action: PayloadAction<boolean>) => {
       state.idPasswordLoginFormView = action.payload;
+    },
+    setLoginLink: (state, action: PayloadAction<string>) => {
+      state.link = action.payload;
     }
   },
   // todo: 로그인 데이터 주입기
@@ -117,28 +132,29 @@ const loginSlice = createSlice({
     });
     builder.addCase(postLogin.fulfilled, (state, action: PayloadAction<any>) => {
       state.steps = { ...state.steps, ...action.payload };
-      state.steps.isLogin = true;
+      state.link = redirectToNextStep(state.steps);
+      state.loading = false;
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
-      state.error = '로그인 실패했습니다. 다시 시도해주세요.';
-      state.steps.isLogin = false;
+      alert('로그인 실패했습니다. 다시 시도해주세요.');
     });
 
     // 로그인 상태 확인하기
-    builder.addCase(getLogin.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getLogin.fulfilled, (state, action: PayloadAction<any>) => {
-      state.steps = { ...state.steps, ...action.payload };
-      state.steps.isLogin = true;
-    });
-    builder.addCase(getLogin.rejected, (state, action) => {
-      state.loading = false;
-      state.steps.isLogin = false;
-      state.error = '로그인을 해주세요.';
-    });
+    // builder.addCase(getLogin.pending, state => {
+    //   state.loading = true;
+    //   state.error = null;
+    // });
+    // builder.addCase(getLogin.fulfilled, (state, action: PayloadAction<any>) => {
+    //   state.steps = { ...state.steps, ...action.payload };
+    //   state.steps.isLogin = true;
+    //   state.steps.oauth = Oauth.EMAIL;
+    // });
+    // builder.addCase(getLogin.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.steps.isLogin = false;
+    //   state.error = '로그인을 해주세요.';
+    // });
 
     //카카오 로그인
     builder.addCase(getKaKaoLogin.pending, state => {
@@ -146,9 +162,9 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getKaKaoLogin.fulfilled, (state, action: PayloadAction<any>) => {
-      // state.steps = { ...state.steps, ...action.payload };
-      state.steps.isLogin = true;
-      state.link = action.payload.data.link;
+      state.steps = { ...state.steps, ...action.payload };
+      state.link = redirectToNextStep(state.steps);
+      state.loading = false;
     });
     builder.addCase(getKaKaoLogin.rejected, (state, action) => {
       state.loading = false;
@@ -162,7 +178,8 @@ const loginSlice = createSlice({
     });
     builder.addCase(getGoogleLogin.fulfilled, (state, action: PayloadAction<any>) => {
       state.steps = { ...state.steps, ...action.payload };
-      state.steps.isLogin = true;
+      state.link = redirectToNextStep(state.steps);
+      state.loading = false;
     });
     builder.addCase(getGoogleLogin.rejected, (state, action) => {
       state.loading = false;
@@ -195,20 +212,6 @@ const loginSlice = createSlice({
       state.error = action.error.message ?? null;
     });
 
-    // 유저 프로필 세팅 !steps 설정때문에 account가 아닌 login slice에 위치
-    builder.addCase(patchUserProfile.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(patchUserProfile.fulfilled, state => {
-      state.steps.profileCheck = true;
-      alert('프로필이 설정되었습니다.');
-    });
-    builder.addCase(patchUserProfile.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
-
     // 로그아웃
     builder.addCase(getLogout.pending, state => {
       state.loading = true;
@@ -224,9 +227,7 @@ const loginSlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(deleteUser.fulfilled, state => {
-      state.steps.isLogin = false;
-    });
+    builder.addCase(deleteUser.fulfilled, state => {});
     builder.addCase(deleteUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
@@ -245,10 +246,25 @@ const loginSlice = createSlice({
       state.loading = false;
       state.error = action.error.message ?? null;
     });
+
+    // 유저 프로필 세팅
+    builder.addCase(patchUserProfile.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(patchUserProfile.fulfilled, (state, action) => {
+      state.steps = { ...state.steps, ...action.payload };
+      state.link = redirectToNextStep(state.steps);
+      state.loading = false;
+    });
+    builder.addCase(patchUserProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
   }
 });
 
-export const { setIdPasswordLoginFormView, closeLoginError } = loginSlice.actions;
+export const { setLoginLink, setIdPasswordLoginFormView, closeLoginError } = loginSlice.actions;
 
 export const extraReducers = loginSlice.reducer;
 

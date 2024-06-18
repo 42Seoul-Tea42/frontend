@@ -15,14 +15,14 @@ export const useSocket = () => {
 
 export function SocketProvider({ children }: { children: React.ReactNode }) {
   const [socket, setSocket] = useState<Socket>();
-  const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || '';
   useSocketEventListener({ socket: socket });
 
+  const domain = process.env.NEXT_PUBLIC_DOMAIN;
   // handle connect/disconnect
   useEffect(() => {
     const id = localStorage.getItem('id');
 
-    const socketInstance = io(serverURL, {
+    const socketInstance = io(domain ?? '', {
       withCredentials: false,
       autoConnect: true,
       transports: ['websocket', 'polling'],
@@ -48,7 +48,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
     return () => {
       socketInstance.disconnect();
     };
-  }, [serverURL]);
+  }, []);
 
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 }

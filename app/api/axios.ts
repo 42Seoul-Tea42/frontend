@@ -3,7 +3,7 @@ import { getCookie } from '../cookie';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_SERVER_URL + '/api',
+  baseURL: process.env.NEXT_PUBLIC_DOMAIN + '/api',
   withCredentials: true, // 자격증명을 포함한 쿠키를 서버로 전달
   headers: {
     'Content-Type': 'application/json'

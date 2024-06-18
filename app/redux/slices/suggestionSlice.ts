@@ -14,26 +14,7 @@ interface SuggestionState {
 }
 
 export const initialState: SuggestionState = {
-  users: [
-    {
-      id: '1',
-      firstname: '재준',
-      lastname: '김',
-      interests: [1, 2, 3],
-      hateInterests: [4, 5],
-      rating: 3,
-      sexualPreference: Gender.MALE,
-      introduction: '',
-      fancy: Fancy.NONE,
-      distance: 10,
-      age: 25,
-      gender: '',
-      picture: '/emoji/3.jpg',
-      pictures: ['/emoji/3.jpg'],
-      emoji: [1, 2, 3],
-      hateEmoji: [4, 5, 6]
-    }
-  ],
+  users: [],
   historyNoti: false,
   fancyNoti: false,
   loading: false,

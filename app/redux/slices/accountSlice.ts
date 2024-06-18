@@ -23,7 +23,7 @@ export const initialState = {
     lastname: '',
     email: '',
     age: 1,
-    gender: Gender.ALL,
+    gender: Gender.NONE,
     sexualPreference: Gender.ALL,
     introduction: '',
     pictures: [],
@@ -60,12 +60,12 @@ export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile'
     emoji: user.emoji,
     hate_emoji: user.hateEmoji,
     name: user.firstname,
-    last_name: user.lastname,
+    last_name: user.lastname ?? '',
     age: user.age,
     pw: password,
     email: user.email
   });
-  return response.status;
+  return serverToClientMapper(response.data);
 });
 
 export const saveIdToLocalStorage = (id: string) => {

@@ -2,12 +2,21 @@ type InputFloatingLabelProps = {
   type: string;
   value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  text: string;
+  text?: string;
   autoComplete?: string;
   maxLength?: number;
+  required?: boolean;
 };
 
-function InputFloatingLabel({ type, value, onChange, text, autoComplete, maxLength }: InputFloatingLabelProps) {
+function InputFloatingLabel({
+  type,
+  value,
+  onChange,
+  text,
+  autoComplete,
+  maxLength,
+  required
+}: InputFloatingLabelProps) {
   return (
     <div className="relative z-0 w-full mb-5 group">
       <input
@@ -20,6 +29,7 @@ function InputFloatingLabel({ type, value, onChange, text, autoComplete, maxLeng
         maxLength={maxLength}
         placeholder=" "
         autoComplete={autoComplete}
+        required={required ? true : false}
       />
       <label
         htmlFor={`${type}_${text}_${value}`}

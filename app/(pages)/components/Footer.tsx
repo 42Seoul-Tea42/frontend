@@ -1,15 +1,12 @@
 'use client';
 
 import { getLogout } from '@/redux/slices/loginSlice';
-import { useSocket } from '@/socket/socketContext';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
 const Footer = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  //test
-  // useLoginRedirect({ trigger: isLogin });
 
   const handleLogout = () => {
     dispatch<any>(getLogout());

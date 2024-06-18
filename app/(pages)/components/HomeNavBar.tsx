@@ -4,26 +4,18 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
 import NavigationNoti from './NavigationNoti';
-import { RootState } from '@/redux/store';
 import requestUserLocation from '@/api/location';
 import { HomeNavBarButton } from '@/ui';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
-import useLoginRedirect from '../hooks/useLoginRedirect';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   // 로그인 유저 체크 훅
-  const isLogin = useSelector((state: RootState) => state.loginSlice.steps.isLogin);
-  useLoginRedirect();
 
-  const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLogin) {
-      return;
-    }
     requestUserLocation();
   }, []);
 

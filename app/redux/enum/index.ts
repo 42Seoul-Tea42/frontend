@@ -1,6 +1,7 @@
 // 성별은 124
 // 취향은 247
 export enum Gender {
+  NONE = 0,
   OTHER = 1,
   FEMALE = 2,
   MALE = 4,
@@ -39,5 +40,6 @@ export enum Status {
 export enum Oauth {
   NONE,
   KAKAO,
-  GOOGLE
+  GOOGLE,
+  EMAIL
 }
