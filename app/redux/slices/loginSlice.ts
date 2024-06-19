@@ -100,8 +100,7 @@ export const getResetPasswordEmail = createAsyncThunk('loginSlice/getResetPasswo
 const redirectToNextStep = (steps: any) => {
   console.log(steps);
   if (!steps.emailCheck && steps.oauth === Oauth.NONE) {
-    alert('이메일 인증을 진행해주세요.');
-    return '/auth/login';
+    return '/auth/verify-email';
   } else if (!steps.profileCheck) {
     return '/auth/upload/profile';
   } else if (!steps.emojiCheck) {

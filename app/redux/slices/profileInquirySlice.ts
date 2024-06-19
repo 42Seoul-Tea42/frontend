@@ -24,7 +24,7 @@ export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfile
 // 유저 신고
 export const reportUser = createAsyncThunk('profileInquirySlice/reportUser', async (userId: string) => {
   const response = await axiosInstance.post('/user/report', {
-    target_id: userId,
+    target_id: Number(userId),
     reason: 0,
     reason_opt: '부정적인 단어 사용'
   });
@@ -34,7 +34,7 @@ export const reportUser = createAsyncThunk('profileInquirySlice/reportUser', asy
 // 유저 차단
 export const blockUser = createAsyncThunk('profileInquirySlice/blockUser', async (userId: string) => {
   const response = await axiosInstance.post('/user/block', {
-    target_id: userId
+    target_id: Number(userId)
   });
   return response.data;
 });
