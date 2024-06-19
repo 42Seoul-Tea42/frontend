@@ -4,6 +4,7 @@ import { serverToClientMapper } from '../dto/mapper';
 import { Fancy, Gender } from '../enum';
 import _ from 'lodash';
 import { recvFancy, recvUnFancy, sendFancy, sendUnFancy } from './fancyConverter';
+import { SearchState } from './searchSlice';
 
 interface SuggestionState {
   users: any[];
@@ -53,6 +54,22 @@ export const patchUnFancy = createAsyncThunk('suggestionSlice/patchUnFancy', asy
   return targetId;
 });
 
+export const postSearch = createAsyncThunk('suggestionSlice/postSearch', async (_, { getState }) => {
+  const state = getState() as { searchSlice: SearchState };
+  const { searchParams } = state.searchSlice;
+
+  const response = await axiosInstance.post('/user/search', {
+    min_age: searchParams.minAge,
+    max_age: searchParams.maxAge,
+    distance: searchParams.distance,
+    tags: searchParams.interests,
+    fame: searchParams.rating
+  });
+
+  const users = response.data.profile_list.map((user: any) => serverToClientMapper(user));
+  return users;
+});
+
 const suggestionSlice = createSlice({
   name: 'suggestionSlice',
   initialState,
@@ -74,6 +91,9 @@ const suggestionSlice = createSlice({
       const targetId = action.payload;
       const user = _.find(state.users, { id: targetId });
       user.fancy = recvUnFancy(user.fancy);
+    },
+    initUser: state => {
+      state.users = [];
     }
   },
   extraReducers: builder => {
@@ -150,10 +170,23 @@ const suggestionSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
+
+    // 검색하기
+    builder.addCase(postSearch.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(postSearch.fulfilled, (state, action: PayloadAction<any>) => {
+      state.users = action.payload;
+    });
+    builder.addCase(postSearch.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
   }
 });
 
-export const { setNewFancy, setUnFancy, setFancyNoti, setHistoryNoti } = suggestionSlice.actions;
+export const { initUser, setNewFancy, setUnFancy, setFancyNoti, setHistoryNoti } = suggestionSlice.actions;
 export const extraReducers = suggestionSlice.reducer;
 
 export default suggestionSlice.reducer;
