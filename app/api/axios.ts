@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getCookie } from '../cookie';
+import { Auth } from '@/redux/enum';
+import handleAuthError, { redirectLogin } from './authHandler';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
@@ -36,18 +38,15 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => {
     // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
-    // 응답 데이터가 있는 작업 수행
     return response;
   },
-
-  error => {
+  async error => {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
-    // 응답 오류가 있는 작업 수행
     switch (error.response.status) {
       case 401:
-        alert('토큰이 만료되었습니다. 재 로그인 해주세요.');
-        // window.location.href = '/auth/login';
-        break;
+        return handleAuthError(error);
+      case 403:
+        redirectLogin();
     }
     return Promise.reject(error);
   }
