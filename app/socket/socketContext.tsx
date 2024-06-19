@@ -43,8 +43,6 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
       console.log('🛠 socket disconnected');
     });
 
-    // socketInstance.connect();
-
     return () => {
       socketInstance.disconnect();
     };
