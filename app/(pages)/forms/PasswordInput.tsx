@@ -14,7 +14,7 @@ const PasswordInput: React.FC = () => {
         type="password"
         value={password}
         onChange={e => dispatch(setAccountPassword(e.target.value))}
-        text="New-Password"
+        text="Password"
         autoComplete="new-password"
         maxLength={InputLimitLength.PASSWORD}
       />
