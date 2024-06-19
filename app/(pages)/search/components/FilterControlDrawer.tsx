@@ -4,6 +4,9 @@ import InputMinMaxAge from './InputMinMaxAge';
 import { DrawerItem, DrawerOpenButton, SubmitButton } from '@/ui';
 import { useCloseOnOutsideClick } from '@/(pages)/hooks';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchParamsInterests } from '@/redux/slices/searchSlice';
+import { RootState } from '@/redux/store';
 
 type FilterControlDrawerProps = {
   onSubmit: () => void;
@@ -19,6 +22,8 @@ const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit, sha
     setIsDrawerOpen(false);
   };
 
+  const dispatch = useDispatch();
+  const searchParams = useSelector((state: RootState) => state.searchSlice.searchParams);
   return (
     <div>
       <DrawerOpenButton shape={shape} onClick={() => setIsDrawerOpen(true)} />
@@ -36,9 +41,21 @@ const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit, sha
               <DrawerItem
                 items={[
                   { title: '필터링할 나이를 선택해주세요.', content: <InputMinMaxAge /> },
-                  { title: '필터링할 태그를 선택해주세요.', content: <InterestsSelector who={'me'} /> },
+                  {
+                    title: '필터링할 태그를 선택해주세요.',
+                    content: (
+                      <InterestsSelector
+                        who={'me'}
+                        onClick={e => dispatch(setSearchParamsInterests(e))}
+                        interests={searchParams.interests}
+                      />
+                    )
+                  },
                   { title: '필터링할 거리를 선택해주세요.', content: <InputRangeDistance /> },
-                  { title: '필터링할 등급을 선택해주세요.', content: <InputRangeStarBar who={'me'} /> }
+                  {
+                    title: '필터링할 등급을 선택해주세요.',
+                    content: <InputRangeStarBar who={'me'} star={searchParams.rating} />
+                  }
                 ]}
               />
             </div>
