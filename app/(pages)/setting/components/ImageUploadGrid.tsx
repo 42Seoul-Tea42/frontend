@@ -4,6 +4,12 @@ import { RootState } from '@/redux/store';
 import { StarFullSVG } from '@/svg';
 import { useDispatch, useSelector } from 'react-redux';
 
+export const checkPictureLength = async (pictures: any) => {
+  if (pictures.length < 1) {
+    return Promise.reject('프로필 사진을 한 장 이상 등록해주세요.');
+  }
+};
+
 const ImageUploadGrid: React.FC = () => {
   const pictures = useSelector((state: RootState) => state.accountSlice.user.pictures);
   const dispatch = useDispatch();

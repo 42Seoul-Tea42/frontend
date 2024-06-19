@@ -6,7 +6,7 @@ import { AccordionItems, SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
 import ReEnterPassword from '../forms/ReEnterPassword';
-import ImageUploadGrid from './components/ImageUploadGrid';
+import ImageUploadGrid, { checkPictureLength } from './components/ImageUploadGrid';
 import {
   AgeInput,
   EmailInput,
@@ -25,6 +25,16 @@ import {
   setAccountInterests
 } from '@/redux/slices/accountSlice';
 import { RootState } from '@/redux/store';
+import { redirectLogin } from '@/api/authHandler';
+
+export const submitProfile = async (pictures: string[], setting: { (): any; (): void }) => {
+  try {
+    await checkPictureLength(pictures);
+    setting();
+  } catch (error: any) {
+    alert(error);
+  }
+};
 
 const Setting: React.FC = () => {
   const user = useSelector((state: RootState) => state.accountSlice.user);
@@ -34,10 +44,6 @@ const Setting: React.FC = () => {
   useEffect(() => {
     dispatch<any>(getMyAccount());
   }, []);
-
-  const submitAccountSetting = () => {
-    dispatch<any>(patchUserProfile());
-  };
 
   return (
     <div className="flex min-h-screen bg-green-50">
@@ -51,7 +57,7 @@ const Setting: React.FC = () => {
           className="flex flex-col justify-start items-center"
           onSubmit={e => {
             e.preventDefault();
-            submitAccountSetting();
+            submitProfile(user.pictures, () => dispatch<any>(patchUserProfile()));
           }}
         >
           <AccordionItems
