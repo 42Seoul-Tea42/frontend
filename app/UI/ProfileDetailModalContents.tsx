@@ -5,25 +5,27 @@ import { RootState } from '@/redux/store';
 import ProfileDetailCarousel from '@/(pages)/components/ProfileDetailCarousel';
 import BlueHyperLink from './BlueHyperLink';
 import { blockUser, reportUser } from '@/redux/slices/profileInquirySlice';
-import { Gender, Status } from '@/redux/enum';
+import { Fancy, Gender, Status } from '@/redux/enum';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
 import InputStarRatingBar from '@/(pages)/search/components/InputRangeStarBar';
+import FancyButton from './FancyButton';
+import { patchFancy, patchUnFancy } from '@/redux/slices/suggestionSlice';
+
+export const sexualPreferenceToStringConverter = (sexualPreference: Gender) => {
+  switch (sexualPreference) {
+    case Gender.ALL:
+      return '모두';
+    case Gender.MALE:
+      return '남성';
+    case Gender.FEMALE:
+      return '여성';
+  }
+};
 
 const ProfileDetailModalContents: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.profileInquirySlice.user);
-
-  const sexualPreferenceToStringConverter = (sexualPreference: Gender) => {
-    switch (sexualPreference) {
-      case Gender.ALL:
-        return '모두';
-      case Gender.MALE:
-        return '남성';
-      case Gender.FEMALE:
-        return '여성';
-    }
-  };
 
   return (
     <div className="md:grid md:grid-cols-2 items-center gap-20 h-relative">
@@ -37,10 +39,16 @@ const ProfileDetailModalContents: React.FC = () => {
                 user.status === Status.ONLINE ? 'bg-green-500' : 'bg-red-500'
               } w-4 h-4 mr-2 border-2 border-white rounded-full`}
             ></span>
-            <div className="w-full">
-              <h5 className="text-xl text-gray-800 font-semibold">{user.lastname.toUpperCase()}</h5>
-              <h5 className="text-xl text-gray-800 font-semibold">{user.firstname.toLowerCase()}</h5>
-              <h5 className="text-sm text-gray-800 font-light">최근 접속시간 : {user.lastOnline}</h5>
+            <div className="w-full flex justify-between">
+              <div>
+                <div className="flex">
+                  <h5 className="text-xl text-gray-800 font-semibold">{user.lastname.toUpperCase()}</h5>
+                  <h5 className="text-xl text-gray-800 font-semibold">{user.firstname.toLowerCase()}</h5>
+                </div>
+                <h5 className="text-sm text-gray-800 font-thin">로그인 아이디 : {user.loginId}</h5>
+                <h5 className="text-sm text-gray-800 font-light">최근 접속시간 : {user.lastOnline}</h5>
+              </div>
+              <div>{sexualPreferenceToStringConverter(user.gender)}</div>
             </div>
           </div>
           {/* user detail content */}
@@ -81,12 +89,12 @@ const ProfileDetailModalContents: React.FC = () => {
                 value={user.introduction}
               ></textarea>
             </h5>
-          </div>
-          <div className="flex justify-end items-end text-blue-400">
-            <div className="flex items-center">
-              <BlueHyperLink text={'차단'} onClick={() => dispatch<any>(blockUser(user.id.toString()))} />
-              <p className="ml-2 mr-2"> / </p>
-              <BlueHyperLink text={'신고'} onClick={() => dispatch<any>(reportUser(user.id.toString()))} />
+            <div className="flex h-12 justify-end items-end text-blue-400">
+              <div className="flex items-center">
+                <BlueHyperLink text={'차단'} onClick={() => dispatch<any>(blockUser(user.id.toString()))} />
+                <p className="ml-2 mr-2"> / </p>
+                <BlueHyperLink text={'신고'} onClick={() => dispatch<any>(reportUser(user.id.toString()))} />
+              </div>
             </div>
           </div>
         </div>
