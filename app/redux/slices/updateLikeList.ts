@@ -7,15 +7,17 @@ interface UpdateLikeListProps {
   action: PayloadAction<number>;
   property: string;
   oppositeType: string;
+  maxItems?: number;
 }
 
-export function updateLikeList({ state, action, property, oppositeType }: UpdateLikeListProps) {
+export function updateLikeList({ state, action, property, oppositeType, maxItems }: UpdateLikeListProps) {
   const currentList = state.user[property];
 
   const oppositeList = state.user[oppositeType];
 
-  // 백엔드 요청: 4개까지만 고르게 해주세요. 4개 이상 && 새로운 이모티콘 추가 시 리턴
-  if (currentList.length >= 4 && !currentList.includes(action.payload)) {
+  // 백엔드 요청: 4개까지만 고르게 해주세요.
+  // 개수제한 로직 : maxItems가 넘고 & 아직 선택되지 않은 항목이면 리턴
+  if (maxItems && currentList.length >= maxItems && !currentList.includes(action.payload)) {
     return;
   }
 
