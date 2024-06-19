@@ -46,6 +46,14 @@ export const getMyAccount = createAsyncThunk<any>('accountSlice/getMyAccount', a
   return user;
 });
 
+// 내 이메일 가져오기 (redis에 보유)
+export const getMyEmail = createAsyncThunk('accountSlice/getMyEmail', async () => {
+  const response = await axiosInstance.get('/user/email');
+  return serverToClientMapper(response.data);
+});
+
+// 이메일 바꾸기 ()
+
 // 유저 프로필 정보 서버로 전송
 export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
   const state = getState() as { accountSlice: AccountState };
@@ -137,7 +145,8 @@ const accountSlice = createSlice({
         state: state,
         action: action,
         property: 'emoji',
-        oppositeType: 'hateEmoji'
+        oppositeType: 'hateEmoji',
+        maxItems: 4
       });
     },
     setAccountHateEmoji: (state: AccountState, action: PayloadAction<number>) => {
@@ -145,7 +154,8 @@ const accountSlice = createSlice({
         state: state,
         action: action,
         property: 'hateEmoji',
-        oppositeType: 'emoji'
+        oppositeType: 'emoji',
+        maxItems: 4
       });
     },
     setAccountInterests: (state: AccountState, action: PayloadAction<number>) => {
@@ -176,6 +186,20 @@ const accountSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getMyAccount.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 내 이메일 가져오기
+    builder.addCase(getMyEmail.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getMyEmail.fulfilled, (state, action) => {
+      state.user.email = action.payload.email;
+      state.loading = false;
+    });
+    builder.addCase(getMyEmail.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? null;
     });
