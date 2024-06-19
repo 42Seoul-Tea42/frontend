@@ -49,7 +49,7 @@ function Home() {
                 { text: '나이', sortBy: 'age' },
                 { text: '거리', sortBy: 'distance' },
                 { text: '등급', sortBy: 'rating' },
-                { text: '관심사', sortBy: 'interests' }
+                { text: '관심사', sortBy: 'interests.length' }
               ]}
               setSortBy={setSortBy}
               setSortOrder={setSortOrder}

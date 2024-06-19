@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
 import SortBar from '../components/SortBar';
-import ProfileDetailModal from '../components/ProfileDetailModal';
 import UserCards from './UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { RootState } from '@/redux/store';
@@ -52,7 +51,7 @@ export function Home() {
                 { text: '나이', sortBy: 'ageGender.age' },
                 { text: '거리', sortBy: 'another.distance' },
                 { text: '등급', sortBy: 'profile.rating' },
-                { text: '관심사', sortBy: 'profile.interests' }
+                { text: '관심사', sortBy: 'profile.interests.length' }
               ]}
               setSortBy={setSortBy}
               setSortOrder={setSortOrder}
