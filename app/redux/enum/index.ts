@@ -43,3 +43,8 @@ export enum Oauth {
   GOOGLE,
   EMAIL
 }
+
+export enum Auth {
+  refreshToken,
+  accessToken
+}
