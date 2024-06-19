@@ -7,6 +7,7 @@ import NavigationNoti from './NavigationNoti';
 import requestUserLocation from '@/api/location';
 import { HomeNavBarButton } from '@/ui';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
+import { initUser } from '@/redux/slices/suggestionSlice';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -19,7 +20,9 @@ const HomeNavBar: React.FC = () => {
     requestUserLocation();
   }, []);
 
+  const dispatch = useDispatch();
   const pushPathPage = (itemName: string) => {
+    dispatch(initUser());
     const path = itemName.toLowerCase();
     router.push(path);
     setIsMenuOpen(false);
