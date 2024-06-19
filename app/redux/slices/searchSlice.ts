@@ -11,15 +11,13 @@ interface SearchParams {
   rating: number;
 }
 
-interface SearchState {
-  users: any[];
+export interface SearchState {
   searchParams: SearchParams;
   loading: boolean;
   error: string | null;
 }
 
 export const initialState: SearchState = {
-  users: [],
   searchParams: {
     minAge: 1,
     maxAge: 100,
@@ -30,23 +28,6 @@ export const initialState: SearchState = {
   loading: false,
   error: null
 };
-
-export const postSearch = createAsyncThunk('homeSlice/postSearch', async (_, { getState }) => {
-  const state = getState() as { searchSlice: SearchState };
-  const { searchParams } = state.searchSlice;
-
-  const response = await axiosInstance.post('/user/search', {
-    min_age: searchParams.minAge,
-    max_age: searchParams.maxAge,
-    distance: searchParams.distance,
-    tags: searchParams.interests,
-    fame: searchParams.rating
-  });
-
-  const users = response.data.profile_list.map((user: any) => serverToClientMapper(user));
-  return users;
-});
-
 const searchSlice = createSlice({
   name: 'searchSlice',
   initialState,
@@ -74,19 +55,6 @@ const searchSlice = createSlice({
     initSearchParams: state => {
       state.searchParams = initialState.searchParams;
     }
-  },
-  extraReducers: builder => {
-    builder.addCase(postSearch.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(postSearch.fulfilled, (state, action: PayloadAction<any>) => {
-      state.users = action.payload;
-    });
-    builder.addCase(postSearch.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
   }
 });
 

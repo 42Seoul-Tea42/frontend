@@ -6,14 +6,18 @@ import { useSort } from '../hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { SearchSVG } from '@/svg';
-import { ProfileDetailModalContents, TableRow } from '@/ui';
-import { postSearch } from '@/redux/slices/searchSlice';
+import { FancyButton, MainContentsArea, ProfileDetailModalContents, TableRow } from '@/ui';
 import { getProfileDetail, setProfileInquiryUser, setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
 import _ from 'lodash';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
+import { Fancy } from '@/redux/enum';
+import { patchFancy, patchUnFancy, postSearch } from '@/redux/slices/suggestionSlice';
+import SortBarVisibleControl from '../components/SortBarVisibleControl';
+import SortBar from '../components/SortBar';
+import UserCards from '../home/UserCards';
 
 const Search: React.FC = () => {
-  const users = useSelector((state: RootState) => state.searchSlice.users);
+  const users = useSelector((state: RootState) => state.suggestionSlice.users);
   const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
   const dispatch = useDispatch();
 
@@ -27,45 +31,42 @@ const Search: React.FC = () => {
     dispatch(setProfileInquiryUser(selectUser));
   };
 
+  const toggleFancy = (user: any) => {
+    if (user.fancy === Fancy.NONE || user.fancy === Fancy.RECV) {
+      dispatch<any>(patchFancy(user.id));
+    } else {
+      dispatch<any>(patchUnFancy(user.id));
+    }
+  };
+
   return (
-    <div className="flex relative h-screen justify-center bg-green-50">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className={sortedUsers.length ? 'hidden' : ''}>
-          <p>검색 결과가 없습니다.</p>
-        </div>
-      </div>
-      <div className="w-full mr-10">
-        <FilterControlDrawer shape={<SearchSVG />} onSubmit={() => dispatch<any>(postSearch())} />
-        <div className="ml-10">
-          <SearchResultTable
-            setSortBy={setSortBy}
-            setSortOrder={setSortOrder}
-            schema={[
-              { text: '이름' },
-              { text: '나이', sortBy: 'age' },
-              { text: '거리', sortBy: 'distance' },
-              { text: '평판', sortBy: 'rating' },
-              { text: '관심사', sortBy: 'interests' }
-            ]}
-            body={
-              <>
-                {sortedUsers.map((user, index) => (
-                  <TableRow
-                    key={index}
-                    option={{ image: '/emoji/1.jpg' }}
-                    head={user.firstname}
-                    columns={[`${user.age}세`, `${user.distance} km`, user.rating, user.interests.length]}
-                    onClick={() => clickUserDetail(user.id)}
-                  />
-                ))}
-              </>
-            }
-          />
-        </div>
-      </div>
-      {/* profile inquiry service */}
-      <ProfileDetailModalControl profileDetail={<ProfileDetailModalContents />} />
-    </div>
+    <MainContentsArea
+      filter={<FilterControlDrawer shape={<SearchSVG />} onSubmit={() => dispatch<any>(postSearch())} />}
+      sort={
+        <SortBarVisibleControl
+          props={
+            <SortBar
+              items={[
+                { text: '나이', sortBy: 'age' },
+                { text: '거리', sortBy: 'distance' },
+                { text: '등급', sortBy: 'rating' },
+                { text: '관심사', sortBy: 'interests.length' }
+              ]}
+              setSortBy={setSortBy}
+              setSortOrder={setSortOrder}
+            />
+          }
+        />
+      }
+      contents={
+        <>
+          {/* profile inquiry service */}
+          <ProfileDetailModalControl profileDetail={<ProfileDetailModalContents />} />
+          {/* suggestion user service */}
+          <UserCards users={sortedUsers} />
+        </>
+      }
+    />
   );
 };
 
