@@ -31,6 +31,7 @@ function UserCards({ users }: UserCardsProps) {
   };
 
   const toggleFancy = (user: any) => {
+    // server update
     if (user.fancy === Fancy.NONE || user.fancy === Fancy.RECV) {
       dispatch<any>(patchFancy(user.id));
     } else {
