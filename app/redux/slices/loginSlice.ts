@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
-import { AccountState, patchUserProfile } from './accountSlice';
+import { AccountState, changeMyEmail, patchUserProfile } from './accountSlice';
 import { serverToClientMapper } from '../dto/mapper';
 import { Oauth } from '../enum';
 
@@ -93,7 +93,7 @@ export const deleteUser = createAsyncThunk('loginSlice/deleteUser', async () => 
 
 // 비밀번호 재설정 이메일 요청
 export const getResetPasswordEmail = createAsyncThunk('loginSlice/getResetPasswordEmail', async (loginId: string) => {
-  const response = await axiosInstance.get(`/usr/reset-pw?login_id=${loginId}`);
+  const response = await axiosInstance.get(`/user/reset-pw?login_id=${loginId}`);
   return response.status;
 });
 
@@ -136,24 +136,20 @@ const loginSlice = createSlice({
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
-      alert('로그인 실패했습니다. 다시 시도해주세요.');
+      alert('잘못된 비밀번호입니다.');
     });
 
     // 로그인 상태 확인하기
-    // builder.addCase(getLogin.pending, state => {
-    //   state.loading = true;
-    //   state.error = null;
-    // });
-    // builder.addCase(getLogin.fulfilled, (state, action: PayloadAction<any>) => {
-    //   state.steps = { ...state.steps, ...action.payload };
-    //   state.steps.isLogin = true;
-    //   state.steps.oauth = Oauth.EMAIL;
-    // });
-    // builder.addCase(getLogin.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.steps.isLogin = false;
-    //   state.error = '로그인을 해주세요.';
-    // });
+    builder.addCase(getLogin.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getLogin.fulfilled, (state, action: PayloadAction<any>) => {
+      state.steps = { ...state.steps, ...action.payload };
+    });
+    builder.addCase(getLogin.rejected, (state, action) => {
+      state.loading = false;
+    });
 
     //카카오 로그인
     builder.addCase(getKaKaoLogin.pending, state => {
@@ -238,10 +234,10 @@ const loginSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getResetPasswordEmail.fulfilled, state => {
-      // test
-      // none
+      alert('비밀번호 재설정 메일을 보냈습니다. 확인해주세요.');
     });
     builder.addCase(getResetPasswordEmail.rejected, (state, action) => {
+      alert('존재하지 않는 로그인 id입니다.');
       state.loading = false;
       state.error = action.error.message ?? null;
     });
@@ -254,10 +250,26 @@ const loginSlice = createSlice({
     builder.addCase(patchUserProfile.fulfilled, (state, action) => {
       state.steps = { ...state.steps, ...action.payload };
       state.link = redirectToNextStep(state.steps);
+      alert('프로필이 변경되었습니다.');
       state.loading = false;
     });
     builder.addCase(patchUserProfile.rejected, (state, action) => {
       state.loading = false;
+      state.error = action.error.message ?? null;
+    });
+
+    // 이메일 변경하기
+    builder.addCase(changeMyEmail.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(changeMyEmail.fulfilled, (state, action) => {
+      state.steps = { ...state.steps, ...action.payload };
+      state.loading = false;
+    });
+    builder.addCase(changeMyEmail.rejected, (state, action) => {
+      state.loading = false;
+      alert('이미 존재하는 이메일입니다.');
       state.error = action.error.message ?? null;
     });
   }
