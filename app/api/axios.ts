@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie } from '../cookie';
-import { Auth } from '@/redux/enum';
 import handleAuthError, { redirectLogin } from './authHandler';
+import handleForbiddenError from './forbiddenhandler';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
@@ -44,9 +44,9 @@ axiosInstance.interceptors.response.use(
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     switch (error.response.status) {
       case 401:
-        return handleAuthError(error);
+        return await handleAuthError(error);
       case 403:
-        redirectLogin();
+        handleForbiddenError(error);
     }
     return Promise.reject(error);
   }
