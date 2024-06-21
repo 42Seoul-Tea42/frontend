@@ -2,7 +2,6 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/redux/store';
 import CardForm from '@/(pages)/forms/CardForm';
 import { postResetPassword } from '@/redux/slices/accountSlice';
@@ -10,6 +9,7 @@ import { LoginIdInput, PasswordInput } from '@/(pages)/forms';
 import ReEnterPassword from '@/(pages)/forms/ReEnterPassword';
 import { SubmitButton } from '@/ui';
 import { getResetPasswordEmail } from '@/redux/slices/loginSlice';
+import { useSearchParams } from 'next/navigation';
 
 function ResetPasswordDetail() {
   const dispatch = useDispatch();

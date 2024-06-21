@@ -122,7 +122,7 @@ const accountSlice = createSlice({
       state.user.gender = value;
     },
     setAccountAge: (state: AccountState, action: PayloadAction<number>) => {
-      if (action.payload < 0 || action.payload > 100) return;
+      if (action.payload < 1 || action.payload > 100) return;
       state.user.age = action.payload;
     },
     setAccountFirstname: (state: AccountState, action: PayloadAction<string>) => {

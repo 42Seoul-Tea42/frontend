@@ -1,7 +1,6 @@
 'use client';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
 import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
 import {
@@ -18,13 +17,13 @@ import Indicator from '@/(pages)/components/Indicator';
 import { RootState } from '@/redux/store';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '@/(pages)/forms';
 import { SubmitButton } from '@/ui';
+import { useRouter } from 'next/navigation';
 
 const Signup: React.FC = () => {
   const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
   const error = useSelector((state: RootState) => state.signupSlice.error);
-  const user = useSelector((state: RootState) => state.accountSlice.user);
   const validation = useSelector((state: RootState) => state.signupSlice.validation);
-  const showAlertsForValidation = useValidationCheck();
+  const checkValidate = useValidationCheck();
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -43,7 +42,7 @@ const Signup: React.FC = () => {
   }, [error]);
 
   const signup = () => {
-    if (!showAlertsForValidation()) return;
+    if (!checkValidate()) return;
     dispatch<any>(postSignup());
   };
 

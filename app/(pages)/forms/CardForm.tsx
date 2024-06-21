@@ -1,8 +1,8 @@
 interface CardFormProps {
-  onSubmit: () => void;
+  onSubmit?: () => void;
   inputs: JSX.Element;
   subject: string;
-  button: JSX.Element;
+  button?: JSX.Element;
 }
 
 /**
@@ -21,7 +21,7 @@ const CardForm: React.FC<CardFormProps> = ({ onSubmit, subject, inputs, button }
             /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
             event.preventDefault();
             /** 폼 컨트롤 */
-            onSubmit();
+            onSubmit && onSubmit();
           }}
           className="max-w-md min-w-96 min-h-24 p-6 bg-white border border-gray-200 rounded-lg shadow"
         >
