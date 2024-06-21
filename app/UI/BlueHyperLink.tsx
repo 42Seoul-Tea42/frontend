@@ -1,6 +1,6 @@
 type BlueHyperLinkProps = {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 function BlueHyperLink({ text, onClick }: BlueHyperLinkProps) {
