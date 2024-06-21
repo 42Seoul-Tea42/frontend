@@ -1,5 +1,5 @@
 import { Fancy, FancyColor } from '@/redux/enum';
-import { HeartSVG, ThumbsUpSVG } from '../svg';
+import { ThumbsUpSVG } from '../svg';
 import { useEffect, useState } from 'react';
 
 type FancyButtonProps = {

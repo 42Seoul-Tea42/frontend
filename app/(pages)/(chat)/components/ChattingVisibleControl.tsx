@@ -2,15 +2,11 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import ChatButton from './ChatButton';
-import {
-  getChattingList,
-  setChattingListModal,
-  setChattingNoti,
-  setExitUser
-} from '@/redux/slices/chatting/chattingSlice';
+import { setChattingListModal, setChattingNoti, setExitUser } from '@/redux/slices/chatting/chattingSlice';
 import { useCloseOnOutsideClick } from '@/(pages)/hooks';
 import { RootState } from '@/redux/store';
 import { useEffect } from 'react';
+import { getChattingList } from '@/redux/slices/chatting/chattingExtraReducers';
 
 type ChatVisibleControlProps = {
   props: JSX.Element;

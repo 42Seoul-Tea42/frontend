@@ -8,9 +8,8 @@ import requestUserLocation from '@/api/location';
 import { HomeNavBarButton } from '@/ui';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
 import { initUser } from '@/redux/slices/suggestion/suggestionSlice';
-import { RefreshSVG } from '@/svg/RefreshSVG';
 import { AdjustSVG } from '@/svg/HomeNavBarSVG';
-import { getLogin } from '@/redux/slices/login/loginSlice';
+import { getLogin } from '@/redux/slices/login/loginExtraReducers';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

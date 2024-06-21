@@ -8,10 +8,10 @@ import { SearchSVG } from '@/svg';
 import { MainContentsArea, ProfileDetailModalContents, TableRow } from '@/ui';
 import _ from 'lodash';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
-import { postSearch } from '@/redux/slices/suggestion/suggestionSlice';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
 import SortBar from '../components/SortBar';
 import UserCards from '../home/UserCards';
+import { postSearch } from '@/redux/slices/suggestion/suggestionExtraReducers';
 
 const Search: React.FC = () => {
   const users = useSelector((state: RootState) => state.suggestionSlice.users);

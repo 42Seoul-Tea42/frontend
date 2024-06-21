@@ -4,9 +4,10 @@ import chattingSlice, { initialState as chattingInit } from './slices/chatting/c
 import suggestionSlice, { initialState as suggestionInit } from './slices/suggestion/suggestionSlice';
 import accountSlice, { initialState as accountInit } from './slices/account/accountSlice';
 import signupSlice, { initialState as signupInit } from './slices/signup/signupSlice';
-import loginSlice, { getLogout, initialState as loginInit } from './slices/login/loginSlice';
 import searchSlice, { initialState as searchInit } from './slices/searchSlice';
+import loginSlice, { initialState as loginInit } from './slices/login/loginSlice';
 import profileInquirySlice, { initialState as profileInquiryInit } from './slices/profileInquiry/profileInquirySlice';
+import { getLogout } from './slices/login/loginExtraReducers';
 
 const appReducer = combineReducers({
   chattingSlice: chattingSlice,

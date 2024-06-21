@@ -16,7 +16,9 @@ const redirectToNextStep = (steps: any) => {
       return Route.EMOJI;
     } else return Route.HOME;
   };
-  window.location.href = selectPath(steps);
+  if (window.location.pathname !== Route.SETTING) {
+    window.location.href = selectPath(steps);
+  }
 };
 
 // 로그인 요청 -----------------------------------------------------
@@ -317,7 +319,7 @@ const addPatchUserProfileCase = (builder: ActionReducerMapBuilder<LoginState>) =
   builder.addCase(patchUserProfile.fulfilled, (state, action) => {
     state.steps = { ...state.steps, ...action.payload };
     state.loading = false;
-    alert('프로필이 변경되었습니다.');
+    alert('프로필이 업데이트 되었습니다.');
     redirectToNextStep(state.steps);
   });
   builder.addCase(patchUserProfile.rejected, (state, action) => {

@@ -17,8 +17,6 @@ import {
   UserNameInput
 } from '../forms';
 import {
-  getMyAccount,
-  patchUserProfile,
   setAccountEmoji,
   setAccountHateEmoji,
   setAccountHateInterests,
@@ -27,6 +25,8 @@ import {
 import { RootState } from '@/redux/store';
 import { submitProfile } from './submitprofile';
 import SimillerRadioInput from '../forms/SimilerRadioInput';
+import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
+import { getMyAccount } from '@/redux/slices/account/accountExtraReducers';
 
 const Setting: React.FC = () => {
   const user = useSelector((state: RootState) => state.accountSlice.user);

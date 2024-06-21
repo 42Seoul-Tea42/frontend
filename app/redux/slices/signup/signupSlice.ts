@@ -1,7 +1,4 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosInstance from '@/api/axios';
-import { AccountState } from '../account/accountSlice';
-import { Route } from '../../enum';
 import { addSignupExtraReducers } from './signupExtraReducers';
 
 export interface SignupState {

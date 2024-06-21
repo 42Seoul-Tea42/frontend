@@ -1,10 +1,8 @@
 'use client';
 
 import { Fancy, FancyColor } from '@/redux/enum';
-import { RootState } from '@/redux/store';
-import _, { set } from 'lodash';
+import _ from 'lodash';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 interface UserCardBorderProps {
   user: any;

@@ -3,16 +3,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { RootState } from '@/redux/store';
-import {
-  getFancyUsers,
-  getVisitorUsers,
-  setFancyNoti,
-  setVisitorNoti
-} from '@/redux/slices/suggestion/suggestionSlice';
+import { setFancyNoti, setVisitorNoti } from '@/redux/slices/suggestion/suggestionSlice';
 import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import UserCards from '../home/UserCards';
 import { timeConverter } from '@/utils/timeConverter';
+import { getVisitorUsers } from '@/redux/slices/suggestion/suggestionExtraReducers';
 
 function Visitor() {
   const dispatch = useDispatch();

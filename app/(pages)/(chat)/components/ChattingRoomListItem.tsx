@@ -1,11 +1,10 @@
+import { getChattingMessages } from '@/redux/slices/chatting/chattingExtraReducers';
 import {
   clearMessages,
-  getChattingMessages,
   setChattingListModal,
   setChattingUser,
   setScrollDirection
 } from '@/redux/slices/chatting/chattingSlice';
-import { RootState } from '@/redux/store';
 import { timeConverter } from '@/utils/timeConverter';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';

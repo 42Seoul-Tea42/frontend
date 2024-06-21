@@ -4,12 +4,13 @@ import { AgeInput, GenderRadioInput, IntroductionInput, SexualPreferenceRadioInp
 import ImageUploadGrid from '@/(pages)/setting/components/ImageUploadGrid';
 import { SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
-import { patchUserProfile, setAccountInterests } from '@/redux/slices/account/accountSlice';
+import { setAccountInterests } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 import { submitProfile } from '@/(pages)/setting/submitprofile';
 import SimillerRadioInput from '@/(pages)/forms/SimilerRadioInput';
+import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
 
 const Profile = () => {
   const dispatch = useDispatch();

@@ -183,4 +183,5 @@ export const addSuggestionExtraReducers = (builder: ActionReducerMapBuilder<Sugg
   addGetFancyUsersCase(builder);
   addPatchUnFancyCase(builder);
   addPostSearchCase(builder);
+  addPatchFancyCase(builder);
 };

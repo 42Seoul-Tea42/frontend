@@ -5,16 +5,15 @@ import LoginPageDetail from './LoginPageDetail';
 import { AllSignOptionButton, CreateAccountButton, LoginFormChangeButton } from '@/ui';
 import KakaoLoginButton from './KakaoLoginButton';
 import { LoginForm } from '@/(pages)/forms';
-import { postLogin, setIdPasswordLoginFormView, setLoginLink } from '@/redux/slices/login/loginSlice';
 import { v4 as uuidv4 } from 'uuid';
-import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 import { Route } from '@/redux/enum';
 import { RootState } from '@/redux/store';
+import { postLogin } from '@/redux/slices/login/loginExtraReducers';
+import { setIdPasswordLoginFormView } from '@/redux/slices/login/loginSlice';
 
 function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
-  useLoginRedirect();
 
   const loginId = useSelector((state: RootState) => state.accountSlice.user.loginId);
   const password = useSelector((state: RootState) => state.accountSlice.password);
@@ -33,14 +32,12 @@ function Login() {
   };
 
   const redirectKaKaoAuth = () => {
-    dispatch(
-      setLoginLink(
-        `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
-          process.env.NEXT_PUBLIC_KAKAO_API_KEY
-        }&redirect_uri=${
-          process.env.NEXT_PUBLIC_DOMAIN ?? '' + process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI ?? ''
-        }&state=${generateToken()}`
-      )
+    router.push(
+      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
+        process.env.NEXT_PUBLIC_KAKAO_API_KEY
+      }&redirect_uri=${
+        process.env.NEXT_PUBLIC_DOMAIN ?? '' + process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI ?? ''
+      }&state=${generateToken()}`
     );
   };
 

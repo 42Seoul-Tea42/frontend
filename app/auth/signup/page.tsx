@@ -5,9 +5,6 @@ import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
 import {
   closeSignupError,
-  getCheckDuplicateEmail,
-  getCheckDuplicateId,
-  postSignup,
   setIsEmailDuplicateChecked,
   setIsLoginIdDuplicateChecked
 } from '@/redux/slices/signup/signupSlice';
@@ -17,6 +14,7 @@ import Indicator from '@/(pages)/components/Indicator';
 import { RootState } from '@/redux/store';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '@/(pages)/forms';
 import { SubmitButton } from '@/ui';
+import { getCheckDuplicateEmail, getCheckDuplicateId, postSignup } from '@/redux/slices/signup/signupExtraReducers';
 
 const Signup: React.FC = () => {
   const error = useSelector((state: RootState) => state.signupSlice.error);

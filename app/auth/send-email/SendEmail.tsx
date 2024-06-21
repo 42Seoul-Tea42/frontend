@@ -3,10 +3,9 @@ import Indicator from '@/(pages)/components/Indicator';
 import { EmailInput, LoginIdInput, PasswordInput } from '@/(pages)/forms';
 import CardForm from '@/(pages)/forms/CardForm';
 import { SubmitButton } from '@/ui';
-import { getResendEmail } from '@/redux/slices/login/loginSlice';
-import { getCheckDuplicateEmail, setIsEmailDuplicateChecked } from '@/redux/slices/signup/signupSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { getResendEmail } from '@/redux/slices/login/loginExtraReducers';
 
 export function SendEmail() {
   const dispatch = useDispatch();
@@ -16,26 +15,7 @@ export function SendEmail() {
     <CardForm
       onSubmit={() => {}}
       subject={'이메일을 못받으셨나요?'}
-      inputs={
-        <div className="mb-10">
-          {/* <LoginIdInput />
-          <PasswordInput />
-          <EmailInput
-            extended={() => {
-              // 이메일 중복체크 후 재입력시 중복체크 여부 초기화
-              dispatch(setIsEmailDuplicateChecked(false));
-            }}
-            addJSX={
-              <Indicator
-                // 이메일 중복체크
-                onClick={() => dispatch<any>(getResendEmail())}
-                color={validation.isEmailDuplicateChecked ? 'bg-green-500' : 'hover:opacity-50 bg-red-500'}
-              />
-            }
-          /> */}
-        </div>
-      }
-      //test
+      inputs={<div className="mb-10"></div>}
       button={<SubmitButton text="이메일 다시보내기" onClick={() => dispatch<any>(getResendEmail())} />}
     />
   );
