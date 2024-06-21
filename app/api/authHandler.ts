@@ -5,7 +5,7 @@ const handleAuthError = async (error: any) => {
   const flag = checkInvalidStatus(error.response.data.msg);
 
   if (flag === Auth.accessToken) {
-    return await reRequest(error.config);
+    return reRequest(error.config);
   } else if (flag === Auth.refreshToken) {
     redirectLogin();
   }
@@ -45,7 +45,6 @@ const reRequest = async (originalRequestConfig: any) => {
 
 // 재 로그인 유저 리다이렉트
 export const redirectLogin = () => {
-  alert('토큰이 만료되었습니다. 재 로그인 해주세요.');
   window.location.href = '/auth/login';
 };
 
