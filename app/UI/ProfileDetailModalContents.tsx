@@ -3,14 +3,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import ProfileDetailCarousel from '@/(pages)/components/ProfileDetailCarousel';
-import BlueHyperLink from './BlueHyperLink';
-import { blockUser, reportUser } from '@/redux/slices/profileInquirySlice';
-import { Fancy, Gender, Status } from '@/redux/enum';
+import { Gender, Status } from '@/redux/enum';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
 import InputStarRatingBar from '@/(pages)/search/components/InputRangeStarBar';
-import FancyButton from './FancyButton';
-import { patchFancy, patchUnFancy } from '@/redux/slices/suggestionSlice';
+import BlockReportForm from '@/(pages)/forms/BlockReportForm';
 
 export const sexualPreferenceToStringConverter = (sexualPreference: Gender) => {
   switch (sexualPreference) {
@@ -89,13 +86,7 @@ const ProfileDetailModalContents: React.FC = () => {
                 value={user.introduction}
               ></textarea>
             </h5>
-            <div className="flex h-12 justify-end items-end text-blue-400">
-              <div className="flex items-center">
-                <BlueHyperLink text={'차단'} onClick={() => dispatch<any>(blockUser(user.id.toString()))} />
-                <p className="ml-2 mr-2"> / </p>
-                <BlueHyperLink text={'신고'} onClick={() => dispatch<any>(reportUser(user.id.toString()))} />
-              </div>
-            </div>
+            <BlockReportForm id={user.id} />
           </div>
         </div>
       </div>
