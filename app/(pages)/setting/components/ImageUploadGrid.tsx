@@ -41,6 +41,12 @@ const ImageUploadGrid: React.FC = () => {
           height={200}
           onClick={() => dispatch(removeAccountPhotos(3))}
         />
+        <ImageUploadForm
+          src={pictures[4] ?? ''}
+          width={200}
+          height={200}
+          onClick={() => dispatch(removeAccountPhotos(3))}
+        />
       </div>
     </div>
   );
