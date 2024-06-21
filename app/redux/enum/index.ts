@@ -66,6 +66,10 @@ export enum ReportReason {
 }
 
 export enum Route {
-  HOME = '/',
-  LOGIN = '/auth/login'
+  HOME = '/home',
+  LOGIN = '/auth/login',
+  EMOJI = '/auth/upload/emoji',
+  PROFILE = '/auth/upload/profile',
+  VERIFY_EMAIL = 'auth/verify-email',
+  SIGNUP = '/auth/signup'
 }

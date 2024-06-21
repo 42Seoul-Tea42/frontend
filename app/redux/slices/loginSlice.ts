@@ -100,12 +100,12 @@ export const getResetPasswordEmail = createAsyncThunk('loginSlice/getResetPasswo
 const redirectToNextStep = (steps: any) => {
   console.log(steps);
   if (!steps.emailCheck && steps.oauth === Oauth.NONE) {
-    return '/auth/verify-email';
+    return Route.VERIFY_EMAIL;
   } else if (!steps.profileCheck) {
-    return '/auth/upload/profile';
+    return Route.PROFILE;
   } else if (!steps.emojiCheck) {
-    return '/auth/upload/emoji';
-  } else return '/home';
+    return Route.EMOJI;
+  } else return Route.HOME;
 };
 
 const loginSlice = createSlice({

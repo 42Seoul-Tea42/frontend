@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
-import { Gender, InputLimitLength } from '../enum';
+import { Gender, InputLimitLength, Route } from '../enum';
 import { serverToClientMapper } from '../dto/mapper';
 import { updateLikeList } from './updateLikeList';
 import _ from 'lodash';
@@ -250,7 +250,7 @@ const accountSlice = createSlice({
     });
     builder.addCase(postResetPassword.fulfilled, (state: { loading: boolean }) => {
       alert('비밀번호가 변경되었습니다. 다시 로그인해주세요.');
-      window.location.href = '/home';
+      window.location.href = Route.HOME;
       state.loading = false;
     });
     builder.addCase(

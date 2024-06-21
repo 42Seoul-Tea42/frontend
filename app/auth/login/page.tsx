@@ -2,12 +2,13 @@
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginPageDetail from './LoginPageDetail';
-import { AllSignOptionButton, CreateAccountButton, BlueHyperLink, LoginFormChangeButton } from '@/ui';
+import { AllSignOptionButton, CreateAccountButton, LoginFormChangeButton } from '@/ui';
 import KakaoLoginButton from './KakaoLoginButton';
 import { LoginForm } from '@/(pages)/forms';
 import { postLogin, setIdPasswordLoginFormView, setLoginLink } from '@/redux/slices/loginSlice';
 import { v4 as uuidv4 } from 'uuid';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
+import { Route } from '@/redux/enum';
 
 function Login() {
   const router = useRouter();
@@ -59,7 +60,7 @@ function Login() {
           <LoginForm onSubmit={submitLogin} />
         </>
       }
-      createAccount={<CreateAccountButton onClick={() => router.push('/auth/signup')} />}
+      createAccount={<CreateAccountButton onClick={() => router.push(Route.SIGNUP)} />}
     />
   );
 }
