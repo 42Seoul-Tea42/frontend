@@ -30,6 +30,7 @@
     "@types/react-dom": "18.2.14",
     "@types/redux-logger": "^3.0.13",
     "@types/three": "^0.160.0",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "autoprefixer": "^10.4.19",
