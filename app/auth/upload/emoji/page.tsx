@@ -1,19 +1,16 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import EmojiGridList from './EmojiGridList';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { RootState } from '@/redux/store';
-import { SubmitButton } from '@/ui';
-import { patchUserProfile, setAccountEmoji } from '@/redux/slices/accountSlice';
+import { AccordionItems, SubmitButton } from '@/ui';
+import { patchUserProfile, setAccountEmoji, setAccountHateEmoji } from '@/redux/slices/accountSlice';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 
 const Emoji = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
-  const emojiCheck = useSelector((state: RootState) => state.loginSlice.steps.emojiCheck);
-  const emoji = useSelector((state: RootState) => state.accountSlice.user.emoji);
+  const user = useSelector((state: RootState) => state.accountSlice.user);
+
   useLoginRedirect();
 
   const submitEmojiPreference = (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +18,7 @@ const Emoji = () => {
     event.preventDefault();
 
     // 서버로 제출 하는 로직 필요
-    dispatch<any>(patchUserProfile());
+    dispatch<any>(patchUserProfile(null));
   };
 
   return (
@@ -30,14 +27,22 @@ const Emoji = () => {
         onSubmit={submitEmojiPreference}
         className="min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow"
       >
-        <h5 className="text-lg font-semibold mb-10">
-          선호하는 이모티콘을 골라주세요.
-          <span className="bg-red-100 text-red-800 ml-3 text-xs font-medium me-2 px-2.5 py-0.5 rounded">좋아요</span>
-          <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">싫어요</span>
-        </h5>
-        <EmojiGridList who={'me'} emoji={emoji} onClick={e => dispatch(setAccountEmoji(e))} />
-        <div className="mt-10"></div>
-        <SubmitButton text="submit" />
+        <p className="text-xl font-medium"> 이모티콘 취향을 선택해주세요.</p>
+        <AccordionItems
+          items={[
+            {
+              title: '좋아하는 이모티콘 선택',
+              content: <EmojiGridList who={'me'} emoji={user.emoji} onClick={e => dispatch(setAccountEmoji(e))} />
+            },
+            {
+              title: '싫어하는 이모티콘 선택',
+              content: (
+                <EmojiGridList who={'me'} emoji={user.hateEmoji} onClick={e => dispatch(setAccountHateEmoji(e))} />
+              )
+            }
+          ]}
+        />
+        <SubmitButton text={'Submit'} />
       </form>
     </div>
   );
