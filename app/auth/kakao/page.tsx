@@ -3,9 +3,10 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
-import { getKaKaoLogin, getResendEmail, getVerifyEmail } from '@/redux/slices/loginSlice';
+import { getKaKaoLogin } from '@/redux/slices/loginSlice';
 import CardForm from '@/(pages)/forms/CardForm';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
+import { Route } from '@/redux/enum';
 
 function KakaoPage() {
   const params = useSearchParams();
@@ -31,7 +32,7 @@ function KakaoPage() {
       button={
         <button
           name="skeleton"
-          onClick={() => router.push('/auth/login')}
+          onClick={() => router.push(Route.LOGIN)}
           className="w-8 h-10 border-4 border-blue-300 rounded-full"
         >
           로그인 하러가기

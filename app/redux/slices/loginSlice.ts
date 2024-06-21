@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { AccountState, changeMyEmail, patchUserProfile } from './accountSlice';
 import { serverToClientMapper } from '../dto/mapper';
-import { Oauth } from '../enum';
+import { Oauth, Route } from '../enum';
 
 /** 서버에서 받아오는 유저의 인증단계 */
 export type Steps = {
@@ -188,6 +188,8 @@ const loginSlice = createSlice({
     });
     builder.addCase(getVerifyEmail.fulfilled, state => {
       state.steps.emailCheck = true;
+      alert('이메일 인증이 완료되었습니다.');
+      window.location.href = Route.LOGIN;
     });
     builder.addCase(getVerifyEmail.rejected, (state, action) => {
       state.loading = false;
@@ -214,6 +216,7 @@ const loginSlice = createSlice({
     });
     builder.addCase(getLogout.fulfilled, state => {
       state = initialState;
+      window.location.href = Route.LOGIN;
     });
     builder.addCase(getLogout.rejected, () => initialState);
 

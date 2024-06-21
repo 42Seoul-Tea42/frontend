@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { AccountState } from './accountSlice';
 import { getLogout } from './loginSlice';
+import { Route } from '../enum';
 
 interface SignupState {
   validation: {
@@ -96,6 +97,7 @@ const signupSlice = createSlice({
     });
     builder.addCase(postSignup.fulfilled, (state, action) => {
       state.validation.isSignup = true;
+      window.location.href = Route.LOGIN;
     });
     builder.addCase(postSignup.rejected, (state, action) => {
       state.loading = false;

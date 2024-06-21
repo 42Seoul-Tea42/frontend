@@ -1,4 +1,4 @@
-import { Auth } from '@/redux/enum';
+import { Auth, Route } from '@/redux/enum';
 import axiosInstance from './axios';
 
 const handleAuthError = async (error: any) => {
@@ -45,7 +45,7 @@ const reRequest = async (originalRequestConfig: any) => {
 
 // 재 로그인 유저 리다이렉트
 export const redirectLogin = () => {
-  window.location.href = '/auth/login';
+  window.location.href = Route.LOGIN;
 };
 
 export default handleAuthError;

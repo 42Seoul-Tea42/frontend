@@ -64,3 +64,8 @@ export enum ReportReason {
   SUSPICIOUS,
   OTHER
 }
+
+export enum Route {
+  HOME = '/',
+  LOGIN = '/auth/login'
+}

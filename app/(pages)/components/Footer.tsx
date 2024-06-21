@@ -1,16 +1,13 @@
 'use client';
 
 import { getLogout } from '@/redux/slices/loginSlice';
-import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
 const Footer = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch<any>(getLogout());
-    router.push('/auth/login');
   };
 
   return (
