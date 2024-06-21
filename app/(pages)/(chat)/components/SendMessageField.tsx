@@ -1,6 +1,6 @@
 'use client';
 
-import { setChattingMessage, setScrollDirection, setSendMessage } from '@/redux/slices/chattingSlice';
+import { setChattingMessage, setScrollDirection, setSendMessage } from '@/redux/slices/chatting/chattingSlice';
 import { RootState } from '@/redux/store';
 import { useSocket } from '@/socket/socketContext';
 import { DirectionSVG } from '@/svg';

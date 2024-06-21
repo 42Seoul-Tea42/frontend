@@ -9,15 +9,22 @@ import { postLogin, setIdPasswordLoginFormView, setLoginLink } from '@/redux/sli
 import { v4 as uuidv4 } from 'uuid';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 import { Route } from '@/redux/enum';
+import { RootState } from '@/redux/store';
 
 function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
   useLoginRedirect();
 
+  const loginId = useSelector((state: RootState) => state.accountSlice.user.loginId);
+  const password = useSelector((state: RootState) => state.accountSlice.password);
   const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
+    if (!loginId || !password) {
+      alert('아이디와 비밀번호를 입력해주세요.');
+      return;
+    }
     dispatch<any>(postLogin());
   };
 

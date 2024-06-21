@@ -46,7 +46,7 @@ const Signup: React.FC = () => {
       subject="회원가입을 위한 계정정보를 입력해주세요."
       inputs={
         <>
-          <p className="text-md font-md p-1 text-green-800">{errorMessage}</p>
+          <p className="text-md font-md p-1 pt-2 pb-2 text-green-800">{errorMessage}</p>
           <div className="border p-2 mb-4 rounded-xl">
             <EmailInput
               extended={() => {

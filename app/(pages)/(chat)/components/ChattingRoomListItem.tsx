@@ -4,7 +4,7 @@ import {
   setChattingListModal,
   setChattingUser,
   setScrollDirection
-} from '@/redux/slices/chattingSlice';
+} from '@/redux/slices/chatting/chattingSlice';
 import { RootState } from '@/redux/store';
 import { timeConverter } from '@/utils/timeConverter';
 import Image from 'next/image';

@@ -1,9 +1,9 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosInstance from '@/api/axios';
-import { serverToClientMapper } from '../dto/mapper';
+import { createSlice } from '@reduxjs/toolkit';
+import { serverToClientMapper } from '../../dto/mapper';
 import _ from 'lodash';
+import { addChattingExtraReducers } from './chattingExtraReducers';
 
-interface ChattingState {
+export interface ChattingState {
   users: [];
   currentUser: any;
   messages: any[];
@@ -28,20 +28,6 @@ export const initialState: ChattingState = {
   loading: false,
   error: null
 };
-
-export const getChattingList = createAsyncThunk('chattingSlice/getChattingList', async () => {
-  const response = await axiosInstance.get('/chat/list');
-  return response.data.chat_list.map((chat: any) => serverToClientMapper(chat));
-});
-
-export const getChattingMessages = createAsyncThunk(
-  'chattingSlice/getChattingMessages',
-  async ({ targetId, time }: { targetId: string; time: string }) => {
-    const response = await axiosInstance.get(`/chat/msg?target_id=${targetId}&time=${time}`);
-    const messages = response.data.msg_list.map((msg: any) => serverToClientMapper(msg));
-    return messages.reverse();
-  }
-);
 
 const chattingSlice = createSlice({
   name: 'chattingSlice',
@@ -82,32 +68,8 @@ const chattingSlice = createSlice({
     }
   },
 
-  // 채팅방 목록 가져오기
   extraReducers: builder => {
-    builder.addCase(getChattingList.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getChattingList.fulfilled, (state, action: PayloadAction<any>) => {
-      state.users = action.payload;
-    });
-    builder.addCase(getChattingList.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
-
-    // 채팅 메세지 가져오기
-    builder.addCase(getChattingMessages.pending, state => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getChattingMessages.fulfilled, (state, action: PayloadAction<[]>) => {
-      state.messages = [...action.payload, ...state.messages];
-    });
-    builder.addCase(getChattingMessages.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
+    addChattingExtraReducers(builder);
   }
 });
 

@@ -1,5 +1,5 @@
 import { Status } from '@/redux/enum';
-import { clearMessages, setChattingListModal, setChattingMessage } from '@/redux/slices/chattingSlice';
+import { clearMessages, setChattingListModal, setChattingMessage } from '@/redux/slices/chatting/chattingSlice';
 import { RootState } from '@/redux/store';
 import { HamburgerSVG } from '@/svg';
 import Image from 'next/image';

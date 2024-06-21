@@ -1,6 +1,6 @@
 // rootReducer.js
 import { combineReducers } from '@reduxjs/toolkit';
-import chattingSlice, { initialState as chattingInit } from './slices/chattingSlice';
+import chattingSlice, { initialState as chattingInit } from './slices/chatting/chattingSlice';
 // import historySlice, { initialState as historyInit } from './slices/historySlice';
 // import fancySlice, { initialState as fancyInit } from './slices/fancySlice';
 import suggestionSlice, { initialState as suggestionInit } from './slices/suggestionSlice';

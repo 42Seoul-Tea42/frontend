@@ -4,7 +4,7 @@ import { use, useEffect, useRef, useState } from 'react';
 import MessageItem from './MessageItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { getChattingMessages, setScrollDirection } from '@/redux/slices/chattingSlice';
+import { getChattingMessages, setScrollDirection } from '@/redux/slices/chatting/chattingSlice';
 
 const ViewMessageForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
