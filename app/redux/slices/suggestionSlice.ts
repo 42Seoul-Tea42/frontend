@@ -8,7 +8,7 @@ import { SearchState } from './searchSlice';
 
 interface SuggestionState {
   users: any[];
-  historyNoti: boolean;
+  visitorNoti: boolean;
   fancyNoti: boolean;
   loading: boolean;
   error: string | null;
@@ -16,7 +16,7 @@ interface SuggestionState {
 
 export const initialState: SuggestionState = {
   users: [],
-  historyNoti: false,
+  visitorNoti: false,
   fancyNoti: false,
   loading: false,
   error: null
@@ -36,6 +36,12 @@ export const getHistoryUserList = createAsyncThunk('suggestionSlice/getHistoryUs
 
 export const getFancyUsers = createAsyncThunk('suggestionSlice/getFancyUsers', async (time: string) => {
   const response = await axiosInstance.get(`/history/fancy-list?time=${time}`);
+  const users = response.data.profile_list.map((user: any) => serverToClientMapper(user));
+  return users;
+});
+
+export const getVisitorUsers = createAsyncThunk('suggestionSlice/getVisitorUsers', async (time: string) => {
+  const response = await axiosInstance.get(`/history/visitor-list?time=${time}`);
   const users = response.data.profile_list.map((user: any) => serverToClientMapper(user));
   return users;
 });
@@ -74,8 +80,8 @@ const suggestionSlice = createSlice({
   name: 'suggestionSlice',
   initialState,
   reducers: {
-    setHistoryNoti: (state: { historyNoti: boolean }, action: { payload: boolean }) => {
-      state.historyNoti = action.payload;
+    setVisitorNoti: (state: { visitorNoti: boolean }, action: { payload: boolean }) => {
+      state.visitorNoti = action.payload;
     },
     setFancyNoti: (state, action: PayloadAction<boolean>) => {
       state.fancyNoti = action.payload;
@@ -121,6 +127,20 @@ const suggestionSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getHistoryUserList.rejected, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    // 방문자 유저리스트 가져오기
+    builder.addCase(getVisitorUsers.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getVisitorUsers.fulfilled, (state, action: PayloadAction<any>) => {
+      state.users = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getVisitorUsers.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.error = action.payload;
     });
@@ -186,7 +206,7 @@ const suggestionSlice = createSlice({
   }
 });
 
-export const { initUser, setNewFancy, setUnFancy, setFancyNoti, setHistoryNoti } = suggestionSlice.actions;
+export const { initUser, setNewFancy, setUnFancy, setFancyNoti, setVisitorNoti } = suggestionSlice.actions;
 export const extraReducers = suggestionSlice.reducer;
 
 export default suggestionSlice.reducer;
