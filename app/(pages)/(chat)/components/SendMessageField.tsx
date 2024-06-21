@@ -14,7 +14,7 @@ enum SendMessage {
 const SendMessageField = () => {
   const sendMessage = useSelector((state: RootState) => state.chattingSlice.sendMessage);
   const currentUser = useSelector((state: RootState) => state.chattingSlice.currentUser);
-  const myId = localStorage.getItem('id');
+  const myId = typeof window !== 'undefined' ? Number(localStorage.getItem('id')) : null;
   const dispatch = useDispatch();
   const socket = useSocket();
   const textRef = useRef(null);
@@ -29,12 +29,13 @@ const SendMessageField = () => {
     // 상대방에게 메시지 전송
     socket?.emit('send_message', {
       recver_id: currentUser.id,
+      sender_id: myId ?? 0,
       message: sendMessage
     });
     // 내 채팅방 화면 업데이트
     dispatch(
       setChattingMessage({
-        sender_id: Number(myId),
+        sender_id: myId ?? 0,
         message: sendMessage
       })
     );

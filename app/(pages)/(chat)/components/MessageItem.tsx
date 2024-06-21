@@ -3,7 +3,7 @@ interface MessageItemProps {
 }
 
 const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
-  const myId = Number(localStorage.getItem('id'));
+  const myId = typeof window !== 'undefined' ? Number(localStorage.getItem('id')) : null;
   const justify = message.senderId === myId ? 'justify-end' : 'justify-start';
 
   const formatTime = (time: string) => {
