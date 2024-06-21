@@ -4,7 +4,7 @@ import { Socket } from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
 import { setChattingMessage, setChattingNoti, setExitUser, setUserStatus } from '../redux/slices/chattingSlice';
 import { setNewFancy, setUnFancy, setFancyNoti } from '../redux/slices/suggestionSlice';
-import { setHistoryNoti } from '../redux/slices/suggestionSlice';
+import { setVisitorNoti } from '../redux/slices/suggestionSlice';
 import { RootState } from '@/redux/store';
 
 type useSocketEventListenerProps = {
@@ -48,8 +48,8 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
         }
       },
       {
-        event: 'new_history',
-        handler: () => dispatch(setHistoryNoti(true))
+        event: 'new_visitor',
+        handler: () => dispatch(setVisitorNoti(true))
       },
       {
         event: 'send_message',

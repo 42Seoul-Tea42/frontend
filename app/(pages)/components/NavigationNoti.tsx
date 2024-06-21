@@ -7,11 +7,11 @@ type NavigationNotiProps = {
 };
 
 function NavigationNoti({ item }: NavigationNotiProps) {
-  const historyNoti = useSelector((state: RootState) => state.suggestionSlice.historyNoti);
+  const visitorNoti = useSelector((state: RootState) => state.suggestionSlice.visitorNoti);
   const fancyNoti = useSelector((state: RootState) => state.suggestionSlice.fancyNoti);
 
   const visibleControl = (name: string) => {
-    if ((name === 'Fancy' && fancyNoti === true) || (name === 'History' && historyNoti === true)) {
+    if ((name === 'Fancy' && fancyNoti === true) || (name === 'Visitor' && visitorNoti === true)) {
       return '';
     }
     return 'hidden';
