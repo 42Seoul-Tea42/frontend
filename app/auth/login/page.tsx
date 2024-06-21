@@ -30,7 +30,7 @@ function Login() {
         `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
           process.env.NEXT_PUBLIC_KAKAO_API_KEY
         }&redirect_uri=${
-          process.env.NEXT_PUBLIC_DOMAIN + process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI
+          process.env.NEXT_PUBLIC_DOMAIN ?? '' + process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI ?? ''
         }&state=${generateToken()}`
       )
     );
