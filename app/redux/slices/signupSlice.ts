@@ -57,7 +57,7 @@ export const getCheckDuplicateEmail = createAsyncThunk(
     const state = getState() as { accountSlice: AccountState };
     const { user } = state.accountSlice;
 
-    const response = await axiosInstance.get(`/user/check-email?email=${user.account.email}`);
+    const response = await axiosInstance.get(`/user/check-email?email=${user.email}`);
     return response;
   }
 );
@@ -67,7 +67,7 @@ export const getCheckDuplicateId = createAsyncThunk('accountSlice/getCheckDuplic
   const state = getState() as { accountSlice: AccountState };
   const { user } = state.accountSlice;
 
-  const response = await axiosInstance.get(`/user/check-id?login_id=${user.identity.loginId}`);
+  const response = await axiosInstance.get(`/user/check-id?login_id=${user.loginId}`);
   return response;
 });
 
@@ -139,9 +139,7 @@ const signupSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getCheckDuplicateId.fulfilled, (state, action) => {
-      action.payload.data.occupied === false
-        ? (state.validation.isIdDuplicateChecked = true)
-        : (state.validation.isIdDuplicateChecked = false);
+      state.validation.isIdDuplicateChecked = true;
     });
     builder.addCase(getCheckDuplicateId.rejected, (state, action) => {
       state.loading = false;
