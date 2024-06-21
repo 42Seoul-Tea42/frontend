@@ -37,6 +37,7 @@ function UserCards({ users }: UserCardsProps) {
     } else {
       dispatch<any>(patchUnFancy(user.id));
     }
+    // profile Detail update
   };
 
   return (
@@ -70,7 +71,7 @@ function UserCards({ users }: UserCardsProps) {
               </div>
             ))
           ) : (
-            <CardsSkeleton style="bg-green-300 opacity-50" />
+            <CardsSkeleton style="bg-green-300 opacity-50" length={users.length} />
           )}
         </>
       }
