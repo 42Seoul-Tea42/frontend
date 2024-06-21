@@ -1,6 +1,6 @@
 'use client';
 
-import { setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
+import { setProfileModalVisible } from '@/redux/slices/profileInquiry/profileInquirySlice';
 import { RootState } from '@/redux/store';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

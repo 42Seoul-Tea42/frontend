@@ -1,4 +1,4 @@
-import { Fancy } from '../enum';
+import { Fancy } from '../../enum';
 
 // api call
 export function sendFancy(fancy: Fancy) {

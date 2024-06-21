@@ -5,7 +5,7 @@ import LoginPageDetail from './LoginPageDetail';
 import { AllSignOptionButton, CreateAccountButton, LoginFormChangeButton } from '@/ui';
 import KakaoLoginButton from './KakaoLoginButton';
 import { LoginForm } from '@/(pages)/forms';
-import { postLogin, setIdPasswordLoginFormView, setLoginLink } from '@/redux/slices/loginSlice';
+import { postLogin, setIdPasswordLoginFormView, setLoginLink } from '@/redux/slices/login/loginSlice';
 import { v4 as uuidv4 } from 'uuid';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 import { Route } from '@/redux/enum';

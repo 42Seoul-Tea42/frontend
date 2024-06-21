@@ -1,6 +1,6 @@
 'use client';
 
-import { addAccountPhotos } from '@/redux/slices/accountSlice';
+import { addAccountPhotos } from '@/redux/slices/account/accountSlice';
 import { CloudUploadSVG } from '@/svg';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';

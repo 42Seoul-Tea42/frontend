@@ -8,7 +8,7 @@ import SortBar from '../components/SortBar';
 import UserCards from './UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { RootState } from '@/redux/store';
-import { getSuggestionUsers } from '@/redux/slices/suggestionSlice';
+import { getSuggestionUsers } from '@/redux/slices/suggestion/suggestionSlice';
 import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
 import { RefreshSVG } from '@/svg/RefreshSVG';
 

@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Suspense } from 'react';
 import { RootState } from '@/redux/store';
 import CardForm from '@/(pages)/forms/CardForm';
-import { postResetPassword } from '@/redux/slices/accountSlice';
+import { postResetPassword } from '@/redux/slices/account/accountSlice';
 import { LoginIdInput, PasswordInput } from '@/(pages)/forms';
 import ReEnterPassword from '@/(pages)/forms/ReEnterPassword';
 import { SubmitButton } from '@/ui';
-import { getResetPasswordEmail } from '@/redux/slices/loginSlice';
+import { getResetPasswordEmail } from '@/redux/slices/login/loginSlice';
 import { useSearchParams } from 'next/navigation';
 
 function ResetPasswordDetail() {

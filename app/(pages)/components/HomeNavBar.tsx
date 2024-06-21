@@ -7,10 +7,10 @@ import NavigationNoti from './NavigationNoti';
 import requestUserLocation from '@/api/location';
 import { HomeNavBarButton } from '@/ui';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
-import { initUser } from '@/redux/slices/suggestionSlice';
+import { initUser } from '@/redux/slices/suggestion/suggestionSlice';
 import { RefreshSVG } from '@/svg/RefreshSVG';
 import { AdjustSVG } from '@/svg/HomeNavBarSVG';
-import { getLogin } from '@/redux/slices/loginSlice';
+import { getLogin } from '@/redux/slices/login/loginSlice';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

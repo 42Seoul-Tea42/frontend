@@ -9,7 +9,7 @@ export const getChattingList = createAsyncThunk('chattingSlice/getChattingList',
   return response.data.chat_list.map((chat: any) => serverToClientMapper(chat));
 });
 
-export const addGetChattingListCase = (builder: ActionReducerMapBuilder<ChattingState>) => {
+const addGetChattingListCase = (builder: ActionReducerMapBuilder<ChattingState>) => {
   builder.addCase(getChattingList.pending, state => {
     state.loading = true;
     state.error = null;
@@ -33,7 +33,7 @@ export const getChattingMessages = createAsyncThunk(
   }
 );
 
-export const addGetChattingMessagesCase = (builder: ActionReducerMapBuilder<ChattingState>) => {
+const addGetChattingMessagesCase = (builder: ActionReducerMapBuilder<ChattingState>) => {
   builder.addCase(getChattingMessages.pending, state => {
     state.loading = true;
     state.error = null;

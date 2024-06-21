@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import UserCards from '../home/UserCards';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
-import { getHistoryUserList, setVisitorNoti } from '@/redux/slices/suggestionSlice';
+import { getHistoryUserList, setVisitorNoti } from '@/redux/slices/suggestion/suggestionSlice';
 import { RootState } from '@/redux/store';
 import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
 import { timeConverter } from '@/utils/timeConverter';

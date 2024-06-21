@@ -10,7 +10,7 @@ import {
   postSignup,
   setIsEmailDuplicateChecked,
   setIsLoginIdDuplicateChecked
-} from '@/redux/slices/signupSlice';
+} from '@/redux/slices/signup/signupSlice';
 import CardForm from '@/(pages)/forms/CardForm';
 import ReEnterPassword from '@/(pages)/forms/ReEnterPassword';
 import Indicator from '@/(pages)/components/Indicator';

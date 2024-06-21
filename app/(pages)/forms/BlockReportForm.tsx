@@ -1,4 +1,4 @@
-import { blockUser, reportUser } from '@/redux/slices/profileInquirySlice';
+import { blockUser, reportUser } from '@/redux/slices/profileInquiry/profileInquirySlice';
 import { BlueHyperLink } from '@/ui';
 import { useDispatch } from 'react-redux';
 

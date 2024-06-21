@@ -8,7 +8,7 @@ import { SearchSVG } from '@/svg';
 import { MainContentsArea, ProfileDetailModalContents, TableRow } from '@/ui';
 import _ from 'lodash';
 import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
-import { postSearch } from '@/redux/slices/suggestionSlice';
+import { postSearch } from '@/redux/slices/suggestion/suggestionSlice';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
 import SortBar from '../components/SortBar';
 import UserCards from '../home/UserCards';

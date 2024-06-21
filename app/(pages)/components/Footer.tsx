@@ -1,6 +1,6 @@
 'use client';
 
-import { getLogout } from '@/redux/slices/loginSlice';
+import { getLogout } from '@/redux/slices/login/loginSlice';
 import { useDispatch } from 'react-redux';
 
 const Footer = () => {

@@ -1,4 +1,4 @@
-import { setAccountSimiller } from '@/redux/slices/accountSlice';
+import { setAccountSimiller } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 

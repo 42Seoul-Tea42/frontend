@@ -1,5 +1,5 @@
 import ImageUploadForm from '@/(pages)/forms/ImageUploadForm';
-import { removeAccountPhotos } from '@/redux/slices/accountSlice';
+import { removeAccountPhotos } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { StarFullSVG } from '@/svg';
 import { useDispatch, useSelector } from 'react-redux';

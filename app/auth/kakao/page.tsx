@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
-import { getKaKaoLogin } from '@/redux/slices/loginSlice';
+import { getKaKaoLogin } from '@/redux/slices/login/loginSlice';
 import CardForm from '@/(pages)/forms/CardForm';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 import { Route } from '@/redux/enum';

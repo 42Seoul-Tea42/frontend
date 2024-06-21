@@ -1,4 +1,4 @@
-import { setAccountIntroduction } from '@/redux/slices/accountSlice';
+import { setAccountIntroduction } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 

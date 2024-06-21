@@ -23,7 +23,7 @@ import {
   setAccountHateEmoji,
   setAccountHateInterests,
   setAccountInterests
-} from '@/redux/slices/accountSlice';
+} from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { submitProfile } from './submitprofile';
 import SimillerRadioInput from '../forms/SimilerRadioInput';

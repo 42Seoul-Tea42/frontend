@@ -1,9 +1,13 @@
 import { Key, useEffect, useState } from 'react';
 import UserCardPhoto from './UserCardPhoto';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileDetail, setProfileInquiryUser, setProfileModalVisible } from '@/redux/slices/profileInquirySlice';
+import {
+  getProfileDetail,
+  setProfileInquiryUser,
+  setProfileModalVisible
+} from '@/redux/slices/profileInquiry/profileInquirySlice';
 import { CardsSkeleton, FancyButton, UserCardGrid } from '@/ui';
-import { patchFancy, patchUnFancy } from '@/redux/slices/suggestionSlice';
+import { patchFancy, patchUnFancy } from '@/redux/slices/suggestion/suggestionSlice';
 import { Fancy } from '@/redux/enum';
 import _ from 'lodash';
 import UserCardBorder from './UserCardBorder';

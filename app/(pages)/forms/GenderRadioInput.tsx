@@ -1,5 +1,5 @@
 import { Gender } from '@/redux/enum';
-import { setAccountGender } from '@/redux/slices/accountSlice';
+import { setAccountGender } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -2,13 +2,13 @@
 import { EmailInput } from '@/(pages)/forms';
 import CardForm from '@/(pages)/forms/CardForm';
 import { SubmitButton } from '@/ui';
-import { getResendEmail } from '@/redux/slices/loginSlice';
+import { getResendEmail } from '@/redux/slices/login/loginSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { changeMyEmail, getMyEmail } from '@/redux/slices/accountSlice';
+import { changeMyEmail, getMyEmail } from '@/redux/slices/account/accountSlice';
 import Indicator from '@/(pages)/components/Indicator';
-import { getCheckDuplicateEmail } from '@/redux/slices/signupSlice';
+import { getCheckDuplicateEmail } from '@/redux/slices/signup/signupSlice';
 import { RefreshSVG } from '@/svg/RefreshSVG';
 
 function emailVerify() {

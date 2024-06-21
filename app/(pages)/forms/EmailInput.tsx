@@ -1,5 +1,5 @@
 import { InputFloatingLabel } from '@/ui';
-import { setAccountEmail } from '@/redux/slices/accountSlice';
+import { setAccountEmail } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { InputLimitLength } from '@/redux/enum';

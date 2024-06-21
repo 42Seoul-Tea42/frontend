@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
-import { getResendEmail, getVerifyEmail } from '@/redux/slices/loginSlice';
+import { getResendEmail, getVerifyEmail } from '@/redux/slices/login/loginSlice';
 import CardForm from '@/(pages)/forms/CardForm';
 import { Route } from '@/redux/enum';
 

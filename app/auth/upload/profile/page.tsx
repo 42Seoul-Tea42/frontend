@@ -4,7 +4,7 @@ import { AgeInput, GenderRadioInput, IntroductionInput, SexualPreferenceRadioInp
 import ImageUploadGrid from '@/(pages)/setting/components/ImageUploadGrid';
 import { SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
-import { patchUserProfile, setAccountInterests } from '@/redux/slices/accountSlice';
+import { patchUserProfile, setAccountInterests } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';

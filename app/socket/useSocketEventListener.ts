@@ -8,8 +8,8 @@ import {
   setExitUser,
   setUserStatus
 } from '../redux/slices/chatting/chattingSlice';
-import { setNewFancy, setUnFancy, setFancyNoti } from '../redux/slices/suggestionSlice';
-import { setVisitorNoti } from '../redux/slices/suggestionSlice';
+import { setNewFancy, setUnFancy, setFancyNoti } from '../redux/slices/suggestion/suggestionSlice';
+import { setVisitorNoti } from '../redux/slices/suggestion/suggestionSlice';
 import { RootState } from '@/redux/store';
 
 type useSocketEventListenerProps = {

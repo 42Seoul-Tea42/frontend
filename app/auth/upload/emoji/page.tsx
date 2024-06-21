@@ -4,7 +4,7 @@ import EmojiGridList from './EmojiGridList';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { AccordionItems, SubmitButton } from '@/ui';
-import { patchUserProfile, setAccountEmoji, setAccountHateEmoji } from '@/redux/slices/accountSlice';
+import { patchUserProfile, setAccountEmoji, setAccountHateEmoji } from '@/redux/slices/account/accountSlice';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 
 const Emoji = () => {
