@@ -17,22 +17,13 @@ import Indicator from '@/(pages)/components/Indicator';
 import { RootState } from '@/redux/store';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '@/(pages)/forms';
 import { SubmitButton } from '@/ui';
-import { useRouter } from 'next/navigation';
 
 const Signup: React.FC = () => {
-  const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
   const error = useSelector((state: RootState) => state.signupSlice.error);
   const validation = useSelector((state: RootState) => state.signupSlice.validation);
-  const checkValidate = useValidationCheck();
+  const [validate, errorMessage] = useValidationCheck();
 
   const dispatch = useDispatch();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isSignup) {
-      router.push('/auth/login');
-    }
-  }, [isSignup]);
 
   useEffect(() => {
     if (error) {
@@ -42,7 +33,10 @@ const Signup: React.FC = () => {
   }, [error]);
 
   const signup = () => {
-    if (!checkValidate()) return;
+    if (!validate) {
+      alert(errorMessage);
+      return;
+    }
     dispatch<any>(postSignup());
   };
 
@@ -52,37 +46,40 @@ const Signup: React.FC = () => {
       subject="회원가입을 위한 계정정보를 입력해주세요."
       inputs={
         <>
-          <EmailInput
-            extended={() => {
-              // 이메일 중복체크 후 재입력시 중복체크 여부 초기화
-              dispatch(setIsEmailDuplicateChecked(false));
-            }}
-            addJSX={
-              <Indicator
-                // 이메일 중복체크
-                onClick={() => dispatch<any>(getCheckDuplicateEmail())}
-                color={validation.isEmailDuplicateChecked ? 'bg-green-500' : 'hover:opacity-50 bg-red-500'}
-                text={validation.isEmailDuplicateChecked ? '' : 'click'}
-              />
-            }
-          />
-          <UserNameInput />
-          <LoginIdInput
-            extended={() => {
-              // 아이디 중복체크 후 재입력시 중복체크 여부 초기화
-              dispatch(setIsLoginIdDuplicateChecked(false));
-            }}
-            addJSX={
-              <Indicator
-                // 아이디 중복체크
-                onClick={() => dispatch<any>(getCheckDuplicateId())}
-                color={validation.isIdDuplicateChecked ? 'bg-green-500' : 'hover:opacity-50 bg-red-500'}
-                text={validation.isIdDuplicateChecked ? '' : 'click'}
-              />
-            }
-          />
-          <PasswordInput />
-          <ReEnterPassword />
+          <p className="text-md font-md p-1 text-green-800">{errorMessage}</p>
+          <div className="border p-2 mb-4 rounded-xl">
+            <EmailInput
+              extended={() => {
+                // 이메일 중복체크 후 재입력시 중복체크 여부 초기화
+                dispatch(setIsEmailDuplicateChecked(false));
+              }}
+              addJSX={
+                <Indicator
+                  // 이메일 중복체크
+                  onClick={() => dispatch<any>(getCheckDuplicateEmail())}
+                  color={validation.isEmailDuplicateChecked ? 'bg-green-500' : 'hover:opacity-50 bg-red-500'}
+                  text={validation.isEmailDuplicateChecked ? '' : 'click'}
+                />
+              }
+            />
+            <UserNameInput />
+            <LoginIdInput
+              extended={() => {
+                // 아이디 중복체크 후 재입력시 중복체크 여부 초기화
+                dispatch(setIsLoginIdDuplicateChecked(false));
+              }}
+              addJSX={
+                <Indicator
+                  // 아이디 중복체크
+                  onClick={() => dispatch<any>(getCheckDuplicateId())}
+                  color={validation.isIdDuplicateChecked ? 'bg-green-500' : 'hover:opacity-50 bg-red-500'}
+                  text={validation.isIdDuplicateChecked ? '' : 'click'}
+                />
+              }
+            />
+            <PasswordInput />
+            <ReEnterPassword />
+          </div>
         </>
       }
       button={<SubmitButton text="회원가입" />}
