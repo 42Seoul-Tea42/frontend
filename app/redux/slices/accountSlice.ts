@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
-import { Gender, Limit } from '../enum';
+import { Gender, InputLimitLength } from '../enum';
 import { serverToClientMapper } from '../dto/mapper';
 import { updateLikeList } from './updateLikeList';
 import _ from 'lodash';
@@ -22,7 +22,7 @@ export const initialState = {
     firstname: '',
     lastname: '',
     email: '',
-    age: Limit.NONE_AGE, // int 0 무시
+    age: InputLimitLength.NONE_AGE, // int 0 무시
     gender: Gender.NONE,
     sexualPreference: Gender.ALL,
     introduction: '',

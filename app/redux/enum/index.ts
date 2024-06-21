@@ -1,4 +1,5 @@
 // 성별은 124
+
 // 취향은 247
 export enum Gender {
   NONE = 0,
@@ -16,6 +17,8 @@ export enum Fancy {
 }
 
 export enum InputLimitLength {
+  NONE_AGE = 0,
+  MIN_AGE = 1,
   EMAIL = 30,
   PASSWORD = 16,
   ID = 20,
@@ -47,4 +50,17 @@ export enum Oauth {
 export enum Auth {
   refreshToken,
   accessToken
+}
+
+export enum ReportReason {
+  NONE,
+  BULLY,
+  CONTENT,
+  FAKE,
+  SPAM,
+  MISINFORM,
+  VIOLATION,
+  PRIVACY,
+  SUSPICIOUS,
+  OTHER
 }

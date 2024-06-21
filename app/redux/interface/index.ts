@@ -1,3 +1,3 @@
-import { Interests, SearchParams, Message, Chatting, FancyColor } from './util';
+import { Interests, SearchParams, Message, Chatting } from './util';
 
-export type { Message, Chatting, Interests, SearchParams, FancyColor };
+export type { Message, Chatting, Interests, SearchParams };
