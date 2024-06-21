@@ -1,7 +1,7 @@
 'use client';
 
 import { AgeInput, GenderRadioInput, IntroductionInput, SexualPreferenceRadioInput } from '@/(pages)/forms';
-import ImageUploadGrid, { checkPictureLength } from '@/(pages)/setting/components/ImageUploadGrid';
+import ImageUploadGrid from '@/(pages)/setting/components/ImageUploadGrid';
 import { SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import { patchUserProfile, setAccountInterests } from '@/redux/slices/accountSlice';
@@ -33,7 +33,6 @@ const Profile = () => {
             event.preventDefault();
             submitProfile(user.pictures, updateUser);
           }}
-          className=""
         >
           <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-lime-500/50">나이</h5>
           <AgeInput />
