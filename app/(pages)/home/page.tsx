@@ -10,6 +10,7 @@ import ProfileDetailModalControl from '../components/ProfileDetailModalControl';
 import { RootState } from '@/redux/store';
 import { getSuggestionUsers } from '@/redux/slices/suggestionSlice';
 import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
+import { RefreshSVG } from '@/svg/RefreshSVG';
 
 function Home() {
   const dispatch = useDispatch();
@@ -19,10 +20,13 @@ function Home() {
   const [sortedUsers, setSortBy, setSortOrder] = useSort(users);
   const [renderUsers, setRenderUsers] = useState<any[]>([]);
 
-  useEffect(() => {
-    // test
+  const handleRefreshUser = () => {
     dispatch<any>(getSuggestionUsers());
     setRenderUsers(users);
+  };
+
+  useEffect(() => {
+    handleRefreshUser();
   }, []);
 
   useEffect(() => {
@@ -44,21 +48,30 @@ function Home() {
       sort={
         <SortBarVisibleControl
           props={
-            <SortBar
-              items={[
-                { text: '나이', sortBy: 'age' },
-                { text: '거리', sortBy: 'distance' },
-                { text: '등급', sortBy: 'rating' },
-                { text: '관심사', sortBy: 'interests.length' }
-              ]}
-              setSortBy={setSortBy}
-              setSortOrder={setSortOrder}
-            />
+            <>
+              <SortBar
+                items={[
+                  { text: '나이', sortBy: 'age' },
+                  { text: '거리', sortBy: 'distance' },
+                  { text: '등급', sortBy: 'rating' },
+                  { text: '관심사', sortBy: 'interests.length' }
+                ]}
+                setSortBy={setSortBy}
+                setSortOrder={setSortOrder}
+              />
+            </>
           }
         />
       }
       contents={
         <>
+          <h5 className="flex justify-center text-2xl font-semibold mb-5 underline decoration-wavy decoration-teal-400">
+            오늘의 추천 유저를 만나보세요 ~ !
+          </h5>
+          <button className="flex border p-1 mb-4 rounded-xl" onClick={handleRefreshUser}>
+            새로고침
+            <RefreshSVG />
+          </button>
           {/* profile inquiry service */}
           <ProfileDetailModalControl profileDetail={<ProfileDetailModalContents />} />
           {/* suggestion user service */}
