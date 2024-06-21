@@ -1,18 +1,18 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosInstance from '@/api/axios';
 import { getGoogleLogin, getKaKaoLogin, getLogout, postLogin } from './loginSlice';
-import { Gender } from '../enum';
+import { Gender, Limit } from '../enum';
 import { serverToClientMapper } from '../dto/mapper';
 import { updateLikeList } from './updateLikeList';
 import _ from 'lodash';
-import { RootState } from '../store';
 
 export interface AccountState {
   user: any;
   password: string;
   reEnterPassword: string;
-  loading: boolean;
-  error: string | null;
+  loading: any;
+  error: any;
+  viewMail: string;
 }
 
 export const initialState = {
@@ -22,7 +22,7 @@ export const initialState = {
     firstname: '',
     lastname: '',
     email: '',
-    age: 1,
+    age: Limit.NONE_AGE, // int 0 무시
     gender: Gender.NONE,
     sexualPreference: Gender.ALL,
     introduction: '',
@@ -35,8 +35,9 @@ export const initialState = {
   },
   password: '',
   reEnterPassword: '',
+  viewMail: '',
   loading: false,
-  error: null
+  error: ''
 };
 
 // 내 정보 가져오기
@@ -53,28 +54,38 @@ export const getMyEmail = createAsyncThunk('accountSlice/getMyEmail', async () =
 });
 
 // 이메일 바꾸기 ()
-
-// 유저 프로필 정보 서버로 전송
-export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (_, { getState }) => {
+export const changeMyEmail = createAsyncThunk('accountSlice/changeMyEmail', async (_: any, { getState }: any) => {
   const state = getState() as { accountSlice: AccountState };
-  const user = state.accountSlice.user;
-  const password = state.accountSlice.password;
-  const response = await axiosInstance.patch('/user/profile', {
-    pictures: user.pictures, // backend: 배열형태로 보내주세요.
-    gender: parseInt(user.gender), // backend: 숫자형태로 보내주세요.
-    taste: parseInt(user.sexualPreference), // backend: 숫자형태로 보내주세요.
-    bio: user.introduction,
-    tags: user.interests,
-    emoji: user.emoji,
-    hate_emoji: user.hateEmoji,
-    name: user.firstname,
-    last_name: user.lastname ?? '',
-    age: user.age,
-    pw: password,
-    email: user.email
+  const response = await axiosInstance.patch('/user/email', {
+    email: state.accountSlice.user.email
   });
   return serverToClientMapper(response.data);
 });
+
+// 유저 프로필 정보 서버로 전송
+export const patchUserProfile = createAsyncThunk(
+  'accountSlice/patchUserProfile',
+  async (_: any, { getState }: { getState: any }) => {
+    const state = getState() as { accountSlice: AccountState };
+    const user = state.accountSlice.user;
+    const password = state.accountSlice.password;
+    const response = await axiosInstance.patch('/user/profile', {
+      pictures: user.pictures, // backend: 배열형태로 보내주세요.
+      gender: parseInt(user.gender), // backend: 숫자형태로 보내주세요.
+      taste: parseInt(user.sexualPreference), // backend: 숫자형태로 보내주세요.
+      bio: user.introduction,
+      tags: user.interests,
+      emoji: user.emoji,
+      hate_emoji: user.hateEmoji,
+      name: user.firstname,
+      last_name: user.lastname ?? '',
+      age: user.age,
+      pw: password,
+      email: user.email
+    });
+    return serverToClientMapper(response.data);
+  }
+);
 
 export const saveIdToLocalStorage = (id: string) => {
   localStorage.setItem('id', id);
@@ -83,12 +94,11 @@ export const saveIdToLocalStorage = (id: string) => {
 // 비밀번호 재설정하기
 export const postResetPassword = createAsyncThunk(
   'accountSlice/postResetPassword',
-  async (key: string, { getState }) => {
-    // 패스워드 직접 받는 것으로 변경 필요 -- test --
-    // const state = getState() as { accountSlice: AccountState };
-    // const password = state.accountSlice.user.password;
+  async (key: string, { getState }: { getState: any }) => {
+    const state = getState() as { accountSlice: AccountState };
+    const password = state.accountSlice.password;
     const response = await axiosInstance.post(`/user/reset-pw?key=${key}`, {
-      // pw: password
+      pw: password
     });
     return response.status;
   }
@@ -140,6 +150,9 @@ const accountSlice = createSlice({
     removeAccountPhotos: (state: AccountState, action: PayloadAction<number>) => {
       state.user.pictures = state.user.pictures.filter((_: any, index: number) => index !== action.payload);
     },
+    setAccountSimiller: (state: AccountState, action: PayloadAction<boolean>) => {
+      state.user.simillar = action.payload;
+    },
     setAccountEmoji: (state: AccountState, action: PayloadAction<number>) => {
       updateLikeList({
         state: state,
@@ -175,63 +188,78 @@ const accountSlice = createSlice({
       });
     }
   },
-  extraReducers: builder => {
+  extraReducers: (builder: any) => {
     // 내정보 가져오기
-    builder.addCase(getMyAccount.pending, state => {
+    builder.addCase(getMyAccount.pending, (state: { loading: boolean; error: null }) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getMyAccount.fulfilled, (state, action) => {
+    builder.addCase(getMyAccount.fulfilled, (state: { user: any; loading: boolean }, action: { payload: any }) => {
       state.user = { ...state.user, ...action.payload };
       state.loading = false;
     });
-    builder.addCase(getMyAccount.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
+    builder.addCase(
+      getMyAccount.rejected,
+      (state: { loading: boolean; error: any }, action: { error: { message: null } }) => {
+        state.loading = false;
+        state.error = action.error.message ?? null;
+      }
+    );
 
     // 내 이메일 가져오기
-    builder.addCase(getMyEmail.pending, state => {
+    builder.addCase(getMyEmail.pending, (state: { loading: boolean; error: null }) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getMyEmail.fulfilled, (state, action) => {
-      state.user.email = action.payload.email;
-      state.loading = false;
-    });
-    builder.addCase(getMyEmail.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
+    builder.addCase(
+      getMyEmail.fulfilled,
+      (state: { viewMail: any; loading: boolean }, action: { payload: { email: any } }) => {
+        state.viewMail = action.payload.email;
+        state.loading = false;
+      }
+    );
+    builder.addCase(
+      getMyEmail.rejected,
+      (state: { loading: boolean; error: any }, action: { error: { message: string } }) => {
+        state.loading = false;
+        alert('이미 인증된 메일입니다.');
+        state.error = action.error.message ?? '';
+      }
+    );
 
     // 이메일 로그인
-    builder.addCase(postLogin.fulfilled, (state, action) => {
+    builder.addCase(postLogin.fulfilled, (state: { user: any }, action: { payload: { id: string } }) => {
       state.user = { ...state.user, ...action.payload };
       saveIdToLocalStorage(action.payload.id);
     });
     // 구글 로그인
-    builder.addCase(getGoogleLogin.fulfilled, (state, action) => {
+    builder.addCase(getGoogleLogin.fulfilled, (state: { user: any }, action: { payload: { id: string } }) => {
       state.user = { ...state.user, ...action.payload };
       saveIdToLocalStorage(action.payload.id);
     });
     // 카카오 로그인
-    builder.addCase(getKaKaoLogin.fulfilled, (state, action) => {
+    builder.addCase(getKaKaoLogin.fulfilled, (state: { user: any }, action: { payload: { id: string } }) => {
       state.user = { ...state.user, ...action.payload };
       saveIdToLocalStorage(action.payload.id);
     });
 
     // 비밀번호 재설정하기
-    builder.addCase(postResetPassword.pending, state => {
+    builder.addCase(postResetPassword.pending, (state: { loading: boolean; error: null }) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(postResetPassword.fulfilled, state => {
+    builder.addCase(postResetPassword.fulfilled, (state: { loading: boolean }) => {
+      alert('비밀번호가 변경되었습니다. 다시 로그인해주세요.');
+      window.location.href = '/home';
       state.loading = false;
     });
-    builder.addCase(postResetPassword.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
-    });
+    builder.addCase(
+      postResetPassword.rejected,
+      (state: { loading: boolean; error: any }, action: { error: { message: null } }) => {
+        state.loading = false;
+        state.error = action.error.message ?? null;
+      }
+    );
   }
 });
 
@@ -252,6 +280,7 @@ export const {
   setAccountHateInterests,
   setAccountIntroduction,
   addAccountPhotos,
+  setAccountSimiller,
   removeAccountPhotos
 } = accountSlice.actions;
 export const extraReducers = accountSlice.reducer;

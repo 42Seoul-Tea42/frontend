@@ -8,12 +8,17 @@ import { patchUserProfile, setAccountInterests } from '@/redux/slices/accountSli
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
-import { submitProfile } from '@/(pages)/setting/page';
+import { submitProfile } from '@/(pages)/setting/submitprofile';
+import SimillerRadioInput from '@/(pages)/forms/SimilerRadioInput';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.accountSlice.user);
   useLoginRedirect();
+
+  const updateUser = () => {
+    dispatch<any>(patchUserProfile(null));
+  };
 
   return (
     <div className="w-full h-screen relative flex justify-center items-center">
@@ -26,7 +31,7 @@ const Profile = () => {
         <form
           onSubmit={event => {
             event.preventDefault();
-            submitProfile(user.pictures, () => dispatch<any>(patchUserProfile()));
+            submitProfile(user.pictures, updateUser);
           }}
           className=""
         >
@@ -36,6 +41,8 @@ const Profile = () => {
           <GenderRadioInput />
           <h5 className="block text-sm font-medium text-gray-900">성적 선호</h5>
           <SexualPreferenceRadioInput />
+          <h5 className="block text-sm font-medium text-gray-900">비슷한 유저를 만나고 싶은가요?</h5>
+          <SimillerRadioInput />
           <IntroductionInput />
           <h5 className="text-lg font-semibold mb-5 underline decoration-wavy decoration-yellow-500/50">
             관심있는 분야를 선택해주세요.
