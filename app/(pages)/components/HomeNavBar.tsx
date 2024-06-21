@@ -8,15 +8,18 @@ import requestUserLocation from '@/api/location';
 import { HomeNavBarButton } from '@/ui';
 import { HamburgerSVG, HistorySVG, HomeFillSVG, SearchSVG, StarFullSVG, UserSVG } from '@/svg';
 import { initUser } from '@/redux/slices/suggestionSlice';
+import { RefreshSVG } from '@/svg/RefreshSVG';
+import { AdjustSVG } from '@/svg/HomeNavBarSVG';
+import { getLogin } from '@/redux/slices/loginSlice';
 
 const HomeNavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   // 로그인 유저 체크 훅
-
   const router = useRouter();
 
   useEffect(() => {
+    dispatch<any>(getLogin());
     requestUserLocation();
   }, []);
 
@@ -41,10 +44,11 @@ const HomeNavBar: React.FC = () => {
 
   const NavigationItems = [
     { name: 'Fancy', icon: <StarFullSVG />, noti: 'on' },
-    { name: 'History', icon: <HistorySVG />, noti: 'on' },
+    { name: 'Visitor', icon: <UserSVG />, noti: 'on' },
+    { name: 'History', icon: <HistorySVG />, noti: 'off' },
     { name: 'Home', icon: <HomeFillSVG />, noti: 'off' },
     { name: 'Search', icon: <SearchSVG />, noti: 'off' },
-    { name: 'Setting', icon: <UserSVG />, notio: 'off' }
+    { name: 'Setting', icon: <AdjustSVG />, notio: 'off' }
   ];
 
   return (
