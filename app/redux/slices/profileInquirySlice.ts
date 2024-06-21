@@ -22,19 +22,22 @@ export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfile
 });
 
 // 유저 신고
-export const reportUser = createAsyncThunk('profileInquirySlice/reportUser', async (userId: string) => {
-  const response = await axiosInstance.post('/user/report', {
-    target_id: Number(userId),
-    reason: 0,
-    reason_opt: '부정적인 단어 사용'
-  });
-  return response.data;
-});
+export const reportUser = createAsyncThunk(
+  'profileInquirySlice/reportUser',
+  async ({ userId, reason }: { userId: number; reason: string }) => {
+    const response = await axiosInstance.post('/user/report', {
+      target_id: userId,
+      reason: 9,
+      reason_opt: reason
+    });
+    return response.data;
+  }
+);
 
 // 유저 차단
-export const blockUser = createAsyncThunk('profileInquirySlice/blockUser', async (userId: string) => {
+export const blockUser = createAsyncThunk('profileInquirySlice/blockUser', async (userId: number) => {
   const response = await axiosInstance.post('/user/block', {
-    target_id: Number(userId)
+    target_id: userId
   });
   return response.data;
 });
@@ -72,6 +75,7 @@ const profileInquirySlice = createSlice({
     });
     builder.addCase(reportUser.fulfilled, (state, action) => {
       state.loading = false;
+      alert('신고가 완료되었습니다.');
     });
     builder.addCase(reportUser.rejected, (state, action) => {
       state.loading = false;
@@ -84,6 +88,7 @@ const profileInquirySlice = createSlice({
       state.error = null;
     });
     builder.addCase(blockUser.fulfilled, (state, action) => {
+      alert('차단했습니다.');
       state.loading = false;
     });
     builder.addCase(blockUser.rejected, (state, action) => {
