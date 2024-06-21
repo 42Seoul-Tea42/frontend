@@ -123,9 +123,8 @@ const signupSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getCheckDuplicateEmail.fulfilled, (state, action) => {
-      action.payload.data.occupied === false
-        ? (state.validation.isEmailDuplicateChecked = true)
-        : (state.validation.isEmailDuplicateChecked = false);
+      state.validation.isEmailDuplicateChecked = true;
+      state.loading = false;
     });
     builder.addCase(getCheckDuplicateEmail.rejected, (state, action) => {
       state.loading = false;
@@ -140,6 +139,7 @@ const signupSlice = createSlice({
     });
     builder.addCase(getCheckDuplicateId.fulfilled, (state, action) => {
       state.validation.isIdDuplicateChecked = true;
+      state.loading = false;
     });
     builder.addCase(getCheckDuplicateId.rejected, (state, action) => {
       state.loading = false;
