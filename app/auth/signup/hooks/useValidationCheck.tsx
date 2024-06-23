@@ -40,9 +40,9 @@ export const useValidationCheck = () => {
     return '';
   };
 
-  const validateIdDupCheck = () => (!idDupCheck ? '아이디가 중복체크를 완료해주세요.' : '');
+  const validateIdDupCheck = () => (!idDupCheck ? '아이디 중복체크를 완료해주세요.' : '');
 
-  const validateEmailDupCheck = () => (!emailDupCheck ? '이메일이 중복체크를 완료해주세요.' : '');
+  const validateEmailDupCheck = () => (!emailDupCheck ? '이메일 중복체크를 완료해주세요.' : '');
 
   useEffect(() => {
     const validations = [
