@@ -16,6 +16,7 @@ export interface LoginState {
   steps: Steps;
   loading: boolean;
   error: string | null;
+  link: string;
 }
 
 export const initialState: LoginState = {
@@ -27,6 +28,7 @@ export const initialState: LoginState = {
     emojiCheck: false,
     oauth: Oauth.NONE
   },
+  link: '',
   loading: false,
   error: null
 };

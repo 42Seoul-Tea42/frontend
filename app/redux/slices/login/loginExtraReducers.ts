@@ -222,6 +222,8 @@ const addGetVerifyEmailCase = (builder: ActionReducerMapBuilder<LoginState>) => 
   });
   builder.addCase(getVerifyEmail.rejected, (state, action) => {
     state.loading = false;
+    alert('로그인 해주세요.');
+    window.location.href = Route.LOGIN;
     state.error = action.error.message ?? null;
   });
 };

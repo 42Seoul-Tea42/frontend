@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { Suspense, useEffect } from 'react';
 import CardForm from '@/(pages)/forms/CardForm';
-import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 import { Route } from '@/redux/enum';
 import { getKaKaoLogin } from '@/redux/slices/login/loginExtraReducers';
 
@@ -12,7 +11,6 @@ function KakaoPage() {
   const params = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
-  useLoginRedirect();
 
   // 컴포넌트 마운트 시에 이메일 자동인증
   useEffect(() => {

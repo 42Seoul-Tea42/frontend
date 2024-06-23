@@ -70,7 +70,7 @@ export enum Route {
   LOGIN = '/auth/login',
   EMOJI = '/auth/upload/emoji',
   PROFILE = '/auth/upload/profile',
-  VERIFY_EMAIL = 'auth/verify-email',
+  VERIFY_EMAIL = '/auth/verify-email',
   SIGNUP = '/auth/signup',
   SETTING = '/setting'
 }

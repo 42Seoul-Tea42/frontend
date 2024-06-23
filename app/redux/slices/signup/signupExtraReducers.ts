@@ -25,37 +25,11 @@ const addPostSignupCase = (builder: ActionReducerMapBuilder<SignupState>) => {
   builder.addCase(postSignup.fulfilled, (state, action) => {
     state.validation.isSignup = true;
     window.location.href = Route.LOGIN;
+    alert('회원가입이 완료되었습니다. 가입하신 이메일로 인증해주세요.');
   });
   builder.addCase(postSignup.rejected, (state, action) => {
     state.loading = false;
     state.error = '회원가입이 실패했습니다.';
-  });
-};
-
-// 이메일로 인증 링크보내기 -----------------------------------------------------
-export const postVerifyEmail = createAsyncThunk('accountSlice/postVerifyEmail', async (_, { getState }) => {
-  const state = getState() as { accountSlice: AccountState };
-  const { user } = state.accountSlice;
-  const response = await axiosInstance.post('https://api.example.com/data', {
-    body: {
-      email: user.account.email
-    }
-  });
-  return response.status;
-});
-
-const addPostVerifyEmailCase = (builder: ActionReducerMapBuilder<SignupState>) => {
-  builder.addCase(postVerifyEmail.pending, state => {
-    state.loading = true;
-    state.error = null;
-  });
-  builder.addCase(postVerifyEmail.fulfilled, (state, action) => {
-    alert('이메일로 인증 링크가 전송되었습니다.');
-    state.loading = false;
-  });
-  builder.addCase(postVerifyEmail.rejected, (state, action) => {
-    state.loading = false;
-    state.error = action.error.message ?? null;
   });
 };
 
@@ -115,7 +89,6 @@ const addCheckDuplicateIdCase = (builder: ActionReducerMapBuilder<SignupState>) 
 // extra reducers 추가 -----------------------------------------------------
 export const addSignupExtraReducers = (builder: ActionReducerMapBuilder<SignupState>) => {
   addPostSignupCase(builder);
-  addPostVerifyEmailCase(builder);
   addCheckDuplicateEmailCase(builder);
   addCheckDuplicateIdCase(builder);
 };
