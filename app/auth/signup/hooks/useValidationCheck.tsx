@@ -47,11 +47,11 @@ export const useValidationCheck = () => {
   useEffect(() => {
     const validations = [
       { check: validateEmail, errorMsg: validateEmail() },
+      { check: validateEmailDupCheck, errorMsg: validateEmailDupCheck() },
       { check: validateUserName, errorMsg: validateUserName() },
       { check: validateLoginId, errorMsg: validateLoginId() },
-      { check: validatePassword, errorMsg: validatePassword() },
       { check: validateIdDupCheck, errorMsg: validateIdDupCheck() },
-      { check: validateEmailDupCheck, errorMsg: validateEmailDupCheck() }
+      { check: validatePassword, errorMsg: validatePassword() }
     ];
 
     const findError = validations.find(validation => validation.errorMsg !== '');

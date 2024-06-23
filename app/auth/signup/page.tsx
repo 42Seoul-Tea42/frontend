@@ -56,7 +56,8 @@ const Signup: React.FC = () => {
                   // 이메일 중복체크
                   onClick={() => dispatch<any>(getCheckDuplicateEmail())}
                   color={validation.isEmailDuplicateChecked ? 'bg-green-500' : 'hover:opacity-50 bg-red-500'}
-                  text={validation.isEmailDuplicateChecked ? '' : 'click'}
+                  text={validation.isEmailDuplicateChecked ? '' : '👇'}
+                  pulse={validation.isEmailDuplicateChecked ? false : true}
                 />
               }
             />
@@ -71,7 +72,8 @@ const Signup: React.FC = () => {
                   // 아이디 중복체크
                   onClick={() => dispatch<any>(getCheckDuplicateId())}
                   color={validation.isIdDuplicateChecked ? 'bg-green-500' : 'hover:opacity-50 bg-red-500'}
-                  text={validation.isIdDuplicateChecked ? '' : 'click'}
+                  text={validation.isIdDuplicateChecked ? '' : '👇'}
+                  pulse={validation.isIdDuplicateChecked ? false : true}
                 />
               }
             />
