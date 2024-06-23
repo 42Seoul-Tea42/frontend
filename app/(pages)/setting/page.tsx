@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AccordionItems, SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
@@ -31,7 +31,6 @@ import SimillarRadioInput from '../forms/SimilarRadioInput';
 const Setting: React.FC = () => {
   const account = useSelector((state: RootState) => state.accountSlice);
   const user = useSelector((state: RootState) => state.accountSlice.user);
-  const password = useSelector((state: RootState) => state.accountSlice.password);
   const dispatch = useDispatch();
 
   // 내정보 가져와서 표시
@@ -40,41 +39,21 @@ const Setting: React.FC = () => {
   }, []);
 
   const updateUser = () => {
-    let data = {};
-    if (user.pictures.length) {
-      data = { ...data, pictures: user.pictures };
-    }
-    if (user.emoji.length) {
-      data = { ...data, emoji: user.emoji };
-    }
-    if (user.hateEmoji.length) {
-      data = { ...data, hate_emoji: user.hateEmoji };
-    }
-    if (user.interests.length) {
-      data = { ...data, tags: user.interests };
-    }
-    if (user.hateInterests.length) {
-      data = { ...data, hate_tags: user.hateInterests };
-    }
-    if (account.password) {
-      data = { ...data, pw: account.password };
-    }
-    dispatch<any>(
-      patchUserProfile({
-        pictures: user.pictures, // backend: 배열형태로 보내주세요.
-        gender: Number(user.gender), // backend: 숫자형태로 보내주세요.
-        taste: Number(user.sexualPreference), // backend: 숫자형태로 보내주세요.
-        bio: user.introduction,
-        tags: user.interests,
-        emoji: user.emoji,
-        hate_emoji: user.hateEmoji,
-        name: user.firstname,
-        last_name: user.lastname ?? '',
-        age: user.age,
-        pw: password,
-        email: user.email
-      })
-    );
+    const data = {
+      gender: Number(user.gender), // backend: 숫자형태로 보내주세요.
+      taste: Number(user.sexualPreference), // backend: 숫자형태로 보내주세요.
+      pictures: user.pictures, // backend: 배열형태로 보내주세요.
+      bio: user.introduction,
+      tags: user.interests,
+      emoji: user.emoji,
+      hate_emoji: user.hateEmoji,
+      name: user.firstname,
+      last_name: user.lastname ?? '',
+      age: user.age,
+      email: user.email,
+      pw: account.password
+    };
+    dispatch<any>(patchUserProfile(data));
   };
 
   return (

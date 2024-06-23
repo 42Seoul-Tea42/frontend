@@ -8,6 +8,7 @@ const handleAuthError = async (error: any) => {
     return reRequest(error.config);
   } else if (flag === Auth.refreshToken) {
     redirectLogin();
+    alert('로그인 후 이용해주세요.');
   }
 
   return Promise.reject(error);

@@ -35,12 +35,10 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
 
     socketInstance.on('connect', () => {
       setSocket(socketInstance);
-      console.log('🚀 socket connected');
     });
 
     socketInstance.on('disconnect', () => {
       setSocket(undefined);
-      console.log('🛠 socket disconnected');
     });
 
     return () => {
