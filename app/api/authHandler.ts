@@ -27,7 +27,11 @@ const checkInvalidStatus = (message: any) => {
 // 토큰 재발급 요청
 const reGenerateToken = async () => {
   try {
-    await axiosInstance.patch('/user/reset-token');
+    await axiosInstance.patch('/user/reset-token', null, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   } catch (error) {
     throw error;
   }
@@ -37,7 +41,6 @@ const reGenerateToken = async () => {
 const reRequest = async (originalRequestConfig: any) => {
   try {
     await reGenerateToken();
-    await axiosInstance.patch('/user/reset-token');
     return axiosInstance(originalRequestConfig);
   } catch (error) {
     redirectLogin();

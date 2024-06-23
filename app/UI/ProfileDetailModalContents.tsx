@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import ProfileDetailCarousel from '@/(pages)/components/ProfileDetailCarousel';
-import { Gender, ReportReason, Status } from '@/redux/enum';
+import { Gender, Status } from '@/redux/enum';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
 import InputStarRatingBar from '@/(pages)/search/components/InputRangeStarBar';
@@ -43,7 +43,7 @@ const ProfileDetailModalContents: React.FC = () => {
                 <div className="w-full flex justify-between">
                   <div>
                     <div className="flex">
-                      <h5 className="text-xl text-gray-800 font-semibold">{user.lastname.toUpperCase()}</h5>
+                      <h5 className="text-sm mr-1 text-gray-800 font-semibold">{user.lastname.toUpperCase()}</h5>
                       <h5 className="text-xl text-gray-800 font-semibold">{user.firstname.toLowerCase()}</h5>
                     </div>
                     <h5 className="text-sm text-gray-800 font-thin">로그인 아이디 : {user.loginId}</h5>

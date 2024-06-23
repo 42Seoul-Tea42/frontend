@@ -8,8 +8,9 @@ import { LoginForm } from '@/(pages)/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { Route } from '@/redux/enum';
 import { RootState } from '@/redux/store';
-import { postLogin } from '@/redux/slices/login/loginExtraReducers';
+import { getLogin, postLogin } from '@/redux/slices/login/loginExtraReducers';
 import { setIdPasswordLoginFormView } from '@/redux/slices/login/loginSlice';
+import { useLayoutEffect } from 'react';
 
 function Login() {
   const router = useRouter();

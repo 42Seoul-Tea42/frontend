@@ -9,7 +9,7 @@ import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitProfile } from '@/(pages)/setting/submitprofile';
 import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
-import SimillarRadioInput from '@/(pages)/forms/SimilarRadioInput';
+import SimilarRadioInput from '@/(pages)/forms/SimilarRadioInput';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ const Profile = () => {
         age: user.age,
         gender: user.gender,
         taste: user.sexualPreference,
-        interests: user.interests,
-        simillar: user.simillar,
+        tags: user.interests,
+        similar: user.similar,
         bio: user.introduction
       })
     );
@@ -74,7 +74,7 @@ const Profile = () => {
             <h5 className="text-red-500 mr-1"> * </h5>
             <h5 className="block text-sm font-medium text-gray-900">나와 비슷한 상대를 추천받고 싶나요?</h5>
           </div>
-          <SimillarRadioInput />
+          <SimilarRadioInput />
           <div className="mb-5"></div>
           <SubmitButton text="Submit" />
         </form>

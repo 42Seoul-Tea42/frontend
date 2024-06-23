@@ -65,9 +65,15 @@ function Home() {
       }
       contents={
         <>
-          <h5 className="flex justify-center text-2xl font-semibold mb-5 underline decoration-wavy decoration-teal-400">
-            오늘의 추천 유저를 만나보세요 ~ !
-          </h5>
+          {renderUsers.length > 0 ? (
+            <h5 className="flex justify-center text-2xl font-semibold mb-5 underline decoration-wavy decoration-teal-400">
+              오늘의 추천 유저를 만나보세요 ~ !
+            </h5>
+          ) : (
+            <h5 className="flex justify-center text-2xl font-semibold mb-5 underline decoration-wavy decoration-teal-400">
+              아쉽게도 추천유저가 없어요. ㅠㅠ{' '}
+            </h5>
+          )}
           <button className="flex border p-1 mb-4 rounded-xl" onClick={handleRefreshUser}>
             새로고침
             <RefreshSVG />

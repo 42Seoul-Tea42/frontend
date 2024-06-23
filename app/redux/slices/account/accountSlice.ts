@@ -29,7 +29,7 @@ export const initialState = {
     hateInterests: [],
     emoji: [],
     hateEmoji: [],
-    simillar: true
+    similar: true
   },
   password: '',
   reEnterPassword: '',
@@ -82,7 +82,7 @@ const accountSlice = createSlice({
       state.user.pictures = state.user.pictures.filter((_: any, index: number) => index !== action.payload);
     },
     setAccountSimiller: (state: AccountState, action: PayloadAction<boolean>) => {
-      state.user.simillar = action.payload;
+      state.user.similar = action.payload;
     },
     setAccountEmoji: (state: AccountState, action: PayloadAction<number>) => {
       updateLikeList({

@@ -12,7 +12,7 @@ export interface ProfileInquiryState {
 export const initialState: ProfileInquiryState = {
   user: {},
   profileModalVisible: false,
-  isReportView: true,
+  isReportView: false,
   loading: false,
   error: null
 };

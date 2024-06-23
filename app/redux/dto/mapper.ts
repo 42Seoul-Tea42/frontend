@@ -18,7 +18,7 @@ const mappingTable = new Map<string, string>([
   ['hate_tags', 'hateInterests'],
   ['emoji', 'emoji'],
   ['hate_emoji', 'hateEmoji'],
-  ['similar', 'simillar'],
+  ['similar', 'similar'],
   ['fancy', 'fancy'],
   ['email_check', 'emailCheck'],
   ['profile_check', 'profileCheck'],

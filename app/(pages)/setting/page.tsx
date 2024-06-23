@@ -26,7 +26,7 @@ import { RootState } from '@/redux/store';
 import { submitProfile } from './submitprofile';
 import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
 import { getMyAccount } from '@/redux/slices/account/accountExtraReducers';
-import SimillarRadioInput from '../forms/SimilarRadioInput';
+import SimilarRadioInput from '../forms/SimilarRadioInput';
 
 const Setting: React.FC = () => {
   const account = useSelector((state: RootState) => state.accountSlice);
@@ -100,7 +100,7 @@ const Setting: React.FC = () => {
               },
               {
                 title: '비슷한 유저를 만나고 싶은가요?',
-                content: <SimillarRadioInput />
+                content: <SimilarRadioInput />
               },
               {
                 title: '나의 관심사 태그를 선택해주세요.',
