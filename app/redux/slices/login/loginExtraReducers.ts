@@ -55,7 +55,7 @@ export const addPostLoginAccountCase = (builder: ActionReducerMapBuilder<Account
   });
   builder.addCase(postLogin.fulfilled, (state: any, action: any) => {
     state.user = { ...state.user, ...action.payload };
-    localStorage.setItem('id', state.user.loginId);
+    localStorage.setItem('id', state.user.id);
   });
   builder.addCase(postLogin.rejected, (state: any, action: any) => {
     state.loading = false;
@@ -159,7 +159,7 @@ export const addGetKaKaoLoginAccountCase = (builder: ActionReducerMapBuilder<Acc
   });
   builder.addCase(getKaKaoLogin.fulfilled, (state: any, action: any) => {
     state.user = { ...state.user, ...action.payload };
-    localStorage.setItem('id', state.user.loginId);
+    localStorage.setItem('id', state.user.id);
   });
   builder.addCase(getKaKaoLogin.rejected, (state: any, action: any) => {
     state.loading = false;
@@ -196,7 +196,7 @@ export const addGetGoogleLoginAccountCase = (builder: ActionReducerMapBuilder<Ac
   });
   builder.addCase(getGoogleLogin.fulfilled, (state: any, action: any) => {
     state.user = { ...state.user, ...action.payload };
-    localStorage.setItem('id', state.user.loginId);
+    localStorage.setItem('id', state.user.id);
   });
   builder.addCase(getGoogleLogin.rejected, (state: any, action: any) => {
     state.loading = false;
