@@ -6,11 +6,13 @@ export interface ProfileInquiryState {
   profileModalVisible: boolean;
   loading: boolean;
   error: string | null;
+  isReportView: boolean;
 }
 
 export const initialState: ProfileInquiryState = {
   user: {},
   profileModalVisible: false,
+  isReportView: true,
   loading: false,
   error: null
 };
@@ -24,6 +26,9 @@ const profileInquirySlice = createSlice({
     },
     setProfileInquiryUser: (state, action: PayloadAction<any>) => {
       state.user = { ...state.user, ...action.payload };
+    },
+    setReportView(state, action: PayloadAction<boolean>) {
+      state.isReportView = action.payload;
     }
   },
   extraReducers: builder => {
@@ -31,7 +36,7 @@ const profileInquirySlice = createSlice({
   }
 });
 
-export const { setProfileInquiryUser, setProfileModalVisible } = profileInquirySlice.actions;
+export const { setReportView, setProfileInquiryUser, setProfileModalVisible } = profileInquirySlice.actions;
 
 export const extraReducers = profileInquirySlice.reducer;
 

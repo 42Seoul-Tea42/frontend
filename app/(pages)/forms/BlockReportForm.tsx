@@ -1,4 +1,5 @@
 import { blockUser, reportUser } from '@/redux/slices/profileInquiry/profileInquiryExtraReducers';
+import { setReportView } from '@/redux/slices/profileInquiry/profileInquirySlice';
 import { BlueHyperLink } from '@/ui';
 import { useDispatch } from 'react-redux';
 
@@ -10,14 +11,7 @@ const BlockReportForm = ({ id }: BlockReportFormProps) => {
   const dispatch = useDispatch();
 
   const handleReportUser = () => {
-    const result = prompt('신고 사유를 입력해주세요.');
-    dispatch<any>(
-      reportUser({
-        userId: id,
-        reason: result ?? ''
-      })
-    );
-    console.log(result);
+    dispatch(setReportView(true));
   };
 
   const handleBlockUser = () => {

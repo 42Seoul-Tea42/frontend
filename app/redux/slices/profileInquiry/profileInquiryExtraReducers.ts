@@ -2,6 +2,7 @@ import { ActionReducerMapBuilder, PayloadAction, createAsyncThunk } from '@redux
 import { ProfileInquiryState } from './profileInquirySlice';
 import axiosInstance from '@/api/axios';
 import { serverToClientMapper } from '@/redux/dto/mapper';
+import { ReportReason } from '@/redux/enum';
 
 // 유저 프로필 상세 조회 -----------------------------------------------------
 export const getProfileDetail = createAsyncThunk('profileInquirySlice/getProfileDetail', async (userId: string) => {
@@ -27,11 +28,11 @@ const addGetProfileDetailCase = (builder: ActionReducerMapBuilder<ProfileInquiry
 // 유저 신고 -----------------------------------------------------
 export const reportUser = createAsyncThunk(
   'profileInquirySlice/reportUser',
-  async ({ userId, reason }: { userId: number; reason: string }) => {
+  async ({ userId, reason, message }: { userId: number; reason: ReportReason; message: string }) => {
     const response = await axiosInstance.post('/user/report', {
       target_id: userId,
-      reason: 9,
-      reason_opt: reason
+      reason: reason,
+      reason_opt: message
     });
     return response.data;
   }
