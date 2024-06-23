@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect } from 'react';
 import { RootState } from '@/redux/store';
 import { setFancyNoti } from '@/redux/slices/suggestion/suggestionSlice';
 import { MainContentsArea, ProfileDetailModalContents } from '@/ui';
@@ -14,7 +14,7 @@ function Fancy() {
   const dispatch = useDispatch();
   const users = useSelector((state: RootState) => state.suggestionSlice.users);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch<any>(getFancyUsers(timeConverter({ time: 'now' })));
 
     // 알림 제거용

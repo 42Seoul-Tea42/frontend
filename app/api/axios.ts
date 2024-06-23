@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getCookie } from '../cookie';
-import handleAuthError, { redirectLogin } from './authHandler';
+import handleAuthError from './authHandler';
 import handleForbiddenError from './forbiddenhandler';
 
 // Axios 인스턴스 생성

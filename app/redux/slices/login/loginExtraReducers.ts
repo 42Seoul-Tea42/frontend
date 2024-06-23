@@ -44,7 +44,7 @@ const addPostLoginCase = (builder: ActionReducerMapBuilder<LoginState>) => {
   });
   builder.addCase(postLogin.rejected, (state, action) => {
     state.loading = false;
-    alert('잘못된 비밀번호입니다.');
+    alert('로그인에 실패했습니다.');
   });
 };
 
@@ -289,29 +289,10 @@ const addGetResetPasswordEmailCase = (builder: ActionReducerMapBuilder<LoginStat
 };
 
 // 유저 프로필 정보 서버로 전송 -----------------------------------------------------
-export const patchUserProfile = createAsyncThunk(
-  'accountSlice/patchUserProfile',
-  async (_: any, { getState }: { getState: any }) => {
-    const state = getState() as { accountSlice: AccountState };
-    const user = state.accountSlice.user;
-    const password = state.accountSlice.password;
-    const response = await axiosInstance.patch('/user/profile', {
-      pictures: user.pictures, // backend: 배열형태로 보내주세요.
-      gender: parseInt(user.gender), // backend: 숫자형태로 보내주세요.
-      taste: parseInt(user.sexualPreference), // backend: 숫자형태로 보내주세요.
-      bio: user.introduction,
-      tags: user.interests,
-      emoji: user.emoji,
-      hate_emoji: user.hateEmoji,
-      name: user.firstname,
-      last_name: user.lastname ?? '',
-      age: user.age,
-      pw: password,
-      email: user.email
-    });
-    return serverToClientMapper(response.data);
-  }
-);
+export const patchUserProfile = createAsyncThunk('accountSlice/patchUserProfile', async (data: any) => {
+  const response = await axiosInstance.patch('/user/profile', data);
+  return serverToClientMapper(response.data);
+});
 
 const addPatchUserProfileCase = (builder: ActionReducerMapBuilder<LoginState>) => {
   builder.addCase(patchUserProfile.pending, state => {

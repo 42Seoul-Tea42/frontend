@@ -7,18 +7,26 @@ import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import { setAccountInterests } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import useLoginRedirect from '@/(pages)/hooks/useLoginRedirect';
 import { submitProfile } from '@/(pages)/setting/submitprofile';
-import SimillerRadioInput from '@/(pages)/forms/SimilerRadioInput';
 import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
+import SimillarRadioInput from '@/(pages)/forms/SimilarRadioInput';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.accountSlice.user);
-  useLoginRedirect();
 
   const updateUser = () => {
-    dispatch<any>(patchUserProfile(null));
+    dispatch<any>(
+      patchUserProfile({
+        pictures: user.pictures,
+        age: user.age,
+        gender: user.gender,
+        taste: user.sexualPreference,
+        interests: user.interests,
+        simillar: user.simillar,
+        bio: user.introduction
+      })
+    );
   };
 
   return (
@@ -66,7 +74,7 @@ const Profile = () => {
             <h5 className="text-red-500 mr-1"> * </h5>
             <h5 className="block text-sm font-medium text-gray-900">나와 비슷한 상대를 추천받고 싶나요?</h5>
           </div>
-          <SimillerRadioInput />
+          <SimillarRadioInput />
           <div className="mb-5"></div>
           <SubmitButton text="Submit" />
         </form>

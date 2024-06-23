@@ -1,7 +1,7 @@
 'use client';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFilter, useSort } from '../hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import FilterControlDrawer from '../search/components/FilterControlDrawer';
 import SortBarVisibleControl from '../components/SortBarVisibleControl';
 import SortBar from '../components/SortBar';
@@ -25,7 +25,7 @@ function Home() {
     setRenderUsers(users);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     handleRefreshUser();
   }, []);
 

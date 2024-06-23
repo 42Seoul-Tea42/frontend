@@ -19,7 +19,12 @@ const Emoji = () => {
     event.preventDefault();
 
     // 서버로 제출 하는 로직 필요
-    dispatch<any>(patchUserProfile(null));
+    dispatch<any>(
+      patchUserProfile({
+        emoij: user.emoji,
+        hate_emoij: user.hateEmoji
+      })
+    );
   };
 
   return (
