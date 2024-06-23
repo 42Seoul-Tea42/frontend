@@ -21,8 +21,8 @@ const Emoji = () => {
     // 서버로 제출 하는 로직 필요
     dispatch<any>(
       patchUserProfile({
-        emoij: user.emoji,
-        hate_emoij: user.hateEmoji
+        emoji: user.emoji,
+        hate_emoji: user.hateEmoji
       })
     );
   };
