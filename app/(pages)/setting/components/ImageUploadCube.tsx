@@ -148,7 +148,11 @@ function ImageUploadCube() {
       if (scene.current && cube.current) {
         scene.current.remove(cube.current);
         cube.current.geometry.dispose();
-        cube.current.material.forEach((material: THREE.Material) => material.dispose());
+        if (Array.isArray(cube.current.material)) {
+          cube.current.material.forEach(material => material.dispose());
+        } else {
+          cube.current.material.dispose();
+        }
       }
     };
   }, []);
