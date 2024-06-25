@@ -29,7 +29,7 @@ function ChattingRoomListItem({ user }: ChattingRoomListItemProps) {
         dispatch(setChattingListModal(false));
         dispatch(setScrollDirection('down'));
       }}
-      className="flex items-end p-4 gap-2 border-b hover:brightness-75 bg-green-200"
+      className="flex items-end p-4 gap-2 border-b border-green-400 hover:brightness-75 bg-green-200"
     >
       <Image className="w-8 h-8 rounded-full" src={user.picture} width={100} height={100} alt={`${user.name} image`} />
       <div className="flex items-center">

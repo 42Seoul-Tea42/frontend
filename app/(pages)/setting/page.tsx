@@ -67,11 +67,12 @@ const Setting: React.FC = () => {
         <div>
           {/* <ImageUploadGrid /> */}
           <ImageUploadCube />
+          <p className="flex justify-center text-gray-700"> ⤷ 프로필을 좌우로 회전시켜 보세요 ⤷ </p>
           <div className="mb-10"></div>
         </div>
 
         <form
-          className="flex flex-col justify-start items-center"
+          className="flex flex-col justify-start items-center max-h-96"
           onSubmit={e => {
             e.preventDefault();
             submitProfile(user.pictures, updateUser);
