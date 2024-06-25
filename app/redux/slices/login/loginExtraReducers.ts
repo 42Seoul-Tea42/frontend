@@ -230,7 +230,9 @@ const addGetVerifyEmailCase = (builder: ActionReducerMapBuilder<LoginState>) => 
 
 // 로그아웃 처리 -----------------------------------------------------
 export const getLogout = createAsyncThunk('loginSlice/getLogout', async () => {
-  const response = await axiosInstance.post('/user/logout');
+  const response = await axiosInstance.post('/user/logout', {
+    headers: { 'Content-Type': 'application/json' }
+  });
   return response.status;
 });
 
@@ -243,7 +245,9 @@ const addGetLogoutCase = (builder: ActionReducerMapBuilder<LoginState>) => {
     state = initialState;
     window.location.href = Route.LOGIN;
   });
-  builder.addCase(getLogout.rejected, () => initialState as LoginState);
+  builder.addCase(getLogout.rejected, state => {
+    alert('로그아웃 실패했습니다.');
+  });
 };
 
 // 회원탈퇴 처리 -----------------------------------------------------

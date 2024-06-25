@@ -28,6 +28,7 @@ import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
 import { getMyAccount } from '@/redux/slices/account/accountExtraReducers';
 import SimilarRadioInput from '../forms/SimilarRadioInput';
 import usePasswordValidMessage from './hooks/useValidMessage';
+import ImageUploadCube from './components/ImageUploadCube';
 
 const Setting: React.FC = () => {
   const account = useSelector((state: RootState) => state.accountSlice);
@@ -64,7 +65,8 @@ const Setting: React.FC = () => {
     <div className="flex min-h-screen bg-green-50">
       <div className="flex-col justify-center mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
         <div>
-          <ImageUploadGrid />
+          {/* <ImageUploadGrid /> */}
+          <ImageUploadCube />
           <div className="mb-10"></div>
         </div>
 
