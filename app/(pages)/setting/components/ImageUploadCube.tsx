@@ -68,7 +68,7 @@ function ImageUploadCube() {
     }
   };
 
-  const handleImageClick = (event: MouseEvent) => {
+  const onClick = (event: MouseEvent) => {
     if (!canvasRef.current || !raycaster.current || !camera.current || !cube.current) {
       return;
     }
@@ -145,14 +145,14 @@ function ImageUploadCube() {
     scene.current?.add(mesh);
 
     if (canvasRef.current) {
-      canvasRef.current.addEventListener('click', handleImageClick);
+      canvasRef.current.addEventListener('click', onClick);
     }
 
     animate();
 
     return () => {
       if (canvasRef.current) {
-        canvasRef.current.removeEventListener('click', handleImageClick);
+        canvasRef.current.removeEventListener('click', onClick);
       }
     };
   }, [pictures]);
