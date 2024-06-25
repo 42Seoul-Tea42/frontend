@@ -61,11 +61,20 @@ function ImageUploadCube() {
 
   // Animation loop
   const animate = () => {
-    requestAnimationFrame(animate);
-    if (controls.current) controls.current.update();
-    if (renderer.current && scene.current && camera.current) {
-      renderer.current.render(scene.current, camera.current);
+    if (!camera.current || !controls.current || !renderer.current || !scene.current) {
+      return;
     }
+
+    requestAnimationFrame(animate);
+
+    // 시간에 따라 카메라의 x 좌표를 조정하여 회전하는 효과 구현
+    // const time = Date.now() * 0.0005;
+    // const radius = 10; // 회전 반경
+    // camera.current.position.x = Math.sin(time) * radius;
+    // camera.current.position.z = Math.cos(time) * radius;
+
+    controls.current.update();
+    renderer.current.render(scene.current, camera.current);
   };
 
   const onClick = (event: MouseEvent) => {
@@ -123,6 +132,10 @@ function ImageUploadCube() {
 
     // 컨트롤 초기화
     controls.current = new OrbitControls(camera.current, renderer.current.domElement);
+    // zoom in
+    controls.current.minDistance = 6;
+    // zoom out
+    controls.current.maxDistance = 10;
 
     // 레이캐스터 초기화
     raycaster.current = new THREE.Raycaster();
@@ -140,7 +153,7 @@ function ImageUploadCube() {
     };
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const mesh = createCube(geometry);
     scene.current?.add(mesh);
 
