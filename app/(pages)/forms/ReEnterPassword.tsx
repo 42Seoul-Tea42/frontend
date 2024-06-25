@@ -4,8 +4,11 @@ import { RootState } from '@/redux/store';
 import { setAccountReEnterPassword } from '@/redux/slices/account/accountSlice';
 import { InputFloatingLabel } from '@/ui';
 
-function ReEnterPassword() {
-  const password = useSelector((state: RootState) => state.accountSlice.password);
+interface ReEnterPasswordProps {
+  stateColor: string;
+}
+
+function ReEnterPassword({ stateColor }: ReEnterPasswordProps) {
   const reEnterPassword = useSelector((state: RootState) => state.accountSlice.reEnterPassword);
   const dispatch = useDispatch();
 
@@ -18,7 +21,7 @@ function ReEnterPassword() {
         text="Re-Enter-Password"
         autoComplete="new-password"
       />
-      <Indicator color={password === reEnterPassword ? 'bg-green-500' : 'bg-red-500'} />
+      <Indicator color={stateColor} />
     </div>
   );
 }

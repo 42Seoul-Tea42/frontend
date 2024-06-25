@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AccordionItems, SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
@@ -27,6 +27,7 @@ import { submitProfile } from './submitprofile';
 import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
 import { getMyAccount } from '@/redux/slices/account/accountExtraReducers';
 import SimilarRadioInput from '../forms/SimilarRadioInput';
+import usePasswordValidMessage from './hooks/useValidMessage';
 
 const Setting: React.FC = () => {
   const account = useSelector((state: RootState) => state.accountSlice);
@@ -55,6 +56,9 @@ const Setting: React.FC = () => {
     };
     dispatch<any>(patchUserProfile(data));
   };
+
+  // 비밀번호 유효성 검사, 에러메시지 표시
+  const errorMessage = usePasswordValidMessage();
 
   return (
     <div className="flex min-h-screen bg-green-50">
@@ -85,8 +89,9 @@ const Setting: React.FC = () => {
                 title: '비밀번호 재설정',
                 content: (
                   <>
+                    {errorMessage && <div className="text-red-500 mb-1">{errorMessage}</div>}
                     <PasswordInput />
-                    <ReEnterPassword />
+                    <ReEnterPassword stateColor={errorMessage.length ? 'bg-red-500' : 'bg-green-500'} />
                   </>
                 )
               },

@@ -1,7 +1,16 @@
 import { RootState } from '@/redux/store';
-import { last } from 'lodash';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+
+export const validatePassword = (password: string, reEnterPassword: string) => {
+  if (password.length < 8) return '비밀번호는 8자 이상이어야 합니다.';
+  if (!/[A-Z]/.test(password)) return '비밀번호는 최소한 하나의 대문자를 포함해야 합니다.';
+  if (!/[a-z]/.test(password)) return '비밀번호는 최소한 하나의 소문자를 포함해야 합니다.';
+  if (!/\d/.test(password)) return '비밀번호는 최소한 하나의 숫자를 포함해야 합니다.';
+  if (password.includes(' ')) return '비밀번호에 공백이 포함되어 있습니다.';
+  if (password !== reEnterPassword) return '재 입력한 비밀번호가 일치하지 않습니다.';
+  return '';
+};
 
 export const useValidationCheck = () => {
   const loginId = useSelector((state: RootState) => state.accountSlice.user.loginId);
@@ -30,16 +39,6 @@ export const useValidationCheck = () => {
     return '';
   };
 
-  const validatePassword = () => {
-    if (password.length < 8) return '비밀번호는 8자 이상이어야 합니다.';
-    if (!/[A-Z]/.test(password)) return '비밀번호는 최소한 하나의 대문자를 포함해야 합니다.';
-    if (!/[a-z]/.test(password)) return '비밀번호는 최소한 하나의 소문자를 포함해야 합니다.';
-    if (!/\d/.test(password)) return '비밀번호는 최소한 하나의 숫자를 포함해야 합니다.';
-    if (password.includes(' ')) return '비밀번호에 공백이 포함되어 있습니다.';
-    if (password !== reEnterPassword) return '재 입력한 비밀번호가 일치하지 않습니다.';
-    return '';
-  };
-
   const validateIdDupCheck = () => (!idDupCheck ? '아이디 중복체크를 완료해주세요.' : '');
 
   const validateEmailDupCheck = () => (!emailDupCheck ? '이메일 중복체크를 완료해주세요.' : '');
@@ -51,7 +50,7 @@ export const useValidationCheck = () => {
       { check: validateUserName, errorMsg: validateUserName() },
       { check: validateLoginId, errorMsg: validateLoginId() },
       { check: validateIdDupCheck, errorMsg: validateIdDupCheck() },
-      { check: validatePassword, errorMsg: validatePassword() }
+      { check: validatePassword, errorMsg: validatePassword(password, reEnterPassword) }
     ];
 
     const findError = validations.find(validation => validation.errorMsg !== '');

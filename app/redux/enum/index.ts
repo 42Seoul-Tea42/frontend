@@ -72,5 +72,6 @@ export enum Route {
   PROFILE = '/auth/upload/profile',
   VERIFY_EMAIL = '/auth/verify-email',
   SIGNUP = '/auth/signup',
-  SETTING = '/setting'
+  SETTING = '/setting',
+  RESET_PASSWORD = '/auth/reset-password'
 }

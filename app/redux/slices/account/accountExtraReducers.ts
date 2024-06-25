@@ -80,6 +80,8 @@ const addPostResetPasswordCase = (builder: ActionReducerMapBuilder<AccountState>
     state.loading = false;
   });
   builder.addCase(postResetPassword.rejected, (state: any, action: any) => {
+    alert('올바르지 않은 인증입니다. 재설정을 다시 시도하세요.');
+    window.location.href = Route.RESET_PASSWORD;
     state.loading = false;
     state.error = action.error.message ?? null;
   });

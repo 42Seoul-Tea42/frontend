@@ -15,6 +15,7 @@ import { RootState } from '@/redux/store';
 import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '@/(pages)/forms';
 import { SubmitButton } from '@/ui';
 import { getCheckDuplicateEmail, getCheckDuplicateId, postSignup } from '@/redux/slices/signup/signupExtraReducers';
+import usePasswordValidMessage from '@/(pages)/setting/hooks/useValidMessage';
 
 const Signup: React.FC = () => {
   const error = useSelector((state: RootState) => state.signupSlice.error);
@@ -38,6 +39,7 @@ const Signup: React.FC = () => {
     dispatch<any>(postSignup());
   };
 
+  const passwordErrorMessage = usePasswordValidMessage();
   return (
     <CardForm
       onSubmit={signup}
@@ -78,7 +80,7 @@ const Signup: React.FC = () => {
               }
             />
             <PasswordInput />
-            <ReEnterPassword />
+            <ReEnterPassword stateColor={passwordErrorMessage ? 'bg-red-500' : 'bg-green-500'} />
           </div>
         </>
       }

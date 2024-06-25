@@ -10,12 +10,14 @@ import { SubmitButton } from '@/ui';
 import { useSearchParams } from 'next/navigation';
 import { postResetPassword } from '@/redux/slices/account/accountExtraReducers';
 import { getResetPasswordEmail } from '@/redux/slices/login/loginExtraReducers';
+import usePasswordValidMessage from '@/(pages)/setting/hooks/useValidMessage';
 
 function ResetPasswordDetail() {
   const dispatch = useDispatch();
   const params = useSearchParams();
   const key = params.get('key');
   const loginId = useSelector((state: RootState) => state.accountSlice.user.loginId);
+  const passwordErrorMessage = usePasswordValidMessage();
 
   return (
     <>
@@ -25,8 +27,9 @@ function ResetPasswordDetail() {
           subject="재설정할 비밀번호를 입력해주세요."
           inputs={
             <>
+              {passwordErrorMessage && <div className="text-red-500">{passwordErrorMessage}</div>}
               <PasswordInput />
-              <ReEnterPassword />
+              <ReEnterPassword stateColor={passwordErrorMessage ? 'bg-red-500' : 'bg-green-500'} />
               <div className="mb-10"></div>
             </>
           }
