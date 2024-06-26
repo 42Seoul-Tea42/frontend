@@ -11,14 +11,15 @@ function ChattingRoomList() {
   return (
     <>
       {visible && (
-        <>
-          <ul className="absolute w-full h-full overflow-hidden border rounded-xl bg-green-50">
-            <p className="p-1"> 채팅방 목록 </p>
-            {users.map((user, index) => (
-              <ChattingRoomListItem key={index} user={user} />
-            ))}
-          </ul>
-        </>
+        <ul className="absolute w-full h-full overflow-hidden border rounded-xl bg-green-50">
+          <div className="flex p-1 text-teal-700">
+            <p> 채팅방 </p>
+            <p className={users.length ? 'hidden' : ''}>이 없습니다.</p>
+          </div>
+          {users.map((user, index) => (
+            <ChattingRoomListItem key={index} user={user} />
+          ))}
+        </ul>
       )}
     </>
   );
