@@ -27,7 +27,11 @@ const cubeIndexPictureMapper = (index: number) => {
   }
 };
 
-function ImageUploadCube() {
+interface ImageUploadCubeProps {
+  backgroundColor?: string;
+}
+
+function ImageUploadCube({ backgroundColor }: ImageUploadCubeProps) {
   const dispatch = useDispatch();
   const pictures = useSelector((state: RootState) => state.accountSlice.user.pictures);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -44,7 +48,7 @@ function ImageUploadCube() {
   // 큐브 생성 함수
   const createCube = (geometry: any) => {
     const loader = new THREE.TextureLoader();
-    const defaultTexture = loader.load('/cloud.png'); // 기본 이미지를 로드
+    const defaultTexture = loader.load('/cloud-line.png'); // 기본 이미지를 로드
     const materials: THREE.MeshBasicMaterial[] = [];
 
     for (let i = 0; i < 6; i++) {
@@ -115,7 +119,7 @@ function ImageUploadCube() {
     // 씬 초기화
     scene.current = new THREE.Scene();
 
-    scene.current.background = new THREE.Color('#F3FAF7'); // 색상, 포그 시작 거리, 포그 끝 거리
+    scene.current.background = backgroundColor ? new THREE.Color(backgroundColor) : new THREE.Color('#F3FAF7');
 
     // 카메라 초기화
     camera.current = new THREE.PerspectiveCamera(
@@ -142,7 +146,6 @@ function ImageUploadCube() {
 
     // 텍스처 로드 및 큐브 생성
     cube.current = createCube(geometry);
-    scene.current.add(cube.current);
 
     return () => {
       if (scene.current && cube.current) {
@@ -158,8 +161,11 @@ function ImageUploadCube() {
   }, []);
 
   useEffect(() => {
-    const mesh = createCube(geometry);
-    scene.current?.add(mesh);
+    // 사진 텍스쳐 세팅
+    const pictureCube = createCube(geometry);
+    // 초기 로딩시 살짝 왼쪽으로 회전하도록 조정
+    pictureCube.rotation.set(0, -0.2, 0);
+    scene.current?.add(pictureCube);
 
     if (canvasRef.current) {
       canvasRef.current.addEventListener('click', onClick);
