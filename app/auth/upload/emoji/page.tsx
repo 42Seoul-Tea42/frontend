@@ -40,7 +40,7 @@ const Emoji = () => {
               title: '좋아하는 이모티콘 선택',
               content: (
                 <EmojiGridList
-                  readOnly={'me'}
+                  readOnly={false}
                   emoji={user.emoji}
                   onClick={e => dispatch(setAccountEmoji(e))}
                   selectColor="border-green-400"
@@ -51,7 +51,7 @@ const Emoji = () => {
               title: '싫어하는 이모티콘 선택',
               content: (
                 <EmojiGridList
-                  readOnly={'me'}
+                  readOnly={false}
                   emoji={user.hateEmoji}
                   onClick={e => dispatch(setAccountHateEmoji(e))}
                   selectColor="border-red-400"

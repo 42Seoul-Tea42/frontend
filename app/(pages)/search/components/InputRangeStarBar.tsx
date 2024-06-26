@@ -2,7 +2,7 @@ import React from 'react';
 import StarButton from './StarButton';
 
 interface InputStarRatingBarProps {
-  readOnly: 'me' | 'other';
+  readOnly: boolean;
   star: number;
 }
 

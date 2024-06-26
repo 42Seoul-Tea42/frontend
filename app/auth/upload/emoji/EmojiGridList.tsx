@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 interface EmojiGridListProps {
-  readOnly: 'me' | 'other';
+  readOnly: boolean;
   onClick?: (e: number) => void;
   emoji: number[];
   selectColor: string;
@@ -22,7 +22,7 @@ const EmojiGridList = ({ readOnly, onClick, emoji, selectColor }: EmojiGridListP
   const colorPicker = (id: number) => {
     if (emoji?.includes(id)) {
       return selectColor + ' ' + 'border-4 rounded-xl';
-    } else if (readOnly === 'other') {
+    } else if (readOnly === true) {
       return 'hidden';
     }
   };

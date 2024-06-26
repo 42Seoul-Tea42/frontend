@@ -70,7 +70,7 @@ const Profile = () => {
             </h5>
           </div>
           <InterestsSelector
-            readOnly={'me'}
+            readOnly={false}
             onClick={e => dispatch(setAccountInterests(e))}
             interests={user.interests}
           />

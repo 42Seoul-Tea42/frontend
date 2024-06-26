@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface InterestsButtonProps {
-  readOnly: 'me' | 'other';
+  readOnly: false | true;
   value: number;
   text: string;
   onClick?: () => void;
@@ -10,7 +10,7 @@ interface InterestsButtonProps {
 
 const InterestsButton: React.FC<InterestsButtonProps> = ({ readOnly, text, onClick, value, interests }) => {
   const otherHidden = () => {
-    if (readOnly === 'other') {
+    if (readOnly === true) {
       return 'hidden';
     }
     return '';

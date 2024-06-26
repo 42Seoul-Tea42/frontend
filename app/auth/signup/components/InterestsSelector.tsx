@@ -8,7 +8,7 @@ export const capitalizeFirstLetter = (str: string) => {
 };
 
 interface InterestsSelectorProps {
-  readOnly: 'me' | 'other';
+  readOnly: boolean;
   onClick?: (value: number) => void;
   interests: number[];
 }

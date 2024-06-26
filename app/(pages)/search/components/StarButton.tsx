@@ -7,16 +7,16 @@ import { useDispatch } from 'react-redux';
 interface StarButtonProps {
   star: number;
   isFilled: boolean;
-  readOnly: 'me' | 'other';
+  readOnly: boolean;
 }
 
 const StarButton: React.FC<StarButtonProps> = ({ star, isFilled, readOnly }) => {
   const dispatch = useDispatch();
 
   const isReadOnly = () => {
-    if (readOnly === 'me') {
+    if (readOnly === false) {
       dispatch(setSearchParamsRating(star));
-    } else if (readOnly === 'other') {
+    } else if (readOnly === true) {
       // do nothing
     }
   };

@@ -113,7 +113,7 @@ const Setting: React.FC = () => {
                 title: '나의 관심사 태그를 선택해주세요.',
                 content: (
                   <InterestsSelector
-                    readOnly={'me'}
+                    readOnly={false}
                     interests={user.interests}
                     onClick={e => dispatch(setAccountInterests(e))}
                   />
@@ -123,7 +123,7 @@ const Setting: React.FC = () => {
                 title: '싫어하는 관심사 태그를 선택해주세요.',
                 content: (
                   <InterestsSelector
-                    readOnly={'me'}
+                    readOnly={false}
                     interests={user.hateInterests}
                     onClick={e => dispatch(setAccountHateInterests(e))}
                   />
@@ -133,7 +133,7 @@ const Setting: React.FC = () => {
                 title: '선호하는 이모티콘을 설정해주세요. (최대 4개)',
                 content: (
                   <EmojiGridList
-                    readOnly={'me'}
+                    readOnly={false}
                     emoji={user.emoji}
                     onClick={e => dispatch(setAccountEmoji(e))}
                     selectColor="border-green-400"
@@ -144,7 +144,7 @@ const Setting: React.FC = () => {
                 title: '싫어하는 이모티콘을 설정해주세요. (최대 4개)',
                 content: (
                   <EmojiGridList
-                    readOnly={'me'}
+                    readOnly={false}
                     emoji={user.hateEmoji}
                     onClick={e => dispatch(setAccountHateEmoji(e))}
                     selectColor="border-red-400"

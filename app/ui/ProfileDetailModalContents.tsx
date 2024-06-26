@@ -56,7 +56,7 @@ const ProfileDetailModalContents: React.FC = () => {
               <div className="w-full h-[290px] p-2 bg-gray-100 text-gray-800 text-lg font-semibold overflow-hidden hover:overflow-auto space-y-10">
                 <h5>
                   인기 점수
-                  <InputStarRatingBar readOnly={'other'} star={user.rating} />
+                  <InputStarRatingBar readOnly={true} star={user.rating} />
                 </h5>
                 <h5 className="flex">
                   <p className="rounded-xl pl-1 pr-1 text-blue-500">
@@ -67,19 +67,19 @@ const ProfileDetailModalContents: React.FC = () => {
                 <h5>
                   전 이런걸 좋아해요.
                   <div className="mt-2">
-                    <InterestsSelector readOnly={'other'} interests={user.interests} />
+                    <InterestsSelector readOnly={true} interests={user.interests} />
                   </div>
                   <div className="mt-2 p-2">
-                    <EmojiGridList readOnly={'other'} emoji={user.emoji} selectColor="border-green-400" />
+                    <EmojiGridList readOnly={true} emoji={user.emoji} selectColor="border-green-400" />
                   </div>
                 </h5>
                 <h5>
                   전 이런걸 싫어해요.
                   <div className="mt-2">
-                    <InterestsSelector readOnly={'other'} interests={user.hateInterests} />
+                    <InterestsSelector readOnly={true} interests={user.hateInterests} />
                   </div>
                   <div className="mt-2 p-2">
-                    <EmojiGridList readOnly={'other'} emoji={user.hateEmoji} selectColor="border-red-400" />
+                    <EmojiGridList readOnly={true} emoji={user.hateEmoji} selectColor="border-red-400" />
                   </div>
                 </h5>
                 <h5>
