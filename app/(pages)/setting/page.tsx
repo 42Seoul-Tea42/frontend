@@ -6,7 +6,6 @@ import { AccordionItems, SubmitButton } from '@/ui';
 import InterestsSelector from '@/auth/signup/components/InterestsSelector';
 import EmojiGridList from '@/auth/upload/emoji/EmojiGridList';
 import ReEnterPassword from '../forms/ReEnterPassword';
-import ImageUploadGrid from './components/ImageUploadGrid';
 import {
   AgeInput,
   EmailInput,
@@ -114,7 +113,7 @@ const Setting: React.FC = () => {
                 title: '나의 관심사 태그를 선택해주세요.',
                 content: (
                   <InterestsSelector
-                    who={'me'}
+                    readOnly={'me'}
                     interests={user.interests}
                     onClick={e => dispatch(setAccountInterests(e))}
                   />
@@ -124,7 +123,7 @@ const Setting: React.FC = () => {
                 title: '싫어하는 관심사 태그를 선택해주세요.',
                 content: (
                   <InterestsSelector
-                    who={'me'}
+                    readOnly={'me'}
                     interests={user.hateInterests}
                     onClick={e => dispatch(setAccountHateInterests(e))}
                   />
@@ -132,12 +131,24 @@ const Setting: React.FC = () => {
               },
               {
                 title: '선호하는 이모티콘을 설정해주세요. (최대 4개)',
-                content: <EmojiGridList who={'me'} emoji={user.emoji} onClick={e => dispatch(setAccountEmoji(e))} />
+                content: (
+                  <EmojiGridList
+                    readOnly={'me'}
+                    emoji={user.emoji}
+                    onClick={e => dispatch(setAccountEmoji(e))}
+                    selectColor="border-green-400"
+                  />
+                )
               },
               {
                 title: '싫어하는 이모티콘을 설정해주세요. (최대 4개)',
                 content: (
-                  <EmojiGridList who={'me'} emoji={user.hateEmoji} onClick={e => dispatch(setAccountHateEmoji(e))} />
+                  <EmojiGridList
+                    readOnly={'me'}
+                    emoji={user.hateEmoji}
+                    onClick={e => dispatch(setAccountHateEmoji(e))}
+                    selectColor="border-red-400"
+                  />
                 )
               },
               { title: '자기소개를 작성해주세요.', content: <IntroductionInput /> },

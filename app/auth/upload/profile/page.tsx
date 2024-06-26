@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { submitProfile } from '@/(pages)/setting/submitprofile';
 import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
 import SimilarRadioInput from '@/(pages)/forms/SimilarRadioInput';
+import ImageUploadCube from '@/(pages)/setting/components/ImageUploadCube';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const Profile = () => {
             프로필 사진을 설정해주세요.
           </h5>
         </div>
-        <ImageUploadGrid />
+        <ImageUploadCube />
         <form
           onSubmit={event => {
             event.preventDefault();
@@ -68,7 +69,11 @@ const Profile = () => {
               관심있는 분야를 선택해주세요.
             </h5>
           </div>
-          <InterestsSelector who={'me'} onClick={e => dispatch(setAccountInterests(e))} interests={user.interests} />
+          <InterestsSelector
+            readOnly={'me'}
+            onClick={e => dispatch(setAccountInterests(e))}
+            interests={user.interests}
+          />
 
           <div className="flex mt-5">
             <h5 className="text-red-500 mr-1"> * </h5>

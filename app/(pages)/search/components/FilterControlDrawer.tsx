@@ -45,7 +45,7 @@ const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit, sha
                     title: '필터링할 태그를 선택해주세요.',
                     content: (
                       <InterestsSelector
-                        who={'me'}
+                        readOnly={'me'}
                         onClick={e => dispatch(setSearchParamsInterests(e))}
                         interests={searchParams.interests}
                       />
@@ -54,7 +54,7 @@ const FilterControlDrawer: React.FC<FilterControlDrawerProps> = ({ onSubmit, sha
                   { title: '필터링할 거리를 선택해주세요.', content: <InputRangeDistance /> },
                   {
                     title: '필터링할 등급을 선택해주세요.',
-                    content: <InputRangeStarBar who={'me'} star={searchParams.rating} />
+                    content: <InputRangeStarBar readOnly={'me'} star={searchParams.rating} />
                   }
                 ]}
               />

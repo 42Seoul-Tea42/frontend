@@ -1,11 +1,13 @@
 import Image from 'next/image';
 
 interface EmojiGridListProps {
-  who: 'me' | 'other';
+  readOnly: 'me' | 'other';
   onClick?: (e: number) => void;
   emoji: number[];
+  selectColor: string;
 }
-const EmojiGridList = ({ who, onClick, emoji }: EmojiGridListProps) => {
+
+const EmojiGridList = ({ readOnly, onClick, emoji, selectColor }: EmojiGridListProps) => {
   enum Count {
     // 파일이름 1부터시작, 백에서 배열요소의 값을 1부터 받음
     START_INDEX = 1
@@ -19,8 +21,8 @@ const EmojiGridList = ({ who, onClick, emoji }: EmojiGridListProps) => {
 
   const colorPicker = (id: number) => {
     if (emoji?.includes(id)) {
-      return 'border-2 border-green-500 rounded-xl';
-    } else if (who === 'other') {
+      return selectColor + ' ' + 'border-4 rounded-xl';
+    } else if (readOnly === 'other') {
       return 'hidden';
     }
   };

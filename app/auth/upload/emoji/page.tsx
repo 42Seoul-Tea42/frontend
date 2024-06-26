@@ -31,19 +31,31 @@ const Emoji = () => {
     <div className="w-full h-screen flex justify-center items-center">
       <form
         onSubmit={submitEmojiPreference}
-        className="min-w-96 min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow"
+        className="min-w-[400px] min-h-96 p-6 bg-white border border-gray-200 rounded-lg shadow"
       >
         <p className="text-xl font-medium"> 이모티콘 취향을 선택해주세요.</p>
         <AccordionItems
           items={[
             {
               title: '좋아하는 이모티콘 선택',
-              content: <EmojiGridList who={'me'} emoji={user.emoji} onClick={e => dispatch(setAccountEmoji(e))} />
+              content: (
+                <EmojiGridList
+                  readOnly={'me'}
+                  emoji={user.emoji}
+                  onClick={e => dispatch(setAccountEmoji(e))}
+                  selectColor="border-green-400"
+                />
+              )
             },
             {
               title: '싫어하는 이모티콘 선택',
               content: (
-                <EmojiGridList who={'me'} emoji={user.hateEmoji} onClick={e => dispatch(setAccountHateEmoji(e))} />
+                <EmojiGridList
+                  readOnly={'me'}
+                  emoji={user.hateEmoji}
+                  onClick={e => dispatch(setAccountHateEmoji(e))}
+                  selectColor="border-red-400"
+                />
               )
             }
           ]}

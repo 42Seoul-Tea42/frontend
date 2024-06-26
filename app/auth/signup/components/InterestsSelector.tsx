@@ -8,12 +8,12 @@ export const capitalizeFirstLetter = (str: string) => {
 };
 
 interface InterestsSelectorProps {
-  who: 'me' | 'other';
+  readOnly: 'me' | 'other';
   onClick?: (value: number) => void;
   interests: number[];
 }
 
-const InterestsSelector: React.FC<InterestsSelectorProps> = ({ who, onClick, interests }) => {
+const InterestsSelector: React.FC<InterestsSelectorProps> = ({ readOnly, onClick, interests }) => {
   const userInterests = {
     SPORTS: 1,
     TRAVEL: 2,
@@ -39,7 +39,7 @@ const InterestsSelector: React.FC<InterestsSelectorProps> = ({ who, onClick, int
     <div className="max-w-96">
       {items.map((item, index) => (
         <InterestsButton
-          who={who}
+          readOnly={readOnly}
           interests={interests}
           value={item.value}
           onClick={onClick && (() => onClick(item.value))}

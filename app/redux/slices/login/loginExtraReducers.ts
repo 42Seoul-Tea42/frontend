@@ -44,7 +44,6 @@ const addPostLoginCase = (builder: ActionReducerMapBuilder<LoginState>) => {
   });
   builder.addCase(postLogin.rejected, (state, action) => {
     state.loading = false;
-    alert('로그인에 실패했습니다.');
   });
 };
 

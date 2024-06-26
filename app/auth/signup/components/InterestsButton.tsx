@@ -1,16 +1,16 @@
 import React from 'react';
 
 interface InterestsButtonProps {
-  who: 'me' | 'other';
+  readOnly: 'me' | 'other';
   value: number;
   text: string;
   onClick?: () => void;
   interests: number[];
 }
 
-const InterestsButton: React.FC<InterestsButtonProps> = ({ who, text, onClick, value, interests }) => {
+const InterestsButton: React.FC<InterestsButtonProps> = ({ readOnly, text, onClick, value, interests }) => {
   const otherHidden = () => {
-    if (who === 'other') {
+    if (readOnly === 'other') {
       return 'hidden';
     }
     return '';
