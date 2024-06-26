@@ -67,7 +67,6 @@ const Setting: React.FC = () => {
         <div>
           {/* <ImageUploadGrid /> */}
           <ImageUploadCube />
-          <div className="mb-10"></div>
         </div>
 
         <div className="flex justify-center items-start">

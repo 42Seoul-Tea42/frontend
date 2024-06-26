@@ -24,7 +24,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
 
     const socketInstance = io(domain ?? '', {
       withCredentials: false,
-      autoConnect: true,
+      autoConnect: false,
       transports: ['websocket', 'polling'],
       closeOnBeforeunload: true,
       reconnection: true,
@@ -34,12 +34,16 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
     });
 
     socketInstance.on('connect', () => {
+      console.log('🚀', 'socket connected');
       setSocket(socketInstance);
     });
 
     socketInstance.on('disconnect', () => {
+      console.log('🛠', 'socket disconnected');
       setSocket(undefined);
     });
+
+    socketInstance.connect();
 
     return () => {
       socketInstance.disconnect();

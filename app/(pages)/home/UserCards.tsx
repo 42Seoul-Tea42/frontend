@@ -58,7 +58,7 @@ function UserCards({ users }: UserCardsProps) {
                           <UserCardPhoto src={user.picture} alt={user.firstname} />
                         </div>
                       </div>
-                      <div className="flex items-center justify-center w-full h-12 bg-white rounded-b-lg border-t-1 gap-1">
+                      <div className="flex items-center justify-center w-full h-12 bg-white rounded-b-lg border border-gray-100 gap-1">
                         <p className="w-12 mr-3 font-semibold text-xl text-gray-700">{formatName(user.firstname)}</p>
                         <p className="mr-1 pl-1 pr-1 border rounded-full text-xl text-gray-500">{user.age}</p>
                         <p className="font-thin mr-1 text-base text-gray-900">{user.distance}km</p>

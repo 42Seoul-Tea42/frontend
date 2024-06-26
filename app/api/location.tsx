@@ -26,7 +26,7 @@ async function requestUserLocation() {
     const { latitude, longitude } = await getGeoLocation();
     localStorage.setItem('user-location', JSON.stringify({ latitude, longitude }));
   } catch (error) {
-    alert('위치 권한 정보를 허용해주세요.');
+    // alert('위치 권한 정보를 허용해주세요.');
   }
 }
 
