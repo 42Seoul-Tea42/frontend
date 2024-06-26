@@ -38,7 +38,6 @@ function UserCards({ users }: UserCardsProps) {
     } else {
       dispatch<any>(patchUnFancy(user.id));
     }
-    // profile Detail update
   };
 
   return (

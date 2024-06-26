@@ -81,7 +81,7 @@ const addCheckDuplicateIdCase = (builder: ActionReducerMapBuilder<SignupState>) 
   });
   builder.addCase(getCheckDuplicateId.rejected, (state, action) => {
     state.loading = false;
-    state.error = '아이디가 유효하지 않습니다.';
+    state.error = '아이디가 중복되었습니다.';
     state.validation.isIdDuplicateChecked = false;
   });
 };

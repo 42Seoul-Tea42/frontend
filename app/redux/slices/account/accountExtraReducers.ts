@@ -76,7 +76,7 @@ const addPostResetPasswordCase = (builder: ActionReducerMapBuilder<AccountState>
   });
   builder.addCase(postResetPassword.fulfilled, (state: any, action: any) => {
     alert('비밀번호가 변경되었습니다. 다시 로그인해주세요.');
-    window.location.href = Route.HOME;
+    window.location.href = Route.LOGIN;
     state.loading = false;
   });
   builder.addCase(postResetPassword.rejected, (state: any, action: any) => {

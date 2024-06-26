@@ -43,6 +43,7 @@ const addPostLoginCase = (builder: ActionReducerMapBuilder<LoginState>) => {
     redirectToNextStep(state.steps);
   });
   builder.addCase(postLogin.rejected, (state, action) => {
+    alert('아이디 또는 비밀번호가 틀렸습니다.');
     state.loading = false;
   });
 };
