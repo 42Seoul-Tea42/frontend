@@ -24,7 +24,7 @@ const InterestsButton: React.FC<InterestsButtonProps> = ({ readOnly, text, onCli
       }`}
       onClick={onClick}
     >
-      <span className="relative px-5 py-2.5 bg-white rounded-md group-hover:bg-opacity-0">{text}</span>
+      <span className="relative px-5 py-2.5 bg-white rounded-md group-hover:bg-opacity-0 capitalize">{text}</span>
       <span
         className={`${
           interests?.includes(value)

@@ -49,8 +49,10 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="h-3/5 flex">
-          <Cup />
+        <div className="h-full w-full flex justify-center items-start">
+          <div className="h-3/5 flex">
+            <Cup style="w-[400px] h-[200px]" backgroundColor="white" />
+          </div>
         </div>
       </div>
       {/* Second Page - Learn more */}

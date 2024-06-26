@@ -1,7 +1,7 @@
 import InterestsButton from './InterestsButton';
 
 export const capitalizeFirstLetter = (str: string) => {
-  if (str[0] === 'I') {
+  if (str === 'IT / SCIENCE') {
     return 'IT / Science';
   }
   return str.charAt(0) + str.slice(1).toLowerCase();

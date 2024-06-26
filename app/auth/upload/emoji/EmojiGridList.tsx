@@ -40,7 +40,9 @@ const EmojiGridList = ({ readOnly, onClick, emoji, selectColor }: EmojiGridListP
             <Image
               width={500}
               height={500}
-              className="h-auto max-w-full hover:brightness-75 rounded-lg transition-opacity duration-300"
+              className={`${
+                readOnly ? '' : 'hover:brightness-75'
+              }h-auto max-w-full rounded-lg transition-opacity duration-300`}
               src={Emoji.src}
               alt={Emoji.alt}
             />

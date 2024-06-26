@@ -2,7 +2,12 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-const Cup: React.FC = () => {
+interface CupProps {
+  style: string;
+  backgroundColor?: string;
+}
+
+const Cup: React.FC<CupProps> = ({ style, backgroundColor }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -19,8 +24,8 @@ const Cup: React.FC = () => {
     const camera = new THREE.PerspectiveCamera(35, canvas.width / canvas.height, 0.1, 1000);
     camera.position.set(0, 0, 6);
 
-    scene.background = new THREE.Color('white');
-    const light = new THREE.DirectionalLight('white', 4);
+    scene.background = new THREE.Color(backgroundColor);
+    const light = new THREE.DirectionalLight(backgroundColor, 4);
     light.position.set(3, 5, 8);
     scene.add(light);
 
@@ -63,11 +68,7 @@ const Cup: React.FC = () => {
     return () => {};
   }, []);
 
-  return (
-    <div className="h-full w-full flex justify-center items-start">
-      <canvas className="w-[400px] h-[200px]" ref={canvasRef} id="cup" />
-    </div>
-  );
+  return <canvas className={style} ref={canvasRef} id="cup" />;
 };
 
 export default Cup;
