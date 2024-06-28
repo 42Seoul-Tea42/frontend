@@ -90,11 +90,17 @@ const addGetLoginCase = (builder: ActionReducerMapBuilder<LoginState>) => {
 
 // 이메일 바꾸기 -----------------------------------------------------
 export const changeMyEmail = createAsyncThunk('accountSlice/changeMyEmail', async (_: any, { getState }: any) => {
-  const state = getState() as { accountSlice: AccountState };
-  const response = await axiosInstance.patch('/user/email', {
-    email: state.accountSlice.user.email
-  });
-  return serverToClientMapper(response.data);
+  try {
+    const state = getState() as { accountSlice: AccountState };
+    const response = await axiosInstance.patch('/user/email', {
+      email: state.accountSlice.user.email
+    });
+    return serverToClientMapper(response.data);
+  } catch (error: any) {
+    return Promise.reject({
+      message: error.response.data.msg
+    });
+  }
 });
 
 const addChangeMyEmailCase = (builder: ActionReducerMapBuilder<LoginState>) => {
@@ -108,7 +114,7 @@ const addChangeMyEmailCase = (builder: ActionReducerMapBuilder<LoginState>) => {
   });
   builder.addCase(changeMyEmail.rejected, (state, action) => {
     state.loading = false;
-    alert('이미 존재하는 이메일입니다.');
+    state.error = action.error.message ?? null;
     state.error = action.error.message ?? null;
   });
 };
@@ -212,8 +218,14 @@ export const addGetGoogleLoginAccountCase = (builder: ActionReducerMapBuilder<Ac
 
 // 토큰으로 이메일 인증받기 -----------------------------------------------------
 export const getVerifyEmail = createAsyncThunk('loginSlice/getVerifyEmail', async (token: string) => {
-  const response = await axiosInstance.get(`/user/verify-email?key=${token}`);
-  return response.status;
+  try {
+    const response = await axiosInstance.get(`/user/verify-email?key=${token}`);
+    return response.status;
+  } catch (error: any) {
+    return Promise.reject({
+      message: error.response.data.msg
+    });
+  }
 });
 
 const addGetVerifyEmailCase = (builder: ActionReducerMapBuilder<LoginState>) => {
@@ -222,15 +234,12 @@ const addGetVerifyEmailCase = (builder: ActionReducerMapBuilder<LoginState>) => 
     state.error = null;
   });
   builder.addCase(getVerifyEmail.fulfilled, state => {
+    state.loading = false;
     state.steps.emailCheck = true;
-    alert('이메일 인증이 완료되었습니다.');
-    window.location.href = Route.LOGIN;
   });
   builder.addCase(getVerifyEmail.rejected, (state, action) => {
-    state.loading = false;
-    alert('로그인 해주세요.');
-    window.location.href = Route.LOGIN;
     state.error = action.error.message ?? null;
+    state.loading = false;
   });
 };
 

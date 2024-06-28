@@ -2,10 +2,9 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useValidationCheck } from './hooks/useValidationCheck';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import {
   closeSignupError,
-  setError,
   setIsEmailDuplicateChecked,
   setIsLoginIdDuplicateChecked
 } from '@/redux/slices/signup/signupSlice';
@@ -41,6 +40,10 @@ const Signup: React.FC = () => {
       autoLogin();
     }
   }, [isSignup]);
+
+  useLayoutEffect(() => {
+    dispatch(closeSignupError());
+  }, []);
 
   const loading = useSelector((state: RootState) => state.signupSlice.loading);
   const error = useSelector((state: RootState) => state.signupSlice.error);

@@ -15,6 +15,7 @@ function emailVerify() {
   const dispatch = useDispatch();
   const validation = useSelector((state: RootState) => state.signupSlice.validation);
   const viewMail = useSelector((state: RootState) => state.accountSlice.viewMail);
+
   const changeEmail = () => {
     dispatch<any>(changeMyEmail(null));
   };

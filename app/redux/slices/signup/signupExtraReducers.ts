@@ -5,15 +5,21 @@ import axiosInstance from '@/api/axios';
 
 // 회원가입 -----------------------------------------------------
 export const postSignup = createAsyncThunk('accountSlice/postSignup', async (_, { getState }) => {
-  const state = getState() as { accountSlice: AccountState };
-  const response = await axiosInstance.post('/user/profile', {
-    login_id: state.accountSlice.user.loginId,
-    email: state.accountSlice.user.email,
-    pw: state.accountSlice.password,
-    last_name: state.accountSlice.user.lastname,
-    name: state.accountSlice.user.firstname
-  });
-  return response.status;
+  try {
+    const state = getState() as { accountSlice: AccountState };
+    const response = await axiosInstance.post('/user/profile', {
+      login_id: state.accountSlice.user.loginId,
+      email: state.accountSlice.user.email,
+      pw: state.accountSlice.password,
+      last_name: state.accountSlice.user.lastname,
+      name: state.accountSlice.user.firstname
+    });
+    return response.status;
+  } catch (error: any) {
+    return Promise.reject({
+      message: error.response.data.msg
+    });
+  }
 });
 
 const addPostSignupCase = (builder: ActionReducerMapBuilder<SignupState>) => {
@@ -27,7 +33,7 @@ const addPostSignupCase = (builder: ActionReducerMapBuilder<SignupState>) => {
   });
   builder.addCase(postSignup.rejected, (state, action) => {
     state.loading = false;
-    state.error = '회원가입이 실패했습니다.';
+    state.error = action.error.message ?? null;
   });
 };
 

@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Route } from '@/redux/enum';
 import { RootState } from '@/redux/store';
 import { getLogin, postLogin } from '@/redux/slices/login/loginExtraReducers';
-import { setError, setIdPasswordLoginFormView } from '@/redux/slices/login/loginSlice';
+import { closeLoginError, setError, setIdPasswordLoginFormView } from '@/redux/slices/login/loginSlice';
 import { useLayoutEffect } from 'react';
 
 function Login() {
@@ -39,6 +39,10 @@ function Login() {
       }&redirect_uri=${process.env.NEXT_PUBLIC_DOMAIN ?? ''}/auth/kakao&state=${generateToken()}`
     );
   };
+
+  useLayoutEffect(() => {
+    dispatch(closeLoginError());
+  });
 
   return (
     <LoginPageDetail
