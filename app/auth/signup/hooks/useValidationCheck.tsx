@@ -1,6 +1,7 @@
+import { setError } from '@/redux/slices/signup/signupSlice';
 import { RootState } from '@/redux/store';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const validatePassword = (password: string, reEnterPassword: string) => {
   if (password.length < 8) return '비밀번호는 8자 이상이어야 합니다.';
@@ -23,7 +24,7 @@ export const useValidationCheck = () => {
   const lastname = useSelector((state: RootState) => state.accountSlice.user.lastname);
 
   const [validate, setValidate] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const dispatch = useDispatch();
 
   const validateEmail = () => (email.length < 1 ? '이메일을 입력해주세요.' : '');
 
@@ -40,7 +41,6 @@ export const useValidationCheck = () => {
   };
 
   const validateIdDupCheck = () => (!idDupCheck ? '아이디 중복체크를 완료해주세요.' : '');
-
   const validateEmailDupCheck = () => (!emailDupCheck ? '이메일 중복체크를 완료해주세요.' : '');
 
   useEffect(() => {
@@ -54,14 +54,19 @@ export const useValidationCheck = () => {
     ];
 
     const findError = validations.find(validation => validation.errorMsg !== '');
-    if (findError) {
-      setErrorMessage(findError.errorMsg);
+    const emptyCheck = validations.filter(validation => validation.errorMsg !== '');
+
+    if (emptyCheck.length === validations.length) {
+      dispatch(setError('모든 항목을 입력해주세요'));
+      setValidate(false);
+    } else if (findError) {
+      dispatch(setError(findError.errorMsg));
       setValidate(false);
     } else {
-      setErrorMessage('회원가입을 진행해주세요');
+      dispatch(setError('회원가입을 진행해주세요'));
       setValidate(true);
     }
   }, [loginId, password, reEnterPassword, idDupCheck, emailDupCheck, email, firstname, lastname]);
 
-  return [validate, errorMessage] as const;
+  return [validate] as const;
 };

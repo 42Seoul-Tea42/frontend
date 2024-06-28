@@ -2,7 +2,6 @@ import { ActionReducerMapBuilder, createAsyncThunk } from '@reduxjs/toolkit';
 import { SignupState } from './signupSlice';
 import { AccountState } from '../account/accountSlice';
 import axiosInstance from '@/api/axios';
-import { Route } from '@/redux/enum';
 
 // 회원가입 -----------------------------------------------------
 export const postSignup = createAsyncThunk('accountSlice/postSignup', async (_, { getState }) => {
@@ -36,11 +35,16 @@ const addPostSignupCase = (builder: ActionReducerMapBuilder<SignupState>) => {
 export const getCheckDuplicateEmail = createAsyncThunk(
   'accountSlice/getCheckDuplicateEmail',
   async (_, { getState }) => {
-    const state = getState() as { accountSlice: AccountState };
-    const { user } = state.accountSlice;
-
-    const response = await axiosInstance.get(`/user/check-email?email=${user.email}`);
-    return response;
+    try {
+      const state = getState() as { accountSlice: AccountState };
+      const { user } = state.accountSlice;
+      const response = await axiosInstance.get(`/user/check-email?email=${user.email}`);
+      return response;
+    } catch (error: any) {
+      return Promise.reject({
+        message: error.response.data.msg
+      });
+    }
   }
 );
 
@@ -54,19 +58,24 @@ const addCheckDuplicateEmailCase = (builder: ActionReducerMapBuilder<SignupState
     state.loading = false;
   });
   builder.addCase(getCheckDuplicateEmail.rejected, (state, action) => {
+    state.error = action.error.message ?? null;
     state.loading = false;
-    state.error = '이메일이 유효하지 않습니다.';
     state.validation.isEmailDuplicateChecked = false;
   });
 };
 
 // DB 로그인 아이디 중복체크 -----------------------------------------------------
 export const getCheckDuplicateId = createAsyncThunk('accountSlice/getCheckDuplicateId', async (_, { getState }) => {
-  const state = getState() as { accountSlice: AccountState };
-  const { user } = state.accountSlice;
-
-  const response = await axiosInstance.get(`/user/check-id?login_id=${user.loginId}`);
-  return response;
+  try {
+    const state = getState() as { accountSlice: AccountState };
+    const { user } = state.accountSlice;
+    const response = await axiosInstance.get(`/user/check-id?login_id=${user.loginId}`);
+    return response;
+  } catch (error: any) {
+    return Promise.reject({
+      message: error.response.data.msg
+    });
+  }
 });
 
 const addCheckDuplicateIdCase = (builder: ActionReducerMapBuilder<SignupState>) => {
@@ -79,8 +88,8 @@ const addCheckDuplicateIdCase = (builder: ActionReducerMapBuilder<SignupState>) 
     state.loading = false;
   });
   builder.addCase(getCheckDuplicateId.rejected, (state, action) => {
+    state.error = action.error.message ?? null;
     state.loading = false;
-    state.error = '아이디가 중복되었습니다.';
     state.validation.isIdDuplicateChecked = false;
   });
 };

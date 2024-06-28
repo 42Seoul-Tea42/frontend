@@ -33,7 +33,7 @@ export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { ge
     return serverToClientMapper(response.data);
   } catch (error: any) {
     return Promise.reject({
-      message: error.response.data.msg // 커스텀 에러 객체에서 메시지 추출
+      message: error.response.data.msg
     });
   }
 });

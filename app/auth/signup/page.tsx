@@ -5,6 +5,7 @@ import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect } from 'react';
 import {
   closeSignupError,
+  setError,
   setIsEmailDuplicateChecked,
   setIsLoginIdDuplicateChecked
 } from '@/redux/slices/signup/signupSlice';
@@ -19,22 +20,13 @@ import usePasswordValidMessage from '@/(pages)/setting/hooks/useValidMessage';
 import { postLogin } from '@/redux/slices/login/loginExtraReducers';
 
 const Signup: React.FC = () => {
-  const error = useSelector((state: RootState) => state.signupSlice.error);
   const validation = useSelector((state: RootState) => state.signupSlice.validation);
-  const [validate, errorMessage] = useValidationCheck();
+  const [validate] = useValidationCheck();
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (error) {
-      alert(error);
-      dispatch(closeSignupError());
-    }
-  }, [error]);
-
   const signup = () => {
     if (!validate) {
-      alert(errorMessage);
       return;
     }
     dispatch<any>(postSignup());
@@ -51,6 +43,7 @@ const Signup: React.FC = () => {
   }, [isSignup]);
 
   const loading = useSelector((state: RootState) => state.signupSlice.loading);
+  const error = useSelector((state: RootState) => state.signupSlice.error);
 
   const passwordErrorMessage = usePasswordValidMessage();
   return (
@@ -60,7 +53,7 @@ const Signup: React.FC = () => {
       subject="회원가입을 위한 계정정보를 입력해주세요."
       inputs={
         <>
-          <p className="text-md font-md p-1 pt-2 pb-2 text-green-800">{errorMessage}</p>
+          <p className="text-md font-md p-1 pt-2 pb-2 text-red-500">{error}</p>
           <div className="border p-2 mb-4 rounded-xl">
             <EmailInput
               extended={() => {
