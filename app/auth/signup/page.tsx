@@ -39,9 +39,12 @@ const Signup: React.FC = () => {
     dispatch<any>(postSignup());
   };
 
+  const loading = useSelector((state: RootState) => state.signupSlice.loading);
+
   const passwordErrorMessage = usePasswordValidMessage();
   return (
     <CardForm
+      loading={loading}
       onSubmit={signup}
       subject="회원가입을 위한 계정정보를 입력해주세요."
       inputs={

@@ -23,6 +23,7 @@ const addPostSignupCase = (builder: ActionReducerMapBuilder<SignupState>) => {
     state.error = null;
   });
   builder.addCase(postSignup.fulfilled, (state, action) => {
+    state.loading = false;
     state.validation.isSignup = true;
     window.location.href = Route.LOGIN;
     alert('회원가입이 완료되었습니다. 가입하신 이메일로 인증해주세요.');
