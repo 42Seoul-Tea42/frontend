@@ -42,12 +42,15 @@ const loginSlice = createSlice({
     },
     setIdPasswordLoginFormView: (state, action: PayloadAction<boolean>) => {
       state.idPasswordLoginFormView = action.payload;
+    },
+    setError(state, action: PayloadAction<string>) {
+      state.error = action.payload;
     }
   },
   extraReducers: (builder: any) => addLoginExtraReducers(builder)
 });
 
-export const { setIdPasswordLoginFormView, closeLoginError } = loginSlice.actions;
+export const { setError, setIdPasswordLoginFormView, closeLoginError } = loginSlice.actions;
 
 export const extraReducers = loginSlice.reducer;
 

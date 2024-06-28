@@ -23,13 +23,19 @@ const redirectToNextStep = (steps: any) => {
 
 // 로그인 요청 -----------------------------------------------------
 export const postLogin = createAsyncThunk('loginSlice/postLogin', async (_, { getState }) => {
-  const state = getState() as { accountSlice: AccountState };
-  const { user, password } = state.accountSlice;
-  const response = await axiosInstance.post('/user/login', {
-    login_id: user.loginId,
-    pw: password
-  });
-  return serverToClientMapper(response.data);
+  try {
+    const state = getState() as { accountSlice: AccountState };
+    const { user, password } = state.accountSlice;
+    const response = await axiosInstance.post('/user/login', {
+      login_id: user.loginId,
+      pw: password
+    });
+    return serverToClientMapper(response.data);
+  } catch (error: any) {
+    return Promise.reject({
+      message: error.response.data.msg // 커스텀 에러 객체에서 메시지 추출
+    });
+  }
 });
 
 const addPostLoginCase = (builder: ActionReducerMapBuilder<LoginState>) => {
@@ -42,8 +48,8 @@ const addPostLoginCase = (builder: ActionReducerMapBuilder<LoginState>) => {
     state.loading = false;
     redirectToNextStep(state.steps);
   });
-  builder.addCase(postLogin.rejected, (state, action) => {
-    alert('아이디 또는 비밀번호가 틀렸습니다.');
+  builder.addCase(postLogin.rejected, (state, action: any) => {
+    state.error = action.error.message ?? null;
     state.loading = false;
   });
 };

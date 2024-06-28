@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Route } from '@/redux/enum';
 import { RootState } from '@/redux/store';
 import { getLogin, postLogin } from '@/redux/slices/login/loginExtraReducers';
-import { setIdPasswordLoginFormView } from '@/redux/slices/login/loginSlice';
+import { setError, setIdPasswordLoginFormView } from '@/redux/slices/login/loginSlice';
 import { useLayoutEffect } from 'react';
 
 function Login() {
@@ -22,7 +22,7 @@ function Login() {
     /** form이 내부 상태를 가지고 있기 때문에 신뢰할 수 있는 단일 동작을 위해 폼 이벤트 방지 */
     event.preventDefault();
     if (!loginId || !password) {
-      alert('아이디와 비밀번호를 입력해주세요.');
+      dispatch(setError('아이디와 비밀번호를 입력해주세요'));
       return;
     }
     dispatch<any>(postLogin());

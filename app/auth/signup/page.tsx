@@ -16,6 +16,7 @@ import { EmailInput, LoginIdInput, PasswordInput, UserNameInput } from '@/(pages
 import { SubmitButton } from '@/ui';
 import { getCheckDuplicateEmail, getCheckDuplicateId, postSignup } from '@/redux/slices/signup/signupExtraReducers';
 import usePasswordValidMessage from '@/(pages)/setting/hooks/useValidMessage';
+import { postLogin } from '@/redux/slices/login/loginExtraReducers';
 
 const Signup: React.FC = () => {
   const error = useSelector((state: RootState) => state.signupSlice.error);
@@ -38,6 +39,16 @@ const Signup: React.FC = () => {
     }
     dispatch<any>(postSignup());
   };
+
+  const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
+  useEffect(() => {
+    const autoLogin = () => {
+      dispatch<any>(postLogin());
+    };
+    if (isSignup) {
+      autoLogin();
+    }
+  }, [isSignup]);
 
   const loading = useSelector((state: RootState) => state.signupSlice.loading);
 
