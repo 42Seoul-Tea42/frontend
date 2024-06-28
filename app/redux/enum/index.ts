@@ -19,6 +19,7 @@ export enum Fancy {
 export enum InputLimitLength {
   NONE_AGE = 0,
   MIN_AGE = 1,
+  PHOTO_COUNT = 5,
   EMAIL = 30,
   PASSWORD = 16,
   ID = 20,

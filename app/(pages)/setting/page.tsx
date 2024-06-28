@@ -41,10 +41,13 @@ const Setting: React.FC = () => {
   }, []);
 
   const updateUser = () => {
+    // 빈값 앞으로 땡기기
+    const picturesToSend = user.pictures.filter(picture => !!picture);
+
     const data = {
       gender: Number(user.gender), // backend: 숫자형태로 보내주세요.
       taste: Number(user.sexualPreference), // backend: 숫자형태로 보내주세요.
-      pictures: user.pictures, // backend: 배열형태로 보내주세요.
+      pictures: picturesToSend.flatMap(pciture => pciture), // backend: 배열형태로 보내주세요.
       bio: user.introduction,
       tags: user.interests,
       emoji: user.emoji,

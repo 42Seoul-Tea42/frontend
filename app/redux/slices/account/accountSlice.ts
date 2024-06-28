@@ -24,7 +24,7 @@ export const initialState = {
     gender: Gender.NONE,
     sexualPreference: Gender.ALL,
     introduction: '',
-    pictures: [],
+    pictures: Array.from({ length: InputLimitLength.PHOTO_COUNT }, () => ''),
     interests: [],
     hateInterests: [],
     emoji: [],
@@ -77,6 +77,9 @@ const accountSlice = createSlice({
     },
     addAccountPhotos: (state: AccountState, action: PayloadAction<[]>) => {
       state.user.pictures = [...state.user.pictures, ...action.payload];
+    },
+    addAccountPhotosWithIndex: (state: AccountState, action: PayloadAction<{ index: number; photo: string }>) => {
+      state.user.pictures[action.payload.index] = action.payload.photo;
     },
     removeAccountPhotos: (state: AccountState, action: PayloadAction<number>) => {
       state.user.pictures = state.user.pictures.filter((_: any, index: number) => index !== action.payload);
@@ -140,6 +143,7 @@ export const {
   setAccountHateInterests,
   setAccountIntroduction,
   addAccountPhotos,
+  addAccountPhotosWithIndex,
   setAccountSimiller,
   removeAccountPhotos
 } = accountSlice.actions;

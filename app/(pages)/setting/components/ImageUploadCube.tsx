@@ -1,9 +1,9 @@
 'use client';
 
 import { handleImageChange } from '@/(pages)/forms/ImageUploadForm';
-import { addAccountPhotos, removeAccountPhotos } from '@/redux/slices/account/accountSlice';
+import { addAccountPhotosWithIndex, removeAccountPhotos } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -44,6 +44,7 @@ function ImageUploadCube({ backgroundColor }: ImageUploadCubeProps) {
   const mouse = useRef(new THREE.Vector2(0, 0));
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const [clickIndex, setClickIndex] = useState<number>(0);
 
   // 큐브 생성 함수
   const createCube = (geometry: any) => {
@@ -105,6 +106,7 @@ function ImageUploadCube({ backgroundColor }: ImageUploadCubeProps) {
         dispatch(removeAccountPhotos(pictureIndex));
       } else {
         if (fileInputRef.current) {
+          setClickIndex(pictureIndex);
           fileInputRef.current.click();
         }
       }
@@ -187,8 +189,17 @@ function ImageUploadCube({ backgroundColor }: ImageUploadCubeProps) {
         ref={fileInputRef}
         className="hidden"
         type="file"
-        multiple={true}
-        onChange={e => handleImageChange(e, photo => dispatch(addAccountPhotos(photo)))}
+        multiple={false}
+        onChange={e =>
+          handleImageChange(e, photo =>
+            dispatch(
+              addAccountPhotosWithIndex({
+                index: clickIndex,
+                photo: photo
+              })
+            )
+          )
+        }
         accept="image/jpeg, image/jpg, image/png"
       />
     </div>
