@@ -1,8 +1,10 @@
 'use client';
 
 import { handleImageChange } from '@/(pages)/forms/ImageUploadForm';
+import { getMyAccount } from '@/redux/slices/account/accountExtraReducers';
 import { addAccountPhotosWithIndex, removeAccountPhotos } from '@/redux/slices/account/accountSlice';
 import { RootState } from '@/redux/store';
+import { RefreshSVG } from '@/svg/RefreshSVG';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as THREE from 'three';
@@ -184,7 +186,12 @@ function ImageUploadCube({ backgroundColor }: ImageUploadCubeProps) {
 
   return (
     <div>
-      <canvas ref={canvasRef} className="w-full h-[400px]" />
+      <div className="relative">
+        <canvas ref={canvasRef} className="w-full h-[400px]" />
+        <button className="absolute bottom-10 right-20" type="button" onClick={() => dispatch<any>(getMyAccount())}>
+          <RefreshSVG />
+        </button>
+      </div>
       <input
         ref={fileInputRef}
         className="hidden"
