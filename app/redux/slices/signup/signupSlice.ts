@@ -41,6 +41,9 @@ const signupSlice = createSlice({
     },
     setError(state, action: PayloadAction<string>) {
       state.error = action.payload;
+    },
+    clearSignupFlag(state) {
+      state.validation.isSignup = false;
     }
   },
   extraReducers: builder => {
@@ -48,8 +51,7 @@ const signupSlice = createSlice({
   }
 });
 
-export const { setError, setIsEmailDuplicateChecked, setIsLoginIdDuplicateChecked, closeSignupError, setIsSignup } =
-  signupSlice.actions;
+export const { clearSignupFlag, setError, setIsEmailDuplicateChecked, setIsLoginIdDuplicateChecked, closeSignupError, setIsSignup } = signupSlice.actions;
 
 export const extraReducers = signupSlice.reducer;
 

@@ -16,10 +16,13 @@ const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.accountSlice.user);
 
+  //  빈값  앞으로 땡기기
+  const picturesToSend = user.pictures.filter(picture => !!picture);
+
   const updateUser = () => {
     dispatch<any>(
       patchUserProfile({
-        pictures: user.pictures,
+        pictures: picturesToSend.flatMap(pciture => pciture), // backend: 배열형태로 보내주세요.
         age: user.age,
         gender: user.gender,
         taste: user.sexualPreference,

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useValidationCheck } from './hooks/useValidationCheck';
 import { useEffect, useLayoutEffect } from 'react';
 import {
+  clearSignupFlag,
   closeSignupError,
   setIsEmailDuplicateChecked,
   setIsLoginIdDuplicateChecked
@@ -33,11 +34,9 @@ const Signup: React.FC = () => {
 
   const isSignup = useSelector((state: RootState) => state.signupSlice.validation.isSignup);
   useEffect(() => {
-    const autoLogin = () => {
-      dispatch<any>(postLogin());
-    };
     if (isSignup) {
-      autoLogin();
+      dispatch<any>(postLogin());
+      clearSignupFlag();
     }
   }, [isSignup]);
 
