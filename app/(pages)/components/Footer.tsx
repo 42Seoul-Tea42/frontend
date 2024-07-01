@@ -1,13 +1,16 @@
 'use client';
 
 import { getLogout } from '@/redux/slices/login/loginExtraReducers';
+import { useSocket } from '@/socket/socketContext';
 import { useDispatch } from 'react-redux';
 
 const Footer = () => {
   const dispatch = useDispatch();
 
+  const socket = useSocket();
   const handleLogout = () => {
     dispatch<any>(getLogout());
+    socket?.disconnect();
   };
 
   return (
