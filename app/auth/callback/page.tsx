@@ -24,7 +24,7 @@ function CallBackAuth() {
   const emailCheck = useSelector((state: RootState) => state.loginSlice.steps.emailCheck);
   useEffect(() => {
     if (emailCheck) {
-      dispatch<any>(postLogin());
+      router.push(Route.LOGIN); 
     }
   }, [emailCheck]);
 
