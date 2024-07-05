@@ -6,6 +6,7 @@ import { BlueHyperLink, SubmitButton } from '@/ui';
 import PasswordInput from './PasswordInput';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 interface LoginFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

@@ -8,9 +8,10 @@ import { LoginForm } from '@/(pages)/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { Route } from '@/redux/enum';
 import { RootState } from '@/redux/store';
-import { getLogin, postLogin } from '@/redux/slices/login/loginExtraReducers';
+import { postLogin } from '@/redux/slices/login/loginExtraReducers';
 import { closeLoginError, setError, setIdPasswordLoginFormView } from '@/redux/slices/login/loginSlice';
 import { useLayoutEffect } from 'react';
+import LoadingSpinner from '@/(pages)/components/LoadingSpinner';
 
 function Login() {
   const router = useRouter();
@@ -44,6 +45,7 @@ function Login() {
     dispatch(closeLoginError());
   });
 
+  const loading = useSelector((state: RootState) => state.loginSlice.loading);
   return (
     <LoginPageDetail
       title={'Welcome to tea for two!'}
@@ -65,6 +67,7 @@ function Login() {
         <>
           <AllSignOptionButton onClick={() => dispatch(setIdPasswordLoginFormView(false))} />
           <LoginForm onSubmit={submitLogin} />
+          <LoadingSpinner visible={loading} />
         </>
       }
       createAccount={<CreateAccountButton onClick={() => router.push(Route.SIGNUP)} />}

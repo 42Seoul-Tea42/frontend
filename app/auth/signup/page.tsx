@@ -50,7 +50,7 @@ const Signup: React.FC = () => {
   const passwordErrorMessage = usePasswordValidMessage();
   return (
     <CardForm
-      loading={loading}
+      loading={loading} // 카드폼 재활용을 위해 props로 분리
       onSubmit={signup}
       subject="회원가입을 위한 계정정보를 입력해주세요."
       inputs={
