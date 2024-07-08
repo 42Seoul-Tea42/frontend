@@ -14,7 +14,7 @@ module.exports = {
 
   images: {
     unoptimized: true
-  }
+  },
 
   // // 리렌더링 방지 true 하면 두번씩 렌더링됨
   // reactStrictMode: false,

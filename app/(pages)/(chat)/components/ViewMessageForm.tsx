@@ -48,7 +48,9 @@ const ViewMessageForm = () => {
     >
       {messages.map((message, index) => (
         <div key={index} className={message.message.length ? '' : 'hidden'}>
+          <div>
           <MessageItem message={message} />
+          </div>
         </div>
       ))}
     </div>

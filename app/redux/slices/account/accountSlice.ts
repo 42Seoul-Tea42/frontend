@@ -44,6 +44,7 @@ const accountSlice = createSlice({
   reducers: {
     setAccountLoginId: (state: AccountState, action: PayloadAction<string>) => {
       state.user.loginId = action.payload;
+      localStorage.setItem('id', action.payload);
     },
     setAccountPassword: (state: AccountState, action: PayloadAction<string>) => {
       state.password = action.payload;

@@ -34,12 +34,12 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
     });
 
     socketInstance.on('connect', () => {
-      console.log('🚀', 'socket connected');
+      // console.log('🚀', 'socket connected');
       setSocket(socketInstance);
     });
 
     socketInstance.on('disconnect', () => {
-      console.log('🛠', 'socket disconnected');
+      // console.log('🛠', 'socket disconnected');
       setSocket(undefined);
     });
 

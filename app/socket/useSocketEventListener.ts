@@ -18,8 +18,6 @@ type useSocketEventListenerProps = {
 
 function useSocketEventListener({ socket }: useSocketEventListenerProps) {
   const dispatch = useDispatch();
-  const myId = useSelector((state: RootState) => state.accountSlice.user.id);
-  const chattingId = useSelector((state: RootState) => state.chattingSlice.currentUser.id);
 
   useEffect(() => {
     if (!socket) return;
@@ -59,10 +57,7 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
       {
         event: 'send_message',
         handler: data => {
-          const sender = data.senderId;
-          if (sender === myId || sender === chattingId) {
-            dispatch(setChattingMessage(data));
-          }
+          dispatch(setChattingMessage(data));
         }
       },
       {

@@ -29,6 +29,7 @@ import SimilarRadioInput from '../forms/SimilarRadioInput';
 import usePasswordValidMessage from './hooks/useValidMessage';
 import ImageUploadCube from './components/ImageUploadCube';
 import LocationButton from './components/LocationButton';
+import ImageUploadGrid from './components/ImageUploadGrid';
 
 const Setting: React.FC = () => {
   const account = useSelector((state: RootState) => state.accountSlice);
@@ -66,15 +67,16 @@ const Setting: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-green-50">
-      <div className="flex-col justify-center mx-auto m-40 md:grid md:grid-cols-2 md:gap-8">
+      <div className="flex-col justify-center mx-auto m-40 md:grid md:grid-cols-2 md:gap-8 overflow">
         <div>
-          {/* <ImageUploadGrid /> */}
-          <ImageUploadCube />
+          <ImageUploadGrid />
+          {/* <ImageUploadCube /> */}
         </div>
+
 
         <div className="flex justify-center items-start">
           <form
-            className="max-h-96 max-w-96"
+            className="min-h-96 max-w-96"
             onSubmit={e => {
               e.preventDefault();
               submitProfile(user.pictures, updateUser);
@@ -162,8 +164,9 @@ const Setting: React.FC = () => {
                 { title: '이메일을 변경하세요.', content: <EmailInput /> }
               ]}
             />
-            <div className="mb-5"></div>
-            <SubmitButton text="Save" />
+            <div className="mb-10">
+              <SubmitButton text="Save" />
+            </div>
           </form>
         </div>
       </div>

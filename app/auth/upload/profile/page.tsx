@@ -43,7 +43,8 @@ const Profile = () => {
             프로필 사진을 설정해주세요.
           </h5>
         </div>
-        <ImageUploadCube backgroundColor="white" />
+        <ImageUploadGrid />
+        {/* <ImageUploadCube backgroundColor="white" /> */}
         <form
           onSubmit={event => {
             event.preventDefault();
