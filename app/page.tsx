@@ -31,6 +31,7 @@ const LandingPage: React.FC = () => {
             <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
               <button
                 type="button"
+                role="button"
                 className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800"
                 onClick={pushLoginPage}
               >

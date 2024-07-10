@@ -34,6 +34,7 @@ const chattingSlice = createSlice({
   initialState,
   reducers: {
     setChattingMessage: (state, action) => {
+      //legacy
       const data = serverToClientMapper(action.payload);
       state.messages = [...state.messages, data];
     },

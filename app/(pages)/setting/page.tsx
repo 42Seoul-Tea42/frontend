@@ -27,7 +27,6 @@ import { patchUserProfile } from '@/redux/slices/login/loginExtraReducers';
 import { getMyAccount } from '@/redux/slices/account/accountExtraReducers';
 import SimilarRadioInput from '../forms/SimilarRadioInput';
 import usePasswordValidMessage from './hooks/useValidMessage';
-import ImageUploadCube from './components/ImageUploadCube';
 import LocationButton from './components/LocationButton';
 import ImageUploadGrid from './components/ImageUploadGrid';
 

@@ -1,7 +1,8 @@
 import { ActionReducerMapBuilder, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { ChattingState } from './chattingSlice';
+import { ChattingState, setChattingMessage } from './chattingSlice';
 import axiosInstance from '@/api/axios';
 import { serverToClientMapper } from '../../dto/mapper';
+import { AccountState } from '../account/accountSlice';
 
 // 채팅 목록 가져오기 -----------------------------------------------------
 export const getChattingList = createAsyncThunk('chattingSlice/getChattingList', async () => {
@@ -47,8 +48,40 @@ const addGetChattingMessagesCase = (builder: ActionReducerMapBuilder<ChattingSta
   });
 };
 
+// 채팅 수신시에 메세지 업데이트 (내 id를 참조해야하는데 갖고올 곳이 없어서 만듦)-----------------------------------------------------
+export const appendChattingMessage = createAsyncThunk('chattingSlice/appendChattingMessage', async (data: any, { getState }) => {
+  try {
+    const accountState = getState() as { accountSlice: AccountState };
+    const chattingState = getState() as { chattingSlice: ChattingState };
+    if (accountState.accountSlice.user.id === data.sender_id 
+      || chattingState.chattingSlice.currentUser.id === data.sender_id) {
+      return serverToClientMapper(data);
+    }
+  } catch (error: any) {
+    return Promise.reject(error);
+  }
+});
+
+const addAppendChattingMessageCase = (builder: ActionReducerMapBuilder<ChattingState>) => {
+  builder.addCase(appendChattingMessage.pending, state => {
+    state.loading = true;
+    state.error = null;
+  });
+  builder.addCase(appendChattingMessage.fulfilled, (state, action: PayloadAction<any>) => {
+    state.loading = false;
+    if (action.payload) {
+      state.messages = [...state.messages, action.payload];
+    }
+  });
+  builder.addCase(appendChattingMessage.rejected, (state, action) => {
+    state.loading = false;
+    console.log('action.error', action.error.message ?? null);
+  });
+}
+
 // extra reducers 추가 -----------------------------------------------------
 export const addChattingExtraReducers = (builder: ActionReducerMapBuilder<ChattingState>) => {
   addGetChattingListCase(builder);
   addGetChattingMessagesCase(builder);
+  addAppendChattingMessageCase(builder);
 };

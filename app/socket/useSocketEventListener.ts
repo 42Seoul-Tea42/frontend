@@ -11,6 +11,7 @@ import {
 import { setNewFancy, setUnFancy, setFancyNoti } from '../redux/slices/suggestion/suggestionSlice';
 import { setVisitorNoti } from '../redux/slices/suggestion/suggestionSlice';
 import { RootState } from '@/redux/store';
+import { appendChattingMessage } from '@/redux/slices/chatting/chattingExtraReducers';
 
 type useSocketEventListenerProps = {
   socket: Socket | undefined;
@@ -57,7 +58,9 @@ function useSocketEventListener({ socket }: useSocketEventListenerProps) {
       {
         event: 'send_message',
         handler: data => {
-          dispatch(setChattingMessage(data));
+          dispatch(setChattingNoti(true));
+          // dispatch(setChattingMessage(data));
+          dispatch<any>(appendChattingMessage(data))
         }
       },
       {
